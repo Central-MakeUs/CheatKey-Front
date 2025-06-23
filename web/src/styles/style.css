@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+}
+@layer components {
+}
+@layer base {
+  html {
+    font-size: 16px;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+@layer utilities {
+}
