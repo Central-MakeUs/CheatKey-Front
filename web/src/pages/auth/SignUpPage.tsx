@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 import { AppHeader, type AppHeaderProps } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
+import { PageIndicator } from "@/components/common/PageIndicator";
+import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
@@ -21,6 +23,14 @@ export const SignUpPage = () => {
     item: [],
   });
   const [isValidName, setIsValidName] = useState<boolean>(true);
+
+  const parseIndicatorStep = (step: number) => {
+    if (step === 1) {
+      return 1;
+    } else if (step === 2 || step === 3 || step === 4) {
+      return 2;
+    } else return 3;
+  };
 
   // 각 단계별 헤더 설정
   const HEADER_CONFIG: Record<number, AppHeaderProps> = {
@@ -58,6 +68,7 @@ export const SignUpPage = () => {
         <NicknameForm nickname={signupFormData.nickname} />
       </div>
       <div className="flex flex-col items-center gap-8 px-5 py-3">
+        <PageIndicator total={3} current={parseIndicatorStep(stepState)} />
         {stepState === 1 && (
           <BottomFullButton
             content="다음"
@@ -65,7 +76,15 @@ export const SignUpPage = () => {
             onClick={() => setStepState((step) => step + 1)}
           />
         )}
-        {stepState !== 1 && <div>123</div>}
+        {stepState !== 1 && (
+          <BottomSignupButton
+            leftContent="이전"
+            rightContent="다음"
+            state={true}
+            onLeftClick={() => setStepState((step) => step - 1)}
+            onRightClick={() => setStepState((step) => step + 1)}
+          />
+        )}
       </div>
     </div>
   );
