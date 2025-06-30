@@ -20,7 +20,7 @@ const BottomNavBar = () => {
       }}
     >
       <div className="flex h-21 items-center justify-around px-2">
-        <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full bg-white" />
+        <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
         {/* TODO: @tifsy 홈, ai, 마이페이지 경로 수정*/}
         <NavLink to={path.home}>
           {({ isActive }) => (
