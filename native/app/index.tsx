@@ -9,6 +9,7 @@ export default function WebViewScreen() {
         source={{ uri: "http://localhost:3000" }}
         style={styles.webview}
         javaScriptEnabled
+        bounces={false}
       />
     </View>
   );
