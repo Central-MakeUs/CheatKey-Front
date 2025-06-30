@@ -7,7 +7,7 @@ import type {
 } from "@/types/signup/signup.types";
 import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
-import { AppHeader, type AppHeaderProps } from "@/components/common/AppHeader";
+import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { PageIndicator } from "@/components/common/PageIndicator";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
@@ -32,57 +32,70 @@ export const SignUpPage = () => {
     } else return 3;
   };
 
+  // 다음 단계로 이동
+  const handleNextStep = () => {
+    if (stepState < 5) {
+      setStepState((step) => step + 1);
+    } else {
+      console.log("회원가입");
+    }
+  };
+
+  // 이전 단계로 이동
+  const handlePrevStep = () => {
+    if (stepState > 1) {
+      setStepState((step) => step - 1);
+    } else {
+      navigate(path.auth.login, { replace: true });
+    }
+  };
+
   // 각 단계별 헤더 설정
-  const HEADER_CONFIG: Record<number, AppHeaderProps> = {
-    1: {
-      title: "닉네임 입력",
-      onPrev: () => navigate(path.auth.login, { replace: true }),
-    },
-    2: {
-      title: "기본 정보 선택",
-      onPrev: () => setStepState((step) => step - 1),
-    },
-    3: {
-      title: "기본 정보 선택",
-      onPrev: () => setStepState((step) => step - 1),
-    },
-    4: {
-      title: "거래 방식",
-      onPrev: () => setStepState((step) => step - 1),
-      onSkip: () => console.log("Skip"),
-    },
-    5: {
-      title: "주요 거래 품목",
-      onPrev: () => setStepState((step) => step - 1),
-      onSkip: () => console.log("Skip"),
-    },
+  const HEADER_CONFIG: Record<number, string> = {
+    1: "닉네임 입력",
+    2: "기본 정보 선택",
+    3: "기본 정보 선택",
+    4: "거래 방식",
+    5: "주요 거래 품목",
+  };
+  // 각 단계별 하단 버튼 설정
+  const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+    5: true,
   };
 
   return (
     <div className="relative flex h-full w-full flex-1 flex-col">
       <AppHeader
-        title={HEADER_CONFIG[stepState].title}
-        onPrev={HEADER_CONFIG[stepState].onPrev}
+        title={HEADER_CONFIG[stepState]}
+        onPrev={handlePrevStep}
+        onSkip={
+          stepState === 4 || stepState === 5
+            ? () => console.log("스킵하기")
+            : undefined
+        }
       />
       <div className="flex flex-1 flex-col px-5">
         <NicknameForm nickname={signupFormData.nickname} />
       </div>
       <div className="flex flex-col items-center gap-8 px-5 py-3">
         <PageIndicator total={3} current={parseIndicatorStep(stepState)} />
-        {stepState === 1 && (
+        {stepState === 1 ? (
           <BottomFullButton
             content="다음"
-            state={isValidName}
-            onClick={() => setStepState((step) => step + 1)}
+            state={BOTTOM_BUTTON_CONFIG[stepState]}
+            onClick={handleNextStep}
           />
-        )}
-        {stepState !== 1 && (
+        ) : (
           <BottomSignupButton
             leftContent="이전"
             rightContent="다음"
-            state={true}
-            onLeftClick={() => setStepState((step) => step - 1)}
-            onRightClick={() => setStepState((step) => step + 1)}
+            state={BOTTOM_BUTTON_CONFIG[stepState]}
+            onLeftClick={handlePrevStep}
+            onRightClick={handleNextStep}
           />
         )}
       </div>
