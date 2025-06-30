@@ -1,20 +1,72 @@
-import { AppHeader } from "@/components/common/AppHeader";
-import Footer from "@/components/common/Footer";
+import { NicknameForm } from "@/components/signup/NicknameForm";
+import { useState } from "react";
+import type {
+  SignUpForm,
+  TradeMethod,
+  ItemCategory,
+} from "@/types/signup/signup.types";
+import { useNavigate } from "react-router-dom";
+import { path } from "@/routes/path";
+import { AppHeader, type AppHeaderProps } from "@/components/common/AppHeader";
+import { BottomFullButton } from "@/components/common/BottomFullButton";
 
 export const SignUpPage = () => {
-  const test = () => {
-    console.log(123);
+  const navigate = useNavigate();
+  const [stepState, setStepState] = useState<number>(1);
+  const [signupFormData, setSignupFormData] = useState<SignUpForm>({
+    nickname: "",
+    age: "",
+    gender: null,
+    method: [],
+    item: [],
+  });
+  const [isValidName, setIsValidName] = useState<boolean>(true);
+
+  // 각 단계별 헤더 설정
+  const HEADER_CONFIG: Record<number, AppHeaderProps> = {
+    1: {
+      title: "닉네임 입력",
+      onPrev: () => navigate(path.auth.login, { replace: true }),
+    },
+    2: {
+      title: "기본 정보 선택",
+      onPrev: () => setStepState((step) => step - 1),
+    },
+    3: {
+      title: "기본 정보 선택",
+      onPrev: () => setStepState((step) => step - 1),
+    },
+    4: {
+      title: "거래 방식",
+      onPrev: () => setStepState((step) => step - 1),
+      onSkip: () => console.log("Skip"),
+    },
+    5: {
+      title: "주요 거래 품목",
+      onPrev: () => setStepState((step) => step - 1),
+      onSkip: () => console.log("Skip"),
+    },
   };
+
   return (
     <div className="relative flex h-full w-full flex-1 flex-col">
       <AppHeader
-        title="커뮤니티"
-        onPrev={test}
-        //onSkip={test}
-        onNotification={test}
-        onWrite={test}
+        title={HEADER_CONFIG[stepState].title}
+        onPrev={HEADER_CONFIG[stepState].onPrev}
       />
-      <Footer />
+      <div className="flex flex-1 flex-col px-5">
+        <NicknameForm nickname={signupFormData.nickname} />
+      </div>
+      <div className="flex flex-col items-center gap-8 px-5 py-3">
+        {stepState === 1 && (
+          <BottomFullButton
+            content="다음"
+            state={isValidName}
+            onClick={() => setStepState((step) => step + 1)}
+          />
+        )}
+        {stepState !== 1 && <div>123</div>}
+      </div>
     </div>
   );
 };
