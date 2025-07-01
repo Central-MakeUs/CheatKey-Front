@@ -11,13 +11,14 @@ import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { PageIndicator } from "@/components/common/PageIndicator";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
+import { AgeForm } from "@/components/signup/AgeForm";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
   const [stepState, setStepState] = useState<number>(1);
   const [signupFormData, setSignupFormData] = useState<SignUpForm>({
     nickname: "",
-    age: "",
+    age: null,
     gender: null,
     method: [],
     item: [],
@@ -60,9 +61,9 @@ export const SignUpPage = () => {
   };
   // 각 단계별 하단 버튼 설정
   const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
-    1: true,
-    2: true,
-    3: true,
+    1: signupFormData.nickname !== "",
+    2: signupFormData.age !== null,
+    3: signupFormData.gender !== null,
     4: true,
     5: true,
   };
@@ -79,17 +80,30 @@ export const SignUpPage = () => {
         }
       />
       <div className="flex flex-1 flex-col px-5 pt-8">
-        <NicknameForm
-          nickname={signupFormData.nickname}
-          setNickname={(newValue) =>
-            setSignupFormData((prev) => ({
-              ...prev,
-              nickname: newValue,
-            }))
-          }
-          isValidName={isValidName}
-          setIsValidName={setIsValidName}
-        />
+        {stepState === 1 && (
+          <NicknameForm
+            nickname={signupFormData.nickname}
+            setNickname={(newValue) =>
+              setSignupFormData((prev) => ({
+                ...prev,
+                nickname: newValue,
+              }))
+            }
+            isValidName={isValidName}
+            setIsValidName={setIsValidName}
+          />
+        )}
+        {stepState === 2 && (
+          <AgeForm
+            age={signupFormData.age}
+            setAge={(newValue) =>
+              setSignupFormData((prev) => ({
+                ...prev,
+                age: newValue,
+              }))
+            }
+          />
+        )}
       </div>
       <div className="flex flex-col items-center gap-8 px-5 py-3">
         <PageIndicator total={3} current={parseIndicatorStep(stepState)} />

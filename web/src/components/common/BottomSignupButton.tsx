@@ -19,7 +19,6 @@ export const BottomSignupButton = ({
       <button
         type="button"
         onClick={onLeftClick}
-        disabled={!state}
         className="body-1-bold bg-base-50 text-gray-system-500 w-31/100 rounded-xl py-3.5"
       >
         {leftContent}

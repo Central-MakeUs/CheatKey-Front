@@ -1,0 +1,64 @@
+import type { Age } from "@/types/signup/signup.types";
+import CheckOn from "@/assets/icons/check_on.svg?react";
+import CheckOff from "@/assets/icons/check_off.svg?react";
+import { cn } from "@/utils/cn";
+
+const AGE_OPTIONS: Age[] = ["10~20대", "30~40대", "50~60대", "60대 이상"];
+
+interface AgeFormProps {
+  age: Age;
+  setAge: (value: Age) => void;
+}
+
+export const AgeForm = ({ age, setAge }: AgeFormProps) => {
+  return (
+    <>
+      <h1 className="head-3-bold text-base-0">회원님의 나이를 알려주세요.</h1>
+      <h2 className="body-5-regular text-gray-system-600 pt-2.5">
+        나이를 바탕으로 사기 유형을 안내해드릴게요.
+      </h2>
+
+      <div className="flex flex-col gap-3 pt-[2.875rem]">
+        {AGE_OPTIONS.map((option) => (
+          <AgeSelect
+            key={option}
+            ageOption={option}
+            selectedAge={age}
+            onSelect={setAge}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
+
+interface AgeSelectProps {
+  ageOption: Age;
+  selectedAge: Age | null;
+  onSelect: (value: Age) => void;
+}
+
+const AgeSelect = ({ ageOption, selectedAge, onSelect }: AgeSelectProps) => {
+  const isSelected = ageOption === selectedAge;
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(ageOption)}
+      className={cn(
+        "body-2-medium flex items-center justify-between rounded-xl border px-5 py-[1.125rem] text-left",
+        {
+          "text-primary-200 border-primary-400 bg-[#2f47bd4d]": isSelected,
+          "bg-base-50 text-gray-system-600 border-gray-system-700": !isSelected,
+        },
+      )}
+    >
+      <p>{ageOption}</p>
+      {isSelected ? (
+        <CheckOn className="h-8 w-8" />
+      ) : (
+        <CheckOff className="h-8 w-8" />
+      )}
+    </button>
+  );
+};

@@ -1,11 +1,12 @@
 export type SignUpForm = {
   nickname: string;
-  age: string;
-  gender: "male" | "female" | null;
+  age: Age;
+  gender: Gender;
   method?: TradeMethod[];
   item?: ItemCategory[];
 };
-
+export type Gender = "남성" | "여성" | null;
+export type Age = "10~20대" | "30~40대" | "50~60대" | "60대 이상" | null;
 export type TradeMethod =
   | "SNS 거래"
   | "중고거래사이트"
