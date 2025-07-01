@@ -1,10 +1,6 @@
 import { NicknameForm } from "@/components/signup/NicknameForm";
-import { useState } from "react";
-import type {
-  SignUpForm,
-  TradeMethod,
-  ItemCategory,
-} from "@/types/signup/signup.types";
+import { useEffect, useState } from "react";
+import type { SignUpForm } from "@/types/signup/signup.types";
 import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 import { AppHeader } from "@/components/common/AppHeader";
@@ -13,6 +9,7 @@ import { PageIndicator } from "@/components/common/PageIndicator";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { AgeForm } from "@/components/signup/AgeForm";
 import { GenderForm } from "@/components/signup/GenderForm";
+import { MethodForm } from "@/components/signup/MethodForm";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
@@ -68,6 +65,9 @@ export const SignUpPage = () => {
     4: true,
     5: true,
   };
+  useEffect(() => {
+    console.log(signupFormData.method);
+  }, [signupFormData.method]);
 
   return (
     <div className="relative flex h-full w-full flex-1 flex-col">
@@ -116,8 +116,24 @@ export const SignUpPage = () => {
             }
           />
         )}
+        {stepState === 4 && (
+          <MethodForm
+            methods={signupFormData.method ?? []}
+            setMethods={(newValue) =>
+              setSignupFormData((prev) => ({
+                ...prev,
+                method: newValue,
+              }))
+            }
+          />
+        )}
       </div>
       <div className="flex flex-col items-center gap-8 px-5 py-3">
+        {(stepState === 4 || stepState === 5) && (
+          <p className="caption-1-medium text-gray-system-600">
+            중복선택이 가능해요
+          </p>
+        )}
         <PageIndicator total={3} current={parseIndicatorStep(stepState)} />
         {stepState === 1 ? (
           <BottomFullButton
