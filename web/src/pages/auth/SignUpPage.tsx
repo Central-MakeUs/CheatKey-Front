@@ -12,6 +12,7 @@ import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { PageIndicator } from "@/components/common/PageIndicator";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { AgeForm } from "@/components/signup/AgeForm";
+import { GenderForm } from "@/components/signup/GenderForm";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
@@ -100,6 +101,17 @@ export const SignUpPage = () => {
               setSignupFormData((prev) => ({
                 ...prev,
                 age: newValue,
+              }))
+            }
+          />
+        )}
+        {stepState === 3 && (
+          <GenderForm
+            gender={signupFormData.gender}
+            setGender={(newValue) =>
+              setSignupFormData((prev) => ({
+                ...prev,
+                gender: newValue,
               }))
             }
           />

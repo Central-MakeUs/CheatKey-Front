@@ -5,7 +5,7 @@ export type SignUpForm = {
   method?: TradeMethod[];
   item?: ItemCategory[];
 };
-export type Gender = "남성" | "여성" | null;
+export type Gender = "남자" | "여자" | null;
 export type Age = "10~20대" | "30~40대" | "50~60대" | "60대 이상" | null;
 export type TradeMethod =
   | "SNS 거래"
