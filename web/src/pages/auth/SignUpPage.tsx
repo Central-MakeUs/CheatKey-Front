@@ -10,6 +10,7 @@ import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { AgeForm } from "@/components/signup/AgeForm";
 import { GenderForm } from "@/components/signup/GenderForm";
 import { MethodForm } from "@/components/signup/MethodForm";
+import { ItemForm } from "@/components/signup/ItemForm";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
@@ -123,6 +124,17 @@ export const SignUpPage = () => {
               setSignupFormData((prev) => ({
                 ...prev,
                 method: newValue,
+              }))
+            }
+          />
+        )}
+        {stepState === 5 && (
+          <ItemForm
+            items={signupFormData.item ?? []}
+            setItems={(newValue) =>
+              setSignupFormData((prev) => ({
+                ...prev,
+                item: newValue,
               }))
             }
           />
