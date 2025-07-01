@@ -78,8 +78,18 @@ export const SignUpPage = () => {
             : undefined
         }
       />
-      <div className="flex flex-1 flex-col px-5">
-        <NicknameForm nickname={signupFormData.nickname} />
+      <div className="flex flex-1 flex-col px-5 pt-8">
+        <NicknameForm
+          nickname={signupFormData.nickname}
+          setNickname={(newValue) =>
+            setSignupFormData((prev) => ({
+              ...prev,
+              nickname: newValue,
+            }))
+          }
+          isValidName={isValidName}
+          setIsValidName={setIsValidName}
+        />
       </div>
       <div className="flex flex-col items-center gap-8 px-5 py-3">
         <PageIndicator total={3} current={parseIndicatorStep(stepState)} />

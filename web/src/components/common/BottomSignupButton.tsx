@@ -20,7 +20,7 @@ export const BottomSignupButton = ({
         type="button"
         onClick={onLeftClick}
         disabled={!state}
-        className="body-1-bold bg-bg-50 text-gray-system-500 w-31/100 rounded-xl py-3.5"
+        className="body-1-bold bg-base-50 text-gray-system-500 w-31/100 rounded-xl py-3.5"
       >
         {leftContent}
       </button>
@@ -30,7 +30,7 @@ export const BottomSignupButton = ({
         disabled={!state}
         className={cn("body-1-bold w-69/100 rounded-xl py-3.5", {
           "bg-primary-400 text-base-0": state,
-          "bg-base-50 text-gray-system-500": !state,
+          "bg-base-50 text-gray-system-700": !state,
         })}
       >
         {rightContent}
