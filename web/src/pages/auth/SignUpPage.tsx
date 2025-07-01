@@ -11,6 +11,23 @@ import { AgeForm } from "@/components/signup/AgeForm";
 import { GenderForm } from "@/components/signup/GenderForm";
 import { MethodForm } from "@/components/signup/MethodForm";
 import { ItemForm } from "@/components/signup/ItemForm";
+import { motion, AnimatePresence } from "motion/react";
+
+// 슬라이드 애니메이션 효과 객체
+const variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "100%" : "-100%",
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? "100%" : "-100%",
+    opacity: 0,
+  }),
+};
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
@@ -24,6 +41,8 @@ export const SignUpPage = () => {
   });
   const [isValidName, setIsValidName] = useState<boolean>(true);
 
+  const [direction, setDirection] = useState(0); // 폼 좌우 애니메이션 용
+
   const parseIndicatorStep = (step: number) => {
     if (step === 1) {
       return 1;
@@ -34,6 +53,7 @@ export const SignUpPage = () => {
 
   // 다음 단계로 이동
   const handleNextStep = () => {
+    setDirection(1);
     if (stepState < 5) {
       setStepState((step) => step + 1);
     } else {
@@ -43,6 +63,7 @@ export const SignUpPage = () => {
 
   // 이전 단계로 이동
   const handlePrevStep = () => {
+    setDirection(-1);
     if (stepState > 1) {
       setStepState((step) => step - 1);
     } else {
@@ -58,6 +79,55 @@ export const SignUpPage = () => {
     4: "거래 방식",
     5: "주요 거래 품목",
   };
+  // 각 단계별로 보여줄 컴포넌트를 정의
+  const STEP_COMPONENTS: Record<number, React.ReactNode> = {
+    1: (
+      <NicknameForm
+        nickname={signupFormData.nickname}
+        setNickname={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, nickname: newValue }))
+        }
+        isValidName={isValidName}
+        setIsValidName={setIsValidName}
+      />
+    ),
+    2: (
+      <AgeForm
+        age={signupFormData.age}
+        setAge={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, age: newValue }))
+        }
+      />
+    ),
+    3: (
+      <GenderForm
+        gender={signupFormData.gender}
+        setGender={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, gender: newValue }))
+        }
+      />
+    ),
+    4: (
+      <MethodForm
+        methods={signupFormData.method ?? []}
+        setMethods={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, method: newValue }))
+        }
+      />
+    ),
+    5: (
+      <ItemForm
+        items={signupFormData.item ?? []}
+        setItems={(newValue) =>
+          setSignupFormData((prev) => ({
+            ...prev,
+            item: newValue,
+          }))
+        }
+      />
+    ),
+  };
+
   // 각 단계별 하단 버튼 설정
   const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
     1: signupFormData.nickname !== "",
@@ -81,64 +151,21 @@ export const SignUpPage = () => {
             : undefined
         }
       />
-      <div className="flex flex-1 flex-col px-5 pt-8">
-        {stepState === 1 && (
-          <NicknameForm
-            nickname={signupFormData.nickname}
-            setNickname={(newValue) =>
-              setSignupFormData((prev) => ({
-                ...prev,
-                nickname: newValue,
-              }))
-            }
-            isValidName={isValidName}
-            setIsValidName={setIsValidName}
-          />
-        )}
-        {stepState === 2 && (
-          <AgeForm
-            age={signupFormData.age}
-            setAge={(newValue) =>
-              setSignupFormData((prev) => ({
-                ...prev,
-                age: newValue,
-              }))
-            }
-          />
-        )}
-        {stepState === 3 && (
-          <GenderForm
-            gender={signupFormData.gender}
-            setGender={(newValue) =>
-              setSignupFormData((prev) => ({
-                ...prev,
-                gender: newValue,
-              }))
-            }
-          />
-        )}
-        {stepState === 4 && (
-          <MethodForm
-            methods={signupFormData.method ?? []}
-            setMethods={(newValue) =>
-              setSignupFormData((prev) => ({
-                ...prev,
-                method: newValue,
-              }))
-            }
-          />
-        )}
-        {stepState === 5 && (
-          <ItemForm
-            items={signupFormData.item ?? []}
-            setItems={(newValue) =>
-              setSignupFormData((prev) => ({
-                ...prev,
-                item: newValue,
-              }))
-            }
-          />
-        )}
+      <div className="relative flex flex-1 flex-col px-5">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={stepState}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ type: "tween", duration: 0.3 }}
+            className="absolute right-0 left-0 h-full px-5 pt-8"
+          >
+            {STEP_COMPONENTS[stepState]}
+          </motion.div>
+        </AnimatePresence>
       </div>
       <div className="flex flex-col items-center gap-8 px-5 py-3">
         {(stepState === 4 || stepState === 5) && (

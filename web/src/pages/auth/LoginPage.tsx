@@ -1,5 +1,6 @@
 import { Bubble } from "@/components/common/Bubble";
 import { KakaoLogin } from "@/components/login/KakaoLogin";
+import { motion } from "motion/react";
 
 export const LoginPage = () => {
   return (
@@ -14,7 +15,18 @@ export const LoginPage = () => {
         </h2>
       </div>
       <div className="absolute bottom-11 flex w-full flex-col items-center gap-8 px-5">
-        <Bubble dir="bottom_center" text="AI로 분석하기" />
+        <motion.div
+          animate={{
+            y: ["0%", "-15%", "0%"],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Bubble dir="bottom_center" text="3초만에 로그인 하기!" />
+        </motion.div>
         <KakaoLogin />
       </div>
     </div>

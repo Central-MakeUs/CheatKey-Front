@@ -1,7 +1,12 @@
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
+import { path } from "@/routes/path";
+import { useNavigate } from "react-router-dom";
 
 export const KakaoLogin = () => {
-  const handleKakaoAuthorize = () => {};
+  const navigate = useNavigate();
+  const handleKakaoAuthorize = () => {
+    navigate(path.auth.signup);
+  };
   return (
     <button
       type="button"
