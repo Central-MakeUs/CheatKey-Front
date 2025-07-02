@@ -1,15 +1,16 @@
-import { path } from "@/routes/path";
 import { NavLink } from "react-router-dom";
 
+import { path } from "@/routes/path";
+
 import CommunityIcon from "@/assets/icons/community.svg";
-import CommunityFocusedIcon from "@/assets/icons/community-focused.svg";
+import CommunityFocusedIcon from "@/assets/icons/community_focused.svg";
 import ContentsIcon from "@/assets/icons/contents.svg";
-import ContentsFocusedIcon from "@/assets/icons/contents-focused.svg";
+import ContentsFocusedIcon from "@/assets/icons/contents_focused.svg";
 import HomeIcon from "@/assets/icons/home.svg";
-import HomeFocusedIcon from "@/assets/icons/home-focused.svg";
+import HomeFocusedIcon from "@/assets/icons/home_focused.svg";
 import MyIcon from "@/assets/icons/my.svg";
-import MyFocusedIcon from "@/assets/icons/my-focused.svg";
-import AiAnalysisIcon from "@/assets/icons/ai-analysis.svg";
+import MyFocusedIcon from "@/assets/icons/my_focused.svg";
+import AiAnalysisIcon from "@/assets/icons/ai_analysis.svg";
 
 const BottomNavBar = () => {
   return (
@@ -21,7 +22,7 @@ const BottomNavBar = () => {
     >
       <div className="flex h-21 items-center justify-around px-2">
         <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
-        {/* TODO: @tifsy 홈, ai, 마이페이지 경로 수정*/}
+        {/* TODO: @tifsy 홈, 콘텐츠, AI 분석하기, 마이페이지 경로 수정*/}
         <NavLink to={path.home}>
           {({ isActive }) => (
             <img
