@@ -1,11 +1,14 @@
 import { NicknameForm } from "@/components/signup/NicknameForm";
-import { useEffect, useState } from "react";
-import type { SignUpForm } from "@/types/signup/signup.types";
+import { useState } from "react";
+import type {
+  DuplicateCheckStatus,
+  NicknameFormatStatus,
+  SignUpForm,
+} from "@/types/signup/signup.types";
 import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
-import { PageIndicator } from "@/components/common/PageIndicator";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { AgeForm } from "@/components/signup/AgeForm";
 import { GenderForm } from "@/components/signup/GenderForm";
@@ -39,17 +42,11 @@ export const SignUpPage = () => {
     method: [],
     item: [],
   });
-  const [isValidName, setIsValidName] = useState<boolean>(true);
+  const [isValidName, setIsValidName] = useState<
+    NicknameFormatStatus | DuplicateCheckStatus
+  >("NORMAL");
 
   const [direction, setDirection] = useState(0); // 폼 좌우 애니메이션 용
-
-  const parseIndicatorStep = (step: number) => {
-    if (step === 1) {
-      return 1;
-    } else if (step === 2 || step === 3 || step === 4) {
-      return 2;
-    } else return 3;
-  };
 
   // 다음 단계로 이동
   const handleNextStep = () => {
@@ -136,9 +133,6 @@ export const SignUpPage = () => {
     4: true,
     5: true,
   };
-  useEffect(() => {
-    console.log(signupFormData.method);
-  }, [signupFormData.method]);
 
   return (
     <div className="relative flex h-full w-full flex-1 flex-col">
@@ -151,6 +145,13 @@ export const SignUpPage = () => {
             : undefined
         }
       />
+      <div className="relative mx-5 pt-1">
+        <div className="bg-bg-50 absolute top-1/2 h-[3px] w-full -translate-y-1/2 rounded-full" />
+        <div
+          className={`bg-primary-600 absolute top-1/2 h-[3px] -translate-y-1/2 rounded-full transition-all duration-300 ease-in-out`}
+          style={{ width: `${(stepState / 5) * 100}%` }}
+        />
+      </div>
       <div className="relative flex flex-1 flex-col px-5">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -167,28 +168,29 @@ export const SignUpPage = () => {
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="flex flex-col items-center gap-8 px-5 py-3">
+      <div className="flex flex-col items-center gap-9 py-3">
         {(stepState === 4 || stepState === 5) && (
           <p className="caption-1-medium text-gray-system-600">
             중복선택이 가능해요
           </p>
         )}
-        <PageIndicator total={3} current={parseIndicatorStep(stepState)} />
-        {stepState === 1 ? (
-          <BottomFullButton
-            content="다음"
-            state={BOTTOM_BUTTON_CONFIG[stepState]}
-            onClick={handleNextStep}
-          />
-        ) : (
-          <BottomSignupButton
-            leftContent="이전"
-            rightContent="다음"
-            state={BOTTOM_BUTTON_CONFIG[stepState]}
-            onLeftClick={handlePrevStep}
-            onRightClick={handleNextStep}
-          />
-        )}
+        <div className="border-t-gray-system-800 w-full border-t px-5 py-3">
+          {stepState === 1 ? (
+            <BottomFullButton
+              content="다음"
+              state={BOTTOM_BUTTON_CONFIG[stepState]}
+              onClick={handleNextStep}
+            />
+          ) : (
+            <BottomSignupButton
+              leftContent="이전"
+              rightContent="다음"
+              state={BOTTOM_BUTTON_CONFIG[stepState]}
+              onLeftClick={handlePrevStep}
+              onRightClick={handleNextStep}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

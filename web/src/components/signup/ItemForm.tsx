@@ -62,10 +62,12 @@ const ItemSelect = ({ itemOption, isSelected, onSelect }: ItemSelectProps) => {
       type="button"
       onClick={() => onSelect(itemOption)}
       className={cn(
-        "body-2-medium flex aspect-square flex-col items-center justify-center gap-2 rounded-xl border",
+        "body-2-medium flex aspect-square flex-col items-center justify-center gap-2 rounded-xl",
         {
-          "text-primary-200 border-primary-400 bg-[#2f47bd4d]": isSelected,
-          "bg-base-50 text-gray-system-600 border-gray-system-700": !isSelected,
+          "text-primary-200 border-primary-400 border bg-[#2f47bd4d]":
+            isSelected,
+          "bg-base-50 text-gray-system-600 border-gray-system-700 border-[0.5px]":
+            !isSelected,
         },
       )}
     >

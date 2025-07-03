@@ -3,6 +3,7 @@
 @import "./typography.css";
 
 @theme {
+  --spacing-header: 2.75rem;
 }
 @layer components {
   .layout {

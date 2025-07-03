@@ -69,16 +69,18 @@ const MethodSelect = ({
       className={cn(
         "body-2-medium flex items-center justify-between rounded-xl border px-5 py-[1.125rem] text-left",
         {
-          "text-primary-200 border-primary-400 bg-[#2f47bd4d]": isSelected,
-          "bg-base-50 text-gray-system-600 border-gray-system-700": !isSelected,
+          "text-primary-200 border-primary-400 border bg-[#2f47bd4d]":
+            isSelected,
+          "bg-base-50 text-gray-system-600 border-gray-system-700 border-[0.5px]":
+            !isSelected,
         },
       )}
     >
       <p>{methodOption}</p>
       {isSelected ? (
-        <CheckOn className="h-8 w-8" />
+        <CheckOn className="h-6 w-6" />
       ) : (
-        <CheckOff className="h-8 w-8" />
+        <CheckOff className="h-6 w-6" />
       )}
     </button>
   );
