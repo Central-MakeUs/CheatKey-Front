@@ -9,7 +9,7 @@ interface SearchBarProps {
 const SearchBar = ({ placeholder, value, onChange }: SearchBarProps) => {
   return (
     <div
-      className={`bg-bg-50 mx-5 my-[10px] flex h-[42px] w-auto items-center gap-1 rounded-full pl-3`}
+      className={`bg-base-75 mx-5 my-[10px] flex h-[42px] w-auto items-center gap-1 rounded-full pl-3`}
     >
       <img src={SearchIcon} alt="검색창" className="h-5 w-5" />
       <input
