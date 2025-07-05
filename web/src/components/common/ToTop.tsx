@@ -23,9 +23,9 @@ const ToTop = () => {
   return (
     <button
       onClick={handleToTopButtonClick}
-      className="bg-base-50 fixed right-5 bottom-[14%] z-50 rounded-xl p-3 backdrop-blur-md"
+      className="bg-base-50 fixed right-5 bottom-[14%] z-50 h-10 w-10 rounded-xl px-2 py-[6.4px] backdrop-blur-md"
     >
-      <img src={ToTopIcon} alt="맨 위로 올라가기" />
+      <img src={ToTopIcon} alt="맨 위로 올라가기" className="h-5 w-6" />
     </button>
   );
 };
