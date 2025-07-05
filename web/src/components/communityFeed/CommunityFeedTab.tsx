@@ -10,7 +10,7 @@ const CommunityFeedTab = ({
   setActiveTab,
 }: CommunityFeedTabProps) => {
   return (
-    <div className="border-gray-system-700 mx-[7.5px] border-b">
+    <div className="border-gray-system-700 border-b">
       <div className="flex w-full justify-between">
         {COMMUNITY_FEED_TABS.map((tab) => (
           <button
