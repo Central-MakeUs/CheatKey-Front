@@ -41,7 +41,7 @@ const CommunityFeedScamTypeDropdown = ({
   return (
     <div
       ref={dropdownRef}
-      className="relative flex w-full justify-end px-5 pt-[14px]"
+      className="relative flex w-full justify-end pt-[14px]"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
