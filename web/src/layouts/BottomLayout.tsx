@@ -1,4 +1,4 @@
-import BottomNavBar from "@/components/BottomNavBar";
+import BottomNavBar from "@/components/common/BottomNavBar";
 import { path } from "@/routes/path";
 import { useLocation, Outlet } from "react-router-dom";
 
