@@ -1,10 +1,6 @@
 import { NicknameForm } from "@/components/signup/NicknameForm";
 import { useState } from "react";
-import type {
-  DuplicateCheckStatus,
-  NicknameFormatStatus,
-  SignUpForm,
-} from "@/types/signup/signup.types";
+import type { NicknameStatus, SignUpForm } from "@/types/signup/signup.types";
 import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 import { AppHeader } from "@/components/common/AppHeader";
@@ -42,9 +38,7 @@ export const SignUpPage = () => {
     method: [],
     item: [],
   });
-  const [isValidName, setIsValidName] = useState<
-    NicknameFormatStatus | DuplicateCheckStatus
-  >("NORMAL");
+  const [isValidName, setIsValidName] = useState<NicknameStatus>("NORMAL");
 
   const [direction, setDirection] = useState(0); // 폼 좌우 애니메이션 용
 
@@ -127,7 +121,7 @@ export const SignUpPage = () => {
 
   // 각 단계별 하단 버튼 설정
   const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
-    1: signupFormData.nickname !== "",
+    1: isValidName === "PASS",
     2: signupFormData.age !== null,
     3: signupFormData.gender !== null,
     4: true,

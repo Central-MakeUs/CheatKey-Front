@@ -6,13 +6,14 @@ export type SignUpForm = {
   item?: ItemCategory[];
 };
 
-export type NicknameFormatStatus =
+export type NicknameStatus =
   | "NORMAL"
   | "VALID_FORMAT"
   | "INVALID_FORMAT"
   | "TOO_SHORT"
-  | "TOO_LONG";
-export type DuplicateCheckStatus = "IDLE" | "DUPLICATE" | "PASS";
+  | "TOO_LONG"
+  | "PASS"
+  | "DUPLICATE";
 
 export type Gender = "남자" | "여자" | null;
 
