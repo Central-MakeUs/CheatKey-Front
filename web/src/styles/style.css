@@ -3,8 +3,12 @@
 @import "./typography.css";
 
 @theme {
+  --spacing-header: 2.75rem;
 }
 @layer components {
+  .layout {
+    @apply bg-base-100 mx-auto flex h-full min-h-dvh max-w-lg flex-col overflow-x-hidden overflow-y-auto;
+  }
 }
 @layer base {
   html {
