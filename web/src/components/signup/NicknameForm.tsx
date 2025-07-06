@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, type ChangeEvent } from "react";
 import CloseButton from "@/assets/icons/close_button.svg?react";
 import CheckOn from "@/assets/icons/check_on.svg?react";
 import type { NicknameStatus } from "@/types/signup/signup.types";
@@ -9,8 +9,10 @@ import { useDebounce } from "@/hooks/useDebounce";
 interface NicknameFormProps {
   nickname: string;
   setNickname: (value: string) => void;
-  isValidName: NicknameStatus;
-  setIsValidName: (value: NicknameStatus) => void;
+  nicknameStatus: NicknameStatus;
+  setNicknameStatus: (value: NicknameStatus) => void;
+  isInputFocus: boolean;
+  setIsInputFocus: (value: boolean) => void;
 }
 
 const NICKNAME_MESSAGES: Record<NicknameStatus, string> = {
@@ -26,16 +28,17 @@ const NICKNAME_MESSAGES: Record<NicknameStatus, string> = {
 export const NicknameForm = ({
   nickname,
   setNickname,
-  isValidName,
-  setIsValidName,
+  nicknameStatus,
+  setNicknameStatus,
+  isInputFocus,
+  setIsInputFocus,
 }: NicknameFormProps) => {
-  const [isFocus, setIsFocus] = useState<boolean>(false);
   const debouncedNickname = useDebounce(nickname, 500);
 
   useEffect(() => {
     // 클라이언트 측 형식 체크
-    setIsValidName(validateNicknameFormat(nickname));
-  }, [nickname, setIsValidName]);
+    setNicknameStatus(validateNicknameFormat(nickname));
+  }, [nickname, setNicknameStatus]);
 
   useEffect(() => {
     // 형식 맞지 않으면 바로 반환
@@ -51,9 +54,9 @@ export const NicknameForm = ({
         const isDuplicate = existingNicknames.includes(debouncedNickname);
 
         if (isDuplicate) {
-          setIsValidName("DUPLICATE");
+          setNicknameStatus("DUPLICATE");
         } else {
-          setIsValidName("PASS");
+          setNicknameStatus("PASS");
         }
       }, 200);
     };
@@ -63,7 +66,7 @@ export const NicknameForm = ({
     return () => {
       clearTimeout(timer);
     };
-  }, [debouncedNickname, setIsValidName]);
+  }, [debouncedNickname, setNicknameStatus]);
 
   return (
     <>
@@ -75,15 +78,16 @@ export const NicknameForm = ({
           className={cn(
             "body-3-regular text-gray-system-400 w-full border-b p-3 overflow-ellipsis outline-0",
             {
-              "border-b-gray-system-700": isValidName === "NORMAL",
+              "border-b-gray-system-700": nicknameStatus === "NORMAL",
               "border-b-error-100": [
                 "DUPLICATE",
                 "INVALID_FORMAT",
                 "TOO_LONG",
                 "TOO_SHORT",
-              ].includes(isValidName),
+              ].includes(nicknameStatus),
               "border-b-primary-400":
-                (isFocus && isValidName === "NORMAL") || isValidName === "PASS",
+                (isInputFocus && nicknameStatus === "NORMAL") ||
+                nicknameStatus === "PASS",
             },
           )}
           value={nickname}
@@ -91,11 +95,11 @@ export const NicknameForm = ({
             setNickname(e.target.value)
           }
           onFocus={() => {
-            setIsFocus(true);
+            setIsInputFocus(true);
           }}
-          onBlur={() => setIsFocus(false)}
+          onBlur={() => setIsInputFocus(false)}
         />
-        {isValidName === "PASS" ? (
+        {nicknameStatus === "PASS" ? (
           <button className="absolute top-1/2 right-4 h-[1.375rem] w-[1.375rem] -translate-y-1/2 rounded-full">
             <CheckOn className="h-[1.375rem] w-[1.375rem]" />
           </button>
@@ -110,17 +114,17 @@ export const NicknameForm = ({
       </label>
       <h2
         className={cn("caption-2-regular text-gray-system-600 pt-2", {
-          "text-gray-system-600": isValidName === "NORMAL",
+          "text-gray-system-600": nicknameStatus === "NORMAL",
           "text-error-100": [
             "DUPLICATE",
             "INVALID_FORMAT",
             "TOO_LONG",
             "TOO_SHORT",
-          ].includes(isValidName),
-          "text-primary-400": isValidName === "PASS",
+          ].includes(nicknameStatus),
+          "text-primary-400": nicknameStatus === "PASS",
         })}
       >
-        {NICKNAME_MESSAGES[isValidName]}
+        {NICKNAME_MESSAGES[nicknameStatus]}
       </h2>
     </>
   );

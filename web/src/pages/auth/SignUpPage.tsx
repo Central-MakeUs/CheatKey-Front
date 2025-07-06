@@ -1,5 +1,5 @@
 import { NicknameForm } from "@/components/signup/NicknameForm";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { NicknameStatus, SignUpForm } from "@/types/signup/signup.types";
 import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
@@ -11,6 +11,8 @@ import { GenderForm } from "@/components/signup/GenderForm";
 import { MethodForm } from "@/components/signup/MethodForm";
 import { ItemForm } from "@/components/signup/ItemForm";
 import { motion, AnimatePresence } from "motion/react";
+import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
+import { cn } from "@/utils/cn";
 
 // 슬라이드 애니메이션 효과 객체
 const variants = {
@@ -38,9 +40,20 @@ export const SignUpPage = () => {
     method: [],
     item: [],
   });
-  const [isValidName, setIsValidName] = useState<NicknameStatus>("NORMAL");
+  const [nicknameStatus, setNicknameStatus] =
+    useState<NicknameStatus>("NORMAL");
 
-  const [direction, setDirection] = useState(0); // 폼 좌우 애니메이션 용
+  // 닉네임 폼 포커스 검사 변수
+  const [isInputFocus, setIsInputFocus] = useState<boolean>(false);
+
+  // 폼 내용 높이 계산 하는 변수
+  const [contentHeight, setContentHeight] = useState<number | "auto">("auto");
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // 폼 좌우 애니메이션 용
+  const [direction, setDirection] = useState(0);
+
+  const keyboardHeight = useKeyboardHeight();
 
   // 다음 단계로 이동
   const handleNextStep = () => {
@@ -78,8 +91,10 @@ export const SignUpPage = () => {
         setNickname={(newValue) =>
           setSignupFormData((prev) => ({ ...prev, nickname: newValue }))
         }
-        isValidName={isValidName}
-        setIsValidName={setIsValidName}
+        nicknameStatus={nicknameStatus}
+        setNicknameStatus={setNicknameStatus}
+        isInputFocus={isInputFocus}
+        setIsInputFocus={setIsInputFocus}
       />
     ),
     2: (
@@ -121,15 +136,22 @@ export const SignUpPage = () => {
 
   // 각 단계별 하단 버튼 설정
   const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
-    1: isValidName === "PASS",
+    1: nicknameStatus === "PASS",
     2: signupFormData.age !== null,
     3: signupFormData.gender !== null,
     4: true,
     5: true,
   };
 
+  // 폼 내용에 맞게 레이아웃 크기 계산 후 적용
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      setContentHeight(contentRef.current.offsetHeight);
+    }
+  }, [stepState]);
+
   return (
-    <div className="relative flex h-full w-full flex-1 flex-col">
+    <div className="relative flex h-fit w-full flex-1 flex-col">
       <AppHeader
         title={HEADER_CONFIG[stepState]}
         onPrev={handlePrevStep}
@@ -146,29 +168,46 @@ export const SignUpPage = () => {
           style={{ width: `${(stepState / 5) * 100}%` }}
         />
       </div>
-      <div className="relative flex flex-1 flex-col px-5">
+      <div
+        className="relative flex flex-1 flex-col"
+        style={{
+          minHeight: contentHeight,
+          transition: "min-height 0.3s ease-in-out",
+        }}
+      >
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={stepState}
+            ref={contentRef}
             custom={direction}
             variants={variants}
             initial="enter"
             animate="center"
             exit="exit"
             transition={{ type: "tween", duration: 0.3 }}
-            className="absolute right-0 left-0 h-full px-5 pt-8"
+            className="absolute right-0 left-0 flex h-fit flex-col px-5 pt-8 pb-3"
           >
             {STEP_COMPONENTS[stepState]}
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="flex flex-col items-center gap-9 py-3">
+      <div
+        className="relative flex flex-col items-center gap-9"
+        style={{
+          bottom: keyboardHeight,
+          transition: "bottom 0.3s ease-out",
+        }}
+      >
         {(stepState === 4 || stepState === 5) && (
           <p className="caption-1-medium text-gray-system-600">
             중복선택이 가능해요
           </p>
         )}
-        <div className="border-t-gray-system-800 w-full border-t px-5 py-3">
+        <div
+          className={cn("w-full px-5 py-3", {
+            "border-t-gray-system-800 border-t": !isInputFocus,
+          })}
+        >
           {stepState === 1 ? (
             <BottomFullButton
               content="다음"

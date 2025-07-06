@@ -22,7 +22,12 @@ export const AppHeader = ({
     <header className="relative w-full py-2">
       <div className="absolute top-1/2 left-5 flex -translate-y-1/2 items-center">
         {onPrev && (
-          <button type="button" onClick={onPrev} className="h-6 w-6">
+          <button
+            type="button"
+            aria-label="뒤로 가기"
+            onClick={onPrev}
+            className="h-6 w-6"
+          >
             <Prev className="text-base-0 h-6 w-6" />
           </button>
         )}
@@ -41,12 +46,22 @@ export const AppHeader = ({
           </button>
         )}
         {onWrite && (
-          <button type="button" onClick={onWrite} className="h-8 w-8">
+          <button
+            type="button"
+            aria-label="글쓰기"
+            onClick={onWrite}
+            className="h-8 w-8"
+          >
             <Write className="text-base-0 h-8 w-8" />
           </button>
         )}
         {onNotification && (
-          <button type="button" onClick={onNotification} className="h-8 w-8">
+          <button
+            type="button"
+            aria-label="알림"
+            onClick={onNotification}
+            className="h-8 w-8"
+          >
             {/* 알림은 추후에 기능에 따라 컴포넌트로 변경해도 될 것으로 보입니다 */}
             <Notification_On className="text-base-0 h-8 w-8" />
           </button>

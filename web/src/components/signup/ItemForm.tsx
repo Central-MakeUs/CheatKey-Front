@@ -71,6 +71,7 @@ const ItemSelect = ({ itemOption, isSelected, onSelect }: ItemSelectProps) => {
         },
       )}
     >
+      {/** TODO: @Ki-Tak 추후 디자인 변경 시, 이미지 추가해야함*/}
       <img className="bg-base-0 h-[3.375rem] w-[3.375rem]" />
       <p>{itemOption}</p>
     </button>

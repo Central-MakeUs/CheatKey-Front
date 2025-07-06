@@ -13,8 +13,14 @@ interface GenderFormProps {
 export const GenderForm = ({ gender, setGender }: GenderFormProps) => {
   return (
     <>
-      <h1 className="head-3-bold text-base-0">회원님의 성별을 알려주세요.</h1>
-      <div className="flex gap-2 pt-8">
+      <h1 id="gender-group-label" className="head-3-bold text-base-0">
+        회원님의 성별을 알려주세요.
+      </h1>
+      <div
+        role="radiogroup"
+        aria-labelledby="gender-group-label"
+        className="flex gap-2 pt-8"
+      >
         {GENDER_OPTIONS.map((option) => (
           <GenderSelect
             key={option}
@@ -44,6 +50,8 @@ const GenderSelect = ({
   return (
     <button
       type="button"
+      role="radio"
+      aria-checked={isSelected}
       onClick={() => onSelect(genderOption)}
       className={cn(
         "body-2-medium flex w-full items-center justify-between rounded-xl px-5 py-[1.6875rem] text-left",

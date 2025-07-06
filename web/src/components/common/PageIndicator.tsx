@@ -1,3 +1,4 @@
+// 안쓰는 컴포넌트지만, 추후에 사용될 수도 있어서 냅두겠습니다 (디자인 변경으로 사라진건 안 비밀..)
 import { cn } from "@/utils/cn";
 
 interface PageIndicatorProps {

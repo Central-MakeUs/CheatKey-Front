@@ -67,7 +67,7 @@ const MethodSelect = ({
       type="button"
       onClick={() => onSelect(methodOption)}
       className={cn(
-        "body-2-medium flex items-center justify-between rounded-xl border px-5 py-[1.125rem] text-left",
+        "body-2-medium flex items-center justify-between rounded-xl px-5 py-[1.125rem] text-left",
         {
           "text-primary-200 border-primary-400 border bg-[#2f47bd4d]":
             isSelected,
