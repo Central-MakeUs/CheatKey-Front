@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Home, CommunityDetail, CommunityFeed, CommunityWrite } from "@/pages";
+import { path } from "./path";
+
+import { Home, CommunityDetail, CommunityFeed, CommunityWrite, LoginPage, SignUpPage} from "@/pages";
 
 import BottomLayout from "@/layout/BottomLayout";
-
-import { path } from "./path";
+import { Layout } from "@/components/layout/Layout";
 
 const AppRouter = createBrowserRouter([
   {
@@ -29,6 +30,22 @@ const AppRouter = createBrowserRouter([
   {
     path: path.community.write,
     element: <CommunityWrite />,
+  },
+  {
+    path: path.auth.login,
+    element: (
+      <Layout>
+        <LoginPage />
+      </Layout>
+    ),
+  },
+  {
+    path: path.auth.signup,
+    element: (
+      <Layout>
+        <SignUpPage />
+      </Layout>
+    ),
   },
 ]);
 
