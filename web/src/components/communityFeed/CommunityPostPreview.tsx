@@ -47,8 +47,8 @@ const CommunityPostPreview = ({
         </button>
       </div>
 
-      <div className="text-primary-400 body-2-medium flex gap-[6px]">
-        <EllipseIcon className="h-4 w-4" aria-hidden />
+      <div className="text-primary-400 body-2-medium flex items-center gap-[6px]">
+        <EllipseIcon className="h-2 w-2" aria-hidden />
         {category}
       </div>
 
