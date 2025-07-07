@@ -53,6 +53,11 @@ export default tseslint.config(
               position: "before",
             },
             {
+              pattern: "@/layout/**",
+              group: "internal",
+              position: "after",
+            },
+            {
               pattern: "@/components/**",
               group: "internal",
               position: "after",
