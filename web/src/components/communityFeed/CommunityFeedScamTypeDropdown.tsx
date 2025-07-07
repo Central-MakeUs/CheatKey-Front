@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-import DropDownIcon from "@/assets/icons/dropdown.svg";
+import DropDownIcon from "@/assets/icons/dropdown.svg?react";
 
 interface CommunityFeedScamTypeDropdownProps {
   selectedScamType: string;
@@ -48,7 +48,7 @@ const CommunityFeedScamTypeDropdown = ({
         className="text-gray-system-600 body-1-bold flex h-[42px] w-25 items-center justify-end gap-[1px]"
       >
         사기 유형
-        <img src={DropDownIcon} alt="드롭다운 아이콘" />
+        <DropDownIcon className="ml-1 h-4 w-4" aria-hidden />
       </button>
 
       {isOpen && (
