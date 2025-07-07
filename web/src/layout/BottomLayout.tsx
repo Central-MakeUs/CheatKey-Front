@@ -1,6 +1,8 @@
-import BottomNavBar from "@/components/common/BottomNavBar";
-import { path } from "@/routes/path";
 import { useLocation, Outlet } from "react-router-dom";
+
+import { path } from "@/routes/path";
+
+import BottomNavBar from "@/components/common/BottomNavBar";
 
 const HIDDEN_PATHS = [
   //TODO: @tifsy HIDDEN_PATHS 로그인, 회원가입 주석 해제
