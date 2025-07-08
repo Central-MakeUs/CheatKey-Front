@@ -44,6 +44,9 @@ const CommunityFeedScamTypeDropdown = ({
       className="relative flex w-full justify-end pt-[0.875rem]"
     >
       <button
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls="scam-type-listbox"
         onClick={() => setIsOpen(!isOpen)}
         className="text-gray-system-600 body-1-bold flex h-[2.625rem] w-[6.25rem] items-center justify-end gap-[0.0625rem]"
       >
@@ -63,6 +66,7 @@ const CommunityFeedScamTypeDropdown = ({
                   onSelect(type);
                   setIsOpen(false);
                 }}
+                aria-selected={isSelected}
                 className={`h-[2.375rem] cursor-pointer p-[0.625rem] ${
                   isSelected
                     ? "bg-gray-system-800 text-gray-system-400"
