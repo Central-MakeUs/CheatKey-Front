@@ -1,3 +1,5 @@
+import { cn } from "@/utils/cn";
+
 import SearchIcon from "@/assets/icons/search.svg?react";
 
 interface SearchBarProps {
@@ -17,11 +19,12 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
-        className={`caret-primary-400 placeholder-gray-system-600 w-full bg-transparent focus:outline-none ${
+        className={cn(
+          "caret-primary-400 placeholder-gray-system-600 w-full bg-transparent focus:outline-none",
           isSearchBarFilled
             ? "text-gray-system-200 body-1-medium"
-            : "text-gray-system-400 body-2-regular"
-        }`}
+            : "text-gray-system-400 body-2-regular",
+        )}
       />
     </div>
   );
