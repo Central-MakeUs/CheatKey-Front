@@ -64,7 +64,7 @@ const CommunityPostPreview = ({
             <img
               src={images[0]}
               alt={`게시글 이미지 1`}
-              className="h-[110px] w-full rounded-lg object-cover"
+              className="h-[6.875rem] w-full rounded-lg object-cover"
             />
           )}
 
@@ -75,7 +75,7 @@ const CommunityPostPreview = ({
                   key={i}
                   src={img}
                   alt={`게시글 이미지 ${i}`}
-                  className="h-[110px] w-1/2 rounded-lg object-cover"
+                  className="h-[6.875rem] w-1/2 rounded-lg object-cover"
                 />
               ))}
             </div>
@@ -88,7 +88,7 @@ const CommunityPostPreview = ({
                   key={i}
                   src={img}
                   alt={`게시글 이미지 ${i}`}
-                  className="h-[110px] w-[130px] flex-shrink-0 rounded-lg object-cover"
+                  className="h-[6.875rem] w-[8.125rem] flex-shrink-0 rounded-lg object-cover"
                 />
               ))}
             </div>

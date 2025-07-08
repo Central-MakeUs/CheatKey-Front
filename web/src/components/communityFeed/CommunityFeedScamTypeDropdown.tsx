@@ -41,18 +41,18 @@ const CommunityFeedScamTypeDropdown = ({
   return (
     <div
       ref={dropdownRef}
-      className="relative flex w-full justify-end pt-[14px]"
+      className="relative flex w-full justify-end pt-[0.875rem]"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-gray-system-600 body-1-bold flex h-[42px] w-25 items-center justify-end gap-[1px]"
+        className="text-gray-system-600 body-1-bold flex h-[2.625rem] w-[6.25rem] items-center justify-end gap-[0.0625rem]"
       >
         사기 유형
         <DropDownIcon className="ml-1 h-4 w-4" aria-hidden />
       </button>
 
       {isOpen && (
-        <ul className="bg-bg-50 caption-1-medium absolute z-10 mt-11 w-25 overflow-hidden rounded-lg">
+        <ul className="bg-bg-50 caption-1-medium absolute z-10 mt-[2.75rem] w-[6.25rem] overflow-hidden rounded-lg">
           {SCAM_TYPES.map((type) => {
             const isSelected = selectedScamType === type;
 
@@ -63,7 +63,7 @@ const CommunityFeedScamTypeDropdown = ({
                   onSelect(type);
                   setIsOpen(false);
                 }}
-                className={`h-[38px] cursor-pointer p-[10px] ${
+                className={`h-[2.375rem] cursor-pointer p-[0.625rem] ${
                   isSelected
                     ? "bg-gray-system-800 text-gray-system-400"
                     : "text-gray-system-600"
