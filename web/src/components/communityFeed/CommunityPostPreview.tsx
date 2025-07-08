@@ -1,3 +1,5 @@
+import { cn } from "@/utils/cn";
+
 import CommentIcon from "@/assets/icons/comment.svg?react";
 import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react";
 import EllipseIcon from "@/assets/icons/ellipse.svg?react";
@@ -59,41 +61,27 @@ const CommunityPostPreview = ({
       </p>
 
       {images.length > 0 && (
-        <>
-          {images.length === 1 && (
-            <img
-              src={images[0]}
-              alt={`게시글 이미지 1`}
-              className="h-[6.875rem] w-full rounded-lg object-cover"
-            />
+        <div
+          className={cn(
+            "flex gap-[0.4375rem]",
+            images.length >= 3 && "scrollbar-hide overflow-x-auto",
           )}
-
-          {images.length === 2 && (
-            <div className="flex gap-[7px]">
-              {images.slice(0, 2).map((img, i) => (
-                <img
-                  key={i}
-                  src={img}
-                  alt={`게시글 이미지 ${i}`}
-                  className="h-[6.875rem] w-1/2 rounded-lg object-cover"
-                />
-              ))}
-            </div>
-          )}
-
-          {images.length >= 3 && (
-            <div className="scrollbar-hide flex gap-[7px] overflow-x-auto">
-              {images.map((img, i) => (
-                <img
-                  key={i}
-                  src={img}
-                  alt={`게시글 이미지 ${i}`}
-                  className="h-[6.875rem] w-[8.125rem] flex-shrink-0 rounded-lg object-cover"
-                />
-              ))}
-            </div>
-          )}
-        </>
+        >
+          {images
+            .slice(0, images.length >= 3 ? images.length : 2)
+            .map((img, i) => (
+              <img
+                key={img}
+                src={img}
+                alt={`게시글 이미지 ${i + 1}`}
+                className={cn("h-[6.875rem] rounded-lg object-cover", {
+                  "w-full": images.length === 1,
+                  "w-1/2": images.length === 2,
+                  "w-[8.125rem] flex-shrink-0": images.length >= 3,
+                })}
+              />
+            ))}
+        </div>
       )}
 
       <div className="text-gray-system-500 body-5-regular flex items-center justify-end gap-1 pt-1">
