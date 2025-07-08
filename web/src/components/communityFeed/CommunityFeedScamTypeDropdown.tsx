@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
+import { cn } from "@/utils/cn";
+
 import DropDownIcon from "@/assets/icons/dropdown.svg?react";
 
 interface CommunityFeedScamTypeDropdownProps {
@@ -67,11 +69,12 @@ const CommunityFeedScamTypeDropdown = ({
                   setIsOpen(false);
                 }}
                 aria-selected={isSelected}
-                className={`h-[2.375rem] cursor-pointer p-[0.625rem] ${
+                className={cn(
+                  "h-[2.375rem] cursor-pointer p-[0.625rem]",
                   isSelected
                     ? "bg-gray-system-800 text-gray-system-400"
-                    : "text-gray-system-600"
-                }`}
+                    : "text-gray-system-600",
+                )}
               >
                 {type}
               </li>
