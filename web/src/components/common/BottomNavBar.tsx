@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 
 import { path } from "@/routes/path";
 
+import BottomNavBarItem from "@/components/common/BottomNavBarItem";
+
 import AiAnalysisIcon from "@/assets/icons/ai_analysis.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
 import CommunityFocusedIcon from "@/assets/icons/community_focused.svg?react";
@@ -24,25 +26,16 @@ const BottomNavBar = () => {
         <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
 
         {/* TODO: @tifsy 홈, 콘텐츠, AI 분석하기, 마이페이지 경로 수정 */}
-        <NavLink to={path.home}>
-          {({ isActive }) =>
-            isActive ? (
-              <HomeFocusedIcon className="h-15 w-15" />
-            ) : (
-              <HomeIcon className="h-15 w-15" />
-            )
-          }
-        </NavLink>
-
-        <NavLink to={path.home}>
-          {({ isActive }) =>
-            isActive ? (
-              <ContentsFocusedIcon className="h-15 w-15" />
-            ) : (
-              <ContentsIcon className="h-15 w-15" />
-            )
-          }
-        </NavLink>
+        <BottomNavBarItem
+          to={path.home}
+          Icon={HomeIcon}
+          FocusedIcon={HomeFocusedIcon}
+        />
+        <BottomNavBarItem
+          to={path.home}
+          Icon={ContentsIcon}
+          FocusedIcon={ContentsFocusedIcon}
+        />
 
         <div className="z-20 translate-y-[-40px] rounded-full shadow-[0_4px_15px_0_rgba(0,89,255,0.3)]">
           <NavLink to={path.home}>
@@ -50,25 +43,16 @@ const BottomNavBar = () => {
           </NavLink>
         </div>
 
-        <NavLink to={path.community.feed}>
-          {({ isActive }) =>
-            isActive ? (
-              <CommunityFocusedIcon className="h-15 w-15" />
-            ) : (
-              <CommunityIcon className="h-15 w-15" />
-            )
-          }
-        </NavLink>
-
-        <NavLink to={path.home}>
-          {({ isActive }) =>
-            isActive ? (
-              <MyFocusedIcon className="h-15 w-15" />
-            ) : (
-              <MyIcon className="h-15 w-15" />
-            )
-          }
-        </NavLink>
+        <BottomNavBarItem
+          to={path.community.feed}
+          Icon={CommunityIcon}
+          FocusedIcon={CommunityFocusedIcon}
+        />
+        <BottomNavBarItem
+          to={path.home}
+          Icon={MyIcon}
+          FocusedIcon={MyFocusedIcon}
+        />
       </div>
     </nav>
   );
