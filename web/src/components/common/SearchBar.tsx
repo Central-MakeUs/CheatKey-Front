@@ -25,6 +25,7 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
             ? "text-gray-system-200 body-1-medium"
             : "text-gray-system-400 body-2-regular",
         )}
+        aria-label={placeholder}
       />
     </div>
   );
