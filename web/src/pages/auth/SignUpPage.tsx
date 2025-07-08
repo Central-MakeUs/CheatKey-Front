@@ -1,18 +1,24 @@
-import { NicknameForm } from "@/components/signup/NicknameForm";
 import { useLayoutEffect, useRef, useState } from "react";
-import type { NicknameStatus, SignUpForm } from "@/types/signup/signup.types";
+
 import { useNavigate } from "react-router-dom";
+
+import { motion, AnimatePresence } from "motion/react";
+
 import { path } from "@/routes/path";
+
+import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
+import type { NicknameStatus, SignUpForm } from "@/types/signup/signup.types";
+import { cn } from "@/utils/cn";
+
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
+import { BottomSheet } from "@/components/common/BottomSheet";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { AgeForm } from "@/components/signup/AgeForm";
 import { GenderForm } from "@/components/signup/GenderForm";
-import { MethodForm } from "@/components/signup/MethodForm";
 import { ItemForm } from "@/components/signup/ItemForm";
-import { motion, AnimatePresence } from "motion/react";
-import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
-import { cn } from "@/utils/cn";
+import { MethodForm } from "@/components/signup/MethodForm";
+import { NicknameForm } from "@/components/signup/NicknameForm";
 
 // 슬라이드 애니메이션 효과 객체
 const variants = {
@@ -33,6 +39,7 @@ const variants = {
 export const SignUpPage = () => {
   const navigate = useNavigate();
   const [stepState, setStepState] = useState<number>(1);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
   const [signupFormData, setSignupFormData] = useState<SignUpForm>({
     nickname: "",
     age: null,
@@ -61,7 +68,7 @@ export const SignUpPage = () => {
     if (stepState < 5) {
       setStepState((step) => step + 1);
     } else {
-      console.log("회원가입");
+      setIsBottomSheetOpen(true);
     }
   };
 
@@ -151,17 +158,17 @@ export const SignUpPage = () => {
   }, [stepState]);
 
   return (
-    <div className="relative flex h-fit w-full flex-1 flex-col">
+    <div className="bg-bg-100 relative flex h-fit w-full flex-1 flex-col">
       <AppHeader
         title={HEADER_CONFIG[stepState]}
         onPrev={handlePrevStep}
         onSkip={
           stepState === 4 || stepState === 5
-            ? () => console.log("스킵하기")
+            ? () => setIsBottomSheetOpen(true)
             : undefined
         }
       />
-      <div className="relative mx-5 pt-1">
+      <div className="mt-header relative mx-5 pt-1">
         <div className="bg-bg-50 absolute top-1/2 h-[3px] w-full -translate-y-1/2 rounded-full" />
         <div
           className={`bg-primary-600 absolute top-1/2 h-[3px] -translate-y-1/2 rounded-full transition-all duration-300 ease-in-out`}
@@ -225,6 +232,14 @@ export const SignUpPage = () => {
           )}
         </div>
       </div>
+      <BottomSheet
+        isOpen={isBottomSheetOpen}
+        onClose={() => setIsBottomSheetOpen(false)}
+      >
+        <div className="flex flex-col gap-[1.875rem]">
+          <div className="flex gap-2.5 px-5 py-3"></div>
+        </div>
+      </BottomSheet>
     </div>
   );
 };

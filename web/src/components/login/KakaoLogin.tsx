@@ -1,10 +1,12 @@
+import { getAuthRegister } from "@/apis/auth/getAuthRegister.api";
 import { getKakaoLogin } from "@/apis/auth/getKakaoLogin.api";
 
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 
 export const KakaoLogin = () => {
   const handleKakaoAuthorize = () => {
-    getKakaoLogin();
+    //getKakaoLogin();
+    getAuthRegister();
   };
   return (
     <button
