@@ -1,11 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { path } from "./path";
-
-import { Home, CommunityDetail, CommunityFeed, CommunityWrite, LoginPage, SignUpPage} from "@/pages";
+import {
+  Home,
+  CommunityDetail,
+  CommunityFeed,
+  CommunityWrite,
+  LoginPage,
+  SignUpPage,
+} from "@/pages";
 
 import BottomLayout from "@/layout/BottomLayout";
+
 import { Layout } from "@/components/layout/Layout";
+
+import { path } from "./path";
 
 const AppRouter = createBrowserRouter([
   {
