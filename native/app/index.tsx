@@ -10,6 +10,7 @@ export default function WebViewScreen() {
         source={{ uri: "http://localhost:3000/signup" }}
         style={styles.webview}
         javaScriptEnabled
+        bounces={false}
       />
     </View>
   );

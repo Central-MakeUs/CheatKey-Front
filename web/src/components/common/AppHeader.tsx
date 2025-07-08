@@ -1,6 +1,6 @@
+import Notification_On from "@/assets/icons/notification_on.svg?react";
 import Prev from "@/assets/icons/prev.svg?react";
 import Write from "@/assets/icons/write.svg?react";
-import Notification_On from "@/assets/icons/notification_on.svg?react";
 //import Notification_Off from "@/assets/icons/notification_off.svg?react";
 export interface AppHeaderProps {
   title: string;
@@ -19,7 +19,7 @@ export const AppHeader = ({
   onNotification,
 }: AppHeaderProps) => {
   return (
-    <header className="relative w-full py-2">
+    <header className="bg-bg-100 fixed z-10 w-full max-w-lg py-2">
       <div className="absolute top-1/2 left-5 flex -translate-y-1/2 items-center">
         {onPrev && (
           <button
