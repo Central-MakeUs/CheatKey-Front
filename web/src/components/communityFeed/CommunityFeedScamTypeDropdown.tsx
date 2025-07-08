@@ -57,7 +57,7 @@ const CommunityFeedScamTypeDropdown = ({
       </button>
 
       {isOpen && (
-        <ul className="bg-bg-50 caption-1-medium absolute z-10 mt-[2.75rem] w-[6.25rem] overflow-hidden rounded-lg">
+        <ul className="bg-bg-50 caption-1-medium absolute top-full z-10 mt-[0.5rem] w-[6.25rem] overflow-hidden rounded-lg">
           {SCAM_TYPES.map((type) => {
             const isSelected = selectedScamType === type;
 
