@@ -75,14 +75,11 @@ export const CommunityFeed = () => {
             )}
           </div>
         ) : (
-          sortedPosts.map((post, idx) => (
-            <div key={post.id}>
-              <CommunityPostPreview {...post} />
-              {idx < sortedPosts.length - 1 && (
-                <div className="bg-bg-50 h-[1px]" />
-              )}
-            </div>
-          ))
+          <div className="divide-bg-50 divide-y">
+            {sortedPosts.map((post) => (
+              <CommunityPostPreview key={post.id} {...post} />
+            ))}
+          </div>
         )}
       </div>
       <ToTop />

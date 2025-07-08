@@ -27,7 +27,7 @@ const CommunityPostPreview = ({
   images = [],
 }: CommunityPostPreviewProps) => {
   return (
-    <div className="text-gray-system-600 space-y-2 rounded-xl py-3">
+    <div className="text-gray-system-600 space-y-2 py-3">
       <div className="flex items-start justify-between">
         <div className="flex gap-3">
           {/* TODO: @tifsy 사용자 프로필 사진 불러오기 */}
