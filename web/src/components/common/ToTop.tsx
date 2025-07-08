@@ -1,22 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+
+import { throttle } from "@/utils/throttle";
 
 import ToTopIcon from "@/assets/icons/arrow_up.svg?react";
 
 const ToTop = () => {
   const [isToTopButtonVisible, setIsToTopButtonVisible] = useState(false);
 
-  const handleToTopButtonScroll = () => {
-    setIsToTopButtonVisible(window.scrollY > 0);
-  };
+  const throttledScrollHandler = useMemo(
+    () =>
+      throttle(() => {
+        setIsToTopButtonVisible(window.scrollY > 0);
+      }, 200),
+    [],
+  );
 
   const handleToTopButtonClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleToTopButtonScroll);
-    return () => window.removeEventListener("scroll", handleToTopButtonScroll);
-  }, []);
+    window.addEventListener("scroll", throttledScrollHandler);
+    return () => window.removeEventListener("scroll", throttledScrollHandler);
+  }, [throttledScrollHandler]);
 
   if (!isToTopButtonVisible) return null;
 
