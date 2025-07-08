@@ -1,11 +1,10 @@
+import { getKakaoLogin } from "@/apis/auth/getKakaoLogin.api";
+
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
-import { path } from "@/routes/path";
-import { useNavigate } from "react-router-dom";
 
 export const KakaoLogin = () => {
-  const navigate = useNavigate();
   const handleKakaoAuthorize = () => {
-    navigate(path.auth.signup);
+    getKakaoLogin();
   };
   return (
     <button
