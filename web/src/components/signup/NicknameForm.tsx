@@ -1,10 +1,12 @@
 import { useEffect, type ChangeEvent } from "react";
-import CloseButton from "@/assets/icons/close_button.svg?react";
-import CheckOn from "@/assets/icons/check_on.svg?react";
+
+import { useDebounce } from "@/hooks/useDebounce";
 import type { NicknameStatus } from "@/types/signup/signup.types";
 import { cn } from "@/utils/cn";
 import { validateNicknameFormat } from "@/utils/validateNicknameFormat";
-import { useDebounce } from "@/hooks/useDebounce";
+
+import CheckOn from "@/assets/icons/check_on.svg?react";
+import CloseButton from "@/assets/icons/close_button.svg?react";
 
 interface NicknameFormProps {
   nickname: string;

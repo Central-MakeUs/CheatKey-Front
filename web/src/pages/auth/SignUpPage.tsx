@@ -12,13 +12,13 @@ import { cn } from "@/utils/cn";
 
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
-import { BottomSheet } from "@/components/common/BottomSheet";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { AgeForm } from "@/components/signup/AgeForm";
 import { GenderForm } from "@/components/signup/GenderForm";
 import { ItemForm } from "@/components/signup/ItemForm";
 import { MethodForm } from "@/components/signup/MethodForm";
 import { NicknameForm } from "@/components/signup/NicknameForm";
+import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
 
 // 슬라이드 애니메이션 효과 객체
 const variants = {
@@ -232,14 +232,12 @@ export const SignUpPage = () => {
           )}
         </div>
       </div>
-      <BottomSheet
+      <TermBottomSheet
         isOpen={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}
-      >
-        <div className="flex flex-col gap-[1.875rem]">
-          <div className="flex gap-2.5 px-5 py-3"></div>
-        </div>
-      </BottomSheet>
+        buttonState={true}
+        onButtonClick={() => console.log(123)}
+      />
     </div>
   );
 };
