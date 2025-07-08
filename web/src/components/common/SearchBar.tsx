@@ -4,8 +4,8 @@ import SearchIcon from "@/assets/icons/search.svg?react";
 
 interface SearchBarProps {
   placeholder: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 
 const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
