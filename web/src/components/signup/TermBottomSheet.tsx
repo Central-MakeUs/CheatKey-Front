@@ -1,5 +1,6 @@
 import CheckBoxOff from "@/assets/icons/checkbox_off.svg?react";
 import CheckBoxOn from "@/assets/icons/checkbox_on.svg?react";
+import OpenDetailTerm from "@/assets/icons/prev.svg?react";
 
 import { BottomFullButton } from "../common/BottomFullButton";
 import { BottomSheet } from "../common/BottomSheet";

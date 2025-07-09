@@ -1,17 +1,19 @@
-import { getAuthRegister } from "@/apis/auth/getAuthRegister.api";
-import { getKakaoLogin } from "@/apis/auth/getKakaoLogin.api";
+import { API_DOMAINS } from "@/constants/apiConstants";
 
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 
 export const KakaoLogin = () => {
-  const handleKakaoAuthorize = () => {
-    //getKakaoLogin();
-    getAuthRegister();
+  const redirectURL =
+    (import.meta.env.VITE_API_BASE_URL as string) + API_DOMAINS.GET_KAKAO_LOGIN;
+
+  const handleKakaoLogin = () => {
+    window.location.href = redirectURL;
   };
+
   return (
     <button
       type="button"
-      onClick={handleKakaoAuthorize}
+      onClick={handleKakaoLogin}
       className="flex h-13 w-full items-center justify-center gap-4 rounded-xl bg-[#FEE500] px-3 text-center align-middle"
     >
       <img src={kakaoLogo} className="h-5 w-5" />

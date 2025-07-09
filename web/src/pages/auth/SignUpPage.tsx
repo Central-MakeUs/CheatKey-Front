@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +19,7 @@ import { ItemForm } from "@/components/signup/ItemForm";
 import { MethodForm } from "@/components/signup/MethodForm";
 import { NicknameForm } from "@/components/signup/NicknameForm";
 import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
+import { TermForm } from "@/components/signup/TermForm";
 
 // 슬라이드 애니메이션 효과 객체
 const variants = {
@@ -38,15 +39,19 @@ const variants = {
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
-  const [stepState, setStepState] = useState<number>(1);
+  const [stepState, setStepState] = useState<number>(0);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
   const [signupFormData, setSignupFormData] = useState<SignUpForm>({
+    term: false,
+    privacy: false,
+    marketing: false,
     nickname: "",
     age: null,
     gender: null,
     method: [],
     item: [],
   });
+
   const [nicknameStatus, setNicknameStatus] =
     useState<NicknameStatus>("NORMAL");
 
@@ -60,7 +65,31 @@ export const SignUpPage = () => {
   // 폼 좌우 애니메이션 용
   const [direction, setDirection] = useState(0);
 
+  // 키보드 높이 측정 훅
   const keyboardHeight = useKeyboardHeight();
+
+  // 전체 동의 여부
+  const isAllAgreed =
+    signupFormData.term && signupFormData.privacy && signupFormData.marketing;
+
+  // 전체 동의 클릭 핸들러
+  const handleToggleAllAgreements = () => {
+    const newCheckState = !isAllAgreed;
+    setSignupFormData((prev) => ({
+      ...prev,
+      term: newCheckState,
+      privacy: newCheckState,
+      marketing: newCheckState,
+    }));
+  };
+
+  // 개별 약관 동의 상태 변경 핸들러
+  const handleAgreementChange = (name: "term" | "privacy" | "marketing") => {
+    setSignupFormData((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }));
+  };
 
   // 다음 단계로 이동
   const handleNextStep = () => {
@@ -68,6 +97,7 @@ export const SignUpPage = () => {
     if (stepState < 5) {
       setStepState((step) => step + 1);
     } else {
+      // TODO: @Ki-Tak 회원가입으로 변경
       setIsBottomSheetOpen(true);
     }
   };
@@ -75,7 +105,7 @@ export const SignUpPage = () => {
   // 이전 단계로 이동
   const handlePrevStep = () => {
     setDirection(-1);
-    if (stepState > 1) {
+    if (stepState > 0) {
       setStepState((step) => step - 1);
     } else {
       navigate(path.auth.login, { replace: true });
@@ -143,6 +173,7 @@ export const SignUpPage = () => {
 
   // 각 단계별 하단 버튼 설정
   const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
+    0: signupFormData.term && signupFormData.privacy,
     1: nicknameStatus === "PASS",
     2: signupFormData.age !== null,
     3: signupFormData.gender !== null,
@@ -159,22 +190,28 @@ export const SignUpPage = () => {
 
   return (
     <div className="bg-bg-100 relative flex h-fit w-full flex-1 flex-col">
-      <AppHeader
-        title={HEADER_CONFIG[stepState]}
-        onPrev={handlePrevStep}
-        onSkip={
-          stepState === 4 || stepState === 5
-            ? () => setIsBottomSheetOpen(true)
-            : undefined
-        }
-      />
-      <div className="mt-header relative mx-5 pt-1">
-        <div className="bg-bg-50 absolute top-1/2 h-[3px] w-full -translate-y-1/2 rounded-full" />
-        <div
-          className={`bg-primary-600 absolute top-1/2 h-[3px] -translate-y-1/2 rounded-full transition-all duration-300 ease-in-out`}
-          style={{ width: `${(stepState / 5) * 100}%` }}
-        />
-      </div>
+      {/* AppHeader와 프로그레스바는 stepState > 0 일 때만 렌더링 */}
+      {stepState > 0 && (
+        <>
+          <AppHeader
+            title={HEADER_CONFIG[stepState]}
+            onPrev={handlePrevStep}
+            onSkip={
+              stepState === 4 || stepState === 5
+                ? () => setIsBottomSheetOpen(true)
+                : undefined
+            }
+          />
+          <div className="mt-header relative mx-5 pt-1">
+            <div className="bg-bg-50 absolute top-1/2 h-[3px] w-full -translate-y-1/2 rounded-full" />
+            <div
+              className={`bg-primary-600 absolute top-1/2 h-[3px] -translate-y-1/2 rounded-full transition-all duration-300 ease-in-out`}
+              style={{ width: `${(stepState / 5) * 100}%` }}
+            />
+          </div>
+        </>
+      )}
+
       <div
         className="relative flex flex-1 flex-col"
         style={{
@@ -182,22 +219,34 @@ export const SignUpPage = () => {
           transition: "min-height 0.3s ease-in-out",
         }}
       >
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={stepState}
-            ref={contentRef}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: "tween", duration: 0.3 }}
-            className="absolute right-0 left-0 flex h-fit flex-col px-5 pt-8 pb-3"
-          >
-            {STEP_COMPONENTS[stepState]}
-          </motion.div>
-        </AnimatePresence>
+        {stepState === 0 ? (
+          <div ref={contentRef}>
+            <TermForm
+              agreements={signupFormData}
+              isAllAgreed={isAllAgreed}
+              onToggleAll={handleToggleAllAgreements}
+              onToggle={handleAgreementChange}
+            />
+          </div>
+        ) : (
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={stepState}
+              ref={contentRef}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ type: "tween", duration: 0.3 }}
+              className="absolute right-0 left-0 flex h-fit flex-col px-5 pt-8 pb-3"
+            >
+              {STEP_COMPONENTS[stepState]}
+            </motion.div>
+          </AnimatePresence>
+        )}
       </div>
+
       <div
         className="relative flex flex-col items-center gap-9"
         style={{
@@ -215,9 +264,9 @@ export const SignUpPage = () => {
             "border-t-gray-system-800 border-t": !isInputFocus,
           })}
         >
-          {stepState === 1 ? (
+          {stepState === 0 || stepState === 1 ? (
             <BottomFullButton
-              content="다음"
+              content={stepState === 0 ? "동의하고 계속하기" : "다음"}
               state={BOTTOM_BUTTON_CONFIG[stepState]}
               onClick={handleNextStep}
             />
@@ -232,6 +281,8 @@ export const SignUpPage = () => {
           )}
         </div>
       </div>
+
+      {/* TermBottomSheet는 그대로 유지 */}
       <TermBottomSheet
         isOpen={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}

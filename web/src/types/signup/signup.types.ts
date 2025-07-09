@@ -1,4 +1,7 @@
 export type SignUpForm = {
+  term: boolean;
+  privacy: boolean;
+  marketing: boolean;
   nickname: string;
   age: Age;
   gender: Gender;
