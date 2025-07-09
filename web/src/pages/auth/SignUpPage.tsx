@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,8 +6,17 @@ import { motion, AnimatePresence } from "motion/react";
 
 import { path } from "@/routes/path";
 
+import {
+  TERMS_OF_SERVICE_CONTENT,
+  PRIVACY_POLICY_CONTENT,
+  MARKETING_CONSENT_CONTENT,
+} from "@/constants/termContents";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
-import type { NicknameStatus, SignUpForm } from "@/types/signup/signup.types";
+import type {
+  NicknameStatus,
+  SignUpForm,
+  TermContent,
+} from "@/types/signup/signup.types";
 import { cn } from "@/utils/cn";
 
 import { AppHeader } from "@/components/common/AppHeader";
@@ -40,7 +49,6 @@ const variants = {
 export const SignUpPage = () => {
   const navigate = useNavigate();
   const [stepState, setStepState] = useState<number>(0);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
   const [signupFormData, setSignupFormData] = useState<SignUpForm>({
     term: false,
     privacy: false,
@@ -51,6 +59,8 @@ export const SignUpPage = () => {
     method: [],
     item: [],
   });
+  // 선택된 약관 상태
+  const [selectedTerm, setSelectedTerm] = useState<TermContent | null>(null);
 
   const [nicknameStatus, setNicknameStatus] =
     useState<NicknameStatus>("NORMAL");
@@ -91,6 +101,28 @@ export const SignUpPage = () => {
     }));
   };
 
+  // 약관 상세 보기 클릭 핸들러
+  const handleOpenTermDetail = (termKey: "term" | "privacy" | "marketing") => {
+    switch (termKey) {
+      case "term":
+        setSelectedTerm(TERMS_OF_SERVICE_CONTENT);
+        break;
+      case "privacy":
+        setSelectedTerm(PRIVACY_POLICY_CONTENT);
+        break;
+      case "marketing":
+        setSelectedTerm(MARKETING_CONSENT_CONTENT);
+        break;
+      default:
+        break;
+    }
+  };
+
+  // 약관 상세 보기 취소
+  const handleCloseBottomSheet = () => {
+    setSelectedTerm(null);
+  };
+
   // 다음 단계로 이동
   const handleNextStep = () => {
     setDirection(1);
@@ -98,7 +130,6 @@ export const SignUpPage = () => {
       setStepState((step) => step + 1);
     } else {
       // TODO: @Ki-Tak 회원가입으로 변경
-      setIsBottomSheetOpen(true);
     }
   };
 
@@ -198,7 +229,7 @@ export const SignUpPage = () => {
             onPrev={handlePrevStep}
             onSkip={
               stepState === 4 || stepState === 5
-                ? () => setIsBottomSheetOpen(true)
+                ? () => console.log("회원가입 폼 제출")
                 : undefined
             }
           />
@@ -226,6 +257,7 @@ export const SignUpPage = () => {
               isAllAgreed={isAllAgreed}
               onToggleAll={handleToggleAllAgreements}
               onToggle={handleAgreementChange}
+              onClickDetail={handleOpenTermDetail}
             />
           </div>
         ) : (
@@ -282,12 +314,11 @@ export const SignUpPage = () => {
         </div>
       </div>
 
-      {/* TermBottomSheet는 그대로 유지 */}
       <TermBottomSheet
-        isOpen={isBottomSheetOpen}
-        onClose={() => setIsBottomSheetOpen(false)}
-        buttonState={true}
-        onButtonClick={() => console.log(123)}
+        isOpen={selectedTerm !== null}
+        onClose={handleCloseBottomSheet}
+        title={selectedTerm?.title ?? ""}
+        content={selectedTerm?.content ?? ""}
       />
     </div>
   );

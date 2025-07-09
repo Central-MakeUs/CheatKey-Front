@@ -9,6 +9,11 @@ export type SignUpForm = {
   item?: ItemCategory[];
 };
 
+export type TermContent = {
+  title: string;
+  content: string;
+};
+
 export type NicknameStatus =
   | "NORMAL"
   | "VALID_FORMAT"

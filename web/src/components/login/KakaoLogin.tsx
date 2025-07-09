@@ -4,9 +4,12 @@ import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 
 export const KakaoLogin = () => {
   const redirectURL =
-    (import.meta.env.VITE_API_BASE_URL as string) + API_DOMAINS.GET_KAKAO_LOGIN;
+    (import.meta.env.VITE_API_BASE_URL as string) +
+    API_DOMAINS.GET_KAKAO_LOGIN +
+    "?redirect_uri=http://localhost:8080/signup";
 
   const handleKakaoLogin = () => {
+    console.log(redirectURL);
     window.location.href = redirectURL;
   };
 

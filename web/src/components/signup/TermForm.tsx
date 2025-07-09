@@ -11,6 +11,7 @@ interface TermFormProps {
   isAllAgreed: boolean;
   onToggleAll: () => void;
   onToggle: (name: "term" | "privacy" | "marketing") => void;
+  onClickDetail: (termKey: "term" | "privacy" | "marketing") => void;
 }
 
 export const TermForm = ({
@@ -18,11 +19,8 @@ export const TermForm = ({
   isAllAgreed,
   onToggleAll,
   onToggle,
+  onClickDetail,
 }: TermFormProps) => {
-  const handleOpenDetail = (termName: string) => {
-    alert(`${termName} 상세 보기`);
-  };
-
   return (
     <>
       <h1 className="head-2-semibold text-base-0 mt-19 px-5">
@@ -48,19 +46,19 @@ export const TermForm = ({
         <TermCheckBox
           isCheck={agreements.term}
           onToggle={() => onToggle("term")}
-          onOpenDetail={() => handleOpenDetail("서비스 이용약관")}
+          onOpenDetail={() => onClickDetail("term")}
           label="서비스 이용약관 동의 (필수)"
         />
         <TermCheckBox
           isCheck={agreements.privacy}
           onToggle={() => onToggle("privacy")}
-          onOpenDetail={() => handleOpenDetail("개인정보 수집 및 이용 동의서")}
+          onOpenDetail={() => onClickDetail("privacy")}
           label="개인정보 수집 및 이용 동의서 (필수)"
         />
         <TermCheckBox
           isCheck={agreements.marketing}
           onToggle={() => onToggle("marketing")}
-          onOpenDetail={() => handleOpenDetail("광고성 정보 내용 수신 동의")}
+          onOpenDetail={() => onClickDetail("marketing")}
           label="광고성 정보 내용 수신 동의 (선택)"
         />
       </div>
