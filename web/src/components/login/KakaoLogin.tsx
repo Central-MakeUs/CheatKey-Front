@@ -1,17 +1,30 @@
+import { useEffect } from "react";
+
 import { API_DOMAINS } from "@/constants/apiConstants";
 
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 
 export const KakaoLogin = () => {
-  const redirectURL =
-    (import.meta.env.VITE_API_BASE_URL as string) +
-    API_DOMAINS.GET_KAKAO_LOGIN +
-    "?redirect_uri=http://localhost:8080/signup";
+  const redirectUri =
+    (import.meta.env.VITE_API_BASE_URL as string) + API_DOMAINS.GET_KAKAO_LOGIN;
+
+  const kakaoKey = import.meta.env.VITE_KAKAO_JS_KEY;
 
   const handleKakaoLogin = () => {
-    console.log(redirectURL);
-    window.location.href = redirectURL;
+    if (!window.Kakao) {
+      return;
+    }
+
+    window.Kakao.Auth.authorize({
+      redirectUri,
+      throughTalk: true,
+    });
   };
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init(kakaoKey);
+    }
+  }, [kakaoKey]);
 
   return (
     <button
