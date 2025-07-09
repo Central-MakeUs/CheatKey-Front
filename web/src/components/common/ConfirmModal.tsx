@@ -47,7 +47,7 @@ export const ConfirmModal = ({
       aria-describedby={description ? "modal-description" : undefined}
     >
       <div
-        className="text-base-0 bg-bg-50 w-[20rem] rounded-[26px] px-5 pt-10 pb-5 text-center"
+        className="text-base-0 bg-bg-50 mx-5 w-full rounded-[26px] px-5 pt-10 pb-5 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {illustration && (
