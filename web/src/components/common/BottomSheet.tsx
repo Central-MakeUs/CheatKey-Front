@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import {
   motion,
@@ -31,6 +31,7 @@ export const BottomSheet = ({
   children,
 }: BottomSheetProps) => {
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+  const scrollHandleRef = useRef<HTMLDivElement>(null); // 스크롤 드래그 핸들 ref
 
   const animationControls = useAnimationControls();
   const dragControls = useDragControls();
@@ -41,6 +42,10 @@ export const BottomSheet = ({
     if (isOpen) {
       animationControls.start("visible");
       document.body.style.overflow = "hidden";
+      // 바텀 시트 생성 시 view 맨 위로
+      if (scrollHandleRef.current) {
+        scrollHandleRef.current.scrollTop = 0;
+      }
     }
     return () => {
       document.body.style.overflow = "unset";
@@ -92,6 +97,7 @@ export const BottomSheet = ({
           >
             {/* 드래그 핸들 */}
             <div
+              ref={scrollHandleRef}
               onPointerDown={(event) => dragControls.start(event)}
               className="flex h-[1.625rem] w-full touch-none items-center justify-center"
             >
