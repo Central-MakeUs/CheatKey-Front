@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import {
   motion,
@@ -6,6 +6,7 @@ import {
   useDragControls,
   useAnimationControls,
 } from "framer-motion";
+import { createPortal } from "react-dom";
 
 interface BottomSheetProps {
   isOpen: boolean;
@@ -29,23 +30,32 @@ export const BottomSheet = ({
   onClose,
   children,
 }: BottomSheetProps) => {
+  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+
   const animationControls = useAnimationControls();
   const dragControls = useDragControls();
 
   useEffect(() => {
+    setPortalRoot(document.getElementById("bottom-sheet-root"));
+
     if (isOpen) {
       animationControls.start("visible");
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
     }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isOpen, animationControls]);
 
-  return (
+  if (!portalRoot) {
+    return null;
+  }
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* 배경 (Backdrop) */}
+          {/* 배경 */}
           <motion.div
             className="fixed inset-0 z-50 bg-black/80 backdrop-blur-[2px]"
             variants={backdropVariants}
@@ -57,6 +67,8 @@ export const BottomSheet = ({
 
           {/* 바텀시트 */}
           <motion.div
+            role="dialog"
+            aria-modal="true"
             className="bg-bg-50 fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-lg rounded-t-[1.625rem] shadow-lg"
             variants={sheetVariants}
             initial="hidden"
@@ -89,6 +101,7 @@ export const BottomSheet = ({
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    portalRoot, // 포탈 렌더링
   );
 };
