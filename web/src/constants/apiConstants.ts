@@ -1,5 +1,5 @@
 export const API_DOMAINS = {
-  GET_KAKAO_LOGIN: "/login/oauth2/code/kakao",
+  GET_KAKAO_LOGIN: "/api/auth/login/kakao/callback",
   GET_AUTH_REGISTER: "/auth/register",
 };
 export const QUERY_KEYS = {};
