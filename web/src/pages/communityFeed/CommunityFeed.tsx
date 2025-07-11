@@ -7,9 +7,11 @@ import { path } from "@/routes/path";
 import { AppHeader } from "@/components/common/AppHeader";
 import SearchBar from "@/components/common/SearchBar";
 import ToTop from "@/components/common/ToTop";
-import CommunityFeedScamTypeDropdown from "@/components/communityFeed/CommunityFeedScamTypeDropdown";
+import CommunityFeedSortOptionDropdown from "@/components/communityFeed/CommunityFeedSortOptionDropdown";
 import CommunityFeedTab from "@/components/communityFeed/CommunityFeedTab";
 import CommunityPostPreview from "@/components/communityFeed/CommunityPostPreview";
+
+import { COMMUNITY_FEED_TABS } from "@/constants/commnityFeedTabs";
 
 import Write from "@/assets/icons/write.svg?react";
 
@@ -18,28 +20,32 @@ import { mockCommunityFeedPreviews } from "@/mocks/mockCommunityFeedPreviews";
 export const CommunityFeed = () => {
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState("최신");
+  const [selectedSortOption, setSelectedSortOption] = useState("최신순");
 
-  const [selectedScamType, setSelectedScamType] = useState("전체");
-  const filteredPosts =
-    selectedScamType === "전체"
-      ? mockCommunityFeedPreviews
-      : mockCommunityFeedPreviews.filter(
-          (post) => post.category === selectedScamType,
-        );
+  const [selectedCategory, setSelectedCategory] = useState("신고합니다");
 
-  //TODO: @tifsy 서버 api에 맞게 아래 CommunityTab 로직 수정
+  const [searchValue, setSearchValue] = useState("");
+
+  const filteredPosts = mockCommunityFeedPreviews.filter((post) => {
+    const matchesCategory = COMMUNITY_FEED_TABS.includes(selectedCategory)
+      ? post.category === selectedCategory
+      : true;
+
+    const matchesSearch = post.title
+      .toLowerCase()
+      .includes(searchValue.trim().toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+
   const sortedPosts =
-    activeTab === "인기"
+    selectedSortOption === "인기순"
       ? [...filteredPosts].sort((a, b) => b.commentCount - a.commentCount)
       : [...filteredPosts].sort(
           (a, b) =>
             new Date(b.date.replace(/\./g, "-")).getTime() -
             new Date(a.date.replace(/\./g, "-")).getTime(),
         );
-
-  //TODO: @tifsy 검색 로직 추가
-  const [searchValue, setSearchValue] = useState("");
 
   return (
     <div className="bg-bg-100 min-h-screen pb-21">
@@ -51,19 +57,22 @@ export const CommunityFeed = () => {
       />
       <div className="px-5 pt-11">
         <SearchBar
-          placeholder="검색어를 입력해주세요."
+          placeholder="사기 사례를 입력해주세요."
           value={searchValue}
           onChange={setSearchValue}
         />
-        <CommunityFeedTab activeTab={activeTab} setActiveTab={setActiveTab} />
-        <CommunityFeedScamTypeDropdown
-          selectedScamType={selectedScamType}
-          onSelect={setSelectedScamType}
+        <CommunityFeedTab
+          activeTab={selectedCategory}
+          setActiveTab={setSelectedCategory}
+        />
+        <CommunityFeedSortOptionDropdown
+          selectedSortOption={selectedSortOption}
+          onSelect={setSelectedSortOption}
         />
         {sortedPosts.length === 0 ? (
           <div className="flex flex-col items-center">
             <p className="body-2-medium text-gray-system-600 py-[1.75rem] text-center whitespace-pre-line">
-              {activeTab === "인기" ? (
+              {selectedSortOption === "인기순" ? (
                 <>
                   현재 등록된 인기글이 없습니다.
                   <br />
