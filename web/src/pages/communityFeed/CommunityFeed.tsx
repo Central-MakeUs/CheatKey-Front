@@ -11,6 +11,8 @@ import CommunityFeedScamTypeDropdown from "@/components/communityFeed/CommunityF
 import CommunityFeedTab from "@/components/communityFeed/CommunityFeedTab";
 import CommunityPostPreview from "@/components/communityFeed/CommunityPostPreview";
 
+import Write from "@/assets/icons/write.svg?react";
+
 import { mockCommunityFeedPreviews } from "@/mocks/mockCommunityFeedPreviews";
 
 export const CommunityFeed = () => {
@@ -59,20 +61,30 @@ export const CommunityFeed = () => {
           onSelect={setSelectedScamType}
         />
         {sortedPosts.length === 0 ? (
-          <div className="body-2-medium text-gray-system-600 py-10 text-center whitespace-pre-line">
-            {activeTab === "인기" ? (
-              <>
-                현재 등록된 인기글이 없습니다.
-                <br />
-                새로운 글을 작성해보세요!
-              </>
-            ) : (
-              <>
-                현재 작성된 글이 존재하지 않아요.
-                <br />
-                새로운 글을 작성해보세요!
-              </>
-            )}
+          <div className="flex flex-col items-center">
+            <p className="body-2-medium text-gray-system-600 py-[1.75rem] text-center whitespace-pre-line">
+              {activeTab === "인기" ? (
+                <>
+                  현재 등록된 인기글이 없습니다.
+                  <br />
+                  새로운 글을 작성해보세요!
+                </>
+              ) : (
+                <>
+                  현재 작성된 글이 존재하지 않아요.
+                  <br />
+                  새로운 글을 작성해보세요!
+                </>
+              )}
+            </p>
+            <button
+              className="bg-bg-50 body-1-bold text-gray-system-500 flex h-[42px] w-[120px] items-center justify-center gap-[1px] rounded-full"
+              onClick={() => navigate(path.community.write)}
+            >
+              <span className="body-1-bold">글 작성하기</span>
+              {/* TODO: @tifsy 글쓰기 아이콘 색상 변경  */}
+              <Write className="h-5 w-5" aria-hidden="true" focusable="false" />
+            </button>
           </div>
         ) : (
           <div className="divide-bg-50 divide-y">

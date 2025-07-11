@@ -43,7 +43,7 @@ const CommunityFeedScamTypeDropdown = ({
   return (
     <div
       ref={dropdownRef}
-      className="relative flex w-full justify-end pt-[0.875rem]"
+      className="relative flex w-full justify-end py-[0.875rem]"
     >
       <button
         aria-haspopup="listbox"
