@@ -31,9 +31,9 @@ export const CommunityFeed = () => {
       ? post.category === selectedCategory
       : true;
 
-    const matchesSearch = post.title
-      .toLowerCase()
-      .includes(searchValue.trim().toLowerCase());
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchValue.trim().toLowerCase()) ||
+      post.content.toLowerCase().includes(searchValue.trim().toLowerCase());
 
     return matchesCategory && matchesSearch;
   });
