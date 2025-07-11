@@ -2,7 +2,6 @@ import { cn } from "@/utils/cn";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react";
-import EllipseIcon from "@/assets/icons/ellipse.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
 import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
 
@@ -10,7 +9,6 @@ import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
 interface CommunityPostPreviewProps {
   nickname: string;
   date: string;
-  category: string;
   title: string;
   content: string;
   commentCount: number;
@@ -20,7 +18,6 @@ interface CommunityPostPreviewProps {
 const CommunityPostPreview = ({
   nickname,
   date,
-  category,
   title,
   content,
   commentCount,
@@ -47,11 +44,6 @@ const CommunityPostPreview = ({
         <button aria-label="커뮤니티 글 메뉴 열기">
           <CommunityPostMenuIcon className="text-gray-system-500 h-6 w-6" />
         </button>
-      </div>
-
-      <div className="text-primary-400 body-2-medium flex items-center gap-[6px]">
-        <EllipseIcon className="h-2 w-2" aria-hidden />
-        {category}
       </div>
 
       <div className="text-gray-system-100 body-1-bold">{title}</div>
