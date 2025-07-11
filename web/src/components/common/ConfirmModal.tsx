@@ -66,7 +66,7 @@ export const ConfirmModal = ({
           {showCancelButton && (
             <button
               onClick={onCancel}
-              className="bg-base-50 body-2-medium text-gray-system-500 h-[50px] flex-1 rounded-xl py-3"
+              className="bg-base-50 body-2-medium text-gray-system-500 h-[50px] flex-1 rounded-xl"
             >
               {cancelText}
             </button>
