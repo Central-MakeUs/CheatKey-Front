@@ -9,6 +9,7 @@ import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
 interface CommunityPostPreviewProps {
   nickname: string;
   date: string;
+  category: string;
   title: string;
   content: string;
   commentCount: number;
@@ -63,7 +64,7 @@ const CommunityPostPreview = ({
             .slice(0, images.length >= 3 ? images.length : 2)
             .map((img, i) => (
               <img
-                key={img}
+                key={`${img}-${i}`}
                 src={img}
                 alt={`게시글 이미지 ${i + 1}`}
                 className={cn("h-[6.875rem] rounded-lg object-cover", {
