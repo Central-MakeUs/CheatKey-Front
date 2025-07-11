@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import { createPortal } from "react-dom";
+
 import { cn } from "@/utils/cn";
 
 interface ConfirmModalProps {
@@ -29,13 +31,14 @@ export const ConfirmModal = ({
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
+
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = originalOverflow;
     };
   }, []);
 
-  return (
+  const confirmModalContent = (
     <div
       className={cn(
         "fixed inset-0 z-50 flex items-center justify-center",
@@ -63,7 +66,7 @@ export const ConfirmModal = ({
           {showCancelButton && (
             <button
               onClick={onCancel}
-              className="bg-base-50 body-2-medium text-gray-system-500 h-[50px] flex-1 rounded-xl py-2"
+              className="bg-base-50 body-2-medium text-gray-system-500 h-[50px] flex-1 rounded-xl py-3"
             >
               {cancelText}
             </button>
@@ -82,4 +85,6 @@ export const ConfirmModal = ({
       </div>
     </div>
   );
+
+  return createPortal(confirmModalContent, document.body);
 };
