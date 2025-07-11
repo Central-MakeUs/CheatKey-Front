@@ -2,75 +2,75 @@
   .head-1-bold {
     font-weight: 700;
     font-size: 2rem; /* 32px */
-    line-height: 140%;
+    line-height: 44px;
     letter-spacing: 0rem;
   }
 
   .head-2-semibold {
     font-weight: 600;
     font-size: 1.5rem; /* 24px */
-    line-height: 140%;
+    line-height: 34px;
     letter-spacing: 0rem;
   }
 
   .head-3-bold {
     font-weight: 700;
     font-size: 1.25rem; /* 20px */
-    line-height: 140%;
+    line-height: 34px;
     letter-spacing: 0rem;
   }
 
   .head-4-semibold {
     font-weight: 600;
     font-size: 1.125rem; /* 18px */
-    line-height: 140%;
+    line-height: 26px;
     letter-spacing: 0rem;
   }
 
   .body-1-bold {
     font-weight: 700;
     font-size: 1rem; /* 16px */
-    line-height: 140%;
+    line-height: 24px;
   }
 
   .body-2-medium {
     font-weight: 500;
     font-size: 1rem;
-    line-height: 140%;
+    line-height: 24px;
   }
 
   .body-3-regular {
     font-weight: 400;
     font-size: 1rem;
-    line-height: 140%;
+    line-height: 18px;
     letter-spacing: 0rem;
   }
 
   .body-4-medium {
     font-weight: 500;
     font-size: 0.875rem; /* 14px */
-    line-height: 140%;
+    line-height: 18px;
     letter-spacing: 0rem;
   }
 
   .body-5-regular {
     font-weight: 400;
     font-size: 0.875rem;
-    line-height: 140%;
+    line-height: 18px;
     letter-spacing: 0rem;
   }
 
   .caption-1-medium {
     font-weight: 500;
     font-size: 0.8125rem; /* 13px */
-    line-height: 140%;
+    line-height: 17px;
     letter-spacing: 0rem;
   }
 
   .caption-2-regular {
     font-weight: 400;
     font-size: 0.8125rem;
-    line-height: 140%;
+    line-height: 17px;
     letter-spacing: 0rem;
   }
 }
