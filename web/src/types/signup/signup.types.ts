@@ -1,9 +1,17 @@
 export type SignUpForm = {
+  term: boolean;
+  privacy: boolean;
+  marketing: boolean;
   nickname: string;
   age: Age;
   gender: Gender;
   method?: TradeMethod[];
   item?: ItemCategory[];
+};
+
+export type TermContent = {
+  title: string;
+  content: string;
 };
 
 export type NicknameStatus =

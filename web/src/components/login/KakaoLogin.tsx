@@ -1,16 +1,35 @@
+import { useEffect } from "react";
+
+import { API_DOMAINS } from "@/constants/apiConstants";
+
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
-import { path } from "@/routes/path";
-import { useNavigate } from "react-router-dom";
 
 export const KakaoLogin = () => {
-  const navigate = useNavigate();
-  const handleKakaoAuthorize = () => {
-    navigate(path.auth.signup);
+  const redirectUri =
+    (import.meta.env.VITE_API_BASE_URL as string) + API_DOMAINS.GET_KAKAO_LOGIN;
+
+  const kakaoKey = import.meta.env.VITE_KAKAO_JS_KEY;
+
+  const handleKakaoLogin = () => {
+    if (!window.Kakao) {
+      return;
+    }
+
+    window.Kakao.Auth.authorize({
+      redirectUri,
+      throughTalk: true,
+    });
   };
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init(kakaoKey);
+    }
+  }, [kakaoKey]);
+
   return (
     <button
       type="button"
-      onClick={handleKakaoAuthorize}
+      onClick={handleKakaoLogin}
       className="flex h-13 w-full items-center justify-center gap-4 rounded-xl bg-[#FEE500] px-3 text-center align-middle"
     >
       <img src={kakaoLogo} className="h-5 w-5" />
