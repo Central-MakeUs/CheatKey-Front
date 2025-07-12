@@ -13,7 +13,7 @@ import CommunityPostPreview from "@/components/communityFeed/CommunityPostPrevie
 
 import { COMMUNITY_FEED_TABS } from "@/constants/commnityFeedTabs";
 
-import Write from "@/assets/icons/write.svg?react";
+import WriteOff from "@/assets/icons/write_off.svg?react";
 
 import { mockCommunityFeedPreviews } from "@/mocks/mockCommunityFeedPreviews";
 
@@ -92,13 +92,17 @@ export const CommunityFeed = () => {
             >
               <span className="body-1-bold">글 작성하기</span>
               {/* TODO: @tifsy 글쓰기 아이콘 색상 변경  */}
-              <Write className="h-5 w-5" aria-hidden="true" focusable="false" />
+              <WriteOff
+                className="h-4 w-4"
+                aria-hidden="true"
+                focusable="false"
+              />
             </button>
           </div>
         ) : (
           <div className="divide-bg-50 divide-y">
             {sortedPosts.map((post) => (
-              <CommunityPostPreview key={post.id} {...post} />
+              <CommunityPostPreview key={post.id} {...post} id={post.id} />
             ))}
           </div>
         )}
