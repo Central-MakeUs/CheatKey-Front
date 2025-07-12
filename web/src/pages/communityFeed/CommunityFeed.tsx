@@ -91,7 +91,6 @@ export const CommunityFeed = () => {
               onClick={() => navigate(path.community.write)}
             >
               <span className="body-1-bold">글 작성하기</span>
-              {/* TODO: @tifsy 글쓰기 아이콘 색상 변경  */}
               <WriteOff
                 className="h-4 w-4"
                 aria-hidden="true"
