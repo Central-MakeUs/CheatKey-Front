@@ -9,7 +9,7 @@ import cutting_lv1 from "@/assets/cuttings/cutting_Lv01.svg";
 export const Home = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   return (
-    <div className="flex flex-1 flex-col bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)] backdrop-opacity-30">
+    <div className="flex flex-1 flex-col bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
       <HomeHeader />
       <div className="px-5">
         <SearchBar
