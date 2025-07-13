@@ -35,7 +35,7 @@ const CommunityPostPreview = ({
             className="h-15 w-15 rounded-[100px]"
           />
           <div className="flex flex-col gap-y-[10px]">
-            <div className="bg-bg-50 text-gray-system-500 body-4-medium h-7 w-fit content-center rounded-lg px-[10px] py-1">
+            <div className="bg-bg-50 text-gray-system-500 body-4-medium h-7 w-fit content-center rounded-lg px-2.5 py-1">
               {nickname}
             </div>
             <span className="text-gray-system-600 body-5-regular">{date}</span>
