@@ -1,9 +1,9 @@
+import { COMMUNITY_FEED_TABS } from "@/constants/commnityFeedTabs";
+
 interface CommunityFeedTabProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }
-
-const COMMUNITY_FEED_TABS = ["최신", "인기"];
 
 const CommunityFeedTab = ({
   activeTab,

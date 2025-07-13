@@ -4,25 +4,17 @@ import { cn } from "@/utils/cn";
 
 import DropDownIcon from "@/assets/icons/dropdown.svg?react";
 
-interface CommunityFeedScamTypeDropdownProps {
-  selectedScamType: string;
+interface CommunityFeedSortOptionDropdownProps {
+  selectedSortOption: string;
   onSelect: (category: string) => void;
 }
 
-const SCAM_TYPES = [
-  "전체",
-  "스팸",
-  "보이스피싱",
-  "티켓 거래",
-  "거래 카페",
-  "SNS 거래",
-  "채팅 거래",
-];
+const SORT_OPTIONS = ["최신순", "인기순"];
 
-const CommunityFeedScamTypeDropdown = ({
-  selectedScamType,
+const CommunityFeedSortOptionDropdown = ({
+  selectedSortOption,
   onSelect,
-}: CommunityFeedScamTypeDropdownProps) => {
+}: CommunityFeedSortOptionDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -52,20 +44,20 @@ const CommunityFeedScamTypeDropdown = ({
         onClick={() => setIsOpen(!isOpen)}
         className="text-gray-system-600 body-1-bold flex h-[2.625rem] w-[6.25rem] items-center justify-end gap-[0.0625rem]"
       >
-        사기 유형
+        {selectedSortOption}
         <DropDownIcon className="ml-1 h-4 w-4" aria-hidden />
       </button>
 
       {isOpen && (
         <ul className="bg-bg-50 caption-1-medium absolute top-full z-10 mt-[0.5rem] w-[6.25rem] overflow-hidden rounded-lg">
-          {SCAM_TYPES.map((type) => {
-            const isSelected = selectedScamType === type;
+          {SORT_OPTIONS.map((option) => {
+            const isSelected = selectedSortOption === option;
 
             return (
               <li
-                key={type}
+                key={option}
                 onClick={() => {
-                  onSelect(type);
+                  onSelect(option);
                   setIsOpen(false);
                 }}
                 aria-selected={isSelected}
@@ -76,7 +68,7 @@ const CommunityFeedScamTypeDropdown = ({
                     : "text-gray-system-600",
                 )}
               >
-                {type}
+                {option}
               </li>
             );
           })}
@@ -86,4 +78,4 @@ const CommunityFeedScamTypeDropdown = ({
   );
 };
 
-export default CommunityFeedScamTypeDropdown;
+export default CommunityFeedSortOptionDropdown;

@@ -57,8 +57,14 @@ export default tseslint.config(
               group: "internal",
               position: "after",
             },
+
             {
               pattern: "@/components/**",
+              group: "internal",
+              position: "after",
+            },
+            {
+              pattern: "@/constants/**",
               group: "internal",
               position: "after",
             },

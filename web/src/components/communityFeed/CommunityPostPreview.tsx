@@ -2,7 +2,6 @@ import { cn } from "@/utils/cn";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react";
-import EllipseIcon from "@/assets/icons/ellipse.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
 import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
 
@@ -20,7 +19,6 @@ interface CommunityPostPreviewProps {
 const CommunityPostPreview = ({
   nickname,
   date,
-  category,
   title,
   content,
   commentCount,
@@ -49,11 +47,6 @@ const CommunityPostPreview = ({
         </button>
       </div>
 
-      <div className="text-primary-400 body-2-medium flex items-center gap-[6px]">
-        <EllipseIcon className="h-2 w-2" aria-hidden />
-        {category}
-      </div>
-
       <div className="text-gray-system-100 body-1-bold">{title}</div>
 
       <p className="text-gray-system-400 body-5-regular line-clamp-3">
@@ -71,7 +64,7 @@ const CommunityPostPreview = ({
             .slice(0, images.length >= 3 ? images.length : 2)
             .map((img, i) => (
               <img
-                key={img}
+                key={`${img}-${i}`}
                 src={img}
                 alt={`게시글 이미지 ${i + 1}`}
                 className={cn("h-[6.875rem] rounded-lg object-cover", {
