@@ -24,9 +24,12 @@ export const Home = () => {
           className="border-primary-600/40 h-[8.125rem] w-[8.125rem] rounded-full border-[0.5px]"
         />
         <div className="flex flex-col">
-          <NameTag type="home" name="LV.1 냄새만 맡아요" />
+          <NameTag type="home" name="LV.1 탐지 훈련" />
           <h1 className="head-3-bold text-base-0 mt-2.5 truncate">
-            닉네임이다님
+            아기냉미녀
+            <span className="head-4-semibold text-gray-system-100 ml-0.5">
+              님
+            </span>
           </h1>
           <h2 className="body-5-regular text-gray-system-300 mt-1">
             오늘의 방문횟수 0회
