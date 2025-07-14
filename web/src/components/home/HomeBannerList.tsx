@@ -32,6 +32,7 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
           style={{
             transform: `translateX(${(index - currentIndex) * 100}%)`,
           }}
+          onClick={banner.onNavigate}
         >
           <img
             src={banner.image}
