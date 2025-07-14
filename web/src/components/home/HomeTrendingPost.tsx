@@ -5,6 +5,7 @@ import { NameTag } from "../common/NameTag";
 export const HomeTrendingPost = ({
   image,
   nickname,
+  isAuthor,
   title,
   content,
 }: HomeTrendingPostData) => {
@@ -16,7 +17,10 @@ export const HomeTrendingPost = ({
           alt="게시글 작성자 프로필 사진"
           className="h-[1.875rem] w-[1.875rem]"
         />
-        <NameTag type="community_mono" name={nickname} />
+        <NameTag
+          type={isAuthor ? "community_primary" : "community_mono"}
+          name={nickname}
+        />
       </div>
       <div className="flex w-full flex-col gap-1">
         <h1 className="body-4-medium text-gray-system-200 truncate">{title}</h1>

@@ -7,6 +7,7 @@ export type HomeBannerData = {
 export type HomeTrendingPostData = {
   image: string;
   nickname: string;
+  isAuthor: boolean;
   title: string;
   content: string;
 };
