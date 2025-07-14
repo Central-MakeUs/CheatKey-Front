@@ -4,3 +4,9 @@ export type HomeBannerData = {
   content: string;
   onNavigate: () => void;
 };
+export type HomeTrendingPostData = {
+  image: string;
+  nickname: string;
+  title: string;
+  content: string;
+};
