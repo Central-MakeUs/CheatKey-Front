@@ -16,14 +16,14 @@ export const Home = () => {
 
   const homeBannerDummyData: HomeBannerData[] = [
     {
-      title: "사기 방지 아티클 보러가기",
-      content: "최근 나타난 사기 방식을 알려줄게요",
+      title: "커팅이랑 사기뉴스 보기",
+      content: "최근 사기 방식을 알려줄게요",
       image: article_banner,
       onNavigate: () => console.log("아티클"),
     },
     {
       title: "AI 분석? 커팅이가 알려드려요!",
-      content: "5초 안에 분석하는 사기 방지 가이드",
+      content: "5초 안에 분석하는 AI 가이드",
       image: ai_banner,
       onNavigate: () => console.log("AI 분석"),
     },

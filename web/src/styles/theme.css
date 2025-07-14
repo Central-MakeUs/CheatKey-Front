@@ -28,4 +28,6 @@
 
   --color-error-50: #ff4646;
   --color-error-100: #ff7373;
+
+  --shadow-shadow-1: 0px -3px 15px 0px rgba(81, 110, 255, 0.1);
 }
