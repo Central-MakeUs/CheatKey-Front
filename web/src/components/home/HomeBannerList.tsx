@@ -26,13 +26,15 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
   return (
     <div className="relative flex h-19 w-full items-center gap-3 overflow-hidden rounded-xl bg-[#212738]">
       {banners.map((banner, index) => (
-        <div
+        <a
           key={`banner-${index}`}
+          href={
+            `${banner.bannerId}` /* TODO: @Ki-Tak 배너 라우팅 정해지면 변경해야함 */
+          }
           className="absolute inset-0 flex items-center gap-3 transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(${(index - currentIndex) * 100}%)`,
           }}
-          onClick={banner.onNavigate}
         >
           <img
             src={banner.image}
@@ -47,7 +49,7 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
               {banner.content}
             </p>
           </div>
-        </div>
+        </a>
       ))}
       <div className="caption-1-medium text-gray-system-500 bg-base-100/50 shadow-shadow-1 absolute right-[0.6875rem] bottom-[0.4375rem] flex h-6 w-12 items-center rounded-full px-2.5 text-center tracking-[0.25rem]">
         {currentIndex + 1}/{banners.length}

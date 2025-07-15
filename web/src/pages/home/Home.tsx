@@ -60,13 +60,14 @@ export const Home = () => {
           <h1 className="body-1-bold text-gray-system-50">
             현재 인기 있는 게시글
           </h1>
-          <Link
-            to={"/"}
+          {/* TODO: @Ki-Tak 추후에 인기 게시글 라우팅 정해지면 변경해야함 */}
+          <a
+            href="/"
             aria-label="인기 게시글 더보기"
             className="caption-1-medium text-gray-system-600"
           >
             더보기
-          </Link>
+          </a>
         </div>
         <p className="caption-2-regular text-gray-system-400 mt-1 w-full px-5">
           커뮤니티에서 다양한 사기 사례를 볼 수 있어요
