@@ -14,7 +14,7 @@ export const HomeTrendingPost = ({
       <div className="flex w-full items-center gap-2">
         <img
           src={image}
-          alt="게시글 작성자 프로필 사진"
+          alt={`${nickname}님의 프로필 사진`}
           className="h-[1.875rem] w-[1.875rem]"
         />
         <NameTag
