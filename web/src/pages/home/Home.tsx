@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
-
 import { NameTag } from "@/components/common/NameTag";
 import SearchBar from "@/components/common/SearchBar";
 import { HomeBannerList } from "@/components/home/HomeBannerList";
