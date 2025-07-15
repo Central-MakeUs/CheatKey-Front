@@ -34,6 +34,7 @@ export const Home = () => {
       <div className="mt-[1.125rem] flex items-center gap-6 px-5">
         <img
           src={cutting_lv1}
+          alt="유저의 커팅이 사진"
           className="border-primary-600/40 h-[8.125rem] w-[8.125rem] rounded-full border-[0.5px]"
         />
         <div className="flex flex-col">
@@ -59,7 +60,11 @@ export const Home = () => {
           <h1 className="body-1-bold text-gray-system-50">
             현재 인기 있는 게시글
           </h1>
-          <Link to={"/"} className="caption-1-medium text-gray-system-600">
+          <Link
+            to={"/"}
+            aria-label="인기 게시글 더보기"
+            className="caption-1-medium text-gray-system-600"
+          >
             더보기
           </Link>
         </div>
