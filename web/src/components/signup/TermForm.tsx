@@ -30,7 +30,7 @@ export const TermForm = ({
       </h1>
 
       {/* 전체 동의 섹션 */}
-      <div className="border-b-gray-system-700 mt-8 flex items-center gap-2.5 border-b px-5 py-4">
+      <div className="border-b-bg-50 mx-5 mt-8 flex items-center gap-2.5 border-b py-4">
         <button
           type="button"
           onClick={onToggleAll}

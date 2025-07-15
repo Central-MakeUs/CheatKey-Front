@@ -13,7 +13,7 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
 
   return (
     <div className="bg-base-75 my-[0.625rem] flex h-[2.625rem] w-auto items-center gap-1 rounded-full pl-3">
-      <SearchIcon className="text-gray-system-600 h-5 w-5" aria-hidden />
+      <SearchIcon className="text-gray-system-700 h-5 w-5" aria-hidden />
       <input
         type="text"
         placeholder={placeholder}

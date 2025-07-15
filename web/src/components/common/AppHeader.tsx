@@ -4,7 +4,6 @@ import Write from "@/assets/icons/write.svg?react";
 //import Notification_Off from "@/assets/icons/notification_off.svg?react";
 export interface AppHeaderProps {
   title: string;
-  logo?: boolean;
   onSkip?: () => void;
   onPrev?: () => void;
   onWrite?: () => void;
@@ -12,7 +11,6 @@ export interface AppHeaderProps {
 }
 export const AppHeader = ({
   title,
-  //logo, // 홈 화면에 로고가 아직 정해지지 않아서 우선 적용 안시켜놨습니당
   onSkip,
   onPrev,
   onWrite,

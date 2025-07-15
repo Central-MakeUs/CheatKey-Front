@@ -1,7 +1,8 @@
 import type { TradeMethod } from "@/types/signup/signup.types";
-import CheckOn from "@/assets/icons/check_on.svg?react";
-import CheckOff from "@/assets/icons/check_off.svg?react";
 import { cn } from "@/utils/cn";
+
+import CheckOff from "@/assets/icons/check_off.svg?react";
+import CheckOn from "@/assets/icons/check_on.svg?react";
 
 const TRADE_METHOD_OPTIONS: TradeMethod[] = [
   "SNS 거래",

@@ -51,7 +51,7 @@ export const CommunityFeed = () => {
     <div className="bg-bg-100 min-h-screen pb-21">
       <AppHeader
         title="커뮤니티"
-        logo
+        //logo
         onWrite={() => navigate(path.community.write)}
         onNotification={() => console.log("🚨알림 클릭됨")}
       />
@@ -100,8 +100,9 @@ export const CommunityFeed = () => {
           </div>
         ) : (
           <div className="divide-bg-50 divide-y">
+            {/* 배포를 위해서 id={post.id} 삭제했습니다! - 기탁 */}
             {sortedPosts.map((post) => (
-              <CommunityPostPreview key={post.id} {...post} id={post.id} />
+              <CommunityPostPreview key={post.id} {...post} />
             ))}
           </div>
         )}

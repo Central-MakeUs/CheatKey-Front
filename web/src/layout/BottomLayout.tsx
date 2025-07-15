@@ -20,7 +20,7 @@ const BottomLayout = () => {
   );
 
   return (
-    <div className="">
+    <div className="layout">
       <Outlet />
       {!hideBottomNavBar && <BottomNavBar />}
     </div>

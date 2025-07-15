@@ -85,7 +85,7 @@ export const BottomSheet = ({
             dragListener={false} // 바텀 시트에서는 드래그 이벤트 X
             dragConstraints={{ top: 0 }}
             dragElastic={0}
-            onDragEnd={(event, info) => {
+            onDragEnd={(_, info) => {
               // y축으로 50px 이상 드래그하면 닫기
               if (info.offset.y > 50) {
                 onClose();
