@@ -1,5 +1,5 @@
 export const path = {
-  home: "/home",
+  home: "/",
   community: {
     base: "/community",
     feed: "/community/feed",
@@ -10,5 +10,8 @@ export const path = {
   auth: {
     login: "/login",
     signup: "/signup",
+  },
+  search: {
+    base: "/search",
   },
 };

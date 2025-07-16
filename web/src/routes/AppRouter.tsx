@@ -7,6 +7,7 @@ import {
   CommunityWrite,
   LoginPage,
   SignUpPage,
+  SearchPage,
 } from "@/pages";
 
 import BottomLayout from "@/layout/BottomLayout";
@@ -38,6 +39,14 @@ const AppRouter = createBrowserRouter([
   {
     path: path.community.write,
     element: <CommunityWrite />,
+  },
+  {
+    path: path.search.base,
+    element: (
+      <Layout>
+        <SearchPage />
+      </Layout>
+    ),
   },
   {
     path: path.auth.login,
