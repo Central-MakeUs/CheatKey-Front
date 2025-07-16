@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import { AppHeader } from "@/components/common/AppHeader";
-import SearchBar from "@/components/common/SearchBar";
+import SearchBarRedirect from "@/components/common/SearchBarRedirect";
 import ToTop from "@/components/common/ToTop";
 import CommunityFeedSortOptionDropdown from "@/components/communityFeed/CommunityFeedSortOptionDropdown";
 import CommunityFeedTab from "@/components/communityFeed/CommunityFeedTab";
@@ -24,18 +24,12 @@ export const CommunityFeed = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("신고합니다");
 
-  const [searchValue, setSearchValue] = useState("");
-
   const filteredPosts = mockCommunityFeedPreviews.filter((post) => {
     const matchesCategory = COMMUNITY_FEED_TABS.includes(selectedCategory)
       ? post.category === selectedCategory
       : true;
 
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchValue.trim().toLowerCase()) ||
-      post.content.toLowerCase().includes(searchValue.trim().toLowerCase());
-
-    return matchesCategory && matchesSearch;
+    return matchesCategory;
   });
 
   const sortedPosts =
@@ -51,16 +45,11 @@ export const CommunityFeed = () => {
     <div className="bg-bg-100 min-h-screen pb-21">
       <AppHeader
         title="커뮤니티"
-        //logo
         onWrite={() => navigate(path.community.write)}
         onNotification={() => console.log("🚨알림 클릭됨")}
       />
       <div className="px-5 pt-11">
-        <SearchBar
-          placeholder="사기 사례를 입력해주세요."
-          value={searchValue}
-          onChange={setSearchValue}
-        />
+        <SearchBarRedirect placeholder="사기 사례를 입력해주세요." />
         <CommunityFeedTab
           activeTab={selectedCategory}
           setActiveTab={setSelectedCategory}
@@ -100,7 +89,6 @@ export const CommunityFeed = () => {
           </div>
         ) : (
           <div className="divide-bg-50 divide-y">
-            {/* 배포를 위해서 id={post.id} 삭제했습니다! - 기탁 */}
             {sortedPosts.map((post) => (
               <CommunityPostPreview key={post.id} {...post} />
             ))}
