@@ -1,6 +1,13 @@
 import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
-import { WebView } from "react-native-webview";
+import { createWebView } from "@webview-bridge/react-native";
+import { appBridge, appSchema } from "@/bridge";
+
+const { WebView } = createWebView({
+  bridge: appBridge,
+  postMessageSchema: appSchema,
+  debug: true, // 개발 중에는 디버깅 모드를 켜는 것이 좋습니다.
+});
 
 export default function WebViewScreen() {
   const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL || "";
