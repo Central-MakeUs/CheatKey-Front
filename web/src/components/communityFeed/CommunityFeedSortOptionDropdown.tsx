@@ -64,8 +64,8 @@ const CommunityFeedSortOptionDropdown = ({
                 className={cn(
                   "h-[2.375rem] cursor-pointer p-[0.625rem]",
                   isSelected
-                    ? "bg-gray-system-800 text-gray-system-400"
-                    : "text-gray-system-600",
+                    ? "bg-base-50 text-gray-system-100"
+                    : "bg-bg-50 text-gray-system-500",
                 )}
               >
                 {option}
