@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import SearchBar from "@/components/common/SearchBar";
+import ToTop from "@/components/common/ToTop";
 import { SearchResultPreview } from "@/components/searchPage/SearchResultPreview";
 
 import CuttingSad from "@/assets/images/cutting_sad.svg?react";
@@ -27,7 +28,7 @@ export const SearchPage = () => {
         />
       </header>
 
-      <div className="bg-bg-100 h-screen px-5 pt-[4.25rem] pb-21">
+      <div className="bg-bg-100 min-h-screen px-5 pt-[4.25rem]">
         {hasNoSearchResult ? (
           <div className="flex flex-col items-center justify-center gap-5 py-18">
             <CuttingSad className="h-[130px] w-[130px]" />
@@ -48,6 +49,8 @@ export const SearchPage = () => {
           </div>
         )}
       </div>
+
+      <ToTop bottom="2rem" />
     </>
   );
 };
