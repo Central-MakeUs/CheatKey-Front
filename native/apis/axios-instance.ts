@@ -8,10 +8,12 @@ export interface AppTokens {
 }
 
 export interface RequestSocialLoginBody {
-  provider: "kakao" | "apple";
+  provider: SocialType;
   idToken: string;
   accessToken?: string;
 }
+
+export type SocialType = "kakao" | "apple";
 
 export const baseAPI = axios.create({
   baseURL: API_BASE_URL,
