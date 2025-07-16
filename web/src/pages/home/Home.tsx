@@ -1,7 +1,5 @@
-import { useState } from "react";
-
 import { NameTag } from "@/components/common/NameTag";
-import SearchBar from "@/components/common/SearchBar";
+import SearchBarRedirect from "@/components/common/SearchBarRedirect";
 import { HomeBannerList } from "@/components/home/HomeBannerList";
 import { HomeHeader } from "@/components/home/HomeHeader";
 import { HomeTrendingPost } from "@/components/home/HomeTrendingPost";
@@ -14,19 +12,13 @@ import {
 } from "@/mocks/mockHomeData";
 
 export const Home = () => {
-  const [searchValue, setSearchValue] = useState<string>("");
-
   return (
     <main className="flex flex-1 flex-col bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
       {/* 로고와 알림 */}
       <HomeHeader />
       {/* 검색 창 */}
       <div className="px-5">
-        <SearchBar
-          placeholder="사기 사례를 검색해주세요."
-          value={searchValue}
-          onChange={(value) => setSearchValue(value)}
-        />
+        <SearchBarRedirect placeholder="사기 사례를 검색해주세요." />
       </div>
       {/* 커팅이 사진과 닉네임 영역 */}
       <div className="mt-[1.125rem] flex items-center gap-6 px-5">
