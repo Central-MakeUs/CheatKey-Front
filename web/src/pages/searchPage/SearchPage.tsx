@@ -19,13 +19,15 @@ export const SearchPage = () => {
 
   return (
     <>
-      <div className="bg-bg-100 min-h-screen px-5 pt-6 pb-21">
+      <header className="bg-bg-100 fixed top-0 right-0 left-0 z-10 px-5 pt-6">
         <SearchBar
           placeholder="사기 사례를 검색해주세요."
           value={query}
           onChange={setQuery}
         />
+      </header>
 
+      <div className="bg-bg-100 h-screen px-5 pt-[4.25rem] pb-21">
         {hasNoSearchResult ? (
           <div className="flex flex-col items-center justify-center gap-5 py-18">
             <CuttingSad className="h-[130px] w-[130px]" />
