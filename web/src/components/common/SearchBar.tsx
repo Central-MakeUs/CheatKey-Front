@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { cn } from "@/utils/cn";
 
+import EraseIcon from "@/assets/icons/erase.svg?react";
 import PrevIcon from "@/assets/icons/prev.svg?react";
 import SearchIcon from "@/assets/icons/search.svg?react";
 
@@ -23,7 +24,7 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
         onClick={() => navigate(-1)}
         role="button"
       />
-      <div className="bg-base-75 flex h-[2.625rem] w-full items-center gap-1 rounded-full pl-3">
+      <div className="bg-base-75 flex h-[2.625rem] w-full items-center gap-1 rounded-full px-3">
         <SearchIcon className="text-gray-system-700 h-5 w-5" aria-hidden />
         <input
           type="text"
@@ -37,6 +38,15 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
               : "text-gray-system-400 body-2-regular",
           )}
           aria-label={placeholder}
+        />
+        <EraseIcon
+          className={cn(
+            "cursor-pointer transition-opacity",
+            isSearchBarFilled ? "opacity-100" : "opacity-0",
+          )}
+          onClick={() => onChange("")}
+          role="button"
+          aria-label="입력 초기화"
         />
       </div>
     </div>
