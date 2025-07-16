@@ -20,7 +20,7 @@ const SearchBarRedirect = ({ placeholder }: SearchBarRedirectProps) => {
       onClick={handleClick}
     >
       <SearchIcon className="text-gray-system-700 h-5 w-5" aria-hidden />
-      <span className="text-gray-system-400 body-2-regular">{placeholder}</span>
+      <span className="text-gray-system-600 body-2-regular">{placeholder}</span>
     </div>
   );
 };
