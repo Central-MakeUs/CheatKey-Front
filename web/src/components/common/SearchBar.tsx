@@ -19,11 +19,9 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
 
   return (
     <div className="mb-[0.625rem] flex items-center gap-[5px]">
-      <PrevIcon
-        className="text-base-0 h-6 w-6"
-        onClick={() => navigate(-1)}
-        role="button"
-      />
+      <button className="text-base-0 h-6 w-6" onClick={() => navigate(-1)}>
+        <PrevIcon />
+      </button>
       <div className="bg-base-75 flex h-[2.625rem] w-full items-center gap-1 rounded-full px-3">
         <SearchIcon className="text-gray-system-700 h-5 w-5" aria-hidden />
         <input
@@ -39,15 +37,16 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
           )}
           aria-label={placeholder}
         />
-        <EraseIcon
+        <button
           className={cn(
             "cursor-pointer transition-opacity",
             isSearchBarFilled ? "opacity-100" : "opacity-0",
           )}
           onClick={() => onChange("")}
-          role="button"
           aria-label="입력 초기화"
-        />
+        >
+          <EraseIcon />
+        </button>
       </div>
     </div>
   );
