@@ -6,11 +6,6 @@ import { motion, AnimatePresence } from "motion/react";
 
 import { path } from "@/routes/path";
 
-import {
-  TERMS_OF_SERVICE_CONTENT,
-  PRIVACY_POLICY_CONTENT,
-  MARKETING_CONSENT_CONTENT,
-} from "@/constants/termContents";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
 import type {
   NicknameStatus,
@@ -29,6 +24,12 @@ import { MethodForm } from "@/components/signup/MethodForm";
 import { NicknameForm } from "@/components/signup/NicknameForm";
 import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
 import { TermForm } from "@/components/signup/TermForm";
+
+import {
+  TERMS_OF_SERVICE_CONTENT,
+  PRIVACY_POLICY_CONTENT,
+  MARKETING_CONSENT_CONTENT,
+} from "@/constants/termContents";
 
 // 슬라이드 애니메이션 효과 객체
 const variants = {

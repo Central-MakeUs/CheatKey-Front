@@ -10,4 +10,5 @@ export const bridge = linkBridge<AppBridge>({
   initialBridge: {
     isLoggedIn: false,
   },
+  timeout: 1000 * 60 * 10, // 10분
 });

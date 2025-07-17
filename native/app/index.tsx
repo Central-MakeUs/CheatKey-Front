@@ -7,7 +7,7 @@ import { initializeKakaoSDK } from "@react-native-kakao/core";
 const { WebView } = createWebView({
   bridge: appBridge,
   postMessageSchema: appSchema,
-  debug: true, // 개발 중에는 디버깅 모드를 켜는 것이 좋습니다.
+  debug: true,
 });
 
 export default function WebViewScreen() {
