@@ -1,30 +1,21 @@
-import { useEffect } from "react";
-
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { bridge } from "@/bridge";
 
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 
 export const KakaoLogin = () => {
-  const redirectUri =
-    (import.meta.env.VITE_API_BASE_URL as string) + API_DOMAINS.GET_KAKAO_LOGIN;
+  const handleKakaoLogin = async () => {
+    try {
+      const result = await bridge.socialLogin("kakao");
 
-  const kakaoKey = import.meta.env.VITE_KAKAO_JS_KEY;
-
-  const handleKakaoLogin = () => {
-    if (!window.Kakao) {
-      return;
+      if (result.success) {
+        alert("카카오 로그인 성공! AccessToken:" + result.accessToken);
+      } else {
+        alert(result.message ?? "알 수 없는 오류가 발생했습니다.");
+      }
+    } catch (e) {
+      alert("브리지 통신 오류:" + e);
     }
-
-    window.Kakao.Auth.authorize({
-      redirectUri,
-      throughTalk: true,
-    });
   };
-  useEffect(() => {
-    if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init(kakaoKey);
-    }
-  }, [kakaoKey]);
 
   return (
     <button

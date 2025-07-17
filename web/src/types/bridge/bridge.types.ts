@@ -6,6 +6,7 @@ export type SocialType = {
 
 export interface SocialLoginResult {
   success: boolean;
+  accessToken: string | null;
   message?: string;
 }
 export interface AppBridgeState {
