@@ -5,18 +5,21 @@ import {
 } from "@webview-bridge/react-native";
 import { z } from "zod";
 import { performKakaoLogin } from "@/social/performKakaoLogin";
-import type { AppTokens, SocialType } from "@/apis/axios-instance";
+import type { SocialType } from "@/apis/axios-instance";
+import { authStorage } from "@/services/authStorage";
 
 // 웹으로 전달할 로그인 결과 타입 정의
 export interface SocialLoginResult {
   success: boolean;
-  tokens?: AppTokens;
+  accessToken?: string;
   message?: string;
 }
 
 interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
   socialLogin: (type: SocialType) => Promise<SocialLoginResult>;
+  getAccessToken: () => Promise<{ accessToken: string | null }>;
+  refreshTokens: () => Promise<{ accessToken: string | null }>;
 }
 
 // 브릿지 생성
@@ -42,6 +45,18 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
     }
     return result;
   },
+
+  getAccessToken: async () => {
+    const accessToken = await authStorage.getAccessToken();
+    return { accessToken };
+  },
+
+  refreshTokens: async () => {
+    // TODO: @Ki-Tak 추후에 재발급 엔드포인트 생기면 추가 예정
+    console.log("미완성 기능");
+
+    return { accessToken: null };
+  },
 }));
 
 // 웹에서 보낸 데이터의 유효성 검사 스키마
@@ -53,6 +68,12 @@ export const appSchema = postMessageSchema({
           type: z.enum(["kakao", "apple"]),
         })
         .parse(data),
+  },
+  getAccessToken: {
+    validate: () => z.object({}).parse({}),
+  },
+  refreshTokens: {
+    validate: () => z.object({}).parse({}),
   },
 });
 

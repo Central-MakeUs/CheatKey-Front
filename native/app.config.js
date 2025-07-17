@@ -36,11 +36,14 @@ module.exports = () => {
           resizeMode: "contain",
           backgroundColor: "#ffffff",
         },
-        "@react-native-seoul/kako-login",
+      ],
+      [
+        "@react-native-seoul/kakao-login",
         {
           kakaoAppKey: KAKAO_NATIVE_APP_KEY,
         },
       ],
+      ["expo-secure-store"],
     ],
     experiments: {
       typedRoutes: true,
