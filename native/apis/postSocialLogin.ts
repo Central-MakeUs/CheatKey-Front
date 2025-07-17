@@ -13,6 +13,7 @@ export const postSocialLogin = async ({
       idToken,
       accessToken,
     });
+
     return response.data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -20,6 +21,7 @@ export const postSocialLogin = async ({
         error.response.data.message || "서버 로그인에 실패했습니다."
       );
     }
+
     throw new Error("서버 통신 중 오류가 발생했습니다.");
   }
 };

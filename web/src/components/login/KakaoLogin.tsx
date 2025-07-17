@@ -5,13 +5,13 @@ import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 export const KakaoLogin = () => {
   const handleKakaoLogin = async () => {
     try {
+      if (!bridge?.socialLogin) {
+        throw new Error("브릿지 함수가 사용 불가능합니다");
+      }
+
       const result = await bridge.socialLogin("kakao");
 
-      if (result.success) {
-        alert("카카오 로그인 성공! AccessToken:" + result.accessToken);
-      } else {
-        alert(result.message ?? "알 수 없는 오류가 발생했습니다.");
-      }
+      alert(result);
     } catch (e) {
       alert("브리지 통신 오류:" + e);
     }

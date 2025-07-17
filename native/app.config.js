@@ -1,5 +1,5 @@
 module.exports = () => {
-  const KAKAO_NATIVE_APP_KEY = process.env.EXPO_KAKAO_NATIVE_KEY;
+  const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY;
 
   return {
     name: "native",
@@ -38,9 +38,25 @@ module.exports = () => {
         },
       ],
       [
-        "@react-native-seoul/kakao-login",
+        "expo-build-properties",
         {
-          kakaoAppKey: KAKAO_NATIVE_APP_KEY,
+          android: {
+            extraMavenRepos: [
+              "https://devrepo.kakao.com/nexus/content/groups/public/",
+            ],
+          },
+        },
+      ],
+      [
+        "@react-native-kakao/core",
+        {
+          nativeAppKey: KAKAO_NATIVE_APP_KEY,
+          android: {
+            authCodeHandlerActivity: true,
+          },
+          ios: {
+            handleKakaoOpenUrl: true,
+          },
         },
       ],
       ["expo-secure-store"],

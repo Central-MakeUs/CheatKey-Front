@@ -7,4 +7,7 @@ export const bridge = linkBridge<AppBridge>({
     // 확인용
     alert("브릿지 연결 성공");
   },
+  initialBridge: {
+    isLoggedIn: false,
+  },
 });

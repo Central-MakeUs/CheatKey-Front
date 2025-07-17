@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
 import { createWebView } from "@webview-bridge/react-native";
 import { appBridge, appSchema } from "@/bridge";
+import { initializeKakaoSDK } from "@react-native-kakao/core";
 
 const { WebView } = createWebView({
   bridge: appBridge,
@@ -11,6 +12,18 @@ const { WebView } = createWebView({
 
 export default function WebViewScreen() {
   const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL || "";
+  const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY || "";
+
+  useEffect(() => {
+    const initKakaoSDK = async () => {
+      try {
+        await initializeKakaoSDK(KAKAO_NATIVE_APP_KEY);
+      } catch (error) {
+        console.error("카카오 SDK 초기화 실패:", error);
+      }
+    };
+    initKakaoSDK();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -18,8 +31,22 @@ export default function WebViewScreen() {
       <WebView
         source={{ uri: WEB_APP_URL }}
         style={styles.webview}
-        javaScriptEnabled
+        // JavaScript 관련
+        javaScriptEnabled={true}
+        javaScriptCanOpenWindowsAutomatically={false}
+        domStorageEnabled={true}
+        // 보안 설정
+        mixedContentMode="compatibility"
+        allowsInlineMediaPlayback={true}
+        mediaPlaybackRequiresUserAction={false}
+        // UI 설정
         bounces={false}
+        scrollEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        // 성능 설정
+        cacheEnabled={true}
+        incognito={false}
       />
     </View>
   );

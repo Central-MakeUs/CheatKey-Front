@@ -29,21 +29,28 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
 
   // 웹에서 `bridge.socialLogin()` 호출 시 아래 함수 실행
   socialLogin: async (type: SocialType) => {
-    let result: SocialLoginResult;
-    // 추후 애플 로그인 추가해야함
-    if (type === "kakao") {
-      result = await performKakaoLogin();
-    } else {
-      result = {
+    try {
+      let result: SocialLoginResult;
+      // 추후 애플 로그인 추가해야함
+      if (type === "kakao") {
+        result = await performKakaoLogin();
+      } else {
+        return {
+          success: false,
+          message: "지원하지 않는 로그인 방식입니다.",
+        };
+      }
+
+      if (result.success) {
+        store.set({ isLoggedIn: true }); // 성공 시 브릿지 내부 상태 변경
+      }
+      return result;
+    } catch (error) {
+      return {
         success: false,
-        message: "지원하지 않는 로그인 방식입니다.",
+        message: error instanceof Error ? error.message : "브릿지 통신 오류",
       };
     }
-
-    if (result.success) {
-      store.set({ isLoggedIn: true }); // 성공 시 브릿지 내부 상태 변경
-    }
-    return result;
   },
 
   getAccessToken: async () => {
