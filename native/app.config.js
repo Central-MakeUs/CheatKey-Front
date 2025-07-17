@@ -13,6 +13,22 @@ module.exports = () => {
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.cheatkey.native",
+      infoPlist: {
+        CFBundleURLTypes: [
+          {
+            CFBundleURLSchemes: ["native", "com.cheatkey.native"],
+          },
+          {
+            CFBundleURLSchemes: [`kakao${KAKAO_NATIVE_APP_KEY}`],
+            CFBundleURLName: "Kakao",
+          },
+        ],
+        LSApplicationQueriesSchemes: [
+          "kakaokompassauth",
+          "kakaolink",
+          "kakaoplus",
+        ],
+      },
     },
     android: {
       adaptiveIcon: {
