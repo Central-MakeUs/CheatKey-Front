@@ -58,7 +58,7 @@ export const ConfirmModal = ({
         )}
         <h2 className="head-3-bold pb-[6px]">{title}</h2>
         {description && (
-          <p className="body-3-regular text-gray-system-400 mt-1 whitespace-pre">
+          <p className="body-3-regular text-gray-system-400 mt-1 break-words whitespace-pre-line">
             {description}
           </p>
         )}
