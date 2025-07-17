@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import { cn } from "@/utils/cn";
@@ -15,6 +17,12 @@ interface SearchBarProps {
 const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
   const navigate = useNavigate();
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   const isSearchBarFilled = value.trim().length > 0;
 
   return (
@@ -25,6 +33,7 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
       <div className="bg-base-75 flex h-[2.625rem] w-full items-center gap-1 rounded-full px-3">
         <SearchIcon className="text-gray-system-700 h-5 w-5" aria-hidden />
         <input
+          ref={inputRef}
           type="text"
           placeholder={placeholder}
           value={value}
