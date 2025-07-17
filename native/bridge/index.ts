@@ -5,7 +5,7 @@ import {
 } from "@webview-bridge/react-native";
 import { z } from "zod";
 import { performKakaoLogin } from "@/social/performKakaoLogin";
-import type { SocialType } from "@/apis/axios-instance";
+import type { SocialType } from "@/apis/postSocialLogin";
 import { authStorage } from "@/services/authStorage";
 
 // 웹으로 전달할 로그인 결과 타입 정의

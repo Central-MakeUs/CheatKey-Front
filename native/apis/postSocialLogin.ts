@@ -1,5 +1,17 @@
 import { isAxiosError } from "axios";
-import { AppTokens, baseAPI, RequestSocialLoginBody } from "./axios-instance";
+import { baseAPI } from "./axios-instance";
+
+export type SocialType = "kakao" | "apple";
+export interface AppTokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface RequestSocialLoginBody {
+  provider: SocialType;
+  idToken: string;
+  accessToken?: string;
+}
 
 export const postSocialLogin = async ({
   provider,
