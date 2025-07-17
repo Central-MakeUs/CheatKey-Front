@@ -62,12 +62,7 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
 // 웹에서 보낸 데이터의 유효성 검사 스키마
 export const appSchema = postMessageSchema({
   socialLogin: {
-    validate: (data) =>
-      z
-        .object({
-          type: z.enum(["kakao", "apple"]),
-        })
-        .parse(data),
+    validate: (data) => z.enum(["kakao", "apple"]).parse(data),
   },
   getAccessToken: {
     validate: () => z.object({}).parse({}),

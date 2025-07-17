@@ -12,7 +12,7 @@ module.exports = () => {
     newArchEnabled: true,
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.anonymous.native",
+      bundleIdentifier: "com.cheatkey.native",
     },
     android: {
       adaptiveIcon: {

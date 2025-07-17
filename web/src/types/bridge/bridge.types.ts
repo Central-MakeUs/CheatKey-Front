@@ -1,8 +1,6 @@
 import type { BridgeStore } from "@webview-bridge/web";
 
-export type SocialType = {
-  type: "kakao" | "apple";
-};
+export type SocialType = "kakao" | "apple";
 
 export interface SocialLoginResult {
   success: boolean;
