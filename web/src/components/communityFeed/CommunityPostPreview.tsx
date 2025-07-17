@@ -5,6 +5,8 @@ import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react"
 //TODO: @tifsy 임시 프로필 이미지 제거
 import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
 
+import { NameTag } from "../common/NameTag";
+
 //TODO: @tifsy 커뮤니티 타입 정리
 interface CommunityPostPreviewProps {
   nickname: string;
@@ -35,9 +37,7 @@ const CommunityPostPreview = ({
             className="h-15 w-15 rounded-full"
           />
           <div className="flex flex-col gap-y-[10px]">
-            <div className="bg-bg-50 text-gray-system-500 body-4-medium h-7 w-fit content-center rounded-lg px-2.5 py-1">
-              {nickname}
-            </div>
+            <NameTag name={nickname} type="community_mono" className="h-7" />
             <span className="text-gray-system-600 body-5-regular">{date}</span>
           </div>
         </div>
