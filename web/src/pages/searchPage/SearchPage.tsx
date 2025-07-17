@@ -40,16 +40,17 @@ export const SearchPage = () => {
             </p>
           </div>
         ) : (
-          <div>
+          <ul>
             {filteredPosts.map((post) => (
-              <SearchResultPreview
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                content={post.content}
-              />
+              <li key={post.id}>
+                <SearchResultPreview
+                  id={post.id}
+                  title={post.title}
+                  content={post.content}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
 
