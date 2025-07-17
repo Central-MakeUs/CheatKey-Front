@@ -31,7 +31,10 @@ export const SearchPage = () => {
       <div className="bg-bg-100 min-h-screen px-5 pt-[4.25rem]">
         {hasNoSearchResult ? (
           <div className="flex flex-col items-center justify-center gap-5 py-18">
-            <CuttingSad className="h-[130px] w-[130px]" />
+            <CuttingSad
+              className="h-[130px] w-[130px]"
+              aria-label="검색 결과가 없어서 슬픈 커팅이"
+            />
             <p className="text-gray-system-500 body-3-regular text-center">
               검색 결과를 찾을 수 없어요.
             </p>
