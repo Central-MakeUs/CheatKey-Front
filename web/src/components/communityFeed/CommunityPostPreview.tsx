@@ -1,11 +1,11 @@
 import { cn } from "@/utils/cn";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
-import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
 import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
 
 import { NameTag } from "../common/NameTag";
+import { PostMenuButton } from "../common/PostMenuButton";
 
 //TODO: @tifsy 커뮤니티 타입 정리
 interface CommunityPostPreviewProps {
@@ -42,9 +42,7 @@ const CommunityPostPreview = ({
           </div>
         </div>
 
-        <button aria-label="커뮤니티 글 메뉴 열기">
-          <CommunityPostMenuIcon className="text-gray-system-500 h-6 w-6" />
-        </button>
+        <PostMenuButton />
       </div>
 
       <div className="text-gray-system-100 body-1-bold">{title}</div>
