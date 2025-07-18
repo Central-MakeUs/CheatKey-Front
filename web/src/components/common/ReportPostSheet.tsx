@@ -44,7 +44,7 @@ export const ReportPostSheet = ({
 
   return (
     <BottomSheet isOpen={isOpen} onClose={onClose}>
-      <div className="mx-5 mb-3 flex flex-col gap-5 text-center">
+      <div className="mb-3 flex flex-col gap-5 text-center">
         <h2 className="text-gray-system-100 head-3-bold my-3">신고하기</h2>
         <div>
           <p className="text-gray-system-200 head-4-semibold mb-1">
@@ -54,8 +54,9 @@ export const ReportPostSheet = ({
             사용자의 허위 신고 발견 시 사용이 제한될 수 있습니다.
           </p>
         </div>
+        <div className="bg-base-50 my-2 h-[1px]" />
 
-        <div className="mb-[22px] flex flex-col gap-[10px]">
+        <div className="mx-5 mb-[22px] flex flex-col gap-[10px]">
           {/* TODO: @tifsy 컴포넌트로 분리  */}
           {REPORT_REASONS.map((reason) => (
             <button
