@@ -1,8 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
+import { path } from "@/routes/path";
+
 import { bridge } from "@/bridge";
 
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 
 export const KakaoLogin = () => {
+  const navigate = useNavigate();
   const handleKakaoLogin = async () => {
     try {
       if (!bridge?.socialLogin) {
@@ -11,9 +16,20 @@ export const KakaoLogin = () => {
 
       const result = await bridge.socialLogin("kakao");
 
-      alert(result);
+      if (result.success) {
+        if (result.data.userState === "PENDING") {
+          navigate(path.auth.signup);
+        } else if (result.data.userState === "ACTIVE") {
+          navigate(path.home);
+        }
+      }
+      // TODO: @Ki-Tak 에러 처리랑 카카오 로그인 실패 처리 로직 수정 필요
+      else {
+        alert("카카오 로그인에 실패하였습니다.");
+      }
     } catch (e) {
-      alert("브리지 통신 오류:" + e);
+      alert("카카오 로그인에 실패하였습니다.");
+      console.error(e);
     }
   };
 

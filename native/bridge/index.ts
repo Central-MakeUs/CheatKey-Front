@@ -5,46 +5,47 @@ import {
 } from "@webview-bridge/react-native";
 import { z } from "zod";
 import { performKakaoLogin } from "@/social/performKakaoLogin";
-import type { SocialType } from "@/apis/postSocialLogin";
+import type { SocialLoginResult, SocialType } from "@/apis/postSocialLogin";
 import { authStorage } from "@/services/authStorage";
 
-// 웹으로 전달할 로그인 결과 타입 정의
-export interface SocialLoginResult {
-  success: boolean;
-  accessToken?: string;
-  message?: string;
+export interface SuccessBridgeResult {
+  success: true;
+  data: SocialLoginResult;
 }
+
+export interface FailureBridgeResult {
+  success: false;
+  message: string;
+}
+
+export type BridgeLoginResult = SuccessBridgeResult | FailureBridgeResult;
 
 interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
-  socialLogin: (type: SocialType) => Promise<SocialLoginResult>;
+  socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
   refreshTokens: () => Promise<{ accessToken: string | null }>;
 }
 
-// 브릿지 생성
 export const appBridge = bridge<AppBridgeType>((store) => ({
-  // 초기 상태 값
   isLoggedIn: false,
 
-  // 웹에서 `bridge.socialLogin()` 호출 시 아래 함수 실행
-  socialLogin: async (type: SocialType) => {
+  socialLogin: async (type: SocialType): Promise<BridgeLoginResult> => {
     try {
-      let result: SocialLoginResult;
-      // 추후 애플 로그인 추가해야함
-      if (type === "kakao") {
-        result = await performKakaoLogin();
-      } else {
+      if (type !== "kakao" && type !== "apple") {
         return {
           success: false,
           message: "지원하지 않는 로그인 방식입니다.",
         };
       }
+      const result = await performKakaoLogin();
 
-      if (result.success) {
-        store.set({ isLoggedIn: true }); // 성공 시 브릿지 내부 상태 변경
-      }
-      return result;
+      store.set({ isLoggedIn: true });
+
+      return {
+        success: true,
+        data: result,
+      };
     } catch (error) {
       return {
         success: false,
