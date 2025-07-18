@@ -1,8 +1,16 @@
 import React, { useEffect } from "react";
-import { StatusBar, StyleSheet, View } from "react-native";
+
 import { createWebView } from "@webview-bridge/react-native";
 import { appBridge, appSchema } from "@/bridge";
 import { initializeKakaoSDK } from "@react-native-kakao/core";
+
+import {
+  StatusBar,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+} from "react-native";
 
 const { WebView } = createWebView({
   bridge: appBridge,
@@ -26,36 +34,52 @@ export default function WebViewScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#161517" />
-      <WebView
-        source={{ uri: WEB_APP_URL }}
-        style={styles.webview}
-        // JavaScript 관련
-        javaScriptEnabled={true}
-        javaScriptCanOpenWindowsAutomatically={false}
-        domStorageEnabled={true}
-        // 보안 설정
-        mixedContentMode="compatibility"
-        allowsInlineMediaPlayback={true}
-        mediaPlaybackRequiresUserAction={false}
-        // UI 설정
-        bounces={false}
-        scrollEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        // 성능 설정
-        cacheEnabled={true}
-        incognito={false}
-      />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoidingView}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+      >
+        <StatusBar barStyle="light-content" backgroundColor="#161517" />
+        <WebView
+          source={{ uri: WEB_APP_URL }}
+          style={styles.webview}
+          // JavaScript 관련
+          javaScriptEnabled={true}
+          javaScriptCanOpenWindowsAutomatically={false}
+          domStorageEnabled={true}
+          // 보안 설정
+          mixedContentMode="compatibility"
+          allowsInlineMediaPlayback={true}
+          mediaPlaybackRequiresUserAction={false}
+          // UI 설정
+          bounces={false}
+          scrollEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          // 성능 설정
+          cacheEnabled={true}
+          incognito={false}
+          // Tifsy 설정
+          keyboardDisplayRequiresUserAction={false}
+          automaticallyAdjustContentInsets={false}
+          contentInsetAdjustmentBehavior="never"
+          onError={(e) => {
+            console.error("WebView error:", e.nativeEvent);
+          }}
+        />
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: "#161517",
+  },
+  keyboardAvoidingView: {
+    flex: 1,
   },
   webview: {
     flex: 1,
