@@ -1,6 +1,7 @@
 import { cn } from "@/utils/cn";
 
 export interface FormTextareaProps {
+  id: string;
   maxLength: number;
   type: "AI" | "Write";
   placeholder: string;
@@ -9,6 +10,7 @@ export interface FormTextareaProps {
 }
 
 export const FormTextarea = ({
+  id,
   maxLength,
   type,
   placeholder,
@@ -20,6 +22,9 @@ export const FormTextarea = ({
       onChange(event.target.value);
     }
   };
+
+  const counterId = `${id}-counter`;
+
   return (
     <div
       className={cn(
@@ -31,13 +36,20 @@ export const FormTextarea = ({
       )}
     >
       <textarea
+        id={id}
         value={value}
         onChange={handleChange}
         maxLength={maxLength}
         placeholder={placeholder}
+        aria-describedby={counterId}
         className="body-5-regular text-gray-system-400 placeholder:text-gray-system-600 h-full w-full resize-none border-none bg-transparent focus:outline-none"
       />
-      <div className="caption-1-medium text-gray-system-600 h-6 w-full">
+      <div
+        id={counterId}
+        aria-live="polite"
+        aria-atomic="true"
+        className="caption-1-medium text-gray-system-600 h-6 w-full"
+      >
         {value.length} / {maxLength}
       </div>
     </div>
