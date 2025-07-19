@@ -7,37 +7,29 @@ import { ReportPostSheet } from "@/components/common/ReportPostSheet";
 import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react";
 
+type ViewState = "closed" | "menu" | "block" | "report" | "reportComplete";
+
 export const PostMenuButton = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [blockOpen, setBlockOpen] = useState(false);
-  const [reportOpen, setReportOpen] = useState(false);
-  const [isReportPostModalOpen, setIsReportPostModalOpen] = useState(false);
-
-  const handleBlockClick = () => {
-    setMenuOpen(false);
-    setBlockOpen(true);
-  };
-
-  const handleReportClick = () => {
-    setMenuOpen(false);
-    setReportOpen(true);
-  };
+  const [viewState, setViewState] = useState<ViewState>("closed");
 
   return (
     <>
       <button
         aria-label="커뮤니티 글 메뉴 열기"
-        onClick={() => setMenuOpen(true)}
+        onClick={() => setViewState("menu")}
       >
         <CommunityPostMenuIcon className="text-gray-system-500 h-6 w-6" />
       </button>
 
-      <BottomSheet isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
+      <BottomSheet
+        isOpen={viewState === "menu"}
+        onClose={() => setViewState("closed")}
+      >
         <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
           {/* TODO: @tifsy 컴포넌트로 분리  */}
           <button
             className="bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5"
-            onClick={handleBlockClick}
+            onClick={() => setViewState("block")}
           >
             <p className="body-2-medium text-gray-system-200">
               해당 유저 차단하기
@@ -46,7 +38,7 @@ export const PostMenuButton = () => {
           </button>
           <button
             className="bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5"
-            onClick={handleReportClick}
+            onClick={() => setViewState("report")}
           >
             <p className="body-2-medium text-gray-system-200">신고하기</p>
             <ArrowRightIcon />
@@ -54,7 +46,7 @@ export const PostMenuButton = () => {
         </div>
       </BottomSheet>
 
-      {blockOpen && (
+      {viewState === "block" && (
         <ConfirmModal
           title="해당 유저를 차단하시겠어요?"
           description={`차단 시, 이 유저의 게시물을\n더 이상 볼 수 없습니다.`}
@@ -62,23 +54,23 @@ export const PostMenuButton = () => {
           cancelText="취소"
           onConfirm={() => {
             console.log("✅유저 차단 완료");
-            setBlockOpen(false);
+            setViewState("closed");
           }}
-          onCancel={() => setBlockOpen(false)}
+          onCancel={() => setViewState("closed")}
         />
       )}
 
-      {isReportPostModalOpen && (
+      {viewState === "reportComplete" && (
         <ConfirmModal
           title="신고가 정상적으로 접수되었습니다."
           description={`접수해주신 내용을 바탕으로\n신속하고 정확하게 검토하겠습니다.`}
-          onConfirm={() => setIsReportPostModalOpen(false)}
+          onConfirm={() => setViewState("closed")}
         />
       )}
       <ReportPostSheet
-        isOpen={reportOpen}
-        onClose={() => setReportOpen(false)}
-        onReportComplete={() => setIsReportPostModalOpen(true)}
+        isOpen={viewState === "report"}
+        onClose={() => setViewState("closed")}
+        onReportComplete={() => setViewState("reportComplete")}
       />
     </>
   );
