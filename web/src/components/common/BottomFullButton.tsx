@@ -4,15 +4,17 @@ export interface BottomFullButtonProps {
   state: boolean;
   onClick: () => void;
   content: string;
+  type?: "button" | "submit" | "reset";
 }
 export const BottomFullButton = ({
   state = true,
   onClick,
   content,
+  type = "button",
 }: BottomFullButtonProps) => {
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
       disabled={!state}
       className={cn("w-full rounded-xl py-3.5", {
