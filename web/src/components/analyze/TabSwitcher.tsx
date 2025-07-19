@@ -36,7 +36,7 @@ export const TabSwitcher = ({
     >
       <div
         ref={indicatorRef}
-        className="absolute top-0 left-0 h-full w-1/2 p-0.5 transition-transform duration-300 ease-in-out"
+        className="absolute top-0 left-0 h-full w-1/2 p-0.5 transition-transform duration-500 ease-in-out"
       >
         <div className="bg-base-50 h-full w-full rounded-full" />
       </div>
@@ -48,7 +48,7 @@ export const TabSwitcher = ({
         aria-controls={ariaControls}
         onClick={() => onTabChange("url")}
         className={cn(
-          "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
+          "rounded-full px-7 py-2 text-sm transition-colors duration-500 ease-in-out",
           {
             "text-gray-system-500": activeTab === "url",
             "text-gray-system-700": activeTab !== "url",
@@ -64,7 +64,7 @@ export const TabSwitcher = ({
         aria-controls={ariaControls}
         onClick={() => onTabChange("case")}
         className={cn(
-          "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
+          "rounded-full px-7 py-2 text-sm transition-colors duration-500 ease-in-out",
           {
             "text-gray-system-500": activeTab === "case",
             "text-gray-system-700": activeTab !== "case",
