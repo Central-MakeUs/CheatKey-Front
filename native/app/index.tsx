@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { createWebView } from "@webview-bridge/react-native";
+import { appBridge, appSchema } from "@/bridge";
+import { initializeKakaoSDK } from "@react-native-kakao/core";
+
 import {
   StatusBar,
   StyleSheet,
@@ -6,9 +11,28 @@ import {
   Platform,
   SafeAreaView,
 } from "react-native";
-import { WebView } from "react-native-webview";
+
+const { WebView } = createWebView({
+  bridge: appBridge,
+  postMessageSchema: appSchema,
+  debug: true,
+});
 
 export default function WebViewScreen() {
+  const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL || "";
+  const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY || "";
+
+  useEffect(() => {
+    const initKakaoSDK = async () => {
+      try {
+        await initializeKakaoSDK(KAKAO_NATIVE_APP_KEY);
+      } catch (error) {
+        console.error("카카오 SDK 초기화 실패:", error);
+      }
+    };
+    initKakaoSDK();
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
@@ -18,10 +42,25 @@ export default function WebViewScreen() {
       >
         <StatusBar barStyle="light-content" backgroundColor="#161517" />
         <WebView
-          source={{ uri: "http://localhost:3000/signup" }}
+          source={{ uri: WEB_APP_URL }}
           style={styles.webview}
-          javaScriptEnabled
+          // JavaScript 관련
+          javaScriptEnabled={true}
+          javaScriptCanOpenWindowsAutomatically={false}
+          domStorageEnabled={true}
+          // 보안 설정
+          mixedContentMode="compatibility"
+          allowsInlineMediaPlayback={true}
+          mediaPlaybackRequiresUserAction={false}
+          // UI 설정
           bounces={false}
+          scrollEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          // 성능 설정
+          cacheEnabled={true}
+          incognito={false}
+          // Tifsy 설정
           keyboardDisplayRequiresUserAction={false}
           automaticallyAdjustContentInsets={false}
           contentInsetAdjustmentBehavior="never"

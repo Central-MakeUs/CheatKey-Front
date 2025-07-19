@@ -1,30 +1,37 @@
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { path } from "@/routes/path";
+
+import { bridge } from "@/bridge";
 
 import kakaoLogo from "@/assets/logo/logo-kakao.svg";
 
 export const KakaoLogin = () => {
-  const redirectUri =
-    (import.meta.env.VITE_API_BASE_URL as string) + API_DOMAINS.GET_KAKAO_LOGIN;
+  const navigate = useNavigate();
+  const handleKakaoLogin = async () => {
+    try {
+      if (!bridge?.socialLogin) {
+        throw new Error("브릿지 함수가 사용 불가능합니다");
+      }
 
-  const kakaoKey = import.meta.env.VITE_KAKAO_JS_KEY;
+      const result = await bridge.socialLogin("kakao");
 
-  const handleKakaoLogin = () => {
-    if (!window.Kakao) {
-      return;
+      if (result.success) {
+        if (result.data.userState === "PENDING") {
+          navigate(path.auth.signup);
+        } else if (result.data.userState === "ACTIVE") {
+          navigate(path.home);
+        }
+      }
+      // TODO: @Ki-Tak 에러 처리랑 카카오 로그인 실패 처리 로직 수정 필요
+      else {
+        alert("카카오 로그인에 실패하였습니다.");
+      }
+    } catch (e) {
+      alert("카카오 로그인에 실패하였습니다.");
+      console.error(e);
     }
-
-    window.Kakao.Auth.authorize({
-      redirectUri,
-      throughTalk: true,
-    });
   };
-  useEffect(() => {
-    if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init(kakaoKey);
-    }
-  }, [kakaoKey]);
 
   return (
     <button
