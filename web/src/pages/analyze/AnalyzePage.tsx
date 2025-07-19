@@ -62,29 +62,34 @@ export const AnalyzePage = () => {
         id={controlledPanelId}
         role="tabpanel"
         className="mt-14 flex w-full flex-col rounded-[1.25rem] border border-[#5C69AE]/20 bg-linear-[158deg,rgba(86,100,179,0.3)_2.67%,rgba(46,54,99,0.12)_104.73%] px-[1.375rem] py-[2.375rem]"
+        onSubmit={(e) => {
+          e.preventDefault();
+          // TODO: @Ki-Tak 추후 연동할 때 변경
+          console.log(`${currentTabInfo.id} 분석하기`);
+        }}
       >
         <h2 className="head-3-bold text-base-0 w-full text-center">
-          피싱 URL을 분석합니다.
+          {currentTabInfo.mainHeading}
         </h2>
         <h3 className="body-3-regular text-primary-100 mt-2 mb-[1.875rem] w-full text-center">
-          분석하고 싶은 URL을 넣어보세요.
+          {currentTabInfo.subHeading}
         </h3>
-        <label htmlFor="phishing-url-input" className="sr-only">
-          피싱 의심 URL
+        <label htmlFor={currentTabInfo.textareaId} className="sr-only">
+          {currentTabInfo.label}
         </label>
         <FormTextarea
-          id="피싱 URL 분석"
-          placeholder="URL을 복사해주세요."
+          id={currentTabInfo.textareaId}
+          placeholder={currentTabInfo.placeholder}
           value={inputValue}
           onChange={setInputValue}
           type="AI"
-          maxLength={100}
+          maxLength={currentTabInfo.maxLength}
         />
         <div className="mt-[3.125rem]" />
         <BottomFullButton
+          type="submit"
           content="분석하기"
           state={inputValue !== ""}
-          onClick={() => console.log("URL 피싱 분석하기")}
         />
       </form>
       <a

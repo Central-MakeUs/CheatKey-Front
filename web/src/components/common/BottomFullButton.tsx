@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 
 export interface BottomFullButtonProps {
   state: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   content: string;
   type?: "button" | "submit" | "reset";
 }
