@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
+import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSheet } from "@/components/common/BottomSheet";
 
 import { REPORT_REASONS } from "@/constants/reportReasons";
 
 import CheckboxOffIcon from "@/assets/icons/checkbox_off.svg?react";
 import CheckboxOnIcon from "@/assets/icons/checkbox_on.svg?react";
-
-import { BottomFullButton } from "./BottomFullButton";
 
 interface ReportPostSheetProps {
   isOpen: boolean;

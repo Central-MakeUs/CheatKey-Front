@@ -1,12 +1,11 @@
 import { useState } from "react";
 
 import { BottomSheet } from "@/components/common/BottomSheet";
+import { ConfirmModal } from "@/components/common/ConfirmModal";
+import { ReportPostSheet } from "@/components/common/ReportPostSheet";
 
 import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react";
-
-import { ConfirmModal } from "./ConfirmModal";
-import { ReportPostSheet } from "./ReportPostSheet";
 
 export const PostMenuButton = () => {
   const [menuOpen, setMenuOpen] = useState(false);
