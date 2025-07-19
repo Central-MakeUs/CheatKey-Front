@@ -37,7 +37,7 @@ export const FormTextarea = ({
         placeholder={placeholder}
         className="body-5-regular text-gray-system-400 placeholder:text-gray-system-600 h-full w-full resize-none border-none bg-transparent focus:outline-none"
       />
-      <div className="caption-1-medium text-gray-system-600 h-6 w-full text-sm">
+      <div className="caption-1-medium text-gray-system-600 h-6 w-full">
         {value.length} / {maxLength}
       </div>
     </div>
