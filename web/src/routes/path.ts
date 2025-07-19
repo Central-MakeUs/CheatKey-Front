@@ -14,4 +14,7 @@ export const path = {
   search: {
     base: "/search",
   },
+  analyze: {
+    base: "/analyze",
+  },
 };
