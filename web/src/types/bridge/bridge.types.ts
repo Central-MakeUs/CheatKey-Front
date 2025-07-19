@@ -1,4 +1,4 @@
-import type { BridgeStore } from "@webview-bridge/web";
+import type { BridgeStore, RawJSON } from "@webview-bridge/web";
 
 export type SocialType = "kakao" | "apple";
 
@@ -21,9 +21,18 @@ export interface FailureBridgeResult {
 
 export type BridgeLoginResult = SuccessBridgeResult | FailureBridgeResult;
 
+export interface AppState {
+  isLoggedIn: boolean;
+}
+
+export interface NativeBridgeMethods {
+  socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
+  getAccessToken: () => Promise<{ accessToken: string | null }>;
+  refreshTokens: () => Promise<{ accessToken: string | null }>;
+}
+
 export interface AppBridgeState {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: RawJSON;
   isLoggedIn: boolean;
 }
 
