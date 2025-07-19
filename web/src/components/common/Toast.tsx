@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { createPortal } from "react-dom";
+
 import { cn } from "@/utils/cn";
 
 import AlertIcon from "@/assets/icons/alert.svg?react";
@@ -44,10 +46,10 @@ export const Toast = ({
     };
   }, []);
 
-  return (
+  const toastContent = (
     <div
       className={cn(
-        "bg-primary-600 z-50 mx-5 flex h-[54px] items-center gap-2 rounded-xl px-4 transition-all ease-in-out",
+        "bg-primary-600 z-[1000] mx-5 flex h-[54px] items-center gap-2 rounded-xl px-4 transition-all ease-in-out",
         visible
           ? "translate-y-0 opacity-100 duration-500"
           : "translate-y-10 opacity-0 duration-1500",
@@ -64,4 +66,6 @@ export const Toast = ({
       <p className="body-2-medium text-base-0">{text}</p>
     </div>
   );
+
+  return createPortal(toastContent, document.body);
 };
