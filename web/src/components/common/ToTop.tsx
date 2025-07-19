@@ -34,7 +34,7 @@ const ToTop = ({ bottom = "7rem" }: ToTopProps) => {
     <button
       onClick={handleToTopButtonClick}
       aria-label="맨 위로 올라가기"
-      className="bg-base-50 fixed right-5 bottom-28 z-50 h-10 w-10 rounded-xl px-2 py-[6.4px] backdrop-blur-md"
+      className="bg-base-50 fixed right-5 bottom-28 z-45 h-10 w-10 rounded-xl px-2 py-[6.4px] backdrop-blur-md"
       style={{ bottom }}
     >
       <ToTopIcon className="text-base-0 h-5 w-6" />
