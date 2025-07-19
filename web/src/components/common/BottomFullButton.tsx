@@ -15,9 +15,9 @@ export const BottomFullButton = ({
       type="button"
       onClick={onClick}
       disabled={!state}
-      className={cn("body-1-bold w-full rounded-xl py-3.5", {
-        "bg-primary-400 text-base-0": state,
-        "bg-base-50 text-gray-system-500": !state,
+      className={cn("w-full rounded-xl py-3.5", {
+        "bg-primary-400 text-base-0 body-1-bold": state,
+        "bg-base-50 text-gray-system-500 body-2-medium": !state,
       })}
     >
       {content}
