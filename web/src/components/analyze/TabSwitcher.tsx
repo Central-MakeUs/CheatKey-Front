@@ -7,9 +7,14 @@ export type TabCategory = "url" | "case";
 interface TabSwitcherProps {
   activeTab: TabCategory;
   onTabChange: (tab: TabCategory) => void;
+  ariaControls: string;
 }
 
-export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
+export const TabSwitcher = ({
+  activeTab,
+  onTabChange,
+  ariaControls,
+}: TabSwitcherProps) => {
   const indicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,7 +29,11 @@ export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
   }, [activeTab]);
 
   return (
-    <div className="body-2-medium bg-base-50 relative flex w-fit items-center justify-center rounded-full p-0.5">
+    <div
+      role="tablist"
+      aria-label="유형 선택"
+      className="body-2-medium bg-base-50 relative flex w-fit items-center justify-center rounded-full p-0.5"
+    >
       <div
         ref={indicatorRef}
         className="absolute top-0 left-0 h-full w-1/2 p-0.5 transition-transform duration-300 ease-in-out"
@@ -34,6 +43,9 @@ export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
 
       <button
         type="button"
+        role="tab"
+        aria-selected={activeTab === "url"}
+        aria-controls={ariaControls}
         onClick={() => onTabChange("url")}
         className={cn(
           "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
@@ -47,6 +59,9 @@ export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
       </button>
       <button
         type="button"
+        role="tab"
+        aria-selected={activeTab === "case"}
+        aria-controls={ariaControls}
         onClick={() => onTabChange("case")}
         className={cn(
           "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
