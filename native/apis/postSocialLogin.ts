@@ -22,7 +22,6 @@ export const postSocialLogin = async ({
   accessToken,
 }: RequestSocialLoginBody): Promise<SocialLoginResult> => {
   try {
-    // TODO: @Ki-Tak 서버 요청 경로 확정에 따라 변경해야함
     const response = await baseAPI.post("/v1/api/auth/login", {
       provider,
       idToken,
