@@ -8,7 +8,7 @@ interface ToTopProps {
   bottom?: string;
 }
 
-const ToTop = ({ bottom = "7rem" }: ToTopProps) => {
+export const ToTop = ({ bottom = "7rem" }: ToTopProps) => {
   const [isToTopButtonVisible, setIsToTopButtonVisible] = useState(false);
 
   const throttledScrollHandler = useMemo(
@@ -41,5 +41,3 @@ const ToTop = ({ bottom = "7rem" }: ToTopProps) => {
     </button>
   );
 };
-
-export default ToTop;

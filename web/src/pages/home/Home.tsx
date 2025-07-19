@@ -1,5 +1,5 @@
 import { NameTag } from "@/components/common/NameTag";
-import SearchBarRedirect from "@/components/common/SearchBarRedirect";
+import { SearchBarRedirect } from "@/components/common/SearchBarRedirect";
 import { HomeBannerList } from "@/components/home/HomeBannerList";
 import { HomeHeader } from "@/components/home/HomeHeader";
 import { HomeTrendingPost } from "@/components/home/HomeTrendingPost";

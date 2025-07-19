@@ -6,7 +6,11 @@ interface BottomNavBarItemProps {
   FocusedIcon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
-const BottomNavBarItem = ({ to, Icon, FocusedIcon }: BottomNavBarItemProps) => (
+export const BottomNavBarItem = ({
+  to,
+  Icon,
+  FocusedIcon,
+}: BottomNavBarItemProps) => (
   <NavLink to={to}>
     {({ isActive }) =>
       isActive ? (
@@ -17,5 +21,3 @@ const BottomNavBarItem = ({ to, Icon, FocusedIcon }: BottomNavBarItemProps) => (
     }
   </NavLink>
 );
-
-export default BottomNavBarItem;

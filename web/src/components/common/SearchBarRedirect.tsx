@@ -6,7 +6,7 @@ interface SearchBarRedirectProps {
   placeholder: string;
 }
 
-const SearchBarRedirect = ({ placeholder }: SearchBarRedirectProps) => {
+export const SearchBarRedirect = ({ placeholder }: SearchBarRedirectProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -23,5 +23,3 @@ const SearchBarRedirect = ({ placeholder }: SearchBarRedirectProps) => {
     </button>
   );
 };
-
-export default SearchBarRedirect;
