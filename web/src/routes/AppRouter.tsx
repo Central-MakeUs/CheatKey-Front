@@ -10,7 +10,7 @@ import {
   SearchPage,
 } from "@/pages";
 
-import BottomLayout from "@/layout/BottomLayout";
+import { BottomLayout } from "@/layout/BottomLayout";
 
 import { Layout } from "@/components/layout/Layout";
 

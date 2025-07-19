@@ -11,7 +11,7 @@ interface CommunityFeedSortOptionDropdownProps {
 
 const SORT_OPTIONS = ["최신순", "인기순"];
 
-const CommunityFeedSortOptionDropdown = ({
+export const CommunityFeedSortOptionDropdown = ({
   selectedSortOption,
   onSelect,
 }: CommunityFeedSortOptionDropdownProps) => {
@@ -77,5 +77,3 @@ const CommunityFeedSortOptionDropdown = ({
     </div>
   );
 };
-
-export default CommunityFeedSortOptionDropdown;

@@ -5,7 +5,7 @@ interface CommunityFeedTabProps {
   setActiveTab: (tab: string) => void;
 }
 
-const CommunityFeedTab = ({
+export const CommunityFeedTab = ({
   activeTab,
   setActiveTab,
 }: CommunityFeedTabProps) => {
@@ -36,5 +36,3 @@ const CommunityFeedTab = ({
     </div>
   );
 };
-
-export default CommunityFeedTab;

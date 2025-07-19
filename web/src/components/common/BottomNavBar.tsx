@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import { path } from "@/routes/path";
 
-import BottomNavBarItem from "@/components/common/BottomNavBarItem";
+import { BottomNavBarItem } from "@/components/common/BottomNavBarItem";
 
 import AiAnalysisIcon from "@/assets/icons/ai_analysis.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
@@ -14,7 +14,7 @@ import HomeFocusedIcon from "@/assets/icons/home_focused.svg?react";
 import MyIcon from "@/assets/icons/my.svg?react";
 import MyFocusedIcon from "@/assets/icons/my_focused.svg?react";
 
-const BottomNavBar = () => {
+export const BottomNavBar = () => {
   return (
     <nav
       className="fixed bottom-0 z-50 w-full rounded-t-2xl shadow-[0_-4px_5px_0_rgba(39,61,174,0.1)]"
@@ -57,5 +57,3 @@ const BottomNavBar = () => {
     </nav>
   );
 };
-
-export default BottomNavBar;

@@ -14,7 +14,11 @@ interface SearchBarProps {
   onChange: (value: string) => void;
 }
 
-const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
+export const SearchBar = ({
+  placeholder,
+  value = "",
+  onChange,
+}: SearchBarProps) => {
   const navigate = useNavigate();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -60,5 +64,3 @@ const SearchBar = ({ placeholder, value = "", onChange }: SearchBarProps) => {
     </div>
   );
 };
-
-export default SearchBar;

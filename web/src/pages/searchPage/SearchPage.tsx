@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import SearchBar from "@/components/common/SearchBar";
-import ToTop from "@/components/common/ToTop";
+import { SearchBar } from "@/components/common/SearchBar";
+import { ToTop } from "@/components/common/ToTop";
 import { SearchResultPreview } from "@/components/searchPage/SearchResultPreview";
 
 import CuttingSad from "@/assets/images/cutting_sad.svg?react";

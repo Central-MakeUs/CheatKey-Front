@@ -18,7 +18,7 @@ interface CommunityPostPreviewProps {
   images?: string[];
 }
 
-const CommunityPostPreview = ({
+export const CommunityPostPreview = ({
   nickname,
   date,
   title,
@@ -82,5 +82,3 @@ const CommunityPostPreview = ({
     </div>
   );
 };
-
-export default CommunityPostPreview;

@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import { AppHeader } from "@/components/common/AppHeader";
-import SearchBarRedirect from "@/components/common/SearchBarRedirect";
-import ToTop from "@/components/common/ToTop";
-import CommunityFeedSortOptionDropdown from "@/components/communityFeed/CommunityFeedSortOptionDropdown";
-import CommunityFeedTab from "@/components/communityFeed/CommunityFeedTab";
-import CommunityPostPreview from "@/components/communityFeed/CommunityPostPreview";
+import { SearchBarRedirect } from "@/components/common/SearchBarRedirect";
+import { ToTop } from "@/components/common/ToTop";
+import { CommunityFeedSortOptionDropdown } from "@/components/communityFeed/CommunityFeedSortOptionDropdown";
+import { CommunityFeedTab } from "@/components/communityFeed/CommunityFeedTab";
+import { CommunityPostPreview } from "@/components/communityFeed/CommunityPostPreview";
 
 import { COMMUNITY_FEED_TABS } from "@/constants/commnityFeedTabs";
 
