@@ -33,7 +33,7 @@ export const PostMenuButton = () => {
       </button>
 
       <BottomSheet isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
-        <div className="mx-5 my-[30px] flex flex-col gap-[10px]">
+        <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
           {/* TODO: @tifsy 컴포넌트로 분리  */}
           <button
             className="bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5"
