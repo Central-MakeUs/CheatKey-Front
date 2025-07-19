@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { cn } from "@/utils/cn";
+
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSheet } from "@/components/common/BottomSheet";
 
@@ -61,12 +63,17 @@ export const ReportPostSheet = ({
             <button
               key={reason}
               onClick={() => handleSelect(reason)}
-              className={`bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5 ${selectedReason === reason ? "border-primary-500 bg-primary-0 border" : ""}`}
+              className={cn(
+                "bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5",
+                selectedReason === reason &&
+                  "border-primary-500 bg-primary-0 border",
+              )}
             >
               <span
-                className={`body-2-medium text-gray-system-200 ${
-                  selectedReason === reason ? "text-primary-200" : ""
-                }`}
+                className={cn(
+                  "body-2-medium text-gray-system-200",
+                  selectedReason === reason && "text-primary-200",
+                )}
               >
                 {reason}
               </span>
