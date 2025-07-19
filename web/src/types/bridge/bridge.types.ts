@@ -22,6 +22,7 @@ export interface FailureBridgeResult {
 export type BridgeLoginResult = SuccessBridgeResult | FailureBridgeResult;
 
 export interface AppState {
+  [key: string]: RawJSON;
   isLoggedIn: boolean;
 }
 
@@ -31,14 +32,6 @@ export interface NativeBridgeMethods {
   refreshTokens: () => Promise<{ accessToken: string | null }>;
 }
 
-export interface AppBridgeState {
-  [key: string]: RawJSON;
-  isLoggedIn: boolean;
-}
+export type AppBridgeSpec = AppState & NativeBridgeMethods;
 
-export interface AppBridge extends BridgeStore<AppBridgeState> {
-  // 네이티브 브릿지가 제공하는 함수들
-  socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
-  getAccessToken: () => Promise<{ accessToken: string | null }>;
-  refreshTokens: () => Promise<{ accessToken: string | null }>;
-}
+export type AppBridge = BridgeStore<AppBridgeSpec>;
