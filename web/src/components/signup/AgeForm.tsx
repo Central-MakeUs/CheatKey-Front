@@ -2,6 +2,9 @@ import type { Age } from "@/types/signup/signup.types";
 
 import { SelectBox } from "@/components/common/SelectBox";
 
+import CheckOff from "@/assets/icons/check_off.svg?react";
+import CheckOn from "@/assets/icons/check_on.svg?react";
+
 const AGE_OPTIONS: Age[] = ["10~20대", "30~40대", "50~60대", "60대 이상"];
 
 interface AgeFormProps {
