@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 
+import { LoadingAnalyze } from "@/components/animation/LoadingAnalyze";
 import { Bubble } from "@/components/common/Bubble";
 import { KakaoLogin } from "@/components/login/KakaoLogin";
 
@@ -12,6 +13,7 @@ export const LoginPage = () => {
           치트키에 오신 것을 환영합니다!
         </h1>
       </div>
+      <LoadingAnalyze />
       <div className="absolute bottom-11 flex w-full flex-col items-center gap-8 px-5">
         <motion.div
           animate={{
