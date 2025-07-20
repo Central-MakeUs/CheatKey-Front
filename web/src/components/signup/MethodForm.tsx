@@ -1,8 +1,6 @@
 import type { TradeMethod } from "@/types/signup/signup.types";
-import { cn } from "@/utils/cn";
 
-import CheckOff from "@/assets/icons/check_off.svg?react";
-import CheckOn from "@/assets/icons/check_on.svg?react";
+import { SelectBox } from "@/components/common/SelectBox";
 
 const TRADE_METHOD_OPTIONS: TradeMethod[] = [
   "SNS 거래",
@@ -64,25 +62,11 @@ const MethodSelect = ({
   onSelect,
 }: MethodSelectProps) => {
   return (
-    <button
-      type="button"
+    <SelectBox
+      type="onboarding"
+      label={methodOption}
+      isSelected={isSelected}
       onClick={() => onSelect(methodOption)}
-      className={cn(
-        "body-2-medium flex items-center justify-between rounded-xl px-5 py-[1.125rem] text-left",
-        {
-          "text-primary-200 border-primary-400 border bg-[#2f47bd4d]":
-            isSelected,
-          "bg-base-50 text-gray-system-600 border-gray-system-700 border-[0.5px]":
-            !isSelected,
-        },
-      )}
-    >
-      <p>{methodOption}</p>
-      {isSelected ? (
-        <CheckOn className="h-6 w-6" />
-      ) : (
-        <CheckOff className="h-6 w-6" />
-      )}
-    </button>
+    />
   );
 };

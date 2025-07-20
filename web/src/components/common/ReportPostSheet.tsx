@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
 
-import { cn } from "@/utils/cn";
-
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSheet } from "@/components/common/BottomSheet";
+import { SelectBox } from "@/components/common/SelectBox";
 
 import { REPORT_REASONS } from "@/constants/reportReasons";
-
-import CheckboxOffIcon from "@/assets/icons/checkbox_off.svg?react";
-import CheckboxOnIcon from "@/assets/icons/checkbox_on.svg?react";
 
 interface ReportPostSheetProps {
   isOpen: boolean;
@@ -57,40 +53,23 @@ export const ReportPostSheet = ({
         </div>
         <div className="bg-base-50 my-2 h-[1px]" />
 
-        <div className="mx-5 mb-[22px] flex flex-col gap-[10px]">
-          {/* TODO: @tifsy 컴포넌트로 분리  */}
+        <div className="mx-5 flex flex-col gap-3">
           {REPORT_REASONS.map((reason) => (
-            <button
+            <SelectBox
               key={reason}
+              type="reportSheet"
+              label={reason}
               onClick={() => handleSelect(reason)}
-              className={cn(
-                "bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5",
-                selectedReason === reason &&
-                  "border-primary-500 bg-primary-0 border",
-              )}
-            >
-              <span
-                className={cn(
-                  "body-2-medium text-gray-system-200",
-                  selectedReason === reason && "text-primary-200",
-                )}
-              >
-                {reason}
-              </span>
-              {selectedReason === reason ? (
-                <CheckboxOnIcon />
-              ) : (
-                <CheckboxOffIcon />
-              )}
-            </button>
+              isSelected={selectedReason === reason}
+            />
           ))}
+          <BottomFullButton
+            state={!!selectedReason}
+            onClick={handleReport}
+            content="신고하기"
+            className="mt-5"
+          />
         </div>
-
-        <BottomFullButton
-          state={!!selectedReason}
-          onClick={handleReport}
-          content="신고하기"
-        />
       </div>
     </BottomSheet>
   );

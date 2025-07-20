@@ -1,5 +1,7 @@
-import { cn } from "@/utils/cn";
 import React from "react";
+
+import { cn } from "@/utils/cn";
+
 import Close from "@/assets/icons/close.svg?react";
 
 // 말풍선 방향
