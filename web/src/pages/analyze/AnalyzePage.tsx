@@ -101,7 +101,7 @@ export const AnalyzePage = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ type: "tween", duration: 0.5 }}
+            transition={{ type: "tween", duration: 0.3 }}
             className="absolute top-0 flex w-full flex-col rounded-[1.25rem] border border-[#5C69AE]/20 bg-[linear-gradient(158deg,rgba(86,100,179,0.3)_2.67%,rgba(46,54,99,0.12)_104.73%)] px-[1.375rem] py-[2.375rem]"
             onSubmit={(e) => {
               e.preventDefault();
