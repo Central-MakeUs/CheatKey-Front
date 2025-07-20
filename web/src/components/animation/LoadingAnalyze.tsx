@@ -1,6 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 
-import LoadingAnalyzeAnimation from "@/assets/animation/Animation.json";
+import LoadingAnalyzeAnimation from "@/assets/animation/ai_analyze_animation.json";
 
 interface LoadingAnalyzeProps {
   width?: number;
