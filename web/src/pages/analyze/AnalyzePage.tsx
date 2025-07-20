@@ -85,11 +85,11 @@ export const AnalyzePage = () => {
           type="AI"
           maxLength={currentTabInfo.maxLength}
         />
-        <div className="mt-[3.125rem]" />
         <BottomFullButton
           type="submit"
           content="분석하기"
           state={inputValue !== ""}
+          className="mt-[3.125rem]"
         />
       </form>
       <a
