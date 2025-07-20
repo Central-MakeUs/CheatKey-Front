@@ -8,6 +8,7 @@ import {
   LoginPage,
   SignUpPage,
   SearchPage,
+  AnalyzePage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -30,7 +31,6 @@ const AppRouter = createBrowserRouter([
       },
     ],
   },
-
   {
     //TODO: @tifsy 커뮤니티 글 상세보기 path 변경
     path: path.community.detail(":id"),
@@ -61,6 +61,14 @@ const AppRouter = createBrowserRouter([
     element: (
       <Layout>
         <SignUpPage />
+      </Layout>
+    ),
+  },
+  {
+    path: path.analyze.base,
+    element: (
+      <Layout>
+        <AnalyzePage />
       </Layout>
     ),
   },

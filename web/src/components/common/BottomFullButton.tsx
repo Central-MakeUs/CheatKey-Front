@@ -2,19 +2,21 @@ import { cn } from "@/utils/cn";
 
 export interface BottomFullButtonProps {
   state: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   content: string;
+  type?: "button" | "submit" | "reset";
   className?: string;
 }
 export const BottomFullButton = ({
   state = true,
   onClick,
   content,
+  type = "button",
   className,
 }: BottomFullButtonProps) => {
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
       disabled={!state}
       className={cn(
