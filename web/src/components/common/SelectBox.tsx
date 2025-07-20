@@ -37,7 +37,7 @@ const SELECT_BOX_CONFIG: Record<
     default:
       "bg-base-50 text-gray-system-400  border-[0.5px] border-gray-system-700",
     selected:
-      "bg-primary-0 text-primary-200 border-blue-300 border-[1px] border-primary-400",
+      "bg-primary-0 text-primary-200 border-blue-300 border border-primary-400",
     icon: (isSelected) =>
       isSelected ? <CheckboxOnIcon /> : <CheckboxOffIcon />,
   },
