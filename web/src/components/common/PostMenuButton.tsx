@@ -3,8 +3,8 @@ import { useState } from "react";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { ConfirmModal } from "@/components/common/ConfirmModal";
 import { ReportPostSheet } from "@/components/common/ReportPostSheet";
+import { SelectBox } from "@/components/common/SelectBox";
 
-import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 import CommunityPostMenuIcon from "@/assets/icons/community_post_menu.svg?react";
 
 type ViewState = "closed" | "menu" | "block" | "report" | "reportComplete";
@@ -26,23 +26,16 @@ export const PostMenuButton = () => {
         onClose={() => setViewState("closed")}
       >
         <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
-          {/* TODO: @tifsy 컴포넌트로 분리  */}
-          <button
-            className="bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5"
+          <SelectBox
+            type="postMenu"
+            label="해당 유저 차단하기"
             onClick={() => setViewState("block")}
-          >
-            <p className="body-2-medium text-gray-system-200">
-              해당 유저 차단하기
-            </p>
-            <ArrowRightIcon />
-          </button>
-          <button
-            className="bg-base-50 flex h-15 w-full items-center justify-between rounded-xl px-5"
+          />
+          <SelectBox
+            type="postMenu"
+            label="신고하기"
             onClick={() => setViewState("report")}
-          >
-            <p className="body-2-medium text-gray-system-200">신고하기</p>
-            <ArrowRightIcon />
-          </button>
+          />
         </div>
       </BottomSheet>
 
