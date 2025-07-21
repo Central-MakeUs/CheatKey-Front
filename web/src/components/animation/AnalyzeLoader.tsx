@@ -1,23 +1,23 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 
-import LoadingAnalyzeAnimation from "@/assets/animation/ai_analyze_animation.json";
+import AnalyzeLoaderAnimation from "@/assets/animation/ai_analyze_animation.json";
 
-interface LoadingAnalyzeProps {
+interface AnalyzeLoaderProps {
   width?: number;
   height?: number;
   speed?: number;
   className?: string;
 }
 
-export const LoadingAnalyze = ({
+export const AnalyzeLoader = ({
   width = 160,
   height = 160,
   speed = 1,
   className,
-}: LoadingAnalyzeProps) => {
+}: AnalyzeLoaderProps) => {
   return (
     <Player
-      src={LoadingAnalyzeAnimation}
+      src={AnalyzeLoaderAnimation}
       loop
       autoplay
       speed={speed}

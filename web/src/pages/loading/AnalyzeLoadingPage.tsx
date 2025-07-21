@@ -1,4 +1,4 @@
-import { LoadingAnalyze } from "@/components/animation/LoadingAnalyze";
+import { AnalyzeLoader } from "@/components/animation/AnalyzeLoader";
 
 export const AnalyzeLoadingPage = () => {
   return (
@@ -13,7 +13,7 @@ export const AnalyzeLoadingPage = () => {
           잠시만 기다려주세요...
         </h2>
       </div>
-      <LoadingAnalyze width={300} height={300} speed={6} className="z-10" />
+      <AnalyzeLoader width={300} height={300} speed={6} className="z-10" />
       <p className="body-5-regular text-primary-200 z-10 mb-15 w-full animate-pulse text-center">
         AI보안 엔진이 최신 사기 유형과 피싱 데이터를
         <br />
