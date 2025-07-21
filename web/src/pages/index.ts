@@ -5,3 +5,4 @@ export { CommunityWrite } from "./communityWrite/CommunityWrite";
 export { LoginPage } from "./auth/LoginPage";
 export { SignUpPage } from "./auth/SignUpPage";
 export { SearchPage } from "./searchPage/SearchPage";
+export { AnalyzeLoadingPage } from "./loading/AnalyzeLoadingPage";
