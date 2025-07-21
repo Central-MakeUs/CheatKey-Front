@@ -1,5 +1,6 @@
 export const path = {
   home: "/home",
+  loading: "/loading",
   community: {
     base: "/community",
     feed: "/community/feed",

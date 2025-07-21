@@ -3,8 +3,8 @@ import type {
   HomeTrendingPostData,
 } from "@/types/home/home.types";
 
-import ai_banner from "@/assets/icons/ai-banner.svg";
-import article_banner from "@/assets/icons/article-banner.svg";
+import ai_banner from "@/assets/icons/ai_banner.svg";
+import article_banner from "@/assets/icons/article_banner.svg";
 import default_img from "@/assets/icons/temporary_profile_pic.png";
 
 export const homeBannerDummyData: HomeBannerData[] = [

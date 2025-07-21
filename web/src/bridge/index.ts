@@ -5,7 +5,7 @@ import type { AppBridge } from "@/types/bridge/bridge.types";
 export const bridge = linkBridge<AppBridge>({
   onReady: () => {
     // 확인용
-    alert("브릿지 연결 성공");
+    console.log("브릿지 연결 성공");
   },
   initialBridge: {
     isLoggedIn: false,
