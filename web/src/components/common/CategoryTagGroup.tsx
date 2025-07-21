@@ -12,7 +12,7 @@ export const CategoryTagGroup: React.FC<CategoryTagGroupProps> = ({
   onSelect,
 }) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2 gap-y-2">
       {tags.map((tag) => (
         <button
           key={tag}
