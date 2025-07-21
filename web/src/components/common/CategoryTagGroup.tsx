@@ -14,11 +14,16 @@ export const CategoryTagGroup: React.FC<CategoryTagGroupProps> = ({
   className,
 }) => {
   return (
-    <div className={cn("flex flex-wrap gap-x-2 gap-y-2", className)}>
+    <div
+      className={cn("flex flex-wrap gap-x-2 gap-y-2", className)}
+      role="radiogroup"
+    >
       {tags.map((tag) => (
         <button
           key={tag}
           type="button"
+          role="radio"
+          aria-checked={selected === tag}
           onClick={() => onSelect(tag)}
           className={cn(
             "body-2-medium min-width-20 h-9 content-center rounded-full px-2 transition-colors",
