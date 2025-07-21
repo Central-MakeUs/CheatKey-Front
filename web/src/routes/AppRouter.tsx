@@ -9,6 +9,7 @@ import {
   SignUpPage,
   SearchPage,
   AnalyzeLoadingPage,
+  AnalyzePage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -69,6 +70,14 @@ const AppRouter = createBrowserRouter([
     element: (
       <Layout>
         <SignUpPage />
+      </Layout>
+    ),
+  },
+  {
+    path: path.analyze.base,
+    element: (
+      <Layout>
+        <AnalyzePage />
       </Layout>
     ),
   },

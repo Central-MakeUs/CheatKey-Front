@@ -17,7 +17,7 @@ export const AppHeader = ({
   onNotification,
 }: AppHeaderProps) => {
   return (
-    <header className="bg-bg-100 fixed z-10 w-full max-w-lg py-2">
+    <header className="fixed z-10 w-full max-w-lg bg-transparent py-2">
       <div className="absolute top-1/2 left-5 flex -translate-y-1/2 items-center">
         {onPrev && (
           <button
