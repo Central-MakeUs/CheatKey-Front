@@ -4,15 +4,17 @@ interface CategoryTagGroupProps {
   tags: string[];
   selected: string;
   onSelect: (tag: string) => void;
+  className?: string;
 }
 
 export const CategoryTagGroup: React.FC<CategoryTagGroupProps> = ({
   tags,
   selected,
   onSelect,
+  className,
 }) => {
   return (
-    <div className="flex flex-wrap gap-2 gap-y-2">
+    <div className={cn("flex flex-wrap gap-x-2 gap-y-2", className)}>
       {tags.map((tag) => (
         <button
           key={tag}
