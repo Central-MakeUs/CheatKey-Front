@@ -1,21 +1,9 @@
-import { motion } from "framer-motion";
-
 import { LoadingAnalyze } from "@/components/animation/LoadingAnalyze";
 
 export const AnalyzeLoadingPage = () => {
   return (
     <div className="relative flex h-screen w-full flex-1 flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-transparent to-[rgba(0,40,255,0.20)]">
-      <motion.div
-        className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-b from-transparent via-[rgba(86,100,179,0.4)] to-transparent bg-[length:100%_200%]"
-        animate={{
-          backgroundPosition: ["0% -100%", "0% 100%"],
-        }}
-        transition={{
-          duration: 4,
-          ease: "linear",
-          repeat: Infinity,
-        }}
-      />
+      <div className="absolute bottom-0 left-0 h-full w-full animate-pulse bg-gradient-to-b from-transparent to-[rgba(0,40,255,0.20)]" />
 
       <div className="z-10 mt-19 flex w-full flex-col gap-2.5 text-center">
         <h1 className="head-2-semibold text-base-0 animate-pulse">
