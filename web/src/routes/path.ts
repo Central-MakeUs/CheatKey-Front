@@ -21,8 +21,8 @@ export const path = {
   content: {
     base: "/content",
     specific: {
-      article: "/article/:articleId",
-      interview: "/interview/:interviewId",
+      article: "article/:articleId",
+      interview: "interview/:interviewId",
     },
   },
 };

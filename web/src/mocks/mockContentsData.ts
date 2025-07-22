@@ -126,3 +126,11 @@ export const interviewData: ContentType[] = [
     ],
   },
 ];
+
+export const articleMap = new Map(
+  articleData.map((article) => [article.id, article]),
+);
+
+export const interviewMap = new Map(
+  interviewData.map((interview) => [interview.id, interview]),
+);
