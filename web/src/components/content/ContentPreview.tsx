@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+import type { ContentCategory } from "@/pages/article/ContentListPage";
 import type { ContentType } from "@/types/content/content.types";
 
 import authorProfile from "@/assets/icons/temporary_profile_pic.png";
@@ -13,13 +14,18 @@ const itemVariants = {
   },
 };
 
+interface ContentPreviewProps extends ContentType {
+  author: ContentCategory;
+}
+
 export const ContentPreview = ({
   title,
   sections,
   image,
   date,
   original,
-}: ContentType) => (
+  author,
+}: ContentPreviewProps) => (
   <motion.article
     variants={itemVariants}
     className="bg-bg-50 flex flex-col gap-2.5 rounded-2xl p-3"
@@ -43,7 +49,10 @@ export const ContentPreview = ({
           className="h-5 w-5"
         />
 
-        <p className="text-primary-200">커팅이</p>
+        <p className="text-primary-200">
+          {author === "알려드림" && "커팅이"}
+          {author === "인터뷰" && "커팅이 리포터"}
+        </p>
         {original !== null && (
           <>
             <div className="bg-gray-system-700 h-5 w-[0.5px]" />

@@ -67,6 +67,7 @@ export const ContentListPage = () => {
                   date={data.date}
                   original={data.original}
                   sections={data.sections}
+                  author="알려드림"
                 />
               ))}
             {articleCategory === "인터뷰" &&
@@ -79,6 +80,7 @@ export const ContentListPage = () => {
                   date={data.date}
                   original={data.original}
                   sections={data.sections}
+                  author="인터뷰"
                 />
               ))}
           </motion.div>
