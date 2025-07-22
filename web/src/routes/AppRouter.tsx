@@ -44,11 +44,11 @@ const AppRouter = createBrowserRouter([
         element: <ContentListPage />,
       },
       {
-        path: path.content.specific.article,
+        path: path.content.specific.article(":articleId"),
         element: <ArticleDetailPage />,
       },
       {
-        path: path.content.specific.interview,
+        path: path.content.specific.interview(":interviewId"),
         element: <InterviewDetailPage />,
       },
     ],
