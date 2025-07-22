@@ -27,7 +27,7 @@ export const Bubble = ({
 }: BubbleProps) => {
   // 기본 스타일
   const baseStyle =
-    "relative flex bg-primary-500 body-4-medium w-fit gap-3 text-base-0 items-center justify-center p-2.5 rounded-xl text-center align-middle";
+    "relative flex bg-primary-500 body-4-medium w-fit whitespace-pre-line gap-3 text-base-0 items-center justify-center p-2.5 rounded-xl text-center align-middle";
 
   // 꼬리 스타일
   const tailStyle = dir

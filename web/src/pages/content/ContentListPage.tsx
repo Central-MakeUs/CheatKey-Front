@@ -24,7 +24,7 @@ export const ContentListPage = () => {
   const [articleCategory, setArticleCategory] =
     useState<ContentCategory>("알려드림");
   return (
-    <div className="bg-bg-100 min-h-screen pb-29">
+    <div className="bg-bg-100 flex min-h-screen flex-col pb-29">
       {/** TODO: @Ki-Tak 추후에 알림 버튼 함수 수정해야함 */}
       <AppHeader title="콘텐츠" onNotification={() => console.log("알림")} />
       <CategoryTagGroup
