@@ -11,6 +11,8 @@ import {
   AnalyzeLoadingPage,
   AnalyzePage,
   ContentListPage,
+  ArticleDetailPage,
+  InterviewDetailPage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -31,9 +33,23 @@ const AppRouter = createBrowserRouter([
         path: path.community.feed,
         element: <CommunityFeed />,
       },
+    ],
+  },
+  {
+    path: path.content.base,
+    element: <BottomLayout />,
+    children: [
       {
-        path: path.content.base,
+        path: "",
         element: <ContentListPage />,
+      },
+      {
+        path: path.content.specific.article,
+        element: <ArticleDetailPage />,
+      },
+      {
+        path: path.content.specific.interview,
+        element: <InterviewDetailPage />,
       },
     ],
   },

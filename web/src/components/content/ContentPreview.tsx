@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import type { ContentCategory } from "@/pages/article/ContentListPage";
+import type { ContentCategory } from "@/pages/content/ContentListPage";
 import type { ContentType } from "@/types/content/content.types";
 
 import authorProfile from "@/assets/icons/temporary_profile_pic.png";
