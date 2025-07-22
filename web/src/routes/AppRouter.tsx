@@ -10,7 +10,7 @@ import {
   SearchPage,
   AnalyzeLoadingPage,
   AnalyzePage,
-  ArticleListPage,
+  ContentListPage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -33,7 +33,7 @@ const AppRouter = createBrowserRouter([
       },
       {
         path: path.article.base,
-        element: <ArticleListPage />,
+        element: <ContentListPage />,
       },
     ],
   },

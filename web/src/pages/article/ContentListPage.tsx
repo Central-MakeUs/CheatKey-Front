@@ -6,11 +6,11 @@ import { AppHeader } from "@/components/common/AppHeader";
 import { CategoryTagGroup } from "@/components/common/CategoryTagGroup";
 
 import authorProfile from "@/assets/icons/temporary_profile_pic.png";
-export type AriticleCategory = "알려드림" | "인터뷰";
+export type ContentCategory = "알려드림" | "인터뷰";
 
-export const ArticleListPage = () => {
+export const ContentListPage = () => {
   const [articleCategory, setArticleCategory] =
-    useState<AriticleCategory>("알려드림");
+    useState<ContentCategory>("알려드림");
   return (
     <div className="bg-bg-100 min-h-screen pb-21">
       {/** TODO: @Ki-Tak 추후에 알림 버튼 함수 수정해야함 */}
@@ -40,7 +40,7 @@ export const ArticleListPage = () => {
   );
 };
 
-interface ContentsPreviewProps {
+interface ContentPreviewProps {
   title: string;
   contents: string;
   image: string;
@@ -48,13 +48,13 @@ interface ContentsPreviewProps {
   original: string | null;
 }
 
-const ContentsPreview = ({
+const ContentPreview = ({
   title,
   contents,
   image,
   date,
   original,
-}: ContentsPreviewProps) => {
+}: ContentPreviewProps) => {
   <article className="bg-bg-50 flex flex-col gap-2.5 rounded-2xl p-3">
     <img
       src={image}

@@ -18,7 +18,7 @@ export const path = {
   analyze: {
     base: "/analyze",
   },
-  article: {
-    base: "/article",
+  content: {
+    base: "/content",
   },
 };
