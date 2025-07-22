@@ -6,6 +6,8 @@ import { AppHeader } from "@/components/common/AppHeader";
 import { CategoryTagGroup } from "@/components/common/CategoryTagGroup";
 
 import authorProfile from "@/assets/icons/temporary_profile_pic.png";
+
+import { articleData, interviewData } from "@/mocks/mockContentsData";
 export type ContentCategory = "알려드림" | "인터뷰";
 
 export const ContentListPage = () => {
@@ -35,7 +37,30 @@ export const ContentListPage = () => {
             : "실제 피해 사례를 모아봤어요"}
         </motion.h2>
       </AnimatePresence>
-      <main className="flex h-fit w-full flex-col gap-5"></main>
+      <main className="flex h-fit w-full flex-col gap-5 px-5">
+        {articleCategory === "알려드림" &&
+          articleData.map((data) => (
+            <ContentPreview
+              key={data.title}
+              title={data.title}
+              image={data.image}
+              date={data.date}
+              original={data.original}
+              contents={data.sections[0].contents as string}
+            />
+          ))}
+        {articleCategory === "인터뷰" &&
+          interviewData.map((data) => (
+            <ContentPreview
+              key={data.title}
+              title={data.title}
+              image={data.image}
+              date={data.date}
+              original={data.original}
+              contents={data.sections[0].contents as string}
+            />
+          ))}
+      </main>
     </div>
   );
 };
@@ -54,7 +79,7 @@ const ContentPreview = ({
   image,
   date,
   original,
-}: ContentPreviewProps) => {
+}: ContentPreviewProps) => (
   <article className="bg-bg-50 flex flex-col gap-2.5 rounded-2xl p-3">
     <img
       src={image}
@@ -80,5 +105,5 @@ const ContentPreview = ({
       </div>
       <time className="caption-2-regular text-gray-system-600">{date}</time>
     </footer>
-  </article>;
-};
+  </article>
+);

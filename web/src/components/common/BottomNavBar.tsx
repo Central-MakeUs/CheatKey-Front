@@ -32,7 +32,7 @@ export const BottomNavBar = () => {
           FocusedIcon={HomeFocusedIcon}
         />
         <BottomNavBarItem
-          to={path.article.base}
+          to={path.content.base}
           Icon={ContentsIcon}
           FocusedIcon={ContentsFocusedIcon}
         />

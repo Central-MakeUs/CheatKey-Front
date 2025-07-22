@@ -32,7 +32,7 @@ const AppRouter = createBrowserRouter([
         element: <CommunityFeed />,
       },
       {
-        path: path.article.base,
+        path: path.content.base,
         element: <ContentListPage />,
       },
     ],
