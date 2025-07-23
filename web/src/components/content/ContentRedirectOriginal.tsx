@@ -12,7 +12,7 @@ export const ContentRedirectOriginal = ({
     <a
       href={original}
       target="_blank"
-      rel="noopener oreferrer"
+      rel="noopener noreferrer"
       className="bg-primary-400 fixed bottom-5 left-1/2 flex h-[2.375rem] -translate-x-1/2 -translate-y-1/2 items-center gap-0.5 rounded-full px-3"
     >
       <span className="body-1-bold text-base-0">원문 보러가기</span>

@@ -5,7 +5,7 @@ import { cn } from "@/utils/cn";
 import report from "@/assets/icons/report.svg";
 import authorProfile from "@/assets/icons/temporary_profile_pic.png";
 
-interface ContentDetailTileProps {
+interface ContentDetailTitleProps {
   original: string | null;
   category: ContentCategory;
   title: string;
@@ -19,7 +19,7 @@ export const ContentDetailTitle = ({
   title,
   date,
   className,
-}: ContentDetailTileProps) => {
+}: ContentDetailTitleProps) => {
   const { isFontSizeLarge } = useFontSize();
   return (
     <header className={cn("flex flex-col gap-2.5", className)}>
