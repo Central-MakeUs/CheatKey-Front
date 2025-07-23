@@ -10,7 +10,7 @@ export const PostImageUploader = ({
   onChange,
 }: {
   value: UploadedImage[];
-  onChange: (val: UploadedImage[]) => void;
+  onChange: (value: UploadedImage[]) => void;
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 

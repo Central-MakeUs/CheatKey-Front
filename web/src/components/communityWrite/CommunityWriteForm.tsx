@@ -5,7 +5,7 @@ export const CommunityWriteForm = ({
   onChange,
 }: {
   value: string;
-  onChange: (val: string) => void;
+  onChange: (value: string) => void;
 }) => {
   return (
     <div>
