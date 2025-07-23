@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import type { UploadedImage } from "@/types/communityWrite/communityWrite.types";
 import { cn } from "@/utils/cn";
@@ -38,6 +38,14 @@ export const PostImageUploader = ({
     URL.revokeObjectURL(value[indexToRemove].previewUrl);
     onChange(updatedImages);
   };
+
+  useEffect(() => {
+    return () => {
+      value.forEach((image) => {
+        URL.revokeObjectURL(image.previewUrl);
+      });
+    };
+  }, []);
 
   return (
     <div>
