@@ -47,7 +47,7 @@ export const PostImageUploader = ({
             type="button"
             onClick={handleClick}
             className={cn(
-              "flex h-[102px] w-[100px] shrink-0 items-center justify-center rounded-[8px]",
+              "flex h-[6.25rem] w-[6.25rem] shrink-0 items-center justify-center rounded-lg",
               "bg-gray-system-800 border-gray-system-700 border-[0.5px]",
             )}
           >
@@ -60,7 +60,7 @@ export const PostImageUploader = ({
             key={item.previewUrl}
             src={item.previewUrl}
             alt={`미리보기 이미지 ${index + 1}`}
-            className="border-gray-system-700 h-[102px] w-[100px] shrink-0 rounded-[8px] border object-cover"
+            className="border-gray-system-700 h-[6.25rem] w-[6.25rem] shrink-0 rounded-lg border object-cover"
           />
         ))}
       </div>
