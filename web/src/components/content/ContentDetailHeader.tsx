@@ -18,7 +18,7 @@ export const ContentDetailHeader = () => {
         onClick={() => navigate(-1)}
         className="h-6 w-6"
       >
-        <Prev className="text-base-0 h-6 w-6" />
+        <Prev className="text-base-0 h-full w-full" />
       </button>
       <div className="flex items-center gap-1" role="toolbar">
         <button
@@ -27,7 +27,7 @@ export const ContentDetailHeader = () => {
           onClick={toggleFontSize}
           className="h-8 w-8"
         >
-          <Resize className="h-8 w-8" />
+          <Resize className="h-full w-full" />
         </button>
         <button
           type="button"
@@ -37,7 +37,7 @@ export const ContentDetailHeader = () => {
           }}
           className="h-8 w-8"
         >
-          <Export className="text-gray-system-50 h-8 w-8" />
+          <Export className="text-gray-system-50 h-full w-full" />
         </button>
       </div>
     </header>
