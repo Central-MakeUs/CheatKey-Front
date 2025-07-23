@@ -8,6 +8,7 @@ export const ContentRedirectOriginal = ({
   original,
 }: ContentRedirectOriginalProps) => {
   return (
+    // TODO: @Ki-Tak 추후 네이티브 기능 연동하여 외부 브라우저로 가게끔 해야 함
     <a
       href={original}
       target="_blank"
