@@ -7,4 +7,6 @@ export { SignUpPage } from "./auth/SignUpPage";
 export { SearchPage } from "./searchPage/SearchPage";
 export { AnalyzeLoadingPage } from "./loading/AnalyzeLoadingPage";
 export { AnalyzePage } from "./analyze/AnalyzePage";
-
+export { ContentListPage } from "./content/ContentListPage";
+export { ArticleDetailPage } from "./content/ArticleDetailPage";
+export { InterviewDetailPage } from "./content/InterviewDetatilPage";

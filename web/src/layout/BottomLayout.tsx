@@ -10,6 +10,7 @@ const HIDDEN_PATHS = [
   // path.auth.signup,
   path.community.write,
   /^\/community\/\d+$/,
+  /^\/content\/(?:article|interview)\/[^/]+$/,
 ];
 
 export const BottomLayout = () => {

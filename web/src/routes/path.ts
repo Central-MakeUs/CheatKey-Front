@@ -18,4 +18,11 @@ export const path = {
   analyze: {
     base: "/analyze",
   },
+  content: {
+    base: "/content",
+    specific: {
+      article: (articleId: string | number) => `article/${articleId}`,
+      interview: (interviewId: string | number) => `interview/${interviewId}`,
+    },
+  },
 };
