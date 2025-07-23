@@ -17,7 +17,7 @@ export const ContentDetailHeader = () => {
       >
         <Prev className="text-base-0 h-6 w-6" />
       </button>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1" role="toolbar">
         <button type="button" aria-label="글씨 크기 조절" className="h-8 w-8">
           <Resize className="h-8 w-8" />
         </button>

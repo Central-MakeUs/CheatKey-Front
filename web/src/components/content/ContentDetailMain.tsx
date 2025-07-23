@@ -36,7 +36,7 @@ export const ContentDetailMain = ({
             })}
           >
             <h2
-              className={cn("head-4-semibold", {
+              className={cn("head-4-semibold whitespace-pre-line", {
                 "text-gray-system-100": category === "알려드림",
                 "text-primary-100": category === "인터뷰",
               })}
@@ -44,7 +44,7 @@ export const ContentDetailMain = ({
               {category === "인터뷰" && "Q. "}
               {section.subtitle}
             </h2>
-            <p className="body-5-regular text-gray-system-200">
+            <p className="body-5-regular text-gray-system-200 whitespace-pre-line">
               {section.contents}
             </p>
           </section>

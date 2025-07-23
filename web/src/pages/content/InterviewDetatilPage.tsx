@@ -4,8 +4,6 @@ import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
 import { ContentDetailMain } from "@/components/content/ContentDetailMain";
 import { ContentDetailTitle } from "@/components/content/ContentDetailTitle";
 
-import authorProfile from "@/assets/icons/temporary_profile_pic.png";
-
 import { interviewMap } from "@/mocks/mockContentsData";
 
 export const InterviewDetailPage = () => {
@@ -27,7 +25,7 @@ export const InterviewDetailPage = () => {
         category="인터뷰"
         title={data.title}
         date={data.date}
-        authorProfile={authorProfile}
+        original={data.original}
       />
       <ContentDetailMain
         className="p-5"

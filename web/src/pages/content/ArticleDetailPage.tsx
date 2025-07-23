@@ -4,8 +4,6 @@ import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
 import { ContentDetailMain } from "@/components/content/ContentDetailMain";
 import { ContentDetailTitle } from "@/components/content/ContentDetailTitle";
 
-import authorProfile from "@/assets/icons/temporary_profile_pic.png";
-
 import { articleMap } from "@/mocks/mockContentsData";
 
 export const ArticleDetailPage = () => {
@@ -25,7 +23,7 @@ export const ArticleDetailPage = () => {
         category="알려드림"
         title={data.title}
         date={data.date}
-        authorProfile={authorProfile}
+        original={data.original}
       />
       <ContentDetailMain
         className="p-5"
