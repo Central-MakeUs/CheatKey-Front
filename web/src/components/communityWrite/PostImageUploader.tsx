@@ -55,11 +55,11 @@ export const PostImageUploader = ({
           </button>
         )}
 
-        {value.map((item) => (
+        {value.map((item, index) => (
           <img
             key={item.previewUrl}
             src={item.previewUrl}
-            alt="preview"
+            alt={`미리보기 이미지 ${index + 1}`}
             className="border-gray-system-700 h-[102px] w-[100px] shrink-0 rounded-[8px] border object-cover"
           />
         ))}
