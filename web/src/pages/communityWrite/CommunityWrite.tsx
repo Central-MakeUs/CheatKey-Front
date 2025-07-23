@@ -21,7 +21,7 @@ export const CommunityWrite = () => {
     modal,
     setModal,
     isValid,
-    isImageTooLarge,
+    validationErrors,
   } = useCommunityWriteState();
 
   const handleBack = () => {
@@ -36,42 +36,25 @@ export const CommunityWrite = () => {
 
   const handleSubmit = () => {
     if (!isValid) {
-      if (isImageTooLarge) {
-        showToast("image");
-      } else if (
-        form.title.trim().length < 10 ||
-        form.content.trim().length < 10
-      ) {
-        showToast("title");
-      } else if (!form.board) {
-        showToast("board");
-      }
+      const newToastState = {
+        titleTooShort:
+          validationErrors.titleTooShort || validationErrors.contentTooShort,
+        boardEmpty: validationErrors.boardEmpty,
+        imageTooLarge: validationErrors.imageTooLarge,
+      };
+      setToast(newToastState);
+
+      setTimeout(() => {
+        setToast({
+          titleTooShort: false,
+          boardEmpty: false,
+          imageTooLarge: false,
+        });
+      }, 3000);
       return;
     }
 
     setModal((prev) => ({ ...prev, complete: true }));
-  };
-
-  const showToast = (type: "title" | "content" | "board" | "image") => {
-    const toastState = {
-      titleTooShort: false,
-      boardEmpty: false,
-      imageTooLarge: false,
-    };
-
-    if (type === "title" || type === "content") toastState.titleTooShort = true;
-    if (type === "board") toastState.boardEmpty = true;
-    if (type === "image") toastState.imageTooLarge = true;
-
-    setToast(toastState);
-
-    setTimeout(() => {
-      setToast({
-        titleTooShort: false,
-        boardEmpty: false,
-        imageTooLarge: false,
-      });
-    }, 3000);
   };
 
   return (

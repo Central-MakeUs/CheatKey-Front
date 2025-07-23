@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
-import type { UploadedImage } from "@/types/communityWrite/communityWrite.types";
+import type {
+  UploadedImage,
+  CommunityWriteValidationError,
+} from "@/types/communityWrite/communityWrite.types";
 
 export const useCommunityWriteState = () => {
   const [form, setForm] = useState({
@@ -10,11 +13,40 @@ export const useCommunityWriteState = () => {
     images: [] as UploadedImage[],
   });
 
-  const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+  const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB입니다
 
-  const isImageTooLarge = form.images.some(
-    (img) => img.file.size > MAX_IMAGE_SIZE,
-  );
+  const validationErrors = useMemo<CommunityWriteValidationError>(() => {
+    const errors: CommunityWriteValidationError = {
+      titleTooShort: false,
+      contentTooShort: false,
+      boardEmpty: false,
+      imageTooLarge: false,
+    };
+
+    if (form.title.trim().length < 10) {
+      errors.titleTooShort = true;
+    }
+    if (form.content.trim().length < 10) {
+      errors.contentTooShort = true;
+    }
+    if (form.board.trim().length === 0) {
+      errors.boardEmpty = true;
+    }
+    if (form.images.some((img) => img.file.size > MAX_IMAGE_SIZE)) {
+      errors.imageTooLarge = true;
+    }
+
+    return errors;
+  }, [form, MAX_IMAGE_SIZE]);
+
+  const isValid = useMemo(() => {
+    return (
+      !validationErrors.titleTooShort &&
+      !validationErrors.contentTooShort &&
+      !validationErrors.boardEmpty &&
+      !validationErrors.imageTooLarge
+    );
+  }, [validationErrors]);
 
   const [toast, setToast] = useState({
     titleTooShort: false,
@@ -34,11 +66,6 @@ export const useCommunityWriteState = () => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
-  const isValid =
-    form.title.trim().length >= 10 &&
-    form.content.trim().length >= 10 &&
-    form.board.trim().length > 0;
-
   return {
     form,
     updateForm,
@@ -47,6 +74,6 @@ export const useCommunityWriteState = () => {
     modal,
     setModal,
     isValid,
-    isImageTooLarge,
+    validationErrors,
   };
 };
