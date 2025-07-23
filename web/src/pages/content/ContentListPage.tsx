@@ -2,13 +2,13 @@ import { useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
+import type { ContentCategory } from "@/types/content/content.types";
+
 import { AppHeader } from "@/components/common/AppHeader";
 import { CategoryTagGroup } from "@/components/common/CategoryTagGroup";
 import { ContentPreview } from "@/components/content/ContentPreview";
 
 import { articleData, interviewData } from "@/mocks/mockContentsData";
-
-export type ContentCategory = "알려드림" | "인터뷰";
 
 const containerVariants = {
   hidden: { opacity: 0 },

@@ -1,4 +1,4 @@
-import type { ContentCategory } from "@/pages/content/ContentListPage";
+import type { ContentCategory } from "@/types/content/content.types";
 
 interface ContentDetailTileProps {
   author: ContentCategory;
