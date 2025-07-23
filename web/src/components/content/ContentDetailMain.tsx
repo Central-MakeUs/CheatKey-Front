@@ -2,8 +2,14 @@ import { useFontSize } from "@/hooks/useFontSize";
 import type {
   ContentCategory,
   ContentSectionType,
+  FontSizeKey,
 } from "@/types/content/content.types";
 import { cn } from "@/utils/cn";
+
+import {
+  DETAIL_MAIN_STYLE_CONFIG,
+  FONT_SIZE_CONFIG,
+} from "@/constants/contentPageConstants";
 
 interface ContentDetailMainProps {
   category: ContentCategory;
@@ -22,6 +28,12 @@ export const ContentDetailMain = ({
 }: ContentDetailMainProps) => {
   const { isFontSizeLarge } = useFontSize();
 
+  const categoryStyles = DETAIL_MAIN_STYLE_CONFIG[category];
+  const fontKey: FontSizeKey = isFontSizeLarge ? "large" : "default";
+
+  const subtitleFontSize = FONT_SIZE_CONFIG.main.subtitle[fontKey];
+  const bodyFontSize = FONT_SIZE_CONFIG.main.body[fontKey];
+
   return (
     <main className={cn("flex flex-col gap-[1.875rem]", className)}>
       <img
@@ -33,27 +45,23 @@ export const ContentDetailMain = ({
         {sections.map((section, index) => (
           <section
             key={`${title}-${index}`}
-            className={cn("flex flex-col", {
-              "gap-5": category === "알려드림",
-              "gap-3.5": category === "인터뷰",
-            })}
+            className={cn("flex flex-col", categoryStyles.sectionGap)}
           >
             <h2
-              className={cn("whitespace-pre-line", {
-                "text-gray-system-100": category === "알려드림",
-                "text-primary-100": category === "인터뷰",
-                "head-4-semibold": !isFontSizeLarge,
-                "head-3-bold": isFontSizeLarge,
-              })}
+              className={cn(
+                "whitespace-pre-line",
+                categoryStyles.subtitleColor,
+                subtitleFontSize,
+              )}
             >
               {category === "인터뷰" && "Q. "}
               {section.subtitle}
             </h2>
             <p
-              className={cn("text-gray-system-200 whitespace-pre-line", {
-                "body-5-regular": !isFontSizeLarge,
-                "body-3-regular": isFontSizeLarge,
-              })}
+              className={cn(
+                "text-gray-system-200 whitespace-pre-line",
+                bodyFontSize,
+              )}
             >
               {section.contents}
             </p>

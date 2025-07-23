@@ -7,10 +7,10 @@ import { path } from "@/routes/path";
 import type {
   ContentType,
   ContentCategory,
+  SourceStateKey,
 } from "@/types/content/content.types";
 
-import report from "@/assets/icons/report.svg";
-import authorProfile from "@/assets/icons/temporary_profile_pic.png";
+import { AUTHOR_INFO_CONFIG } from "@/constants/contentPageConstants";
 
 interface ContentPreviewProps extends ContentType {
   author: ContentCategory;
@@ -23,11 +23,6 @@ const itemVariants = {
     opacity: 1,
     transition: { duration: 0.3 },
   },
-};
-
-const AUTHOR_NAME_BY_CATEGORY: { [key in ContentCategory]: string } = {
-  알려드림: "커팅이",
-  인터뷰: "커팅이 리포터",
 };
 
 const getDetailPath = (author: ContentCategory, id: number) => {
@@ -50,12 +45,10 @@ export const ContentPreview = ({
   const navigate = useNavigate();
   const handleNavigate = () => navigate(getDetailPath(author, id));
 
-  const authorInfo = {
-    icon: original === null ? authorProfile : report,
-    altText: original === null ? "콘텐츠 작성자의 프로필" : "참고자료 아이콘",
-    name: original === null ? AUTHOR_NAME_BY_CATEGORY[author] : "참고자료",
-    textColor: original === null ? "text-primary-200" : "text-gray-system-600",
-  };
+  const sourceStateKey: SourceStateKey = original
+    ? "withOriginal"
+    : "withoutOriginal";
+  const authorInfo = AUTHOR_INFO_CONFIG[author][sourceStateKey];
 
   return (
     <motion.article
