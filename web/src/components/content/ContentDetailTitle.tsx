@@ -22,7 +22,7 @@ export const ContentDetailTitle = ({
 }: ContentDetailTileProps) => {
   const { isFontSizeLarge } = useFontSize();
   return (
-    <header className={`flex flex-col gap-2.5 ${className}`}>
+    <header className={cn("flex flex-col gap-2.5", className)}>
       <div className="caption-1-medium bg-bg-50 text-gray-system-500 flex h-[1.875rem] w-16 items-center justify-center rounded-full px-2">
         {category}
       </div>

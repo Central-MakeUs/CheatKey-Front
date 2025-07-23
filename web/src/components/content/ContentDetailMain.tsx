@@ -23,7 +23,7 @@ export const ContentDetailMain = ({
   const { isFontSizeLarge } = useFontSize();
 
   return (
-    <main className={`flex flex-col gap-[1.875rem] ${className}`}>
+    <main className={cn("flex flex-col gap-[1.875rem]", className)}>
       <img
         src={image}
         alt={`${title}의 메인 사진`}
