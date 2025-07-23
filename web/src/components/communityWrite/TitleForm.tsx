@@ -18,9 +18,9 @@ export const TitleForm = ({ title, onChange }: TitleFormProps) => {
         글 제목을 입력해주세요.
         <span className="text-primary-400">*</span>
       </h1>
-      <label htmlFor="nicknameInput" className="relative h-fit w-full">
+      <label htmlFor="titleInput" className="relative h-fit w-full">
         <input
-          id="nicknameInput"
+          id="titleInput"
           placeholder="최소 10자 이상 작성해주세요."
           className={cn(
             "body-3-regular w-full border-b p-3 overflow-ellipsis transition-colors outline-none",
