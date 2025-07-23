@@ -36,6 +36,7 @@ export const TitleForm = ({ title, onChange }: TitleFormProps) => {
 
         {title.length > 0 && (
           <button
+            type="button"
             onClick={() => onChange("")}
             className="absolute top-1/2 right-4 h-[1.375rem] w-[1.375rem] -translate-y-1/2 rounded-full"
           >
