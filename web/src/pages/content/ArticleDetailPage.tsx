@@ -5,6 +5,7 @@ import { FontSizeProvider } from "@/contexts/FontSizeContext";
 import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
 import { ContentDetailMain } from "@/components/content/ContentDetailMain";
 import { ContentDetailTitle } from "@/components/content/ContentDetailTitle";
+import { ContentRedirectOriginal } from "@/components/content/ContentRedirectOriginal";
 
 import { articleMap } from "@/mocks/mockContentsData";
 
@@ -34,6 +35,7 @@ const ArticleDetailContent = () => {
         image={data.image}
         sections={data.sections}
       />
+      {data.original && <ContentRedirectOriginal original={data.original} />}
     </div>
   );
 };
