@@ -2,7 +2,10 @@ import { useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import type { ContentCategory } from "@/types/content/content.types";
+import type {
+  ContentCategory,
+  ContentType,
+} from "@/types/content/content.types";
 
 import { AppHeader } from "@/components/common/AppHeader";
 import { CategoryTagGroup } from "@/components/common/CategoryTagGroup";
@@ -20,12 +23,19 @@ const containerVariants = {
   },
 };
 
+const contentDataByCategory: Record<ContentCategory, ContentType[]> = {
+  알려드림: articleData,
+  인터뷰: interviewData,
+};
+
 export const ContentListPage = () => {
   const [articleCategory, setArticleCategory] =
     useState<ContentCategory>("알려드림");
+
+  const currentData = contentDataByCategory[articleCategory];
+
   return (
     <div className="bg-bg-100 flex min-h-screen flex-col pb-29">
-      {/** TODO: @Ki-Tak 추후에 알림 버튼 함수 수정해야함 */}
       <AppHeader title="콘텐츠" onNotification={() => console.log("알림")} />
       <CategoryTagGroup
         tags={["알려드림", "인터뷰"]}
@@ -57,32 +67,18 @@ export const ContentListPage = () => {
             exit={{ opacity: 0 }}
             className="flex h-fit w-full flex-col gap-5 px-5"
           >
-            {articleCategory === "알려드림" &&
-              articleData.map((data) => (
-                <ContentPreview
-                  key={data.title}
-                  id={data.id}
-                  title={data.title}
-                  image={data.image}
-                  date={data.date}
-                  original={data.original}
-                  sections={data.sections}
-                  author="알려드림"
-                />
-              ))}
-            {articleCategory === "인터뷰" &&
-              interviewData.map((data) => (
-                <ContentPreview
-                  key={data.title}
-                  id={data.id}
-                  title={data.title}
-                  image={data.image}
-                  date={data.date}
-                  original={data.original}
-                  sections={data.sections}
-                  author="인터뷰"
-                />
-              ))}
+            {currentData.map((data) => (
+              <ContentPreview
+                key={`${data.id}-${data.title}`}
+                id={data.id}
+                title={data.title}
+                image={data.image}
+                date={data.date}
+                original={data.original}
+                sections={data.sections}
+                author={articleCategory}
+              />
+            ))}
           </motion.div>
         </AnimatePresence>
       </main>
