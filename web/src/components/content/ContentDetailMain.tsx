@@ -1,3 +1,4 @@
+import { useFontSize } from "@/hooks/useFontSize";
 import type {
   ContentCategory,
   ContentSectionType,
@@ -19,6 +20,8 @@ export const ContentDetailMain = ({
   sections,
   className,
 }: ContentDetailMainProps) => {
+  const { isFontSizeLarge } = useFontSize();
+
   return (
     <main className={`flex flex-col gap-[1.875rem] ${className}`}>
       <img
@@ -36,15 +39,22 @@ export const ContentDetailMain = ({
             })}
           >
             <h2
-              className={cn("head-4-semibold whitespace-pre-line", {
+              className={cn("whitespace-pre-line", {
                 "text-gray-system-100": category === "알려드림",
                 "text-primary-100": category === "인터뷰",
+                "head-4-semibold": !isFontSizeLarge,
+                "head-3-bold": isFontSizeLarge,
               })}
             >
               {category === "인터뷰" && "Q. "}
               {section.subtitle}
             </h2>
-            <p className="body-5-regular text-gray-system-200 whitespace-pre-line">
+            <p
+              className={cn("text-gray-system-200 whitespace-pre-line", {
+                "body-5-regular": !isFontSizeLarge,
+                "body-3-regular": isFontSizeLarge,
+              })}
+            >
               {section.contents}
             </p>
           </section>

@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 
+import { FontSizeProvider } from "@/contexts/FontSizeContext";
+
 import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
 import { ContentDetailMain } from "@/components/content/ContentDetailMain";
 import { ContentDetailTitle } from "@/components/content/ContentDetailTitle";
 
 import { articleMap } from "@/mocks/mockContentsData";
 
-export const ArticleDetailPage = () => {
+const ArticleDetailContent = () => {
   const { articleId } = useParams();
 
   const data = articleId ? articleMap.get(parseInt(articleId, 10)) : undefined;
@@ -35,3 +37,9 @@ export const ArticleDetailPage = () => {
     </div>
   );
 };
+
+export const ArticleDetailPage = () => (
+  <FontSizeProvider>
+    <ArticleDetailContent />
+  </FontSizeProvider>
+);

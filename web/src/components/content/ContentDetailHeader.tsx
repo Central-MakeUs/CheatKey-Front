@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
+import { useFontSize } from "@/hooks/useFontSize";
+
 import Export from "@/assets/icons/export.svg?react";
 import Prev from "@/assets/icons/prev.svg?react";
 import Resize from "@/assets/icons/resize.svg?react";
 
 export const ContentDetailHeader = () => {
   const navigate = useNavigate();
+  const { toggleFontSize } = useFontSize();
 
   return (
     <header className="h-header bg-bg-100 fixed flex w-full max-w-lg items-center justify-between px-5">
@@ -18,7 +21,12 @@ export const ContentDetailHeader = () => {
         <Prev className="text-base-0 h-6 w-6" />
       </button>
       <div className="flex items-center gap-1" role="toolbar">
-        <button type="button" aria-label="글씨 크기 조절" className="h-8 w-8">
+        <button
+          type="button"
+          aria-label="글씨 크기 조절"
+          onClick={toggleFontSize}
+          className="h-8 w-8"
+        >
           <Resize className="h-8 w-8" />
         </button>
         <button

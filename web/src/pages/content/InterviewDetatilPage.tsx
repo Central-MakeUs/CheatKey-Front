@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 
+import { FontSizeProvider } from "@/contexts/FontSizeContext";
+
 import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
 import { ContentDetailMain } from "@/components/content/ContentDetailMain";
 import { ContentDetailTitle } from "@/components/content/ContentDetailTitle";
 
 import { interviewMap } from "@/mocks/mockContentsData";
 
-export const InterviewDetailPage = () => {
+const InterviewDetailContent = () => {
   const { interviewId } = useParams();
 
   const data = interviewId
@@ -37,3 +39,9 @@ export const InterviewDetailPage = () => {
     </div>
   );
 };
+
+export const InterviewDetailPage = () => (
+  <FontSizeProvider>
+    <InterviewDetailContent />
+  </FontSizeProvider>
+);
