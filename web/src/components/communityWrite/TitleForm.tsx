@@ -1,4 +1,4 @@
-import { type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 
 import { cn } from "@/utils/cn";
 
@@ -10,7 +10,7 @@ interface TitleFormProps {
 }
 
 export const TitleForm = ({ title, onChange }: TitleFormProps) => {
-  const isInputFocus = title.length > 0;
+  const [isInputFocus, setIsInputFocus] = useState(false);
 
   return (
     <div>
@@ -24,7 +24,7 @@ export const TitleForm = ({ title, onChange }: TitleFormProps) => {
           placeholder="최소 10자 이상 작성해주세요."
           className={cn(
             "body-3-regular w-full border-b p-3 overflow-ellipsis transition-colors outline-none",
-            isInputFocus || title.length > 0
+            isInputFocus
               ? "border-b-primary-400 text-gray-system-400"
               : "border-b-gray-system-700 text-gray-system-600",
           )}
@@ -32,6 +32,8 @@ export const TitleForm = ({ title, onChange }: TitleFormProps) => {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             onChange(e.target.value)
           }
+          onFocus={() => setIsInputFocus(true)}
+          onBlur={() => setIsInputFocus(false)}
         />
 
         {title.length > 0 && (
