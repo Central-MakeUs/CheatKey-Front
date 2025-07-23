@@ -26,7 +26,7 @@ export const TitleForm = ({ title, onChange }: TitleFormProps) => {
             "body-3-regular w-full border-b p-3 overflow-ellipsis transition-colors outline-none",
             isInputFocus
               ? "border-b-primary-400 text-gray-system-400"
-              : "border-b-gray-system-700 text-gray-system-600",
+              : "border-b-gray-system-700 text-gray-system-400",
           )}
           value={title}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
