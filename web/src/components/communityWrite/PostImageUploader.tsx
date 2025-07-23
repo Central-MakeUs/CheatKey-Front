@@ -4,6 +4,7 @@ import type { UploadedImage } from "@/types/communityWrite/communityWrite.types"
 import { cn } from "@/utils/cn";
 
 import AddIcon from "@/assets/icons/add.svg?react";
+import DeleteIcon from "@/assets/icons/delete.svg?react";
 
 export const PostImageUploader = ({
   value,
@@ -32,6 +33,12 @@ export const PostImageUploader = ({
     onChange([...value, ...previews]);
   };
 
+  const handleRemoveImage = (indexToRemove: number) => {
+    const updatedImages = value.filter((_, index) => index !== indexToRemove);
+    URL.revokeObjectURL(value[indexToRemove].previewUrl);
+    onChange(updatedImages);
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-[3px] pb-3">
@@ -56,12 +63,24 @@ export const PostImageUploader = ({
         )}
 
         {value.map((item, index) => (
-          <img
+          <div
             key={item.previewUrl}
-            src={item.previewUrl}
-            alt={`미리보기 이미지 ${index + 1}`}
-            className="border-gray-system-700 h-[6.25rem] w-[6.25rem] shrink-0 rounded-lg border object-cover"
-          />
+            className="relative h-[6.25rem] w-[6.25rem] shrink-0"
+          >
+            <img
+              src={item.previewUrl}
+              alt={`미리보기 이미지 ${index + 1}`}
+              className="border-gray-system-700 h-full w-full rounded-lg border object-cover"
+            />
+            <button
+              type="button"
+              onClick={() => handleRemoveImage(index)}
+              className="absolute top-[0.5rem] right-[0.5rem]"
+              aria-label={`미리보기 이미지 ${index + 1} 삭제`}
+            >
+              <DeleteIcon />
+            </button>
+          </div>
         ))}
       </div>
 
