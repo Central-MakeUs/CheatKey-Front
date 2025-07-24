@@ -45,7 +45,7 @@ export const Bubble = ({
       {dir && <div className={cn(tailStyle)} />}
       {onClose && (
         <button type="button" aria-label="말풍선 끄기" onClick={onClose}>
-          <Close className="text-gray-system-300 h-4 w-4" />
+          <Close className="text-gray-system-300 h-4 w-4 opacity-[0.61]" />
         </button>
       )}
     </div>
