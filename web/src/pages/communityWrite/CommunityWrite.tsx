@@ -21,7 +21,7 @@ export const CommunityWrite = () => {
     modal,
     setModal,
     isValid,
-    validationErrors,
+    errors,
   } = useCommunityWriteState();
 
   const handleBack = () => {
@@ -34,23 +34,33 @@ export const CommunityWrite = () => {
     }
   };
 
+  const resetToast = () => {
+    setToast({
+      titleTooShort: false,
+      boardEmpty: false,
+      imageTooLarge: false,
+      contentTooShort: false,
+    });
+  };
+
+  const toastMessage = toast.imageTooLarge
+    ? errors.images || "사진 용량이 너무 커요."
+    : toast.titleTooShort || toast.contentTooShort
+      ? errors.title || errors.content || "최소 10자 이상 작성해주세요."
+      : toast.boardEmpty
+        ? errors.board || "게시판을 선택해주세요."
+        : null;
+
   const handleSubmit = () => {
     if (!isValid) {
       const newToastState = {
-        titleTooShort:
-          validationErrors.titleTooShort || validationErrors.contentTooShort,
-        boardEmpty: validationErrors.boardEmpty,
-        imageTooLarge: validationErrors.imageTooLarge,
+        titleTooShort: !!errors.title,
+        boardEmpty: !!errors.board,
+        imageTooLarge: !!errors.images,
+        contentTooShort: !!errors.content,
       };
       setToast(newToastState);
 
-      setTimeout(() => {
-        setToast({
-          titleTooShort: false,
-          boardEmpty: false,
-          imageTooLarge: false,
-        });
-      }, 3000);
       return;
     }
 
@@ -83,16 +93,10 @@ export const CommunityWrite = () => {
           onClick={handleSubmit}
           content="등록하기"
         />
-        {toast.imageTooLarge && (
-          <Toast text="사진 용량이 너무 커요." position="write" />
-        )}
-        {toast.titleTooShort && (
-          <Toast text="최소 10자 이상 작성해주세요." position="write" />
-        )}
-        {toast.boardEmpty && (
-          <Toast text="게시판을 선택해주세요." position="write" />
-        )}
 
+        {toastMessage && (
+          <Toast text={toastMessage} position="write" onDone={resetToast} />
+        )}
         {modal.leave && (
           <ConfirmModal
             title="작성 중인 글이 저장되지 않았어요."
