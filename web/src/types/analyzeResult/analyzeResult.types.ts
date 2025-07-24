@@ -6,8 +6,9 @@ import {
 export type AnalysisCategory =
   (typeof ANALYSIS_CATEGORY)[keyof typeof ANALYSIS_CATEGORY];
 
-interface ResultCardStyle {
+export interface ResultCardStyle {
   background: string;
+  statusBackground: string;
   cardBackground: string;
   cardInnerBackground: string;
   borderColor: string;
@@ -15,7 +16,7 @@ interface ResultCardStyle {
   indicatorColor: string;
 }
 
-interface FooterItem {
+export interface AnalysisFirstFooterItem {
   label: string;
   value: string;
 }
@@ -33,7 +34,7 @@ interface AnalysisFirstCardData {
   explain: string;
   footer: {
     header: string;
-    items: FooterItem[];
+    items: AnalysisFirstFooterItem[];
   };
 }
 
