@@ -1,6 +1,5 @@
 export const path = {
   home: "/home",
-  loading: "/loading",
   community: {
     base: "/community",
     feed: "/community/feed",
@@ -17,6 +16,10 @@ export const path = {
   },
   analyze: {
     base: "/analyze",
+    specific: {
+      loading: "loading",
+      result: (analyzeId: string | number) => `result/${analyzeId}`,
+    },
   },
   content: {
     base: "/content",
