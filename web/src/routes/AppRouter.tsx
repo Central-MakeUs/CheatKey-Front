@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import {
   Home,
@@ -89,7 +89,11 @@ const AppRouter = createBrowserRouter([
   },
   {
     path: path.analyze.base,
-    element: <Layout />,
+    element: (
+      <Layout>
+        <Outlet />
+      </Layout>
+    ),
     children: [
       {
         path: "",

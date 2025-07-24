@@ -1,0 +1,11 @@
+export const ANALYSIS_STATUS = {
+  SAFE: "SAFE",
+  WARNING: "WARNING",
+  DANGER: "DANGER",
+} as const;
+
+export const ANALYSIS_CATEGORY = {
+  URL: "URL_ANALYSIS",
+  FISHING: "FISHING_FRAUD",
+  INVESTMENT: "INVESTMENT_FRAUD",
+} as const;
