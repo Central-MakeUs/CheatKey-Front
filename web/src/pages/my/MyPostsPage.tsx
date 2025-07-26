@@ -20,7 +20,12 @@ export const MyPostsPage = () => {
           총 2개의 작성글
         </span>
         {posts.length === 0 ? (
-          <NoResult text="작성한 글이 없습니다." type="none" />
+          <NoResult
+            text={
+              "현재 작성된 글이 존재하지 않아요.\n새로운 글을 작성해보세요!"
+            }
+            type="write"
+          />
         ) : (
           <div className="divide-bg-50 divide-y">
             {posts.map((post) => (
