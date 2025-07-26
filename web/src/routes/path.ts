@@ -29,6 +29,7 @@ export const path = {
     base: "/my",
     edit: "/my/edit",
     posts: "/my/posts",
-    analysis: "my/analysis",
+    analysis: "/my/analysis",
+    terms: "/my/terms",
   },
 };

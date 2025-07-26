@@ -14,3 +14,4 @@ export { MyPage } from "./my/MyPage";
 export { MyEditPage } from "./my/MyEditPage";
 export { MyPostsPage } from "./my/MyPostsPage";
 export { MyAnalysisPage } from "./my/MyAnalysisPage";
+export { TermsPage } from "./my/TermsPage";

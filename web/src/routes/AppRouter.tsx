@@ -17,6 +17,7 @@ import {
   MyEditPage,
   MyPostsPage,
   MyAnalysisPage,
+  TermsPage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -113,19 +114,23 @@ const AppRouter = createBrowserRouter([
         path: path.my.base,
         element: <MyPage />,
       },
-      {
-        path: path.my.edit,
-        element: <MyEditPage />,
-      },
-      {
-        path: path.my.posts,
-        element: <MyPostsPage />,
-      },
-      {
-        path: path.my.analysis,
-        element: <MyAnalysisPage />,
-      },
     ],
+  },
+  {
+    path: path.my.edit,
+    element: <MyEditPage />,
+  },
+  {
+    path: path.my.posts,
+    element: <MyPostsPage />,
+  },
+  {
+    path: path.my.analysis,
+    element: <MyAnalysisPage />,
+  },
+  {
+    path: path.my.terms,
+    element: <TermsPage />,
   },
 ]);
 
