@@ -1,5 +1,5 @@
 import Notification from "@/assets/icons/notification_on.svg?react";
-import CheatKeyLogo from "@/assets/logo/logo-cheatkey.svg?react";
+import CheatKeyLogo from "@/assets/logo/logo_cheatkey.svg?react";
 
 export const HomeHeader = () => {
   return (
