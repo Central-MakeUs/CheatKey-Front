@@ -13,6 +13,9 @@ import {
   ContentListPage,
   ArticleDetailPage,
   InterviewDetailPage,
+  MyPage,
+  MyEditPage,
+  MyPostsPage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -101,6 +104,23 @@ const AppRouter = createBrowserRouter([
         <AnalyzePage />
       </Layout>
     ),
+  },
+  {
+    element: <BottomLayout />,
+    children: [
+      {
+        path: path.my.base,
+        element: <MyPage />,
+      },
+      {
+        path: path.my.edit,
+        element: <MyEditPage />,
+      },
+      {
+        path: path.my.posts,
+        element: <MyPostsPage />,
+      },
+    ],
   },
 ]);
 
