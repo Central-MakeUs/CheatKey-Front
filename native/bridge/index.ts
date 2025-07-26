@@ -5,6 +5,8 @@ import {
 } from "@webview-bridge/react-native";
 import { z } from "zod";
 import { performKakaoLogin } from "@/social/performKakaoLogin";
+import { performAppleLogin } from "@/social/performAppleLogin";
+
 import type { SocialLoginResult, SocialType } from "@/apis/postSocialLogin";
 import { authStorage } from "@/services/authStorage";
 
@@ -32,13 +34,18 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
 
   socialLogin: async (type: SocialType): Promise<BridgeLoginResult> => {
     try {
-      if (type !== "kakao" && type !== "apple") {
+      let result: SocialLoginResult;
+
+      if (type === "kakao") {
+        result = await performKakaoLogin();
+      } else if (type === "apple") {
+        result = await performAppleLogin();
+      } else {
         return {
           success: false,
           message: "지원하지 않는 로그인 방식입니다.",
         };
       }
-      const result = await performKakaoLogin();
 
       store.set({ isLoggedIn: true });
 
