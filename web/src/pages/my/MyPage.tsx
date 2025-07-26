@@ -9,7 +9,7 @@ import { MyProfile } from "@/components/my/MyProfile";
 
 import AddIcon from "@/assets/icons/add.svg?react";
 import AnalysisIcon from "@/assets/icons/analysis.svg?react";
-import NotificationOnIcon from "@/assets/icons/notification_on.svg?react";
+import NotificationOffIcon from "@/assets/icons/notification_off.svg?react";
 import TermsIcon from "@/assets/icons/terms.svg?react";
 import WriteIcon from "@/assets/icons/write.svg?react";
 
@@ -46,7 +46,7 @@ export const MyPage = () => {
             aria-label="작성글 보기"
           />
           <MyMenuItem
-            icon={<NotificationOnIcon className="h-6 w-6" />}
+            icon={<NotificationOffIcon className="h-6 w-6" />}
             label="알림 설정"
             type="toggle"
             className="active:bg-gray-system-800"
