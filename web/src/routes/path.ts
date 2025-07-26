@@ -29,5 +29,6 @@ export const path = {
     base: "/my",
     edit: "/my/edit",
     posts: "/my/posts",
+    analysis: "my/analysis",
   },
 };
