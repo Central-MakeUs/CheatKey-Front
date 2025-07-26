@@ -5,7 +5,7 @@ import type {
 
 import ai_banner from "@/assets/icons/ai_banner.svg";
 import article_banner from "@/assets/icons/article_banner.svg";
-import default_img from "@/assets/icons/temporary_profile_pic.png";
+import default_img from "@/assets/icons/temporary_profile_pic.svg";
 
 export const homeBannerDummyData: HomeBannerData[] = [
   {

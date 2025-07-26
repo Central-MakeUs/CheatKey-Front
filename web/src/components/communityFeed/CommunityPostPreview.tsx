@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
-import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
+import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
 
 import { NameTag } from "../common/NameTag";
 import { PostMenuButton } from "../common/PostMenuButton";
