@@ -21,7 +21,7 @@ export const MyPostsPage = () => {
           {posts.map((post) => (
             <MyPostsPreview
               nickname={post.nickname}
-              key={post.id}
+              id={post.id}
               date={post.date}
               title={post.title}
               content={post.content}

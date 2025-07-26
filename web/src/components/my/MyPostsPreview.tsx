@@ -13,6 +13,7 @@ import { NameTag } from "../common/NameTag";
 
 //TODO: @tifsy 커뮤니티 타입과 겹치는 부분이 많아 정리
 interface MyPostsPreviewProps {
+  id: number;
   nickname: string;
   date: string;
   title: string;
@@ -22,6 +23,7 @@ interface MyPostsPreviewProps {
 }
 
 export const MyPostsPreview = ({
+  id,
   nickname,
   date,
   title,
@@ -98,7 +100,11 @@ export const MyPostsPreview = ({
       </div>
 
       {isDeleteModalOpen && (
-        <DeleteModal onCancel={handleCloseModal} onConfirm={handleDeletePost} />
+        <DeleteModal
+          onCancel={handleCloseModal}
+          onConfirm={handleDeletePost}
+          id={id}
+        />
       )}
     </div>
   );
