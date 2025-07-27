@@ -15,8 +15,10 @@ import Close from "@/assets/icons/close.svg?react";
 export const AnalyzeResultPage = () => {
   const navigate = useNavigate();
 
-  const category = ANALYSIS_CATEGORY.FISHING;
-  const status = ANALYSIS_STATUS.DANGER;
+  // 이 부분은 이제 서버로부터 받아오는 값으로 바뀔 예정입니당
+  // TODO: @Ki-Tak
+  const category = ANALYSIS_CATEGORY.INVESTMENT;
+  const status = ANALYSIS_STATUS.WARNING;
 
   const currentData = ALL_ANALYSIS_DATA[category][status];
   const { style } = currentData;

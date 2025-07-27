@@ -37,7 +37,7 @@ export const ResultCard = ({
     return (
       <section
         className={cn(
-          "flex h-full w-[calc(100vw-50px)] shrink-0 snap-center flex-col items-center rounded-2xl border px-4 py-5",
+          "flex h-full w-full shrink-0 snap-center flex-col items-center rounded-2xl border px-4 py-5",
           style.cardBackground,
           style.borderColor,
           className,
@@ -87,7 +87,7 @@ export const ResultCard = ({
     return (
       <section
         className={cn(
-          "flex h-full w-[calc(100vw-50px)] shrink-0 snap-center flex-col rounded-2xl border px-4 pt-5 pb-4",
+          "flex h-full w-full shrink-0 snap-center flex-col justify-between rounded-2xl border px-4 pt-5 pb-4",
           style.cardBackground,
           style.borderColor,
           className,
@@ -108,19 +108,21 @@ export const ResultCard = ({
           </h1>
           <img src={data.image} className="h-auto w-full" />
         </div>
-        <div
-          className={cn(
-            "mt-5 mb-4 flex w-full items-center justify-center rounded-xl px-3 py-4",
-            style.cardInnerBackground,
-          )}
-        >
-          <p className="caption-2-regular text-gray-system-500 flex text-left whitespace-pre-line">
-            {data.explain}
-          </p>
+        <div>
+          <div
+            className={cn(
+              "mt-5 mb-4 flex w-full items-center justify-center rounded-xl px-3 py-4",
+              style.cardInnerBackground,
+            )}
+          >
+            <p className="caption-2-regular text-gray-system-500 flex text-left whitespace-pre-line">
+              {data.explain}
+            </p>
+          </div>
+          <footer className="caption-2-regular text-gray-system-600 w-full text-center">
+            {data.footer}
+          </footer>
         </div>
-        <footer className="caption-2-regular text-gray-system-600 w-full text-center">
-          {data.footer}
-        </footer>
       </section>
     );
   }
