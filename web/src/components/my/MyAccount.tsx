@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import CuttingCry from "@/assets/images/cutting_cry.svg?react";
+import { ConfirmModal } from "@/components/common/ConfirmModal";
 
-import { ConfirmModal } from "../common/ConfirmModal";
+import CuttingCry from "@/assets/images/cutting_cry.svg?react";
 
 export const MyAccount = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

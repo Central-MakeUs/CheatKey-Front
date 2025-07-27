@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
-import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
+import { Toggle } from "@/components/common/Toggle";
 
-import { Toggle } from "../common/Toggle";
+import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 
 interface MyMenuItemProps {
   icon: ReactNode;
