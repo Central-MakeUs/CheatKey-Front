@@ -23,7 +23,7 @@ export const MyPage = () => {
         <MyProfile />
 
         <div>
-          <span className="text-base-0 mr-[10px]">작성글</span>
+          <span className="text-base-0 mr-2.5">작성글</span>
           <span className="text-gray-system-600">243</span>
         </div>
 

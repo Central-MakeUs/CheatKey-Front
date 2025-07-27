@@ -26,7 +26,7 @@ export const MyMenuItem = ({
       role="button"
       aria-label={label}
     >
-      <div className="flex items-center gap-[10px]">
+      <div className="flex items-center gap-2.5">
         {icon}
         <span className="text-gray-system-500 body-2-medium">{label}</span>
       </div>
