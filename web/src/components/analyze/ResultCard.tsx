@@ -37,7 +37,7 @@ export const ResultCard = ({
     return (
       <section
         className={cn(
-          "flex h-fit min-h-[28.375rem] w-[calc(100vw-50px)] shrink-0 snap-center flex-col items-center rounded-2xl border px-4 py-5",
+          "flex h-full w-[calc(100vw-50px)] shrink-0 snap-center flex-col items-center rounded-2xl border px-4 py-5",
           style.cardBackground,
           style.borderColor,
           className,
@@ -87,7 +87,7 @@ export const ResultCard = ({
     return (
       <section
         className={cn(
-          "flex h-fit min-h-[28.375rem] w-[calc(100vw-50px)] shrink-0 snap-center flex-col rounded-2xl border px-4 pt-5 pb-4",
+          "flex h-full w-[calc(100vw-50px)] shrink-0 snap-center flex-col rounded-2xl border px-4 pt-5 pb-4",
           style.cardBackground,
           style.borderColor,
           className,

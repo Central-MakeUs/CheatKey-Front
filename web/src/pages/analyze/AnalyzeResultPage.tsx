@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { cn } from "@/utils/cn";
 
-import { ResultCard } from "@/components/analyze/ResultCard";
-import { PageIndicator } from "@/components/common/PageIndicator";
+import { ResultCardList } from "@/components/analyze/ResultCardList";
 
 import {
   ANALYSIS_STATUS,
@@ -42,24 +41,8 @@ export const AnalyzeResultPage = () => {
       <h1 className="head-3-bold text-base-0 px-5 pt-[1.875rem] pb-8">
         {currentData.title}
       </h1>
-      <div className="flex snap-x snap-mandatory gap-x-4 overflow-x-scroll px-5">
-        <ResultCard
-          type="first"
-          data={currentData.details.first}
-          status={currentData.status}
-          style={currentData.style}
-        />
-        {currentData.details.detailCards.map((deatil) => (
-          <ResultCard
-            type="detail"
-            data={deatil}
-            status={currentData.status}
-            style={currentData.style}
-          />
-        ))}
-      </div>
-      <PageIndicator total={3} current={1} />
-      <p className="caption-2-regular text-gray-system-600 w-full text-center">
+      <ResultCardList currentData={currentData} />
+      <p className="caption-2-regular text-gray-system-600 mt-12 w-full text-center">
         *AI는 기대와 다른 결과가 나올 수 있습니다.
       </p>
     </div>

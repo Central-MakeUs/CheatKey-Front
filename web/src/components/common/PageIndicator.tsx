@@ -4,12 +4,14 @@ import { cn } from "@/utils/cn";
 interface PageIndicatorProps {
   total: number;
   current: number;
+  indicatorColor: string;
   className?: string;
 }
 
 export const PageIndicator = ({
   total,
   current,
+  indicatorColor,
   className,
 }: PageIndicatorProps) => {
   return (
@@ -22,7 +24,7 @@ export const PageIndicator = ({
           className={cn(
             "h-2 rounded-full transition-all duration-300",
             index + 1 === current
-              ? "bg-primary-400 w-4" // 활성화된 점 스타일
+              ? `${indicatorColor} w-4` // 활성화된 점 스타일
               : "w-2 bg-gray-700", // 비활성화된 점 스타일
           )}
         />
