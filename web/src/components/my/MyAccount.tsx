@@ -5,16 +5,8 @@ import { ConfirmModal } from "@/components/common/ConfirmModal";
 import CuttingCry from "@/assets/images/cutting_cry.svg?react";
 
 export const MyAccount = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [modalType, setModalType] = useState<"logout" | "delete" | null>(null);
-
-  const openModal = (type: "logout" | "delete") => {
-    setModalType(type);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => setModalType(null);
 
   const handleLogout = () => {
     console.log("로그아웃 모달");
@@ -31,20 +23,20 @@ export const MyAccount = () => {
       <div className="text-gray-system-600 body-3-regular mt-[1.25rem] flex w-full justify-center gap-5">
         <span
           className="active:text-gray-system-700"
-          onClick={() => openModal("logout")}
+          onClick={() => setModalType("logout")}
         >
           로그아웃
         </span>
         <span className="text-gray-system-700">|</span>
         <span
           className="active:text-gray-system-700"
-          onClick={() => openModal("delete")}
+          onClick={() => setModalType("delete")}
         >
           회원 탈퇴
         </span>
       </div>
 
-      {isModalOpen && modalType === "logout" && (
+      {modalType === "logout" && (
         <ConfirmModal
           title="로그아웃 하시겠어요?"
           description="다음에 다시 만나요!"
@@ -53,7 +45,7 @@ export const MyAccount = () => {
         />
       )}
 
-      {isModalOpen && modalType === "delete" && (
+      {modalType === "delete" && (
         <ConfirmModal
           illustration={<CuttingCry />}
           title="정말 치트키를 떠나실 건가요?"
