@@ -11,7 +11,7 @@ export const MyProfile = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-[4rem] mb-[1.875rem] flex items-center gap-[27px]">
+    <div className="mt-16 mb-[1.875rem] flex items-center gap-[27px]">
       <img
         src={TemporaryProfileImage}
         alt="유저의 프로필 사진"
