@@ -1,21 +1,22 @@
-import { useState } from "react";
-
 import { cn } from "@/utils/cn";
 
-export const Toggle = () => {
-  const [isToggled, setIsToggled] = useState(false);
+interface ToggleProps {
+  isToggled: boolean;
+  onToggle: () => void;
+  className?: string;
+}
 
-  const handleToggle = () => {
-    setIsToggled((prev) => !prev);
-  };
-
+export const Toggle = ({ isToggled, onToggle, className }: ToggleProps) => {
   return (
     <div className="flex items-center justify-center">
       <div
-        onClick={handleToggle}
+        onClick={onToggle}
         role="switch"
         aria-checked={isToggled}
-        className={`bg-base-75 relative inline-block h-6 w-10 cursor-pointer rounded-full p-0.5 transition-all duration-300`}
+        className={cn(
+          "bg-base-75 relative inline-block h-6 w-10 cursor-pointer rounded-full p-0.5 transition-all duration-300",
+          className,
+        )}
       >
         <div
           className={cn(

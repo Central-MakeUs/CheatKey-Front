@@ -12,6 +12,8 @@ interface MyMenuItemProps {
   type: "link" | "toggle";
   onClick?: () => void;
   className?: string;
+  isToggled?: boolean;
+  onToggle?: () => void;
 }
 
 export const MyMenuItem = ({
@@ -20,6 +22,8 @@ export const MyMenuItem = ({
   type,
   onClick,
   className,
+  isToggled,
+  onToggle,
 }: MyMenuItemProps) => {
   return (
     <div
@@ -35,7 +39,14 @@ export const MyMenuItem = ({
         {icon}
         <span className="text-gray-system-500 body-2-medium">{label}</span>
       </div>
-      {type === "link" ? <ArrowRightIcon /> : <Toggle />}
+      {type === "link" ? (
+        <ArrowRightIcon />
+      ) : (
+        <Toggle
+          isToggled={isToggled ?? false}
+          onToggle={onToggle ?? (() => {})}
+        />
+      )}
     </div>
   );
 };
