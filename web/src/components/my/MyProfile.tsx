@@ -29,9 +29,9 @@ export const MyProfile = () => {
           </button>
         </div>
 
-        <h2 className="body-5-regular text-gray-system-200 mt-2">
+        <p className="body-5-regular text-gray-system-200 mt-2">
           오늘의 방문횟수 389회
-        </h2>
+        </p>
       </div>
     </div>
   );
