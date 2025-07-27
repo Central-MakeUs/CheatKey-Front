@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { cn } from "@/utils/cn";
+
 import { Toggle } from "@/components/common/Toggle";
 
 import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
@@ -21,7 +23,10 @@ export const MyMenuItem = ({
 }: MyMenuItemProps) => {
   return (
     <div
-      className={`active:bg-base-50 bg-gray-system-800 ${className} flex h-16 w-full items-center justify-between px-4`}
+      className={cn(
+        "active:bg-base-50 bg-gray-system-800 flex h-16 w-full items-center justify-between px-4",
+        className,
+      )}
       onClick={onClick}
       role="button"
       aria-label={label}
