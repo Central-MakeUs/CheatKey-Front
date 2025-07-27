@@ -1,11 +1,11 @@
 import { cn } from "@/utils/cn";
 
+import { NameTag } from "@/components/common/NameTag";
+import { PostMenuButton } from "@/components/common/PostMenuButton";
+
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
-import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
-
-import { NameTag } from "../common/NameTag";
-import { PostMenuButton } from "../common/PostMenuButton";
+import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
 
 //TODO: @tifsy 커뮤니티 타입 정리
 interface CommunityPostPreviewProps {

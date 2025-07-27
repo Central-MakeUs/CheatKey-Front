@@ -4,7 +4,7 @@ export const path = {
   community: {
     base: "/community",
     feed: "/community/feed",
-    write: "/community/write",
+    write: "/write",
     //TODO: @tifsy 커뮤니티 글 상세보기 path 변경 가능
     detail: (id: string) => `/community/${id}`,
   },
@@ -24,5 +24,12 @@ export const path = {
       article: (articleId: string | number) => `article/${articleId}`,
       interview: (interviewId: string | number) => `interview/${interviewId}`,
     },
+  },
+  my: {
+    base: "/my",
+    edit: "/my/edit",
+    posts: "/my/posts",
+    analysis: "/my/analysis",
+    terms: "/my/terms",
   },
 };

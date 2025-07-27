@@ -1,6 +1,6 @@
 import type { HomeTrendingPostData } from "@/types/home/home.types";
 
-import { NameTag } from "../common/NameTag";
+import { NameTag } from "@/components/common/NameTag";
 
 export const HomeTrendingPost = ({
   image,
