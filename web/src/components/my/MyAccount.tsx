@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-import { ConfirmModal } from "@/components/common/ConfirmModal";
-
-import CuttingCry from "@/assets/images/cutting_cry.svg?react";
+import { MyAccountModalRenderer } from "@/components/my/MyAccountModalRenderer";
 
 export const MyAccount = () => {
   const [modalType, setModalType] = useState<"logout" | "delete" | null>(null);
@@ -36,26 +34,12 @@ export const MyAccount = () => {
         </span>
       </div>
 
-      {modalType === "logout" && (
-        <ConfirmModal
-          title="로그아웃 하시겠어요?"
-          description="다음에 다시 만나요!"
-          onCancel={closeModal}
-          onConfirm={handleLogout}
-        />
-      )}
-
-      {modalType === "delete" && (
-        <ConfirmModal
-          illustration={<CuttingCry />}
-          title="정말 치트키를 떠나실 건가요?"
-          description={
-            "함께한 시간 동안 감사했습니다.\n언제든 다시 돌아오실 수 있어요. 기다릴게요."
-          }
-          onCancel={closeModal}
-          onConfirm={handleDeleteAccount}
-        />
-      )}
+      <MyAccountModalRenderer
+        modalType={modalType}
+        closeModal={closeModal}
+        handleLogout={handleLogout}
+        handleDeleteAccount={handleDeleteAccount}
+      />
     </>
   );
 };
