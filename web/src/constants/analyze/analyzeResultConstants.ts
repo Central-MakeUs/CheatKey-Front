@@ -41,20 +41,23 @@ export const ANALYSIS_CATEGORY = {
   INVESTMENT: "INVESTMENT_FRAUD",
 } as const;
 
+export const STATUS_TEXT_MAP = {
+  [ANALYSIS_STATUS.SAFE]: "양호",
+  [ANALYSIS_STATUS.WARNING]: "주의",
+  [ANALYSIS_STATUS.DANGER]: "위험",
+};
+
 const SAFE_TITLE = "AI 분석 결과, 대체로 안전해요.";
 const WARNING_TITLE = "AI 분석 결과, 일부 위험이 존재해요.";
 const DANGER_TITLE = " AI 분석 결과, 안전하지 않을 수 있어요.";
 
-const FIRST_SAFE_EXPLAIN = `
-위험 신호는 30% 미만이지만,
+const FIRST_SAFE_EXPLAIN = `위험 신호는 30% 미만이지만,
 한 번 더 확인하는 것을 권장드려요. 
 `;
-const FIRST_WARNING_EXPLAIN = `
-분석 결과, 일부 위험 요소가 감지되어
+const FIRST_WARNING_EXPLAIN = `분석 결과, 일부 위험 요소가 감지되어
 주의가 필요해요. 거래 전 다시 확인해 주세요. 
 `;
-const FIRST_DANGER_EXPLAIN = `
-분석 결과 50% 이상으로 확인되었어요.
+const FIRST_DANGER_EXPLAIN = `분석 결과 50% 이상으로 확인되었어요.
 위험도가 높아 주의가 필요합니다.
 `;
 
@@ -65,7 +68,7 @@ const FIRST_FOOTER_ITEMS: AnalysisFirstFooterItem[] = [
   { label: "위험", value: "50% 이상" },
 ];
 
-const SAFE_STYLE = {
+const SAFE_STYLE: ResultCardStyle = {
   background:
     "bg-linear-[180deg,rgba(0,40,255,0.2)_0%,rgba(34,68,109,0.1)_30%,rgba(34,68,109,0.1)_78.11%,rgba(23,40,134,0.2)_100%]",
   statusBackground: "bg-[#0d153c]/40",
@@ -75,8 +78,9 @@ const SAFE_STYLE = {
   borderColor: "border-[#5c69ae]/20",
   primaryColor: "text-primary-300",
   indicatorColor: "bg-primary-400",
+  questionColor: "text-primary-100",
 };
-const WARNING_STYLE = {
+const WARNING_STYLE: ResultCardStyle = {
   background:
     "bg-linear-[180deg,rgba(180,42,42,0.2)_0%,rgba(34,68,109,0.1)_30%,rgba(34,68,109,0.1)_78.11%,rgba(23,40,134,0.2)_100%]",
   statusBackground: "bg-[#2d0808]/40",
@@ -86,8 +90,9 @@ const WARNING_STYLE = {
   borderColor: "border-[#7e5959]/20",
   primaryColor: "text-error-100",
   indicatorColor: "bg-[#973c3c]",
+  questionColor: "text-[#ffeaea]",
 };
-const DANGER_STYLE = {
+const DANGER_STYLE: ResultCardStyle = {
   background:
     "bg-linear-[180deg,rgba(178,31,31,0.2)_0%,rgba(105,67,67,0.1)_30%,rgba(105,67,67,0.1)_78.11%,rgba(66,18,18,0.2)_100%]",
   statusBackground: "bg-[#280e0e]/40",
@@ -97,6 +102,7 @@ const DANGER_STYLE = {
   borderColor: "border-[#7e5959]/20",
   primaryColor: "text-error-50",
   indicatorColor: "bg-error-100",
+  questionColor: "text-[#fff2f2]",
 };
 
 const COMMON_URL_FISHING_DETAILS_TEXT = [

@@ -4,11 +4,18 @@ import { cn } from "@/utils/cn";
 interface PageIndicatorProps {
   total: number;
   current: number;
+  className?: string;
 }
 
-export const PageIndicator = ({ total, current }: PageIndicatorProps) => {
+export const PageIndicator = ({
+  total,
+  current,
+  className,
+}: PageIndicatorProps) => {
   return (
-    <div className="flex items-center justify-center space-x-1">
+    <div
+      className={cn("flex items-center justify-center space-x-1", className)}
+    >
       {Array.from({ length: total }, (_, index) => (
         <div
           key={"indicator-" + (index + 1)}

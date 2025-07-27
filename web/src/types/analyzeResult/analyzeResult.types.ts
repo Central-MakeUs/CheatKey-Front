@@ -14,6 +14,7 @@ export interface ResultCardStyle {
   borderColor: string;
   primaryColor: string;
   indicatorColor: string;
+  questionColor: string;
 }
 
 export interface AnalysisFirstFooterItem {
@@ -21,7 +22,7 @@ export interface AnalysisFirstFooterItem {
   value: string;
 }
 
-interface AnalysisDetailCardData {
+export interface AnalysisDetailCardData {
   question: string;
   answer: string;
   image: string;
@@ -29,7 +30,7 @@ interface AnalysisDetailCardData {
   footer: string;
 }
 
-interface AnalysisFirstCardData {
+export interface AnalysisFirstCardData {
   image: string;
   explain: string;
   footer: {
