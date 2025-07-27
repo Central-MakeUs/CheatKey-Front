@@ -5,7 +5,8 @@ import { motion, useMotionValue, animate, type PanInfo } from "framer-motion";
 import { useCardNavigation } from "@/hooks/useCardNavigation";
 import type { CategoryAnalysisResult } from "@/types/analyzeResult/analyzeResult.types";
 
-import { ResultCard } from "@/components/analyze/ResultCard";
+import { DetailResultCard } from "@/components/analyze/DetailResultCard";
+import { FirstResultCard } from "@/components/analyze/FirstResultCard";
 import { PageIndicator } from "@/components/common/PageIndicator";
 
 import { CARD_ANIMATION } from "@/constants/animation/cardAnimationConstants";
@@ -117,8 +118,7 @@ export const ResultCardList = ({ currentData }: ResultCardListProps) => {
             }}
             transition={CARD_ANIMATION.transition}
           >
-            <ResultCard
-              type="first"
+            <FirstResultCard
               data={currentData.details.first}
               status={currentData.status}
               style={currentData.style}
@@ -137,12 +137,7 @@ export const ResultCardList = ({ currentData }: ResultCardListProps) => {
                 }}
                 transition={CARD_ANIMATION.transition}
               >
-                <ResultCard
-                  type="detail"
-                  data={detail}
-                  status={currentData.status}
-                  style={currentData.style}
-                />
+                <DetailResultCard data={detail} style={currentData.style} />
               </motion.div>
             );
           })}
