@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 interface UseCardNavigationProps {
   totalCards: number;
@@ -13,6 +13,14 @@ export const useCardNavigation = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const transitionTimeoutRef = useRef<number>(null);
 
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const goToCard = useCallback(
     (index: number) => {
       if (index >= 0 && index < totalCards && !isTransitioning) {
@@ -25,6 +33,8 @@ export const useCardNavigation = ({
         }
         transitionTimeoutRef.current = setTimeout(() => {
           setIsTransitioning(false);
+
+          transitionTimeoutRef.current = null;
         }, 300);
       }
     },
