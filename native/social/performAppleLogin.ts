@@ -12,14 +12,14 @@ export const performAppleLogin = async (): Promise<SocialLoginResult> => {
       ],
     });
 
-    if (!appleResult.identityToken) {
-      throw new Error("애플로부터 idToken을 받지 못했습니다.");
+    if (!appleResult.identityToken || !appleResult.authorizationCode) {
+      throw new Error("애플로부터 토큰을 받지 못했습니다.");
     }
 
     const response = await postSocialLogin({
       provider: "apple",
       idToken: appleResult.identityToken,
-      // accessToken: appleResult.authorizationCode
+      accessToken: appleResult.authorizationCode,
     });
 
     await authStorage.setTokens(response.accessToken, response.refreshToken);
