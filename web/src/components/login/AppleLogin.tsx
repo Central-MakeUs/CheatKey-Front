@@ -36,12 +36,9 @@ export const AppleLogin = () => {
           `Apple 로그인에 실패하였습니다: ${result.message || "알 수 없는 오류"}`,
         );
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (e: any) {
+    } catch (e) {
       console.error("Error during Apple login process:", e);
-      alert(
-        `Apple 로그인에 실패하였습니다. 오류: ${e.message || "알 수 없는 오류"}`,
-      );
+      alert(`Apple 로그인에 실패하였습니다.`);
     }
   };
 
