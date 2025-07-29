@@ -127,19 +127,19 @@ const AppRouter = createBrowserRouter([
     path: path.my.base,
     children: [
       {
-        path: "edit",
+        path: path.my.edit,
         element: <MyEditPage />,
       },
       {
-        path: "posts",
+        path: path.my.posts,
         element: <MyPostsPage />,
       },
       {
-        path: "analysis",
+        path: path.my.analysis,
         element: <MyAnalysisPage />,
       },
       {
-        path: "terms",
+        path: path.my.terms,
         element: <TermsPage />,
       },
     ],
