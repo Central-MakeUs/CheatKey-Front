@@ -7,20 +7,13 @@ import { z } from "zod";
 import { performKakaoLogin } from "@/social/performKakaoLogin";
 import { performAppleLogin } from "@/social/performAppleLogin";
 
-import type { SocialLoginResult, SocialType } from "@/apis/postSocialLogin";
+import type {
+  BridgeLoginResult,
+  SocialType,
+  SocialLoginApiResponse,
+} from "@/types/auth.types";
 import { authStorage } from "@/services/authStorage";
-
-export interface SuccessBridgeResult {
-  success: true;
-  data: SocialLoginResult;
-}
-
-export interface FailureBridgeResult {
-  success: false;
-  message: string;
-}
-
-export type BridgeLoginResult = SuccessBridgeResult | FailureBridgeResult;
+import { postReissue } from "@/apis/postReissue";
 
 interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
@@ -34,7 +27,7 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
 
   socialLogin: async (type: SocialType): Promise<BridgeLoginResult> => {
     try {
-      let result: SocialLoginResult;
+      let result: SocialLoginApiResponse;
 
       if (type === "kakao") {
         result = await performKakaoLogin();
@@ -48,10 +41,14 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
       }
 
       store.set({ isLoggedIn: true });
+      await authStorage.setTokens(result.accessToken, result.refreshToken);
 
       return {
         success: true,
-        data: result,
+        data: {
+          userState: result.userState,
+          accessToken: result.accessToken,
+        },
       };
     } catch (error) {
       return {
@@ -67,10 +64,26 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
   },
 
   refreshTokens: async () => {
-    // TODO: @Ki-Tak 추후에 재발급 엔드포인트 생기면 추가 예정
-    console.log("미완성 기능");
+    try {
+      const refreshToken = await authStorage.getRefreshToken();
+      if (!refreshToken) {
+        await authStorage.clearTokens();
+        store.set({ isLoggedIn: false });
 
-    return { accessToken: null };
+        return { accessToken: null };
+      }
+      const response = await postReissue({ refreshToken });
+
+      await authStorage.setTokens(response.accessToken, response.refreshToken);
+
+      return { accessToken: response.accessToken };
+    } catch {
+      await authStorage.clearTokens();
+
+      store.set({ isLoggedIn: false });
+
+      return { accessToken: null };
+    }
   },
 }));
 

@@ -1,17 +1,14 @@
 import type { BridgeStore, RawJSON } from "@webview-bridge/web";
 
+export type UserState = "ACTIVE" | "PENDING" | "SUSPENDED";
 export type SocialType = "kakao" | "apple";
-
-export interface SocialLoginResult {
-  userState: "ACTIVE" | "PENDING" | "SUSPENDED";
-  grantType: "Bearer";
-  accessToken: string;
-  refreshToken: string;
-}
 
 export interface SuccessBridgeResult {
   success: true;
-  data: SocialLoginResult;
+  data: {
+    userState: UserState;
+    accessToken: string;
+  };
 }
 
 export interface FailureBridgeResult {
