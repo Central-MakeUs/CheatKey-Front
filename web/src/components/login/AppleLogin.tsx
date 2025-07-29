@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import { bridge } from "@/bridge";
+import { useAuthStore } from "@/store/useAuthStore";
 
 import appleLogo from "@/assets/logo/logo_apple.svg";
 
@@ -11,33 +12,25 @@ export const AppleLogin = () => {
   const handleAppleLogin = async () => {
     try {
       if (!bridge?.socialLogin) {
-        console.error("Bridge function is not available.");
         alert("브릿지 함수가 사용 불가능합니다.");
         throw new Error("브릿지 함수가 사용 불가능합니다");
       }
 
-      console.log("Attempting Apple login via bridge...");
       const result = await bridge.socialLogin("apple");
-      console.log("Bridge socialLogin result:", result);
 
       if (result.success) {
-        console.log(
-          "Apple login successful from bridge. User state:",
-          result.data.userState,
-        );
+        useAuthStore.getState().setAccessToken(result.data.accessToken);
         if (result.data.userState === "PENDING") {
           navigate(path.auth.signup);
         } else if (result.data.userState === "ACTIVE") {
           navigate(path.home);
         }
       } else {
-        console.error("Apple login failed on bridge side:", result.message);
         alert(
           `Apple 로그인에 실패하였습니다: ${result.message || "알 수 없는 오류"}`,
         );
       }
-    } catch (e) {
-      console.error("Error during Apple login process:", e);
+    } catch {
       alert(`Apple 로그인에 실패하였습니다.`);
     }
   };

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import { bridge } from "@/bridge";
+import { useAuthStore } from "@/store/useAuthStore";
 
 import kakaoLogo from "@/assets/logo/logo_kakao.svg";
 
@@ -17,6 +18,7 @@ export const KakaoLogin = () => {
       const result = await bridge.socialLogin("kakao");
 
       if (result.success) {
+        useAuthStore.getState().setAccessToken(result.data.accessToken);
         if (result.data.userState === "PENDING") {
           navigate(path.auth.signup);
         } else if (result.data.userState === "ACTIVE") {

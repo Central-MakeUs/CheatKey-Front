@@ -7,21 +7,13 @@ import { z } from "zod";
 import { performKakaoLogin } from "@/social/performKakaoLogin";
 import { performAppleLogin } from "@/social/performAppleLogin";
 
-import type { SocialLoginResult, SocialType } from "@/apis/postSocialLogin";
+import type {
+  BridgeLoginResult,
+  SocialType,
+  SocialLoginApiResponse,
+} from "@/types/auth.types";
 import { authStorage } from "@/services/authStorage";
 import { postReissue } from "@/apis/postReissue";
-
-export interface SuccessBridgeResult {
-  success: true;
-  data: SocialLoginResult;
-}
-
-export interface FailureBridgeResult {
-  success: false;
-  message: string;
-}
-
-export type BridgeLoginResult = SuccessBridgeResult | FailureBridgeResult;
 
 interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
@@ -35,7 +27,7 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
 
   socialLogin: async (type: SocialType): Promise<BridgeLoginResult> => {
     try {
-      let result: SocialLoginResult;
+      let result: SocialLoginApiResponse;
 
       if (type === "kakao") {
         result = await performKakaoLogin();
@@ -49,10 +41,14 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
       }
 
       store.set({ isLoggedIn: true });
+      await authStorage.setTokens(result.accessToken, result.refreshToken);
 
       return {
         success: true,
-        data: result,
+        data: {
+          userState: result.userState,
+          accessToken: result.accessToken,
+        },
       };
     } catch (error) {
       return {
