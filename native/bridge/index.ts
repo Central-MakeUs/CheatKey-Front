@@ -9,6 +9,7 @@ import { performAppleLogin } from "@/social/performAppleLogin";
 
 import type { SocialLoginResult, SocialType } from "@/apis/postSocialLogin";
 import { authStorage } from "@/services/authStorage";
+import { postReissue } from "@/apis/postReissue";
 
 export interface SuccessBridgeResult {
   success: true;
@@ -67,10 +68,26 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
   },
 
   refreshTokens: async () => {
-    // TODO: @Ki-Tak 추후에 재발급 엔드포인트 생기면 추가 예정
-    console.log("미완성 기능");
+    try {
+      const refreshToken = await authStorage.getRefreshToken();
+      if (!refreshToken) {
+        await authStorage.clearTokens();
+        store.set({ isLoggedIn: false });
 
-    return { accessToken: null };
+        return { accessToken: null };
+      }
+      const response = await postReissue({ refreshToken });
+
+      await authStorage.setTokens(response.accessToken, response.refreshToken);
+
+      return { accessToken: response.accessToken };
+    } catch {
+      await authStorage.clearTokens();
+
+      store.set({ isLoggedIn: false });
+
+      return { accessToken: null };
+    }
   },
 }));
 

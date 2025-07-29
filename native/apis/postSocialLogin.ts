@@ -1,5 +1,5 @@
 import { isAxiosError } from "axios";
-import { baseAPI } from "@/apis/axios-instance";
+import { baseAPI } from "@/apis/instance";
 
 export type SocialType = "kakao" | "apple";
 
