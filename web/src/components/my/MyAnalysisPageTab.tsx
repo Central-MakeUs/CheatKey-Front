@@ -15,7 +15,7 @@ export const MyAnalysisPageTab = ({
 }: MyAnalysisPageTabProps) => {
   return (
     //TODO: @tifsy 커뮤니티 피드랑 이 페이지 탭 컴포넌트화
-    <div className="border-gray-system-700 border-b">
+    <div className="border-gray-system-700 mx-5 border-b">
       <div className="flex w-full justify-between">
         {MY_ANALYSIS_PAGE_TABS.map((tab) => {
           const isActive = activeTab === tab;

@@ -21,7 +21,7 @@ export const MyAnalysisPage = () => {
     <div className="bg-bg-100">
       <AppHeader onPrev={() => navigate(-1)} title="분석 내역 보기" />
 
-      <div className="divide-bg-50 divide-y px-5 pt-11">
+      <div className="divide-bg-50 divide-y pt-11">
         <MyAnalysisPageTab activeTab={activeTab} setActiveTab={setActiveTab} />
         <MyAnalysisList items={mockMyAnalysisPageData} />
       </div>

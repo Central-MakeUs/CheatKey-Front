@@ -25,7 +25,9 @@ export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
             type="button"
             key={item.id}
             onClick={() => navigate("/home")}
-            className={"w-full py-5 text-left transition-colors duration-200"}
+            className={
+              "active:bg-gray-system-800 w-full px-5 py-5 text-left transition-colors duration-200"
+            }
             aria-label={`"${item.content}" 분석 상세 보기`}
           >
             <div className="mb-[0.9375rem] flex items-center justify-between">
