@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
-import { onRequest, onResponseError } from "./interceptors";
+import { onRequest, onResponseError } from "@/apis/interceptors";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
