@@ -1,7 +1,4 @@
-import {
-  ANALYSIS_STATUS,
-  ANALYSIS_CATEGORY,
-} from "@/constants/analyze/analyzeResultConstants";
+import { ANALYSIS_STATUS, ANALYSIS_CATEGORY } from "@/constants/analyze/result";
 
 export type AnalysisCategory =
   (typeof ANALYSIS_CATEGORY)[keyof typeof ANALYSIS_CATEGORY];
@@ -65,4 +62,7 @@ type AnalysisResultUnion<DetailsType> =
     };
 export type CategoryAnalysisResult = AnalysisResultUnion<CategoryResultDetails>;
 
-export type AnalysisReport = Record<AnalysisCategory, CategoryAnalysisResult>;
+export type AllAnalysisData = Record<
+  AnalysisCategory,
+  Record<keyof typeof ANALYSIS_STATUS, CategoryAnalysisResult>
+>;

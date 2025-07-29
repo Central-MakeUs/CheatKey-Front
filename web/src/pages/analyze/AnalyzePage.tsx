@@ -10,7 +10,7 @@ import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { FormTextarea } from "@/components/common/FormTextarea";
 
-import { analysisTabsData } from "@/constants/analyze/analyzePageConstants";
+import { analysisTabsData } from "@/constants/analyze/page/analyzePageConstants";
 
 import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 
