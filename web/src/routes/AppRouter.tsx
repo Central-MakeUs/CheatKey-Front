@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import {
   Home,
@@ -13,6 +13,7 @@ import {
   ContentListPage,
   ArticleDetailPage,
   InterviewDetailPage,
+  AnalyzeResultPage,
   MyPage,
   MyEditPage,
   MyPostsPage,
@@ -59,14 +60,6 @@ const AppRouter = createBrowserRouter([
     ],
   },
   {
-    path: path.loading,
-    element: (
-      <Layout>
-        <AnalyzeLoadingPage />
-      </Layout>
-    ),
-  },
-  {
     //TODO: @tifsy 커뮤니티 글 상세보기 path 변경
     path: path.community.detail(":id"),
     element: <CommunityDetail />,
@@ -103,9 +96,23 @@ const AppRouter = createBrowserRouter([
     path: path.analyze.base,
     element: (
       <Layout>
-        <AnalyzePage />
+        <Outlet />
       </Layout>
     ),
+    children: [
+      {
+        path: "",
+        element: <AnalyzePage />,
+      },
+      {
+        path: path.analyze.specific.loading,
+        element: <AnalyzeLoadingPage />,
+      },
+      {
+        path: path.analyze.specific.result(":analyzeId"),
+        element: <AnalyzeResultPage />,
+      },
+    ],
   },
   {
     element: <BottomLayout />,
