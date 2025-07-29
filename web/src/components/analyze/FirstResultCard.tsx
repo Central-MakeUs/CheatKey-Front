@@ -4,10 +4,7 @@ import type {
 } from "@/types/analyzeResult/analyzeResult.types";
 import { cn } from "@/utils/cn";
 
-import {
-  ANALYSIS_STATUS,
-  STATUS_TEXT_MAP,
-} from "@/constants/analyze/analyzeResultConstants";
+import { ANALYSIS_STATUS, STATUS_TEXT_MAP } from "@/constants/analyze/result";
 
 interface FirstResultCardProps {
   data: AnalysisFirstCardData;

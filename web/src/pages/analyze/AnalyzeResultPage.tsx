@@ -8,7 +8,7 @@ import {
   ANALYSIS_STATUS,
   ANALYSIS_CATEGORY,
   ALL_ANALYSIS_DATA,
-} from "@/constants/analyze/analyzeResultConstants";
+} from "@/constants/analyze/result";
 
 import Close from "@/assets/icons/close.svg?react";
 
