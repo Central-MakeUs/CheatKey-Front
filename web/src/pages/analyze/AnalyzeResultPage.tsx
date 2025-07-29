@@ -35,6 +35,7 @@ export const AnalyzeResultPage = () => {
         <button
           type="button"
           className="absolute right-5 h-8 w-8"
+          aria-label="뒤로 가기"
           onClick={() => navigate(-1)}
         >
           <Close className="text-gray-system-50 h-full w-full" />
