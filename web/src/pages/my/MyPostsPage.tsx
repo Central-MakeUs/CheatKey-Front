@@ -15,8 +15,8 @@ export const MyPostsPage = () => {
   return (
     <div className="bg-bg-100 h-full">
       <AppHeader title="작성글 보기" onPrev={() => navigate(-1)} />
-      <div className="px-5 pt-[4rem]">
-        <span className="text-base-0 head-4-semibold w-fit py-[0.75rem]">
+      <div className="px-5 pt-16">
+        <span className="text-base-0 head-4-semibold w-fit py-3">
           총 2개의 작성글
         </span>
         {posts.length === 0 ? (

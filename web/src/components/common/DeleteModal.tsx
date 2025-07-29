@@ -1,4 +1,4 @@
-import { ConfirmModal } from "./ConfirmModal";
+import { ConfirmModal } from "@/components/common/ConfirmModal";
 
 interface DeleteModalProps {
   id: number;

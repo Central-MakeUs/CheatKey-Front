@@ -25,7 +25,7 @@ export const NoResult = ({ text, type = "none" }: NoResultProps) => {
   return (
     <div className="flex flex-col items-center justify-center gap-5 py-18">
       <CuttingSad
-        className="h-[130px] w-[130px]"
+        className="h-[8.125rem] w-[8.125rem]"
         aria-label="검색 결과가 없어서 슬픈 커팅이"
       />
       <p className="text-gray-system-500 body-3-regular text-center break-words whitespace-pre-line">
@@ -33,7 +33,7 @@ export const NoResult = ({ text, type = "none" }: NoResultProps) => {
       </p>
       {type !== "none" && (
         <button
-          className="bg-bg-50 body-1-bold text-gray-system-500 mt-2.5 flex h-[42px] w-fit items-center justify-center gap-[1px] rounded-full px-3"
+          className="bg-bg-50 body-1-bold text-gray-system-500 mt-2.5 flex h-[2.625rem] w-fit items-center justify-center gap-0.5 rounded-full px-3"
           onClick={handleClick}
           aria-label={type === "write" ? "글 작성하기" : "AI로 분석하기"}
         >
