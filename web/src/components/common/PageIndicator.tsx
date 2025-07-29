@@ -29,10 +29,10 @@ export const PageIndicator = ({
           <button
             key={"indicator-" + (index + 1)}
             className={cn(
-              "h-2 rounded-full transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none",
+              "h-2 rounded-full transition-all duration-300",
               isActive
                 ? `${indicatorColor} w-4` // 활성화된 점 스타일
-                : "w-2 bg-gray-700 hover:bg-gray-600", // 비활성화된 점 스타일
+                : "bg-base-75 w-2", // 비활성화된 점 스타일
             )}
             onClick={() => onIndicatorClick?.(index)}
             role="tab"
