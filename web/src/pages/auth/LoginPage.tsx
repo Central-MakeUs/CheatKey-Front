@@ -1,10 +1,11 @@
 import { motion } from "motion/react";
 
 import { Bubble } from "@/components/common/Bubble";
+import { AppleLogin } from "@/components/login/AppleLogin";
 import { KakaoLogin } from "@/components/login/KakaoLogin";
 
-import CheatKeyTextLogo from "@/assets/logo/logo-cheatkey-text.svg?react";
-import CheatKeyLogo from "@/assets/logo/logo-cheatkey.svg?react";
+import CheatKeyLogo from "@/assets/logo/logo_cheatkey.svg?react";
+import CheatKeyTextLogo from "@/assets/logo/logo_cheatkey_text.svg?react";
 
 export const LoginPage = () => {
   return (
@@ -24,7 +25,10 @@ export const LoginPage = () => {
         >
           <Bubble dir="bottom_center" text="3초만에 로그인 하기!" />
         </motion.div>
-        <KakaoLogin />
+        <div className="w-full">
+          <KakaoLogin />
+          <AppleLogin />
+        </div>
       </div>
     </div>
   );

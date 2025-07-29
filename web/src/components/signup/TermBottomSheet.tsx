@@ -1,4 +1,4 @@
-import { BottomSheet } from "../common/BottomSheet";
+import { BottomSheet } from "@/components/common/BottomSheet";
 
 interface TermBottomSheetProps {
   isOpen: boolean;
