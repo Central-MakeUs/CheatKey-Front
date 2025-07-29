@@ -21,14 +21,13 @@ export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
       {items.map((item) => {
         return (
           //TODO: @tifsy 분석 상세 보기 경로 수정
-          <button
-            type="button"
+          <a
+            type="link"
             key={item.id}
             onClick={() => navigate("/home")}
             className={
               "active:bg-gray-system-800 w-full px-5 py-5 text-left transition-colors duration-200"
             }
-            aria-label={`"${item.content}" 분석 상세 보기`}
           >
             <div className="mb-[0.9375rem] flex items-center justify-between">
               <div className="flex gap-[7px]">
@@ -49,7 +48,7 @@ export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
                 {item.detectedAt}
               </span>
             </p>
-          </button>
+          </a>
         );
       })}
     </>
