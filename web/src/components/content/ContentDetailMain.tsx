@@ -8,14 +8,14 @@ import type {
 } from "@/types/content/content.types";
 import { cn } from "@/utils/cn";
 
+import { ContentRedirectBanner } from "@/components/content/ContentRedirectBanner";
+
 import {
   DETAIL_MAIN_STYLE_CONFIG,
   FONT_SIZE_CONFIG,
 } from "@/constants/contentPageConstants";
 
 import safe from "@/assets/images/result/safe.svg";
-
-import { ContentRedirectBanner } from "./ContentRedirectBanner";
 
 interface ContentDetailMainProps {
   category: ContentCategory;
