@@ -5,8 +5,8 @@ import CheckOff from "@/assets/icons/check_off.svg?react";
 import CheckOn from "@/assets/icons/check_on.svg?react";
 
 interface GenderFormProps {
-  genderCode: "MALE" | "FEMALE" | null;
-  setGenderCode: (value: "MALE" | "FEMALE") => void;
+  genderCode: string | null;
+  setGenderCode: (value: string) => void;
   genderOptions: GenderCode[];
 }
 
@@ -40,8 +40,8 @@ export const GenderForm = ({
 
 interface GenderSelectProps {
   genderOption: GenderCode;
-  selectedGender: "MALE" | "FEMALE" | null;
-  onSelect: (value: "MALE" | "FEMALE") => void;
+  selectedGender: string | null;
+  onSelect: (value: string) => void;
 }
 
 const GenderSelect = ({

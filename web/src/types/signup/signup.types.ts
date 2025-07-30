@@ -6,7 +6,7 @@ export interface AgeCode {
 }
 
 export interface GenderCode {
-  code: "MALE" | "FEMALE";
+  code: string;
   name: string;
   imageUrl: string | null;
   disabledImageUrl: string | null;
@@ -43,11 +43,21 @@ export interface RegisterResponse {
   termsList: Terms[];
 }
 
+export interface RegisterRequest {
+  nickname: string;
+  ageCode: string;
+  genderCode: string;
+  tradeMethodCodeList: string[];
+  tradeItemCodeList: string[];
+  agreedRequiredTerms: number[];
+  agreedOptionalTerms: number[];
+}
+
 export type SignUpForm = {
   agreedTerms: number[];
   nickname: string;
   ageCode: string | null;
-  genderCode: "MALE" | "FEMALE" | null;
+  genderCode: string | null;
   tradeMethodCodes: string[];
   tradeItemCodes: string[];
 };
