@@ -1,32 +1,24 @@
-import type { ItemCategory } from "@/types/signup/signup.types";
+import type { TradeItemCode } from "@/types/signup/signup.types";
 import { cn } from "@/utils/cn";
 
-const ITEM_OPTIONS: ItemCategory[] = [
-  "전자제품",
-  "가전제품",
-  "티켓",
-  "패션",
-  "명품",
-  "임시값_1",
-  "임시값_2",
-  "임시값_3",
-  "임시값_4",
-];
-
 interface ItemFormProps {
-  items: ItemCategory[];
-  setItems: (value: ItemCategory[]) => void;
+  selectedItems: string[];
+  setItems: (value: string[]) => void;
+  itemOptions: TradeItemCode[];
 }
 
-export const ItemForm = ({ items, setItems }: ItemFormProps) => {
-  const handleSelect = (selectedOption: ItemCategory) => {
-    if (items.includes(selectedOption)) {
-      setItems(items.filter((item) => item !== selectedOption));
+export const ItemForm = ({
+  selectedItems,
+  setItems,
+  itemOptions,
+}: ItemFormProps) => {
+  const handleSelect = (selectedOptionCode: string) => {
+    if (selectedItems.includes(selectedOptionCode)) {
+      setItems(selectedItems.filter((code) => code !== selectedOptionCode));
     } else {
-      setItems([...items, selectedOption]);
+      setItems([...selectedItems, selectedOptionCode]);
     }
   };
-
   return (
     <>
       <h1 className="head-3-bold text-base-0">
@@ -37,11 +29,11 @@ export const ItemForm = ({ items, setItems }: ItemFormProps) => {
       </h2>
 
       <div className="grid grid-cols-3 grid-rows-3 gap-3 pt-[3.25rem]">
-        {ITEM_OPTIONS.map((option) => (
+        {itemOptions.map((option) => (
           <ItemSelect
-            key={option}
+            key={option.code}
             itemOption={option}
-            isSelected={items.includes(option)}
+            isSelected={selectedItems.includes(option.code)}
             onSelect={handleSelect}
           />
         ))}
@@ -51,16 +43,20 @@ export const ItemForm = ({ items, setItems }: ItemFormProps) => {
 };
 
 interface ItemSelectProps {
-  itemOption: ItemCategory;
+  itemOption: TradeItemCode;
   isSelected: boolean;
-  onSelect: (value: ItemCategory) => void;
+  onSelect: (value: string) => void;
 }
 
 const ItemSelect = ({ itemOption, isSelected, onSelect }: ItemSelectProps) => {
+  const imageUrl = isSelected
+    ? itemOption.imageUrl
+    : itemOption.disabledImageUrl;
+
   return (
     <button
       type="button"
-      onClick={() => onSelect(itemOption)}
+      onClick={() => onSelect(itemOption.code)}
       className={cn(
         "body-2-medium flex aspect-square flex-col items-center justify-center gap-2 rounded-xl",
         {
@@ -71,9 +67,16 @@ const ItemSelect = ({ itemOption, isSelected, onSelect }: ItemSelectProps) => {
         },
       )}
     >
-      {/** TODO: @Ki-Tak 추후 디자인 변경 시, 이미지 추가해야함*/}
-      <img className="bg-base-0 h-[3.375rem] w-[3.375rem]" />
-      <p>{itemOption}</p>
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={itemOption.name}
+          className="h-[3.375rem] w-[3.375rem]"
+        />
+      ) : (
+        <div className="bg-base-0 h-[3.375rem] w-[3.375rem]" />
+      )}
+      <p>{itemOption.name}</p>
     </button>
   );
 };

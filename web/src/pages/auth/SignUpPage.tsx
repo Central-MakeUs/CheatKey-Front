@@ -27,12 +27,6 @@ import { NicknameForm } from "@/components/signup/NicknameForm";
 import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
 import { TermForm } from "@/components/signup/TermForm";
 
-import {
-  TERMS_OF_SERVICE_CONTENT,
-  PRIVACY_POLICY_CONTENT,
-  MARKETING_CONSENT_CONTENT,
-} from "@/constants/termContents";
-
 // 슬라이드 애니메이션 효과 객체
 const variants = {
   enter: (direction: number) => ({
@@ -102,37 +96,29 @@ export const SignUpPage = () => {
 
   // 전체 동의 클릭 핸들러
   const handleToggleAllAgreements = () => {
-    const newCheckState = !isAllAgreed;
-    setSignupFormData((prev) => ({
-      ...prev,
-      term: newCheckState,
-      privacy: newCheckState,
-      marketing: newCheckState,
-    }));
+    if (isAllAgreed) {
+      setSignupFormData((prev) => ({ ...prev, agreedTerms: [] }));
+    } else {
+      const allTermIds = termsList.map((term) => term.id);
+      setSignupFormData((prev) => ({ ...prev, agreedTerms: allTermIds }));
+    }
   };
 
   // 개별 약관 동의 상태 변경 핸들러
-  const handleAgreementChange = (name: "term" | "privacy" | "marketing") => {
-    setSignupFormData((prev) => ({
-      ...prev,
-      [name]: !prev[name],
-    }));
+  const handleAgreementChange = (termId: number) => {
+    setSignupFormData((prev) => {
+      const newAgreedTerms = prev.agreedTerms.includes(termId)
+        ? prev.agreedTerms.filter((id) => id !== termId)
+        : [...prev.agreedTerms, termId];
+      return { ...prev, agreedTerms: newAgreedTerms };
+    });
   };
 
   // 약관 상세 보기 클릭 핸들러
-  const handleOpenTermDetail = (termKey: "term" | "privacy" | "marketing") => {
-    switch (termKey) {
-      case "term":
-        setSelectedTerm(TERMS_OF_SERVICE_CONTENT);
-        break;
-      case "privacy":
-        setSelectedTerm(PRIVACY_POLICY_CONTENT);
-        break;
-      case "marketing":
-        setSelectedTerm(MARKETING_CONSENT_CONTENT);
-        break;
-      default:
-        break;
+  const handleOpenTermDetail = (termId: number) => {
+    const term = termsList.find((t) => t.id === termId);
+    if (term) {
+      setSelectedTerm({ title: term.title, content: term.contents });
     }
   };
 
@@ -185,47 +171,48 @@ export const SignUpPage = () => {
     ),
     2: (
       <AgeForm
-        age={signupFormData.age}
-        setAge={(newValue) =>
-          setSignupFormData((prev) => ({ ...prev, age: newValue }))
+        ageCode={signupFormData.ageCode}
+        setAgeCode={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, ageCode: newValue }))
         }
+        ageOptions={ageCodeList}
       />
     ),
     3: (
       <GenderForm
-        gender={signupFormData.gender}
-        setGender={(newValue) =>
-          setSignupFormData((prev) => ({ ...prev, gender: newValue }))
+        genderCode={signupFormData.genderCode}
+        setGenderCode={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, genderCode: newValue }))
         }
+        genderOptions={genderCodeList}
       />
     ),
     4: (
       <MethodForm
-        methods={signupFormData.method ?? []}
+        selectedMethods={signupFormData.tradeMethodCodes}
         setMethods={(newValue) =>
-          setSignupFormData((prev) => ({ ...prev, method: newValue }))
+          setSignupFormData((prev) => ({ ...prev, tradeMethodCodes: newValue }))
         }
+        methodOptions={tradeMethodCodeList}
       />
     ),
     5: (
       <ItemForm
-        items={signupFormData.item ?? []}
+        selectedItems={signupFormData.tradeItemCodes}
         setItems={(newValue) =>
-          setSignupFormData((prev) => ({
-            ...prev,
-            item: newValue,
-          }))
+          setSignupFormData((prev) => ({ ...prev, tradeItemCodes: newValue }))
         }
+        itemOptions={tradeItemCodeList}
       />
     ),
   };
 
   // 각 단계별 하단 버튼 설정
   const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
-    0: signupFormData.term && signupFormData.privacy,
+    0: requiredTermIds.every((id) => signupFormData.agreedTerms.includes(id)),
     1: nicknameStatus === "PASS",
-    2: signupFormData.age !== null,
-    3: signupFormData.gender !== null,
+    2: signupFormData.ageCode !== null,
+    3: signupFormData.genderCode !== null,
     4: true,
     5: true,
   };
@@ -275,7 +262,8 @@ export const SignUpPage = () => {
         {stepState === 0 ? (
           <div ref={contentRef}>
             <TermForm
-              agreements={signupFormData}
+              terms={termsList}
+              agreedTerms={signupFormData.agreedTerms}
               isAllAgreed={isAllAgreed}
               onToggleAll={handleToggleAllAgreements}
               onToggle={handleAgreementChange}
