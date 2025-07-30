@@ -8,7 +8,6 @@ import {
   LoginPage,
   SignUpPage,
   SearchPage,
-  AnalyzeLoadingPage,
   AnalyzePage,
   ContentListPage,
   ArticleDetailPage,
@@ -103,10 +102,6 @@ const AppRouter = createBrowserRouter([
       {
         path: "",
         element: <AnalyzePage />,
-      },
-      {
-        path: path.analyze.specific.loading,
-        element: <AnalyzeLoadingPage />,
       },
       {
         path: path.analyze.specific.result(":analyzeId"),

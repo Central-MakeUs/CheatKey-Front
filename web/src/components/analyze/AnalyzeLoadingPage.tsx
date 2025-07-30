@@ -2,7 +2,7 @@ import { AnalyzeLoader } from "@/components/animation/AnalyzeLoader";
 
 export const AnalyzeLoadingPage = () => {
   return (
-    <div className="relative flex h-screen w-full flex-1 flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-transparent to-[rgba(0,40,255,0.20)]">
+    <div className="fixed inset-0 z-50 flex h-screen w-screen flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-transparent to-[rgba(0,40,255,0.20)]">
       <div className="absolute bottom-0 left-0 h-full w-full animate-pulse bg-gradient-to-b from-transparent to-[rgba(0,40,255,0.20)]" />
 
       <div className="z-10 mt-19 flex w-full flex-col gap-2.5 text-center">
