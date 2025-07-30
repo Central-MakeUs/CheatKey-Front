@@ -1,8 +1,9 @@
 import { authAPI } from "@/apis/instance";
+import type { RegisterRequest } from "@/types/signup/signup.types";
 
 import { API_DOMAINS } from "@/constants/apiConstants";
 
-export const postAuthRegister = async () => {
-  const response = await authAPI.post(API_DOMAINS.AUTH_REGISTER);
+export const postAuthRegister = async (payload: RegisterRequest) => {
+  const response = await authAPI.post(API_DOMAINS.AUTH_REGISTER, payload);
   return response.data;
 };

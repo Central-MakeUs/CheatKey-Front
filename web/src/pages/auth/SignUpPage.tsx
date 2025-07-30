@@ -11,6 +11,7 @@ import { getAuthRegister } from "@/apis/auth/getAuthRegister.api";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
 import type {
   NicknameStatus,
+  RegisterRequest,
   SignUpForm,
   TermContent,
 } from "@/types/signup/signup.types";
@@ -67,6 +68,44 @@ export const SignUpPage = () => {
   const genderCodeList = registerData?.genderCodeList ?? [];
   const tradeMethodCodeList = registerData?.tradeMethodCodeList ?? [];
   const tradeItemCodeList = registerData?.tradeItemCodeList ?? [];
+
+  const createRegisterPayload = (): RegisterRequest | null => {
+    if (
+      !signupFormData.nickname ||
+      !signupFormData.ageCode ||
+      !signupFormData.genderCode
+    ) {
+      alert("회원가입 정보가 제대로 들어가지 않았습니다.");
+      return null;
+    }
+
+    const requiredTermIds = termsList
+      .filter((term) => term.required)
+      .map((term) => term.id);
+
+    const optionalTermIds = termsList
+      .filter((term) => !term.required)
+      .map((term) => term.id);
+
+    const agreedRequiredTerms = signupFormData.agreedTerms.filter((id) =>
+      requiredTermIds.includes(id),
+    );
+    const agreedOptionalTerms = signupFormData.agreedTerms.filter((id) =>
+      optionalTermIds.includes(id),
+    );
+
+    const payload: RegisterRequest = {
+      nickname: signupFormData.nickname,
+      ageCode: signupFormData.ageCode,
+      genderCode: signupFormData.genderCode,
+      tradeMethodCodeList: signupFormData.tradeMethodCodes,
+      tradeItemCodeList: signupFormData.tradeItemCodes,
+      agreedRequiredTerms,
+      agreedOptionalTerms,
+    };
+
+    return payload;
+  };
 
   // 선택된 약관 상태
   const [selectedTerm, setSelectedTerm] = useState<TermContent | null>(null);
@@ -135,7 +174,10 @@ export const SignUpPage = () => {
     if (stepState < 5) {
       setStepState((step) => step + 1);
     } else {
-      // TODO: @Ki-Tak 회원가입으로 변경
+      const registerPayload = createRegisterPayload();
+      if (registerPayload) {
+        console.log("회원가입 요청 데이터:", registerPayload);
+      }
     }
   };
 
