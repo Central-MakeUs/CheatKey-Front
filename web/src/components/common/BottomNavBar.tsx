@@ -24,7 +24,6 @@ export const BottomNavBar = () => {
     >
       <div className="flex h-21 items-center justify-around px-2">
         <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
-        {/* TODO: @tifsy AI 분석하기 경로 추가 */}
         <BottomNavBarItem
           to={path.home}
           Icon={HomeIcon}
@@ -37,7 +36,7 @@ export const BottomNavBar = () => {
         />
 
         <div className="z-20 translate-y-[-40px] rounded-full shadow-[0_4px_15px_0_rgba(0,89,255,0.3)]">
-          <NavLink to={path.home}>
+          <NavLink to={path.analyze.base}>
             <AiAnalysisIcon className="h-15 w-15" />
           </NavLink>
         </div>
