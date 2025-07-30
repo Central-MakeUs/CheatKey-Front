@@ -22,7 +22,7 @@ export const ContentRedirectBanner = ({
       <div className="flex w-full flex-col gap-[0.1825rem]">
         <div className="flex w-full items-center justify-between">
           <h1 className="body-4-medium text-gray-system-100">{title}</h1>
-          <ArrowRight className="text-gray-system-700 h-5 w-5" />
+          <ArrowRight className="text-gray-system-700 h-3.5 w-3.5" />
         </div>
         <p className="caption-2-regular text-primary-200">{content}</p>
       </div>

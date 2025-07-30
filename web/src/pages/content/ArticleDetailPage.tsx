@@ -28,7 +28,7 @@ const ArticleDetailContent = () => {
         original={data.original}
       />
       <ContentDetailMain
-        className="p-5"
+        className="mb-10 p-5"
         category="알려드림"
         title={data.title}
         image={data.image}
