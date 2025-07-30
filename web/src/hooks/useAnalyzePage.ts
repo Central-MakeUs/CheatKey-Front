@@ -26,11 +26,11 @@ export const useAnalyzePage = () => {
   const [activeTab, setActiveTab] = useState<TabCategory>("url");
   const [inputValue, setInputValue] = useState<string>("");
 
-  const { mutate: analyze, isPending: isAnalyzePending } = useMutation<
-    AnalyzeResponse,
-    AxiosError,
-    AnalyzeVariables
-  >({
+  const {
+    mutate: analyze,
+    isPending: isAnalyzePending,
+    isSuccess: isAnalyzeSuccess,
+  } = useMutation<AnalyzeResponse, AxiosError, AnalyzeVariables>({
     mutationFn: ({ activeTab, inputValue }) => {
       if (activeTab === "url") {
         return postAnalyzeURL({ detectionUrl: inputValue });
@@ -70,6 +70,7 @@ export const useAnalyzePage = () => {
     currentTabInfo,
     controlledPanelId,
     isAnalyzePending,
+    isAnalyzeSuccess,
     isButtonEnabled,
     handleNavigateBack,
     handleTabChange,

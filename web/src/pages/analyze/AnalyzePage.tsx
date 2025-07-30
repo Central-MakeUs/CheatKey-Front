@@ -16,13 +16,14 @@ export const AnalyzePage = () => {
     currentTabInfo,
     controlledPanelId,
     isAnalyzePending,
+    isAnalyzeSuccess,
     isButtonEnabled,
     handleNavigateBack,
     handleTabChange,
     handleSubmit,
   } = useAnalyzePage();
 
-  if (isAnalyzePending) {
+  if (isAnalyzePending || isAnalyzeSuccess) {
     return <AnalyzeLoading />;
   }
 
