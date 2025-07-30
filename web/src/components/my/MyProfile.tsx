@@ -25,7 +25,7 @@ export const MyProfile = () => {
             aria-label="프로필 수정하기"
             onClick={() => navigate(path.my.edit)}
           >
-            <ArrowRightIcon />
+            <ArrowRightIcon className="text-gray-system-700 h-5 w-5" />
           </button>
         </div>
 

@@ -1,5 +1,3 @@
-//리뷰
-
 import { cn } from "@/utils/cn";
 
 import { MY_ANALYSIS_PAGE_TABS } from "@/constants/myAnalysisPageTabs";

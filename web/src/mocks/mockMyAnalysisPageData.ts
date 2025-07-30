@@ -1,5 +1,3 @@
-//리뷰
-
 import type { MyAnalysisItem } from "@/types/my/my.types";
 
 export const mockMyAnalysisPageData: MyAnalysisItem[] = [
