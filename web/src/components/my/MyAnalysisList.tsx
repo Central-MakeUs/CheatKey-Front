@@ -36,7 +36,7 @@ export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
                 <AnalysisTypeBadge type={item.analysisType} />
               </div>
 
-              <ArrowRightIcon className="text-gray-system-700" />
+              <ArrowRightIcon className="text-gray-system-700 h-5 w-5" />
             </div>
             <p className="text-base-0 body-1-bold mb-[0.3125rem] truncate">
               {item.content}
