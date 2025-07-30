@@ -1,5 +1,9 @@
 import { useEffect, type ChangeEvent } from "react";
 
+import { useMutation } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+
+import { getCheckNickname } from "@/apis/auth/getCheckNickname";
 import { useDebounce } from "@/hooks/useDebounce";
 import type { NicknameStatus } from "@/types/signup/signup.types";
 import { cn } from "@/utils/cn";
@@ -37,38 +41,35 @@ export const NicknameForm = ({
 }: NicknameFormProps) => {
   const debouncedNickname = useDebounce(nickname, 500);
 
+  const { mutate: checkNickname } = useMutation({
+    mutationFn: getCheckNickname,
+    onSuccess: () => {
+      setNicknameStatus("PASS");
+    },
+    onError: (error) => {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status === 409) {
+        setNicknameStatus("DUPLICATE");
+      }
+    },
+  });
+
   useEffect(() => {
     // 클라이언트 측 형식 체크
     setNicknameStatus(validateNicknameFormat(nickname));
   }, [nickname, setNicknameStatus]);
 
   useEffect(() => {
-    // 형식 맞지 않으면 바로 반환
-    if (validateNicknameFormat(debouncedNickname) !== "VALID_FORMAT") {
+    const formatStatus = validateNicknameFormat(debouncedNickname);
+
+    if (formatStatus !== "VALID_FORMAT") {
+      setNicknameStatus(formatStatus);
       return;
     }
-    // 클린업 함수 (추후에 서버 연동시 abort 컨트롤러로 변경)
-    let timer: number;
 
-    const checkDuplicate = () => {
-      timer = setTimeout(() => {
-        const existingNicknames = ["관리자", "테스트", "게스트"];
-        const isDuplicate = existingNicknames.includes(debouncedNickname);
-
-        if (isDuplicate) {
-          setNicknameStatus("DUPLICATE");
-        } else {
-          setNicknameStatus("PASS");
-        }
-      }, 200);
-    };
-
-    checkDuplicate();
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [debouncedNickname, setNicknameStatus]);
+    // 서버 측 중복 체크
+    checkNickname({ nickname: debouncedNickname });
+  }, [debouncedNickname, setNicknameStatus, checkNickname]);
 
   return (
     <>

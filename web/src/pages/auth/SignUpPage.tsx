@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -218,10 +218,6 @@ export const SignUpPage = () => {
     4: true,
     5: true,
   };
-
-  useEffect(() => {
-    console.log(registerData);
-  }, [registerData]);
 
   // 폼 내용에 맞게 레이아웃 크기 계산 후 적용
   useLayoutEffect(() => {
