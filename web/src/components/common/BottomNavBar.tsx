@@ -1,4 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { useCallback } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import { motion, useAnimation } from "framer-motion";
 
 import { path } from "@/routes/path";
 
@@ -15,6 +19,20 @@ import MyIcon from "@/assets/icons/my.svg?react";
 import MyFocusedIcon from "@/assets/icons/my_focused.svg?react";
 
 export const BottomNavBar = () => {
+  const navigate = useNavigate();
+  const controls = useAnimation();
+
+  const handleClick = useCallback(async () => {
+    await controls.start({
+      y: [0, -10, 0, -5, 0],
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut",
+      },
+    });
+    navigate(path.analyze.base);
+  }, [controls, navigate]);
+
   return (
     <nav
       className="fixed bottom-0 z-50 w-full max-w-lg rounded-t-2xl shadow-[0_-4px_5px_0_rgba(39,61,174,0.1)]"
@@ -35,11 +53,15 @@ export const BottomNavBar = () => {
           FocusedIcon={ContentsFocusedIcon}
         />
 
-        <div className="z-20 translate-y-[-40px] rounded-full shadow-[0_4px_15px_0_rgba(0,89,255,0.3)]">
-          <NavLink to={path.analyze.base}>
-            <AiAnalysisIcon className="h-15 w-15" />
-          </NavLink>
-        </div>
+        <motion.div
+          className="z-20 translate-y-[-40px] rounded-full shadow-[0_4px_15px_0_rgba(0,89,255,0.3)]"
+          animate={controls}
+          onClick={handleClick}
+          role="button"
+          aria-label="AI 분석 이동"
+        >
+          <AiAnalysisIcon className="h-15 w-15" />
+        </motion.div>
 
         <BottomNavBarItem
           to={path.community.feed}
