@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
 
 import { path } from "@/routes/path";
 
@@ -36,17 +37,18 @@ export const useSignUp = () => {
   const [isInputFocus, setIsInputFocus] = useState(false);
   const [direction, setDirection] = useState(0);
 
-  const { data: registerData } = useQuery({
+  const { data: registerData, isLoading: isRegisterLoading } = useQuery({
     queryFn: getAuthRegister,
     queryKey: [QUERY_KEYS.GET_AUTH_REGISTER],
   });
-  const { mutate: register } = useMutation({
+  const { mutate: register, isPending: isRegistering } = useMutation({
     mutationFn: postAuthRegister,
     onSuccess: () => {
       navigate(path.home, { replace: true });
     },
-    onError: () => {
-      alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+    onError: (error) => {
+      const axiosError = error as AxiosError;
+      alert(axiosError.response?.status);
     },
   });
 
@@ -115,6 +117,8 @@ export const useSignUp = () => {
   };
 
   const handleNextStep = () => {
+    if (isRegistering) return;
+
     if (stepState < 5) {
       setDirection(1);
       setStepState((prev) => prev + 1);
@@ -136,6 +140,8 @@ export const useSignUp = () => {
   };
 
   const handleSkip = () => {
+    if (isRegistering) return;
+
     const payload = createRegisterPayload();
     if (payload) {
       register(payload);
@@ -155,6 +161,7 @@ export const useSignUp = () => {
     nicknameStatus,
     setNicknameStatus,
     registerData,
+    isRegisterLoading,
     termsList,
     selectedTerm,
     isAllAgreed,
@@ -165,6 +172,6 @@ export const useSignUp = () => {
     handlePrevStep,
     handleNextStep,
     handleSkip,
-    bottomButtonState,
+    bottomButtonState: bottomButtonState && !isRegistering,
   };
 };

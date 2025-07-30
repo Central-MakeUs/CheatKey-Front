@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useSignUp } from "@/hooks/useSignUp";
 import { cn } from "@/utils/cn";
 
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
@@ -31,6 +32,7 @@ export const SignUpPage = () => {
     nicknameStatus,
     setNicknameStatus,
     registerData,
+    isRegisterLoading,
     termsList,
     selectedTerm,
     isAllAgreed,
@@ -95,6 +97,14 @@ export const SignUpPage = () => {
       />
     ),
   };
+
+  if (isRegisterLoading) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <LoadingSpinner width={32} height={32} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-bg-100 relative flex h-fit w-full flex-1 flex-col">
