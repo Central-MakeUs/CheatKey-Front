@@ -37,7 +37,7 @@ export const BottomNavBar = () => {
         />
 
         <div className="z-20 translate-y-[-40px] rounded-full shadow-[0_4px_15px_0_rgba(0,89,255,0.3)]">
-          <NavLink to={path.home}>
+          <NavLink to={path.analyze.base}>
             <AiAnalysisIcon className="h-15 w-15" />
           </NavLink>
         </div>
