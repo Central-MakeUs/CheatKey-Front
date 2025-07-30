@@ -1,13 +1,10 @@
-import { useEffect, type ChangeEvent } from "react";
+import { type ChangeEvent } from "react";
 
-import { useMutation } from "@tanstack/react-query";
-import type { AxiosError } from "axios";
-
-import { getCheckNickname } from "@/apis/auth/getCheckNickname";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useNicknameValidation } from "@/hooks/useNicknameValidation";
 import type { NicknameStatus } from "@/types/signup/signup.types";
 import { cn } from "@/utils/cn";
-import { validateNicknameFormat } from "@/utils/validateNicknameFormat";
+
+import { NICKNAME_MESSAGES } from "@/constants/signUpConstants";
 
 import CheckOn from "@/assets/icons/check_on.svg?react";
 import CloseButton from "@/assets/icons/close_button.svg?react";
@@ -21,16 +18,6 @@ interface NicknameFormProps {
   setIsInputFocus: (value: boolean) => void;
 }
 
-const NICKNAME_MESSAGES: Record<NicknameStatus, string> = {
-  NORMAL: "이모티콘 및 영어 대문자는 사용할 수 없어요.",
-  TOO_SHORT: "최소 2글자 이상 입력해주세요.",
-  TOO_LONG: "닉네임은 5글자 이하로 입력해주세요.",
-  INVALID_FORMAT: "사용할 수 없는 닉네임이에요.",
-  VALID_FORMAT: "중복 확인 중이에요...",
-  PASS: "사용 가능한 닉네임이에요.",
-  DUPLICATE: "이미 존재하는 닉네임이에요.",
-} as const;
-
 export const NicknameForm = ({
   nickname,
   setNickname,
@@ -39,37 +26,7 @@ export const NicknameForm = ({
   isInputFocus,
   setIsInputFocus,
 }: NicknameFormProps) => {
-  const debouncedNickname = useDebounce(nickname, 500);
-
-  const { mutate: checkNickname } = useMutation({
-    mutationFn: getCheckNickname,
-    onSuccess: () => {
-      setNicknameStatus("PASS");
-    },
-    onError: (error) => {
-      const axiosError = error as AxiosError;
-      if (axiosError.response?.status === 409) {
-        setNicknameStatus("DUPLICATE");
-      }
-    },
-  });
-
-  useEffect(() => {
-    // 클라이언트 측 형식 체크
-    setNicknameStatus(validateNicknameFormat(nickname));
-  }, [nickname, setNicknameStatus]);
-
-  useEffect(() => {
-    const formatStatus = validateNicknameFormat(debouncedNickname);
-
-    if (formatStatus !== "VALID_FORMAT") {
-      setNicknameStatus(formatStatus);
-      return;
-    }
-
-    // 서버 측 중복 체크
-    checkNickname({ nickname: debouncedNickname });
-  }, [debouncedNickname, setNicknameStatus, checkNickname]);
+  useNicknameValidation({ nickname, setNicknameStatus });
 
   return (
     <>
