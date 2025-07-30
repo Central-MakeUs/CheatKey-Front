@@ -27,6 +27,8 @@ import { NicknameForm } from "@/components/signup/NicknameForm";
 import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
 import { TermForm } from "@/components/signup/TermForm";
 
+import { QUERY_KEYS } from "@/constants/apiConstants";
+
 // 슬라이드 애니메이션 효과 객체
 const variants = {
   enter: (direction: number) => ({
@@ -57,7 +59,7 @@ export const SignUpPage = () => {
 
   const { data: registerData } = useQuery({
     queryFn: getAuthRegister,
-    queryKey: ["register"],
+    queryKey: [QUERY_KEYS.GET_AUTH_REGISTER],
   });
 
   const termsList = registerData?.termsList ?? [];
