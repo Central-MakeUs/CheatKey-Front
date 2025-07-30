@@ -1,5 +1,3 @@
-//리뷰
-
 import { useNavigate } from "react-router-dom";
 
 import type { MyAnalysisItem } from "@/types/my/my.types";

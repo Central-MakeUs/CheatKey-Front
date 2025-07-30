@@ -1,5 +1,3 @@
-//리뷰
-
 import type { AnalysisType } from "@/types/my/my.types";
 
 interface AnalysisTypeBadgeProps {
