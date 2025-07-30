@@ -51,8 +51,7 @@ export const useSignUp = () => {
       if (axiosError.response?.status === 409) {
         alert("이미 존재하는 회원입니다.");
       } else {
-        alert(axiosError.response?.status);
-        // alert("회원가입에 실패하였습니다.");
+        alert("회원가입에 실패하였습니다.");
       }
     },
   });
