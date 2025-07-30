@@ -33,13 +33,13 @@ export const useAnalyzePage = () => {
   >({
     mutationFn: ({ activeTab, inputValue }) => {
       if (activeTab === "url") {
-        return postAnalyzeURL({ text: inputValue });
+        return postAnalyzeURL({ detectionUrl: inputValue });
       }
-      return postAnalyzeCase({ detectionUrl: inputValue });
+      return postAnalyzeCase({ text: inputValue });
     },
     onSuccess: (data) => {
       const resultId = data.detectionId;
-      navigate(path.analyze.specific.result(resultId));
+      navigate(path.analyze.specific.result(resultId), { state: data });
     },
     onError: (error) => {
       console.error("분석 실패:", error);

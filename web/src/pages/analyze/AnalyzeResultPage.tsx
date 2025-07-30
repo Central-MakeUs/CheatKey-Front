@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
 import { cn } from "@/utils/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
@@ -14,11 +15,12 @@ import Close from "@/assets/icons/close.svg?react";
 
 export const AnalyzeResultPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // 이 부분은 이제 서버로부터 받아오는 값으로 바뀔 예정입니당
-  // TODO: @Ki-Tak
-  const category = ANALYSIS_CATEGORY.INVESTMENT;
-  const status = ANALYSIS_STATUS.WARNING;
+  const responseData = location.state as AnalyzeResponse | null;
+
+  const category = responseData?.group ?? ANALYSIS_CATEGORY.URL;
+  const status = responseData?.status ?? ANALYSIS_STATUS.SAFE;
 
   const currentData = ALL_ANALYSIS_DATA[category][status];
   const { style } = currentData;

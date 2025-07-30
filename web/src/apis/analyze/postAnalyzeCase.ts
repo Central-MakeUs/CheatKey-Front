@@ -4,12 +4,12 @@ import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types"
 import { API_DOMAINS } from "@/constants/apiConstants";
 
 export const postAnalyzeCase = async ({
-  detectionUrl,
+  text,
 }: {
-  detectionUrl: string;
+  text: string;
 }): Promise<AnalyzeResponse> => {
   const response = await authAPI.post(API_DOMAINS.POST_ANALYZE_CASE, {
-    detectionUrl,
+    text,
   });
   return response.data;
 };
