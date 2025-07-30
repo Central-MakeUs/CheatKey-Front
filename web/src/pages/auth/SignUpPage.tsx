@@ -1,11 +1,13 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "motion/react";
 
 import { path } from "@/routes/path";
 
+import { getAuthRegister } from "@/apis/auth/getAuthRegister.api";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
 import type {
   NicknameStatus,
@@ -51,15 +53,25 @@ export const SignUpPage = () => {
   const navigate = useNavigate();
   const [stepState, setStepState] = useState<number>(0);
   const [signupFormData, setSignupFormData] = useState<SignUpForm>({
-    term: false,
-    privacy: false,
-    marketing: false,
+    agreedTerms: [],
     nickname: "",
-    age: null,
-    gender: null,
-    method: [],
-    item: [],
+    ageCode: null,
+    genderCode: null,
+    tradeMethodCodes: [],
+    tradeItemCodes: [],
   });
+
+  const { data: registerData } = useQuery({
+    queryFn: getAuthRegister,
+    queryKey: ["register"],
+  });
+
+  const termsList = registerData?.termsList ?? [];
+  const ageCodeList = registerData?.ageCodeList ?? [];
+  const genderCodeList = registerData?.genderCodeList ?? [];
+  const tradeMethodCodeList = registerData?.tradeMethodCodeList ?? [];
+  const tradeItemCodeList = registerData?.tradeItemCodeList ?? [];
+
   // 선택된 약관 상태
   const [selectedTerm, setSelectedTerm] = useState<TermContent | null>(null);
 
@@ -79,9 +91,14 @@ export const SignUpPage = () => {
   // 키보드 높이 측정 훅
   const keyboardHeight = useKeyboardHeight();
 
+  const requiredTermIds = termsList
+    .filter((term) => term.required)
+    .map((term) => term.id);
+
   // 전체 동의 여부
-  const isAllAgreed =
-    signupFormData.term && signupFormData.privacy && signupFormData.marketing;
+  const isAllAgreed = termsList.every((term) =>
+    signupFormData.agreedTerms.includes(term.id),
+  );
 
   // 전체 동의 클릭 핸들러
   const handleToggleAllAgreements = () => {
@@ -212,6 +229,10 @@ export const SignUpPage = () => {
     4: true,
     5: true,
   };
+
+  useEffect(() => {
+    console.log(registerData);
+  }, [registerData]);
 
   // 폼 내용에 맞게 레이아웃 크기 계산 후 적용
   useLayoutEffect(() => {
