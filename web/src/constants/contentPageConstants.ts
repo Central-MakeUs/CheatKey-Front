@@ -18,7 +18,7 @@ export const AUTHOR_INFO_CONFIG: {
     withOriginal: {
       icon: report,
       altText: "참고자료 아이콘",
-      name: "참고자료",
+      name: "원문 참조",
       textColor: "text-gray-system-200",
     },
     withoutOriginal: {
