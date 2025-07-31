@@ -1,5 +1,3 @@
-//리뷰
-
 import type { AnalysisLevel } from "@/types/my/my.types";
 import { cn } from "@/utils/cn";
 

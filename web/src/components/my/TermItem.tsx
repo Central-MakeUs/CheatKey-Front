@@ -1,5 +1,3 @@
-//리뷰
-
 interface TermItemProps {
   title: string;
   content: string;
