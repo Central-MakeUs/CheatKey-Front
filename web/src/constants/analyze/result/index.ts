@@ -51,23 +51,20 @@ const createAnalysisData = (
 
 export const ALL_ANALYSIS_DATA: AllAnalysisData = {
   [ANALYSIS_CATEGORY.URL]: {
-    [ANALYSIS_STATUS.SAFE]: createAnalysisData("URL_ANALYSIS", "SAFE"),
-    [ANALYSIS_STATUS.WARNING]: createAnalysisData("URL_ANALYSIS", "WARNING"),
-    [ANALYSIS_STATUS.DANGER]: createAnalysisData("URL_ANALYSIS", "DANGER"),
+    [ANALYSIS_STATUS.SAFE]: createAnalysisData("URL", "SAFE"),
+    [ANALYSIS_STATUS.WARNING]: createAnalysisData("URL", "WARNING"),
+    [ANALYSIS_STATUS.DANGER]: createAnalysisData("URL", "DANGER"),
   },
   // 현재 서버에서 URL과 피싱 사례 분석을 같은 값을 주고 있어서 겹치는 오류가 나서 주석 처리하였습니다.
-  /*[ANALYSIS_CATEGORY.FISHING]: {
-    [ANALYSIS_STATUS.SAFE]: createAnalysisData("FISHING_FRAUD", "SAFE"),
-    [ANALYSIS_STATUS.WARNING]: createAnalysisData("FISHING_FRAUD", "WARNING"),
-    [ANALYSIS_STATUS.DANGER]: createAnalysisData("FISHING_FRAUD", "DANGER"),
+  /*[ANALYSIS_CATEGORY.PHISHING]: {
+    [ANALYSIS_STATUS.SAFE]: createAnalysisData("PHISHING", "SAFE"),
+    [ANALYSIS_STATUS.WARNING]: createAnalysisData("PHISHING", "WARNING"),
+    [ANALYSIS_STATUS.DANGER]: createAnalysisData("PHISHING", "DANGER"),
   },*/
   [ANALYSIS_CATEGORY.INVESTMENT]: {
-    [ANALYSIS_STATUS.SAFE]: createAnalysisData("INVESTMENT_FRAUD", "SAFE"),
-    [ANALYSIS_STATUS.WARNING]: createAnalysisData(
-      "INVESTMENT_FRAUD",
-      "WARNING",
-    ),
-    [ANALYSIS_STATUS.DANGER]: createAnalysisData("INVESTMENT_FRAUD", "DANGER"),
+    [ANALYSIS_STATUS.SAFE]: createAnalysisData("INVESTMENT", "SAFE"),
+    [ANALYSIS_STATUS.WARNING]: createAnalysisData("INVESTMENT", "WARNING"),
+    [ANALYSIS_STATUS.DANGER]: createAnalysisData("INVESTMENT", "DANGER"),
   },
 };
 
