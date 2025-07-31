@@ -55,7 +55,7 @@ const INVESTMENT_DETAILS_TEXT = [
 ];
 
 export const DETAIL_CARD_CONTENT = {
-  URL_ANALYSIS: {
+  URL: {
     TEXTS: COMMON_URL_FISHING_DETAILS_TEXT,
     IMAGES: {
       SAFE: [safeFishing1, safeFishing2],
@@ -63,7 +63,7 @@ export const DETAIL_CARD_CONTENT = {
       DANGER: [dangerFishing1, dangerFishing2],
     },
   },
-  FISHING_FRAUD: {
+  PHISHING: {
     TEXTS: COMMON_URL_FISHING_DETAILS_TEXT,
     IMAGES: {
       SAFE: [safeFishing1, safeFishing2],
@@ -71,7 +71,7 @@ export const DETAIL_CARD_CONTENT = {
       DANGER: [dangerFishing1, dangerFishing2],
     },
   },
-  INVESTMENT_FRAUD: {
+  INVESTMENT: {
     TEXTS: INVESTMENT_DETAILS_TEXT,
     IMAGES: {
       SAFE: [safeInvest1, safeInvest2, safeInvest3],
