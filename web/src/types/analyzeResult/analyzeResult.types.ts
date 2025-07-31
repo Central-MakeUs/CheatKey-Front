@@ -1,5 +1,11 @@
 import { ANALYSIS_STATUS, ANALYSIS_CATEGORY } from "@/constants/analyze/result";
 
+export interface AnalyzeResponse {
+  status: (typeof ANALYSIS_STATUS)[keyof typeof ANALYSIS_STATUS];
+  group: (typeof ANALYSIS_CATEGORY)[keyof typeof ANALYSIS_CATEGORY];
+  detectionId: number;
+}
+
 export type AnalysisCategory =
   (typeof ANALYSIS_CATEGORY)[keyof typeof ANALYSIS_CATEGORY];
 

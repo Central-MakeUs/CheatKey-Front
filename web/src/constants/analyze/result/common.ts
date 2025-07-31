@@ -7,9 +7,9 @@ export const ANALYSIS_STATUS = {
 } as const;
 
 export const ANALYSIS_CATEGORY = {
-  URL: "URL_ANALYSIS",
-  FISHING: "FISHING_FRAUD",
-  INVESTMENT: "INVESTMENT_FRAUD",
+  URL: "PHISHING",
+  FISHING: "PHISHING",
+  INVESTMENT: "NORMAL",
 } as const;
 
 export const STATUS_TEXT_MAP = {

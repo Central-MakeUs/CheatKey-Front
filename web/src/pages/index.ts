@@ -5,7 +5,6 @@ export { CommunityWrite } from "./communityWrite/CommunityWrite";
 export { LoginPage } from "./auth/LoginPage";
 export { SignUpPage } from "./auth/SignUpPage";
 export { SearchPage } from "./searchPage/SearchPage";
-export { AnalyzeLoadingPage } from "./analyze/AnalyzeLoadingPage";
 export { AnalyzePage } from "./analyze/AnalyzePage";
 export { AnalyzeResultPage } from "./analyze/AnalyzeResultPage";
 export { ContentListPage } from "./content/ContentListPage";
