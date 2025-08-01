@@ -36,19 +36,17 @@ export const CommentItem = ({ comment }: { comment: Comment }) => {
         <p className="body-5-regular text-gray-system-500">{comment.content}</p>
       </div>
 
-      <div className="px-5">
-        {comment.children?.length > 0 && (
-          <div className="px-5">
-            {comment.children.map((reply, index) => (
-              <ReplyCommentItem
-                key={reply.id}
-                reply={reply}
-                isFirst={index === 0}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+      {comment.children?.length > 0 && (
+        <div className="px-5">
+          {comment.children.map((reply, index) => (
+            <ReplyCommentItem
+              key={reply.id}
+              reply={reply}
+              isFirst={index === 0}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
