@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import type { CommunityPost } from "@/types/communityDetail/communityDetail.types";
 import { cn } from "@/utils/cn";
 
 import { DeleteModal } from "@/components/common/DeleteModal";
@@ -10,17 +11,6 @@ import CommentIcon from "@/assets/icons/comment.svg?react";
 import RemoveIcon from "@/assets/icons/remove.svg?react";
 import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
 
-//TODO: @tifsy 커뮤니티 타입과 겹치는 부분이 많아 정리
-interface MyPostsPreviewProps {
-  id: number;
-  nickname: string;
-  date: string;
-  title: string;
-  content: string;
-  commentCount: number;
-  images?: string[];
-}
-
 export const MyPostsPreview = ({
   id,
   nickname,
@@ -29,7 +19,7 @@ export const MyPostsPreview = ({
   content,
   commentCount,
   images = [],
-}: MyPostsPreviewProps) => {
+}: CommunityPost) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleRemoveClick = () => {
