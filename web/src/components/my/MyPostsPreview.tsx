@@ -3,13 +3,12 @@ import { useState } from "react";
 import { cn } from "@/utils/cn";
 
 import { DeleteModal } from "@/components/common/DeleteModal";
+import { NameTag } from "@/components/common/NameTag";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
 import RemoveIcon from "@/assets/icons/remove.svg?react";
 import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
-
-import { NameTag } from "../common/NameTag";
 
 //TODO: @tifsy 커뮤니티 타입과 겹치는 부분이 많아 정리
 interface MyPostsPreviewProps {
