@@ -1,4 +1,4 @@
-import type { Comment } from "@/types/communityDetail/communityDetail.types";
+import type { Comment } from "@/types/community/community.types";
 
 import { NoResult } from "@/components/common/NoResult";
 import { CommentItem } from "@/components/communityDetail/CommentItem";

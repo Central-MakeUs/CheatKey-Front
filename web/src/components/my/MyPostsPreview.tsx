@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { CommunityPost } from "@/types/communityDetail/communityDetail.types";
+import type { CommunityPost } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
 
 import { DeleteModal } from "@/components/common/DeleteModal";

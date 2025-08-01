@@ -1,4 +1,4 @@
-import type { Comment } from "@/types/communityDetail/communityDetail.types";
+import type { Comment } from "@/types/community/community.types";
 
 import { NameTag } from "@/components/common/NameTag";
 

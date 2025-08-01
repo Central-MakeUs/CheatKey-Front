@@ -1,4 +1,4 @@
-import type { Comment } from "@/types/communityDetail/communityDetail.types";
+import type { Comment } from "@/types/community/community.types";
 
 export const mockCommunityDetailCommentsData: Comment[] = [
   {

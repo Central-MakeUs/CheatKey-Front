@@ -1,5 +1,5 @@
 import { useImageCloseUp } from "@/hooks/useImageCloseUp";
-import type { CommunityPost } from "@/types/communityDetail/communityDetail.types";
+import type { CommunityPost } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
 
 import { PostMenuButton } from "@/components/common/PostMenuButton";
