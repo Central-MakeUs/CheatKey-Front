@@ -1,5 +1,3 @@
-//리뷰
-
 import { useNavigate } from "react-router-dom";
 
 import { AppHeader } from "@/components/common/AppHeader";

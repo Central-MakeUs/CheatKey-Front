@@ -1,37 +1,35 @@
-import { useState } from "react";
+import { useAnalyzePage } from "@/hooks/useAnalyzePage";
 
-import { useNavigate } from "react-router-dom";
-
-import {
-  TabSwitcher,
-  type TabCategory,
-} from "@/components/analyze/TabSwitcher";
+import { AnalyzeLoading } from "@/components/analyze/AnalyzeLoading";
+import { TabSwitcher } from "@/components/analyze/TabSwitcher";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { FormTextarea } from "@/components/common/FormTextarea";
 
-import { analysisTabsData } from "@/constants/analyze/page/analyzePageConstants";
-
 import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 
 export const AnalyzePage = () => {
-  const navigate = useNavigate();
+  const {
+    activeTab,
+    inputValue,
+    setInputValue,
+    currentTabInfo,
+    controlledPanelId,
+    isAnalyzePending,
+    isAnalyzeSuccess,
+    isButtonEnabled,
+    handleNavigateBack,
+    handleTabChange,
+    handleSubmit,
+  } = useAnalyzePage();
 
-  const [activeTab, setActiveTab] = useState<TabCategory>("url");
-  const [inputValue, setInputValue] = useState<string>("");
-
-  const currentTabInfo = analysisTabsData.find((tab) => tab.id === activeTab)!;
-
-  const controlledPanelId = "analysis-panel";
-
-  const handleTabChange = (tab: TabCategory) => {
-    setActiveTab(tab);
-    setInputValue("");
-  };
+  if (isAnalyzePending || isAnalyzeSuccess) {
+    return <AnalyzeLoading />;
+  }
 
   return (
     <main className="relative flex h-full w-full flex-1 flex-col items-center bg-linear-[180deg,rgba(0,40,255,0.2)_0%,rgba(34,68,109,0.1)_30%,rgba(34,68,109,0.1)_78.11%,rgba(23,40,134,0.2)_100%] px-5">
-      <AppHeader title="분석하기" onPrev={() => navigate(-1)} />
+      <AppHeader title="분석하기" onPrev={handleNavigateBack} />
       <div className="mt-header flex w-full justify-center pt-3">
         <TabSwitcher
           activeTab={activeTab}
@@ -43,11 +41,7 @@ export const AnalyzePage = () => {
         id={controlledPanelId}
         role="tabpanel"
         className="mt-14 flex w-full flex-col rounded-[1.25rem] border border-[#5C69AE]/20 bg-linear-[158deg,rgba(86,100,179,0.3)_2.67%,rgba(46,54,99,0.12)_104.73%] px-[1.375rem] py-[2.375rem]"
-        onSubmit={(e) => {
-          e.preventDefault();
-          // TODO: @Ki-Tak 추후 연동할 때 변경
-          console.log(`${currentTabInfo.id} 분석하기`);
-        }}
+        onSubmit={handleSubmit}
       >
         <h2 className="head-3-bold text-base-0 w-full text-center">
           {currentTabInfo.mainHeading}
@@ -69,7 +63,7 @@ export const AnalyzePage = () => {
         <BottomFullButton
           type="submit"
           content="분석하기"
-          state={inputValue !== ""}
+          state={isButtonEnabled}
           className="mt-[3.125rem]"
         />
       </form>

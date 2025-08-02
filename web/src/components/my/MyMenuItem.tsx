@@ -40,7 +40,7 @@ export const MyMenuItem = ({
         <span className="text-gray-system-500 body-2-medium">{label}</span>
       </div>
       {type === "link" ? (
-        <ArrowRightIcon />
+        <ArrowRightIcon className="text-gray-system-700 h-5 w-5" />
       ) : (
         <Toggle
           isToggled={isToggled ?? false}

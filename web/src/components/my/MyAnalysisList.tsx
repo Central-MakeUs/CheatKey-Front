@@ -1,9 +1,8 @@
-//리뷰
-
 import { useNavigate } from "react-router-dom";
 
 import type { MyAnalysisItem } from "@/types/my/my.types";
 
+import { NoResult } from "@/components/common/NoResult";
 import { AnalysisLevelBadge } from "@/components/my/AnalysisLevelBadge";
 import { AnalysisTypeBadge } from "@/components/my/AnalysisTypeBadge";
 
@@ -16,7 +15,9 @@ interface MyAnalysisListProps {
 export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
   const navigate = useNavigate();
 
-  return (
+  return items.length === 0 ? (
+    <NoResult text="분석 결과가 존재하지 않아요!" type="ai" />
+  ) : (
     <>
       {items.map((item) => {
         return (
@@ -26,7 +27,7 @@ export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
             key={item.id}
             onClick={() => navigate("/home")}
             className={
-              "active:bg-gray-system-800 w-full px-5 py-5 text-left transition-colors duration-200"
+              "active:bg-gray-system-800 flex w-full flex-col px-5 py-5 text-left transition-colors duration-200"
             }
           >
             <div className="mb-[0.9375rem] flex items-center justify-between">
@@ -35,13 +36,11 @@ export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
                 <AnalysisTypeBadge type={item.analysisType} />
               </div>
 
-              <ArrowRightIcon className="text-gray-system-700" />
+              <ArrowRightIcon className="text-gray-system-700 h-5 w-5" />
             </div>
-
             <p className="text-base-0 body-1-bold mb-[0.3125rem] truncate">
               {item.content}
             </p>
-
             <p className="text-gray-system-500 body-4-medium flex gap-[7px]">
               판독 날짜
               <span className="text-gray-system-600 body-5-regular">

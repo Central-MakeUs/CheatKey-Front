@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import { path } from "@/routes/path";
@@ -15,6 +17,8 @@ import WriteIcon from "@/assets/icons/write.svg?react";
 
 export const MyPage = () => {
   const navigate = useNavigate();
+
+  const [isToggleOn, setIsToggleOn] = useState(false);
 
   return (
     <>
@@ -51,6 +55,8 @@ export const MyPage = () => {
             type="toggle"
             className="active:bg-gray-system-800"
             aria-label="알림 설정"
+            isToggled={isToggleOn}
+            onToggle={() => setIsToggleOn((prev) => !prev)}
           />
 
           <MyMenuItem

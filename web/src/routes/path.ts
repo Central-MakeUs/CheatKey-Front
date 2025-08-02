@@ -17,7 +17,6 @@ export const path = {
   analyze: {
     base: "/analyze",
     specific: {
-      loading: "loading",
       result: (analyzeId: string | number) => `result/${analyzeId}`,
     },
   },

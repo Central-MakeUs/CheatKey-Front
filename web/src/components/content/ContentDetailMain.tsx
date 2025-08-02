@@ -1,3 +1,5 @@
+import { path } from "@/routes/path";
+
 import { useFontSize } from "@/hooks/useFontSize";
 import type {
   ContentCategory,
@@ -6,10 +8,14 @@ import type {
 } from "@/types/content/content.types";
 import { cn } from "@/utils/cn";
 
+import { ContentRedirectBanner } from "@/components/content/ContentRedirectBanner";
+
 import {
   DETAIL_MAIN_STYLE_CONFIG,
   FONT_SIZE_CONFIG,
 } from "@/constants/contentPageConstants";
+
+import safe from "@/assets/images/result/safe.svg";
 
 interface ContentDetailMainProps {
   category: ContentCategory;
@@ -68,6 +74,12 @@ export const ContentDetailMain = ({
           </section>
         ))}
       </div>
+      <ContentRedirectBanner
+        image={safe}
+        title="의심되는 URL, 텍스트가 있나요?"
+        content="AI로 5초 안에 분석하러 가기"
+        href={path.analyze.base}
+      />
     </main>
   );
 };
