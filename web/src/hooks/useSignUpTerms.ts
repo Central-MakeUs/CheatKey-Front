@@ -53,7 +53,7 @@ export const useSignUpTerms = ({
   };
 
   const handleOpenTermDetail = (termId: number) => {
-    const term = termsList.find((t) => t.id === termId);
+    const term = termsList.find((term) => term.id === termId);
     if (term) {
       setSelectedTerm({ title: term.title, content: term.contents });
     }
