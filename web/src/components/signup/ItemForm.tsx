@@ -21,14 +21,18 @@ export const ItemForm = ({
   };
   return (
     <>
-      <h1 className="head-3-bold text-base-0">
+      <h1 id="item-form-title" className="head-3-bold text-base-0">
         자주 거래하는 품목을 알려주세요.
       </h1>
       <h2 className="body-5-regular text-gray-system-600 pt-2.5">
         관심사를 참고하여 사기 예방법을 알려드릴게요.
       </h2>
 
-      <div className="grid grid-cols-3 grid-rows-3 gap-3 pt-[3.25rem]">
+      <div
+        role="group"
+        aria-labelledby="item-form-title"
+        className="grid grid-cols-3 grid-rows-3 gap-3 pt-[3.25rem]"
+      >
         {itemOptions.map((option) => (
           <ItemSelect
             key={option.code}
@@ -56,6 +60,7 @@ const ItemSelect = ({ itemOption, isSelected, onSelect }: ItemSelectProps) => {
   return (
     <button
       type="button"
+      aria-pressed={isSelected}
       onClick={() => onSelect(itemOption.code)}
       className={cn(
         "body-2-medium flex aspect-square flex-col items-center justify-center gap-2 rounded-xl",
@@ -74,7 +79,11 @@ const ItemSelect = ({ itemOption, isSelected, onSelect }: ItemSelectProps) => {
           className="h-[3.375rem] w-[3.375rem]"
         />
       ) : (
-        <div className="bg-base-0 h-[3.375rem] w-[3.375rem]" />
+        <div
+          role="img"
+          aria-label={`${itemOption.name} 아이콘`}
+          className="bg-base-0 h-[3.375rem] w-[3.375rem]"
+        />
       )}
       <p>{itemOption.name}</p>
     </button>
