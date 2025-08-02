@@ -1,15 +1,17 @@
-import type { Age } from "@/types/signup/signup.types";
-
 import { SelectBox } from "@/components/common/SelectBox";
 
-const AGE_OPTIONS: Age[] = ["10~20대", "30~40대", "50~60대", "60대 이상"];
-
-interface AgeFormProps {
-  age: Age;
-  setAge: (value: Age) => void;
+interface AgeOption {
+  code: string;
+  name: string;
 }
 
-export const AgeForm = ({ age, setAge }: AgeFormProps) => {
+interface AgeFormProps {
+  ageCode: string | null;
+  setAgeCode: (value: string) => void;
+  ageOptions: AgeOption[];
+}
+
+export const AgeForm = ({ ageCode, setAgeCode, ageOptions }: AgeFormProps) => {
   return (
     <>
       <h1 id="age-group-label" className="head-3-bold text-base-0">
@@ -24,12 +26,12 @@ export const AgeForm = ({ age, setAge }: AgeFormProps) => {
         aria-labelledby="age-group-label"
         className="flex flex-col gap-3 pt-[2.875rem]"
       >
-        {AGE_OPTIONS.map((option) => (
+        {ageOptions.map((option) => (
           <AgeSelect
-            key={option}
+            key={option.code}
             ageOption={option}
-            selectedAge={age}
-            onSelect={setAge}
+            selectedAgeCode={ageCode}
+            onSelect={setAgeCode}
           />
         ))}
       </div>
@@ -38,21 +40,25 @@ export const AgeForm = ({ age, setAge }: AgeFormProps) => {
 };
 
 interface AgeSelectProps {
-  ageOption: Age;
-  selectedAge: Age | null;
-  onSelect: (value: Age) => void;
+  ageOption: AgeOption;
+  selectedAgeCode: string | null;
+  onSelect: (value: string) => void;
 }
 
-const AgeSelect = ({ ageOption, selectedAge, onSelect }: AgeSelectProps) => {
-  const isSelected = ageOption === selectedAge;
+const AgeSelect = ({
+  ageOption,
+  selectedAgeCode,
+  onSelect,
+}: AgeSelectProps) => {
+  const isSelected = ageOption.code === selectedAgeCode;
 
   return (
     <>
       <SelectBox
         type="onboarding"
-        label={ageOption}
+        label={ageOption.name}
         isSelected={isSelected}
-        onClick={() => onSelect(ageOption)}
+        onClick={() => onSelect(ageOption.code)}
       />
     </>
   );

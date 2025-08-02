@@ -1,29 +1,23 @@
-import type { TradeMethod } from "@/types/signup/signup.types";
+import type { TradeMethodCode } from "@/types/signup/signup.types";
 
 import { SelectBox } from "@/components/common/SelectBox";
 
-const TRADE_METHOD_OPTIONS: TradeMethod[] = [
-  "SNS 거래",
-  "중고거래사이트",
-  "블로그 거래",
-  "중고거래 앱",
-  "기타",
-];
-
 interface MethodFormProps {
-  methods: TradeMethod[];
-  setMethods: (value: TradeMethod[]) => void;
+  selectedMethods: string[];
+  setMethods: (value: string[]) => void;
+  methodOptions: TradeMethodCode[];
 }
 
-export const MethodForm = ({ methods, setMethods }: MethodFormProps) => {
-  const handleSelect = (selectedOption: TradeMethod) => {
-    // 이미 선택된 항목인지 확인
-    if (methods.includes(selectedOption)) {
-      // 이미 있다면, 해당 항목을 제외한 새 배열을 만듦 (선택 해제)
-      setMethods(methods.filter((method) => method !== selectedOption));
+export const MethodForm = ({
+  selectedMethods,
+  setMethods,
+  methodOptions,
+}: MethodFormProps) => {
+  const handleSelect = (selectedOptionCode: string) => {
+    if (selectedMethods.includes(selectedOptionCode)) {
+      setMethods(selectedMethods.filter((code) => code !== selectedOptionCode));
     } else {
-      // 없다면, 기존 배열에 새 항목을 추가 (선택)
-      setMethods([...methods, selectedOption]);
+      setMethods([...selectedMethods, selectedOptionCode]);
     }
   };
 
@@ -37,11 +31,11 @@ export const MethodForm = ({ methods, setMethods }: MethodFormProps) => {
       </h2>
 
       <div className="flex flex-col gap-3 pt-[2.875rem]">
-        {TRADE_METHOD_OPTIONS.map((option) => (
+        {methodOptions.map((option) => (
           <MethodSelect
-            key={option}
+            key={option.code}
             methodOption={option}
-            isSelected={methods.includes(option)}
+            isSelected={selectedMethods.includes(option.code)}
             onSelect={handleSelect}
           />
         ))}
@@ -51,9 +45,9 @@ export const MethodForm = ({ methods, setMethods }: MethodFormProps) => {
 };
 
 interface MethodSelectProps {
-  methodOption: TradeMethod;
+  methodOption: TradeMethodCode;
   isSelected: boolean;
-  onSelect: (value: TradeMethod) => void;
+  onSelect: (value: string) => void;
 }
 
 const MethodSelect = ({
@@ -64,9 +58,9 @@ const MethodSelect = ({
   return (
     <SelectBox
       type="onboarding"
-      label={methodOption}
+      label={methodOption.name}
       isSelected={isSelected}
-      onClick={() => onSelect(methodOption)}
+      onClick={() => onSelect(methodOption.code)}
     />
   );
 };
