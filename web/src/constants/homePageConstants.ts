@@ -3,7 +3,7 @@ import type { HomeBannerData } from "@/types/home/home.types";
 import ai_banner from "@/assets/icons/ai_banner.svg";
 import article_banner from "@/assets/icons/article_banner.svg";
 
-export const homeBannerData: HomeBannerData[] = [
+export const HOME_BANNER_DATA: HomeBannerData[] = [
   {
     title: "커팅이랑 사기뉴스 보기",
     content: "최근 사기 방식을 알려줄게요",
@@ -17,3 +17,9 @@ export const homeBannerData: HomeBannerData[] = [
     bannerId: 2,
   },
 ];
+export const LEVEL_DATA_MAP = new Map<number, { name: string }>([
+  [1, { name: "LV.1 탐지 훈련중" }],
+  [2, { name: "LV.2 정통 탐지견" }],
+  [3, { name: "LV.3 캡틴십 탐정" }],
+  [4, { name: "LV.4 커팅의 제왕" }],
+]);

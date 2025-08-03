@@ -9,8 +9,10 @@ import { HomeHeader } from "@/components/home/HomeHeader";
 import { HomeTrendingPost } from "@/components/home/HomeTrendingPost";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
-
-import { homeBannerData } from "@/mocks/mockHomeData";
+import {
+  HOME_BANNER_DATA,
+  LEVEL_DATA_MAP,
+} from "@/constants/homePageConstants";
 
 export const Home = () => {
   const { data: dashboardData } = useQuery({
@@ -23,6 +25,10 @@ export const Home = () => {
   }
 
   const { userInfo, popularPosts } = dashboardData;
+
+  const levelInfo = LEVEL_DATA_MAP.get(userInfo.level);
+
+  const levelName = levelInfo?.name ?? `LV.${userInfo.level} 측정 불가`;
   return (
     <main className="flex flex-1 flex-col bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
       {/* 로고와 알림 */}
@@ -39,7 +45,7 @@ export const Home = () => {
           className="border-primary-600/40 h-[8.125rem] w-[8.125rem] rounded-full border-[0.5px]"
         />
         <div className="flex flex-col">
-          <NameTag type="home" name="LV.1 탐지 훈련" />
+          <NameTag type="home" name={levelName} />
           <h1 className="head-3-bold text-base-0 mt-2.5 truncate">
             {userInfo.nickname}
             <span className="head-4-semibold text-gray-system-100 ml-0.5">
@@ -53,7 +59,7 @@ export const Home = () => {
       </div>
       {/* 배너 영역 */}
       <section className="border-b-bg-50 mx-5 border-b py-9 pt-7">
-        <HomeBannerList banners={homeBannerData} />
+        <HomeBannerList banners={HOME_BANNER_DATA} />
       </section>
       {/* 인기 게시글 영역 */}
       <section className="mt-[1.375rem] flex w-full flex-col">
