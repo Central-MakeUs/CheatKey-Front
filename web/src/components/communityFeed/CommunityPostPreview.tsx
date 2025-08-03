@@ -1,33 +1,31 @@
+import { useNavigate } from "react-router-dom";
+
+import type { CommunityPost } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
+
+import { NameTag } from "@/components/common/NameTag";
+import { PostMenuButton } from "@/components/common/PostMenuButton";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
-import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.png";
-
-import { NameTag } from "../common/NameTag";
-import { PostMenuButton } from "../common/PostMenuButton";
-
-//TODO: @tifsy 커뮤니티 타입 정리
-interface CommunityPostPreviewProps {
-  nickname: string;
-  date: string;
-  category: string;
-  title: string;
-  content: string;
-  commentCount: number;
-  images?: string[];
-}
+import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
 
 export const CommunityPostPreview = ({
+  id,
   nickname,
   date,
   title,
   content,
   commentCount,
   images = [],
-}: CommunityPostPreviewProps) => {
+}: CommunityPost) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="text-gray-system-600 space-y-2 py-3">
+    <div
+      className="text-gray-system-600 space-y-2 py-3"
+      onClick={() => navigate(`/community/${id}`)}
+    >
       <div className="flex items-start justify-between">
         <div className="flex gap-3">
           {/* TODO: @tifsy 사용자 프로필 사진 불러오기 */}
@@ -36,7 +34,7 @@ export const CommunityPostPreview = ({
             alt="임시 프로필 사진"
             className="h-15 w-15 rounded-full"
           />
-          <div className="flex flex-col gap-y-[10px]">
+          <div className="flex flex-col gap-y-2.5">
             <NameTag name={nickname} type="community_mono" className="h-7" />
             <span className="text-gray-system-600 body-5-regular">{date}</span>
           </div>

@@ -1,26 +1,17 @@
 import { isAxiosError } from "axios";
-import { baseAPI } from "@/apis/axios-instance";
+import { baseAPI } from "@/apis/instance";
+import type {
+  SocialLoginApiRequest,
+  SocialLoginApiResponse,
+} from "@/types/auth.types";
 
 export type SocialType = "kakao" | "apple";
-
-export interface RequestSocialLoginBody {
-  provider: SocialType;
-  idToken: string;
-  accessToken?: string;
-}
-
-export interface SocialLoginResult {
-  userState: "ACTIVE" | "PENDING" | "SUSPENDED";
-  grantType: "Bearer";
-  accessToken: string;
-  refreshToken: string;
-}
 
 export const postSocialLogin = async ({
   provider,
   idToken,
   accessToken,
-}: RequestSocialLoginBody): Promise<SocialLoginResult> => {
+}: SocialLoginApiRequest): Promise<SocialLoginApiResponse> => {
   try {
     const response = await baseAPI.post("/v1/api/auth/login", {
       provider,

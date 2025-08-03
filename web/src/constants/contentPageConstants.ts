@@ -6,7 +6,7 @@ import type {
 } from "@/types/content/content.types";
 
 import report from "@/assets/icons/report.svg";
-import authorProfile from "@/assets/icons/temporary_profile_pic.png";
+import authorProfile from "@/assets/icons/temporary_profile_pic.svg";
 
 /**
  * @description 원본 출처(original) 유무와 카테고리에 따른 저자 정보
@@ -18,7 +18,7 @@ export const AUTHOR_INFO_CONFIG: {
     withOriginal: {
       icon: report,
       altText: "참고자료 아이콘",
-      name: "참고자료",
+      name: "원문 참조",
       textColor: "text-gray-system-200",
     },
     withoutOriginal: {

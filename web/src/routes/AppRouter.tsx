@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import {
   Home,
@@ -8,11 +8,16 @@ import {
   LoginPage,
   SignUpPage,
   SearchPage,
-  AnalyzeLoadingPage,
   AnalyzePage,
   ContentListPage,
   ArticleDetailPage,
   InterviewDetailPage,
+  AnalyzeResultPage,
+  MyPage,
+  MyEditPage,
+  MyPostsPage,
+  MyAnalysisPage,
+  TermsPage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -54,14 +59,6 @@ const AppRouter = createBrowserRouter([
     ],
   },
   {
-    path: path.loading,
-    element: (
-      <Layout>
-        <AnalyzeLoadingPage />
-      </Layout>
-    ),
-  },
-  {
     //TODO: @tifsy 커뮤니티 글 상세보기 path 변경
     path: path.community.detail(":id"),
     element: <CommunityDetail />,
@@ -98,9 +95,49 @@ const AppRouter = createBrowserRouter([
     path: path.analyze.base,
     element: (
       <Layout>
-        <AnalyzePage />
+        <Outlet />
       </Layout>
     ),
+    children: [
+      {
+        path: "",
+        element: <AnalyzePage />,
+      },
+      {
+        path: path.analyze.specific.result(":analyzeId"),
+        element: <AnalyzeResultPage />,
+      },
+    ],
+  },
+  {
+    element: <BottomLayout />,
+    children: [
+      {
+        path: path.my.base,
+        element: <MyPage />,
+      },
+    ],
+  },
+  {
+    path: path.my.base,
+    children: [
+      {
+        path: path.my.edit,
+        element: <MyEditPage />,
+      },
+      {
+        path: path.my.posts,
+        element: <MyPostsPage />,
+      },
+      {
+        path: path.my.analysis,
+        element: <MyAnalysisPage />,
+      },
+      {
+        path: path.my.terms,
+        element: <TermsPage />,
+      },
+    ],
   },
 ]);
 

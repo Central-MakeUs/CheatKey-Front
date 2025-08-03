@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 
-import type { UploadedImage } from "@/types/communityWrite/communityWrite.types";
+import type { UploadedImage } from "@/types/community/community.types";
 
 import { communityWriteSchema } from "@/schemas/communityWriteSchema";
 

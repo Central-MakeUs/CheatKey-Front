@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-import type { UploadedImage } from "@/types/communityWrite/communityWrite.types";
+import type { UploadedImage } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
 
 import AddIcon from "@/assets/icons/add.svg?react";
@@ -66,7 +66,7 @@ export const PostImageUploader = ({
               "bg-gray-system-800 border-gray-system-700 border-[0.5px]",
             )}
           >
-            <AddIcon className="h-6 w-6 rotate-45" />
+            <AddIcon className="text-gray-system-600 h-6 w-6 rotate-45" />
           </button>
         )}
 

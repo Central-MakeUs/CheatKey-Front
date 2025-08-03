@@ -1,3 +1,5 @@
+import { cn } from "@/utils/cn";
+
 import { COMMUNITY_FEED_TABS } from "@/constants/commnityFeedTabs";
 
 interface CommunityFeedTabProps {
@@ -22,11 +24,12 @@ export const CommunityFeedTab = ({
               aria-selected={isActive}
               aria-label={`${tab} 탭`}
               onClick={() => setActiveTab(tab)}
-              className={`h-10 flex-1 ${
+              className={cn(
+                "h-10 flex-1 border-b",
                 isActive
                   ? "text-primary-400 border-primary-400 body-1-bold border-b-[1px]"
-                  : "text-gray-system-600 border-bg-50 body-2-medium border-b-[0.5px]"
-              }`}
+                  : "text-gray-system-600 border-bg-50 body-2-medium border-b-[0.5px]",
+              )}
             >
               {tab}
             </button>

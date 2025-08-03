@@ -5,9 +5,19 @@ export type HomeBannerData = {
   bannerId: number;
 };
 export type HomeTrendingPostData = {
-  image: string;
-  nickname: string;
-  isAuthor: boolean;
+  id: number;
   title: string;
   content: string;
+  authorProfileImageUrl: string;
+  authorNickname: string;
 };
+export interface HomeUserInfo {
+  profileImageUrl: string;
+  level: number;
+  nickname: string;
+  totalVisitCount: number;
+}
+export interface HomeDashboardResponse {
+  userInfo: HomeUserInfo;
+  popularPosts: HomeTrendingPostData[];
+}

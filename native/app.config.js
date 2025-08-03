@@ -75,8 +75,10 @@ module.exports = () => {
           },
         },
       ],
+      "expo-apple-authentication",
       ["expo-secure-store"],
     ],
+
     experiments: {
       typedRoutes: true,
     },

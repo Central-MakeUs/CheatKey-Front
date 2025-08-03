@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import { bridge } from "@/bridge";
+import { useAuthStore } from "@/store/useAuthStore";
 
-import kakaoLogo from "@/assets/logo/logo-kakao.svg";
+import kakaoLogo from "@/assets/logo/logo_kakao.svg";
 
 export const KakaoLogin = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export const KakaoLogin = () => {
       const result = await bridge.socialLogin("kakao");
 
       if (result.success) {
+        useAuthStore.getState().setAccessToken(result.data.accessToken);
         if (result.data.userState === "PENDING") {
           navigate(path.auth.signup);
         } else if (result.data.userState === "ACTIVE") {
@@ -37,12 +39,13 @@ export const KakaoLogin = () => {
     <button
       type="button"
       onClick={handleKakaoLogin}
-      className="flex h-13 w-full items-center justify-center gap-4 rounded-xl bg-[#FEE500] px-3 text-center align-middle"
+      className="flex h-[3.125rem] w-full items-center justify-center gap-[1rem] rounded-xl bg-[#FFE812] px-3 text-center align-middle"
     >
-      <img src={kakaoLogo} className="h-5 w-5" />
-      <span className="font-sans text-base leading-5 text-[#191919]">
-        카카오로 시작하기
+      <img src={kakaoLogo} />
+      <span className="body-4-medium leading-5 text-[#221F1F]">
+        카카오톡으로 시작하기
       </span>
+      <img src={kakaoLogo} className="invisible" />
     </button>
   );
 };
