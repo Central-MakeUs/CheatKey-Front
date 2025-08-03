@@ -25,7 +25,7 @@ export const CommentInput = () => {
         onChange={(e) => setComment(e.target.value)}
         rows={1}
         placeholder="댓글을 작성해주세요."
-        className="body-3-regular text-gray-system-200 placeholder-gray-system-600 bg-bg-50 box-border max-h-[100px] min-h-12 flex-1 resize-none content-center-safe overflow-y-auto rounded-xl px-[10px] py-[8px] leading-[1.4] outline-none"
+        className="body-3-regular text-gray-system-200 placeholder-gray-system-600 bg-bg-50 box-border max-h-[100px] min-h-12 flex-1 resize-none content-center-safe overflow-y-auto rounded-xl px-2.5 py-2 leading-[1.4] outline-none"
       />
 
       <button
