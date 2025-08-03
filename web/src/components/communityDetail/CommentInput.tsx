@@ -18,7 +18,7 @@ export const CommentInput = () => {
   };
 
   return (
-    <div className="bg-bg-100 border-bg-50 fixed right-0 bottom-0 left-0 z-10 flex items-center gap-3 border-t px-5 py-2.5">
+    <form className="bg-bg-100 border-bg-50 fixed right-0 bottom-0 left-0 z-10 flex items-center gap-3 border-t px-5 py-2.5">
       <textarea
         aria-label="댓글을 작성해주세요."
         value={comment}
@@ -29,6 +29,7 @@ export const CommentInput = () => {
       />
 
       <button
+        type="submit"
         onClick={handleSubmit}
         className="disabled:bg-base-50 bg-primary-400 flex h-12 w-12 items-center justify-center rounded-xl"
         disabled={!comment.trim()}
@@ -41,6 +42,6 @@ export const CommentInput = () => {
           )}
         />
       </button>
-    </div>
+    </form>
   );
 };
