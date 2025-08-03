@@ -8,7 +8,7 @@ import TemporaryProfilePic from "@/assets/icons/temporary_profile_pic.svg";
 
 export const CommentItem = ({ comment }: { comment: Comment }) => {
   return (
-    <div>
+    <>
       <div className="active:bg-gray-system-800 px-5 py-3.5">
         <div className="mb-2.5 flex items-center justify-between">
           <div className="flex items-center">
@@ -47,6 +47,6 @@ export const CommentItem = ({ comment }: { comment: Comment }) => {
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
