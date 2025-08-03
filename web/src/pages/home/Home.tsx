@@ -15,6 +15,7 @@ import {
 } from "@/constants/homePageConstants";
 
 export const Home = () => {
+  // TODO: @Ki-Tak 추후, 로딩 및 에러 + staleTime 정해지면 변경해야함
   const { data: dashboardData } = useQuery({
     queryKey: [QUERY_KEYS.HOME_DASHBOARD],
     queryFn: getHomeDashboard,
