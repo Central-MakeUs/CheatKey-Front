@@ -40,6 +40,7 @@ export const CommentInput = () => {
             "h-5 w-6",
             isDisabled ? "text-gray-system-700" : "text-gray-system-50",
           )}
+          aria-hidden="true"
         />
       </button>
     </form>
