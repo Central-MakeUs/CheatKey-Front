@@ -16,12 +16,12 @@ export const CommunityWrite = () => {
   const {
     form,
     updateForm,
-    toast,
-    setToast,
     modal,
     setModal,
     isValid,
     errors,
+    toastMessage,
+    showToast,
   } = useCommunityWriteState();
 
   const handleBack = () => {
@@ -34,33 +34,12 @@ export const CommunityWrite = () => {
     }
   };
 
-  const resetToast = () => {
-    setToast({
-      titleTooShort: false,
-      boardEmpty: false,
-      imageTooLarge: false,
-      contentTooShort: false,
-    });
-  };
-
-  const toastMessage = toast.imageTooLarge
-    ? errors.images || "사진 용량이 너무 커요."
-    : toast.titleTooShort || toast.contentTooShort
-      ? errors.title || errors.content || "최소 10자 이상 작성해주세요."
-      : toast.boardEmpty
-        ? errors.board || "게시판을 선택해주세요."
-        : null;
-
   const handleSubmit = () => {
     if (!isValid) {
-      const newToastState = {
-        titleTooShort: !!errors.title,
-        boardEmpty: !!errors.board,
-        imageTooLarge: !!errors.images,
-        contentTooShort: !!errors.content,
-      };
-      setToast(newToastState);
-
+      const firstError = Object.values(errors)[0];
+      if (firstError) {
+        showToast(firstError);
+      }
       return;
     }
 
@@ -73,19 +52,22 @@ export const CommunityWrite = () => {
       <div className="justify mx-5 mt-[4.6875rem] flex h-full flex-col gap-y-[1.5rem]">
         <TitleForm
           title={form.title}
-          onChange={(v) => updateForm("title", v)}
+          onChange={(value) => updateForm("title", value)}
         />
+
         <PostBoardSelect
           value={form.board}
-          onChange={(v) => updateForm("board", v)}
+          onChange={(value) => updateForm("board", value)}
         />
+
         <CommunityWriteForm
           value={form.content}
-          onChange={(v) => updateForm("content", v)}
+          onChange={(value) => updateForm("content", value)}
         />
+
         <PostImageUploader
           value={form.images}
-          onChange={(v) => updateForm("images", v)}
+          onChange={(value) => updateForm("images", value)}
         />
 
         <BottomFullButton
@@ -94,9 +76,8 @@ export const CommunityWrite = () => {
           content="등록하기"
         />
 
-        {toastMessage && (
-          <Toast text={toastMessage} position="write" onDone={resetToast} />
-        )}
+        {toastMessage && <Toast text={toastMessage} position="write" />}
+
         {modal.leave && (
           <ConfirmModal
             title="작성 중인 글이 저장되지 않았어요."

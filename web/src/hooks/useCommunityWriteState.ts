@@ -17,9 +17,7 @@ export const useCommunityWriteState = () => {
   }, [form]);
 
   const errors = useMemo(() => {
-    if (validationResult.success) {
-      return {};
-    }
+    if (validationResult.success) return {};
 
     const formattedErrors: Record<string, string> = {};
     validationResult.error.issues.forEach((error) => {
@@ -31,12 +29,11 @@ export const useCommunityWriteState = () => {
     return formattedErrors;
   }, [validationResult]);
 
-  const [toast, setToast] = useState({
-    titleTooShort: false,
-    boardEmpty: false,
-    imageTooLarge: false,
-    contentTooShort: false,
-  });
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
 
   const [modal, setModal] = useState({
     leave: false,
@@ -53,10 +50,11 @@ export const useCommunityWriteState = () => {
   return {
     form,
     updateForm,
-    toast,
-    setToast,
     modal,
     setModal,
     errors,
+    isValid: validationResult.success,
+    toastMessage,
+    showToast,
   };
 };
