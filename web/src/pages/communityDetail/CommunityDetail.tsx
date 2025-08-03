@@ -14,7 +14,8 @@ export const CommunityDetail = () => {
 
   const post = mockCommunityFeedPreviews.find((item) => String(item.id) === id);
   if (!post) {
-    return console.log("‼️게시글 없음");
+    console.log("‼️게시글 없음");
+    return null;
   }
   const { title, nickname, date, content, images } = post;
 

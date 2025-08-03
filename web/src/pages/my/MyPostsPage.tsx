@@ -38,6 +38,7 @@ export const MyPostsPage = () => {
                 content={post.content}
                 commentCount={post.commentCount}
                 images={post.images}
+                category={post.category}
               />
             ))}
           </div>
