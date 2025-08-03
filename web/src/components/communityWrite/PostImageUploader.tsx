@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-import type { UploadedImage } from "@/types/communityWrite/communityWrite.types";
+import type { UploadedImage } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
 
 import AddIcon from "@/assets/icons/add.svg?react";

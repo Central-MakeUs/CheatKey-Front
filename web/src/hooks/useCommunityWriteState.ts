@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import type {
   UploadedImage,
   CommunityWriteValidationError,
-} from "@/types/communityWrite/communityWrite.types";
+} from "@/types/community/community.types";
 
 export const useCommunityWriteState = () => {
   const [form, setForm] = useState({
