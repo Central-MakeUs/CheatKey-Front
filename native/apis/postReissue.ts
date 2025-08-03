@@ -16,9 +16,17 @@ export const postReissue = async ({
   refreshToken,
 }: RequestReissueBody): Promise<ReissueResult> => {
   try {
-    const response = await baseAPI.post("/v1/api/auth/refresh", {
-      refreshToken,
-    });
+    const authorizationToken = `Bearer ${refreshToken}`;
+
+    const response = await baseAPI.post(
+      "/v1/api/auth/refresh",
+      { refreshToken },
+      {
+        headers: {
+          Authorization: authorizationToken,
+        },
+      }
+    );
 
     return response.data;
   } catch (error) {
