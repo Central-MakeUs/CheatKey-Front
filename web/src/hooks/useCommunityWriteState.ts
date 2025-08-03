@@ -16,10 +16,8 @@ export const useCommunityWriteState = () => {
     return communityWriteSchema.safeParse(form);
   }, [form]);
 
-  const isValid = validationResult.success;
-
   const errors = useMemo(() => {
-    if (isValid) {
+    if (validationResult.success) {
       return {};
     }
 
@@ -31,7 +29,7 @@ export const useCommunityWriteState = () => {
       }
     });
     return formattedErrors;
-  }, [isValid, validationResult.error]);
+  }, [validationResult]);
 
   const [toast, setToast] = useState({
     titleTooShort: false,
@@ -59,7 +57,6 @@ export const useCommunityWriteState = () => {
     setToast,
     modal,
     setModal,
-    isValid,
     errors,
   };
 };
