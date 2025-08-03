@@ -29,7 +29,7 @@ export const CommentItem = ({ comment }: { comment: Comment }) => {
             </p>
           </div>
 
-          <button className="댓글 삭제">
+          <button className="댓글 삭제" type="button">
             <RemoveIcon />
           </button>
         </div>
