@@ -6,10 +6,7 @@ import { HomeTrendingPost } from "@/components/home/HomeTrendingPost";
 
 import cutting_lv1 from "@/assets/cuttings/cutting_Lv01.svg";
 
-import {
-  homeBannerDummyData,
-  homeTrendingPostDummyData,
-} from "@/mocks/mockHomeData";
+import { homeBannerData } from "@/mocks/mockHomeData";
 
 export const Home = () => {
   return (
@@ -42,7 +39,7 @@ export const Home = () => {
       </div>
       {/* 배너 영역 */}
       <section className="border-b-bg-50 mx-5 border-b py-9 pt-7">
-        <HomeBannerList banners={homeBannerDummyData} />
+        <HomeBannerList banners={homeBannerData} />
       </section>
       {/* 인기 게시글 영역 */}
       <section className="mt-[1.375rem] flex w-full flex-col">
