@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AppHeader } from "@/components/common/AppHeader";
@@ -13,8 +11,6 @@ import { mockCommunityFeedPreviews } from "@/mocks/mockCommunityFeedPreviews";
 export const CommunityDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-
-  const commentInputRef = useRef<HTMLDivElement>(null);
 
   const post = mockCommunityFeedPreviews.find((item) => String(item.id) === id);
   if (!post) {
@@ -41,7 +37,7 @@ export const CommunityDetail = () => {
         <CommentSection comments={commentsForPost} />
       </div>
 
-      <div ref={commentInputRef} className="border-t-1">
+      <div className="border-t-1">
         <CommentInput />
       </div>
     </div>
