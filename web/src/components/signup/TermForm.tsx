@@ -2,20 +2,23 @@ import CheckBoxOff from "@/assets/icons/checkbox_off.svg?react";
 import CheckBoxOn from "@/assets/icons/checkbox_on.svg?react";
 import OpenDetailTerm from "@/assets/icons/prev.svg?react";
 
+interface Term {
+  id: number;
+  title: string;
+  required: boolean;
+}
 interface TermFormProps {
-  agreements: {
-    term: boolean;
-    privacy: boolean;
-    marketing: boolean;
-  };
+  terms: Term[];
+  agreedTerms: number[];
   isAllAgreed: boolean;
   onToggleAll: () => void;
-  onToggle: (name: "term" | "privacy" | "marketing") => void;
-  onClickDetail: (termKey: "term" | "privacy" | "marketing") => void;
+  onToggle: (termId: number) => void;
+  onClickDetail: (termId: number) => void;
 }
 
 export const TermForm = ({
-  agreements,
+  terms,
+  agreedTerms,
   isAllAgreed,
   onToggleAll,
   onToggle,
@@ -49,26 +52,16 @@ export const TermForm = ({
         </p>
       </div>
 
-      {/* 개별 약관 목록 섹션 추후에 서버 연동 후 변경 예정*/}
       <div className="flex flex-col gap-6 px-5 pt-[1.875rem]">
-        <TermCheckBox
-          isCheck={agreements.term}
-          onToggle={() => onToggle("term")}
-          onOpenDetail={() => onClickDetail("term")}
-          label="서비스 이용약관 동의 (필수)"
-        />
-        <TermCheckBox
-          isCheck={agreements.privacy}
-          onToggle={() => onToggle("privacy")}
-          onOpenDetail={() => onClickDetail("privacy")}
-          label="개인정보 수집 및 이용 동의서 (필수)"
-        />
-        <TermCheckBox
-          isCheck={agreements.marketing}
-          onToggle={() => onToggle("marketing")}
-          onOpenDetail={() => onClickDetail("marketing")}
-          label="광고성 정보 내용 수신 동의 (선택)"
-        />
+        {terms.map((term) => (
+          <TermCheckBox
+            key={term.id}
+            isCheck={agreedTerms.includes(term.id)}
+            onToggle={() => onToggle(term.id)}
+            onOpenDetail={() => onClickDetail(term.id)}
+            label={term.title}
+          />
+        ))}
       </div>
     </>
   );

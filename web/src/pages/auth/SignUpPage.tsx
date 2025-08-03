@@ -1,19 +1,9 @@
-import { useLayoutEffect, useRef, useState } from "react";
-
-import { useNavigate } from "react-router-dom";
-
 import { motion, AnimatePresence } from "motion/react";
 
-import { path } from "@/routes/path";
-
-import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
-import type {
-  NicknameStatus,
-  SignUpForm,
-  TermContent,
-} from "@/types/signup/signup.types";
+import { useSignUp } from "@/hooks/useSignUp";
 import { cn } from "@/utils/cn";
 
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
@@ -25,133 +15,37 @@ import { NicknameForm } from "@/components/signup/NicknameForm";
 import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
 import { TermForm } from "@/components/signup/TermForm";
 
-import {
-  TERMS_OF_SERVICE_CONTENT,
-  PRIVACY_POLICY_CONTENT,
-  MARKETING_CONSENT_CONTENT,
-} from "@/constants/termContents";
-
-// 슬라이드 애니메이션 효과 객체
-const variants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? "100%" : "-100%",
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => ({
-    x: direction < 0 ? "100%" : "-100%",
-    opacity: 0,
-  }),
-};
+import { SLIDE_ANIMATION } from "@/constants/animation/slideAnimation";
+import { SIGNUP_HEADER_CONFIG } from "@/constants/signUpConstants";
 
 export const SignUpPage = () => {
-  const navigate = useNavigate();
-  const [stepState, setStepState] = useState<number>(0);
-  const [signupFormData, setSignupFormData] = useState<SignUpForm>({
-    term: false,
-    privacy: false,
-    marketing: false,
-    nickname: "",
-    age: null,
-    gender: null,
-    method: [],
-    item: [],
-  });
-  // 선택된 약관 상태
-  const [selectedTerm, setSelectedTerm] = useState<TermContent | null>(null);
+  const {
+    stepState,
+    direction,
+    contentRef,
+    contentHeight,
+    keyboardHeight,
+    isInputFocus,
+    setIsInputFocus,
+    signupFormData,
+    setSignupFormData,
+    nicknameStatus,
+    setNicknameStatus,
+    registerData,
+    isRegisterLoading,
+    termsList,
+    selectedTerm,
+    isAllAgreed,
+    handleToggleAllAgreements,
+    handleAgreementChange,
+    handleOpenTermDetail,
+    handleCloseBottomSheet,
+    handlePrevStep,
+    handleNextStep,
+    handleSkip,
+    bottomButtonState,
+  } = useSignUp();
 
-  const [nicknameStatus, setNicknameStatus] =
-    useState<NicknameStatus>("NORMAL");
-
-  // 닉네임 폼 포커스 검사 변수
-  const [isInputFocus, setIsInputFocus] = useState<boolean>(false);
-
-  // 폼 내용 높이 계산 하는 변수
-  const [contentHeight, setContentHeight] = useState<number | "auto">("auto");
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  // 폼 좌우 애니메이션 용
-  const [direction, setDirection] = useState(0);
-
-  // 키보드 높이 측정 훅
-  const keyboardHeight = useKeyboardHeight();
-
-  // 전체 동의 여부
-  const isAllAgreed =
-    signupFormData.term && signupFormData.privacy && signupFormData.marketing;
-
-  // 전체 동의 클릭 핸들러
-  const handleToggleAllAgreements = () => {
-    const newCheckState = !isAllAgreed;
-    setSignupFormData((prev) => ({
-      ...prev,
-      term: newCheckState,
-      privacy: newCheckState,
-      marketing: newCheckState,
-    }));
-  };
-
-  // 개별 약관 동의 상태 변경 핸들러
-  const handleAgreementChange = (name: "term" | "privacy" | "marketing") => {
-    setSignupFormData((prev) => ({
-      ...prev,
-      [name]: !prev[name],
-    }));
-  };
-
-  // 약관 상세 보기 클릭 핸들러
-  const handleOpenTermDetail = (termKey: "term" | "privacy" | "marketing") => {
-    switch (termKey) {
-      case "term":
-        setSelectedTerm(TERMS_OF_SERVICE_CONTENT);
-        break;
-      case "privacy":
-        setSelectedTerm(PRIVACY_POLICY_CONTENT);
-        break;
-      case "marketing":
-        setSelectedTerm(MARKETING_CONSENT_CONTENT);
-        break;
-      default:
-        break;
-    }
-  };
-
-  // 약관 상세 보기 취소
-  const handleCloseBottomSheet = () => {
-    setSelectedTerm(null);
-  };
-
-  // 다음 단계로 이동
-  const handleNextStep = () => {
-    setDirection(1);
-    if (stepState < 5) {
-      setStepState((step) => step + 1);
-    } else {
-      // TODO: @Ki-Tak 회원가입으로 변경
-    }
-  };
-
-  // 이전 단계로 이동
-  const handlePrevStep = () => {
-    setDirection(-1);
-    if (stepState > 0) {
-      setStepState((step) => step - 1);
-    } else {
-      navigate(path.auth.login, { replace: true });
-    }
-  };
-
-  // 각 단계별 헤더 설정
-  const HEADER_CONFIG: Record<number, string> = {
-    1: "닉네임 입력",
-    2: "기본 정보 선택",
-    3: "기본 정보 선택",
-    4: "거래 방식",
-    5: "주요 거래 품목",
-  };
   // 각 단계별로 보여줄 컴포넌트를 정의
   const STEP_COMPONENTS: Record<number, React.ReactNode> = {
     1: (
@@ -168,71 +62,58 @@ export const SignUpPage = () => {
     ),
     2: (
       <AgeForm
-        age={signupFormData.age}
-        setAge={(newValue) =>
-          setSignupFormData((prev) => ({ ...prev, age: newValue }))
+        ageCode={signupFormData.ageCode}
+        setAgeCode={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, ageCode: newValue }))
         }
+        ageOptions={registerData?.ageCodeList ?? []}
       />
     ),
     3: (
       <GenderForm
-        gender={signupFormData.gender}
-        setGender={(newValue) =>
-          setSignupFormData((prev) => ({ ...prev, gender: newValue }))
+        genderCode={signupFormData.genderCode}
+        setGenderCode={(newValue) =>
+          setSignupFormData((prev) => ({ ...prev, genderCode: newValue }))
         }
+        genderOptions={registerData?.genderCodeList ?? []}
       />
     ),
     4: (
       <MethodForm
-        methods={signupFormData.method ?? []}
+        selectedMethods={signupFormData.tradeMethodCodes}
         setMethods={(newValue) =>
-          setSignupFormData((prev) => ({ ...prev, method: newValue }))
+          setSignupFormData((prev) => ({ ...prev, tradeMethodCodes: newValue }))
         }
+        methodOptions={registerData?.tradeMethodCodeList ?? []}
       />
     ),
     5: (
       <ItemForm
-        items={signupFormData.item ?? []}
+        selectedItems={signupFormData.tradeItemCodes}
         setItems={(newValue) =>
-          setSignupFormData((prev) => ({
-            ...prev,
-            item: newValue,
-          }))
+          setSignupFormData((prev) => ({ ...prev, tradeItemCodes: newValue }))
         }
+        itemOptions={registerData?.tradeItemCodeList ?? []}
       />
     ),
   };
 
-  // 각 단계별 하단 버튼 설정
-  const BOTTOM_BUTTON_CONFIG: Record<number, boolean> = {
-    0: signupFormData.term && signupFormData.privacy,
-    1: nicknameStatus === "PASS",
-    2: signupFormData.age !== null,
-    3: signupFormData.gender !== null,
-    4: true,
-    5: true,
-  };
-
-  // 폼 내용에 맞게 레이아웃 크기 계산 후 적용
-  useLayoutEffect(() => {
-    if (contentRef.current) {
-      setContentHeight(contentRef.current.offsetHeight);
-    }
-  }, [stepState]);
+  if (isRegisterLoading) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <LoadingSpinner width={32} height={32} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-bg-100 relative flex h-fit w-full flex-1 flex-col">
-      {/* AppHeader와 프로그레스바는 stepState > 0 일 때만 렌더링 */}
       {stepState > 0 && (
         <>
           <AppHeader
-            title={HEADER_CONFIG[stepState]}
+            title={SIGNUP_HEADER_CONFIG[stepState]}
             onPrev={handlePrevStep}
-            onSkip={
-              stepState === 4 || stepState === 5
-                ? () => console.log("회원가입 폼 제출")
-                : undefined
-            }
+            onSkip={stepState === 4 || stepState === 5 ? handleSkip : undefined}
           />
           <div className="mt-header relative mx-5 pt-1">
             <div className="bg-bg-50 absolute top-1/2 h-[3px] w-full -translate-y-1/2 rounded-full" />
@@ -254,7 +135,8 @@ export const SignUpPage = () => {
         {stepState === 0 ? (
           <div ref={contentRef}>
             <TermForm
-              agreements={signupFormData}
+              terms={termsList}
+              agreedTerms={signupFormData.agreedTerms}
               isAllAgreed={isAllAgreed}
               onToggleAll={handleToggleAllAgreements}
               onToggle={handleAgreementChange}
@@ -267,7 +149,7 @@ export const SignUpPage = () => {
               key={stepState}
               ref={contentRef}
               custom={direction}
-              variants={variants}
+              variants={SLIDE_ANIMATION}
               initial="enter"
               animate="center"
               exit="exit"
@@ -300,14 +182,14 @@ export const SignUpPage = () => {
           {stepState === 0 || stepState === 1 ? (
             <BottomFullButton
               content={stepState === 0 ? "동의하고 계속하기" : "다음"}
-              state={BOTTOM_BUTTON_CONFIG[stepState]}
+              state={bottomButtonState}
               onClick={handleNextStep}
             />
           ) : (
             <BottomSignupButton
               leftContent="이전"
               rightContent="다음"
-              state={BOTTOM_BUTTON_CONFIG[stepState]}
+              state={bottomButtonState}
               onLeftClick={handlePrevStep}
               onRightClick={handleNextStep}
             />
