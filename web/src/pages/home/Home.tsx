@@ -1,14 +1,28 @@
+import { useQuery } from "@tanstack/react-query";
+
+import { getHomeDashboard } from "@/apis/home/getHomeDashboard";
+
 import { NameTag } from "@/components/common/NameTag";
 import { SearchBarRedirect } from "@/components/common/SearchBarRedirect";
 import { HomeBannerList } from "@/components/home/HomeBannerList";
 import { HomeHeader } from "@/components/home/HomeHeader";
 import { HomeTrendingPost } from "@/components/home/HomeTrendingPost";
 
-import cutting_lv1 from "@/assets/cuttings/cutting_Lv01.svg";
+import { QUERY_KEYS } from "@/constants/apiConstants";
 
 import { homeBannerData } from "@/mocks/mockHomeData";
 
 export const Home = () => {
+  const { data: dashboardData } = useQuery({
+    queryKey: [QUERY_KEYS.HOME_DASHBOARD],
+    queryFn: getHomeDashboard,
+  });
+
+  if (!dashboardData) {
+    return null;
+  }
+
+  const { userInfo, popularPosts } = dashboardData;
   return (
     <main className="flex flex-1 flex-col bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
       {/* 로고와 알림 */}
@@ -20,20 +34,20 @@ export const Home = () => {
       {/* 커팅이 사진과 닉네임 영역 */}
       <div className="mt-[1.125rem] flex items-center gap-6 px-5">
         <img
-          src={cutting_lv1}
+          src={userInfo.profileImageUrl}
           alt="유저의 커팅이 사진"
           className="border-primary-600/40 h-[8.125rem] w-[8.125rem] rounded-full border-[0.5px]"
         />
         <div className="flex flex-col">
           <NameTag type="home" name="LV.1 탐지 훈련" />
           <h1 className="head-3-bold text-base-0 mt-2.5 truncate">
-            아기냉미녀
+            {userInfo.nickname}
             <span className="head-4-semibold text-gray-system-100 ml-0.5">
               님
             </span>
           </h1>
           <h2 className="body-5-regular text-gray-system-300 mt-1">
-            오늘의 방문횟수 0회
+            오늘의 방문횟수 {userInfo.totalVisitCount}회
           </h2>
         </div>
       </div>
@@ -60,7 +74,7 @@ export const Home = () => {
           커뮤니티에서 다양한 사기 사례를 볼 수 있어요
         </p>
         <div className="relative mt-5 flex w-full gap-3.5 overflow-x-auto px-5">
-          {homeTrendingPostDummyData.map((data, index) => (
+          {popularPosts.map((data, index) => (
             <HomeTrendingPost {...data} key={`home-trending-${index}`} />
           ))}
         </div>
