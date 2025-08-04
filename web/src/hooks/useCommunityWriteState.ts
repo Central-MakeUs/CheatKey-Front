@@ -20,12 +20,13 @@ export const useCommunityWriteState = () => {
     if (validationResult.success) return {};
 
     const formattedErrors: Record<string, string> = {};
-    validationResult.error.issues.forEach((error) => {
-      const pathKey = error.path[0];
+    for (const { path, message } of validationResult.error.issues) {
+      const pathKey = path[0];
       if (typeof pathKey === "string" || typeof pathKey === "number") {
-        formattedErrors[pathKey] = error.message;
+        formattedErrors[pathKey] = message;
       }
-    });
+    }
+
     return formattedErrors;
   }, [validationResult]);
 
