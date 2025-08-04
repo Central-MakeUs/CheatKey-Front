@@ -35,29 +35,15 @@ export const ContentListPage = () => {
   const currentData = contentDataByCategory[articleCategory];
 
   return (
-    <div className="bg-bg-100 flex min-h-screen flex-col pb-29">
+    <div className="bg-bg-100 safearea flex h-screen flex-col">
       <AppHeader title="콘텐츠" onNotification={() => console.log("알림")} />
-      <CategoryTagGroup
-        tags={["알려드림", "인터뷰"]}
-        selected={articleCategory}
-        onSelect={setArticleCategory}
-        className="mt-header border-bg-50 border-b px-5 py-2.5"
-      />
-      <AnimatePresence mode="wait">
-        <motion.h2
-          key={articleCategory}
-          className="head-3-bold text-base-0 p-5"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.3 }}
-        >
-          {articleCategory === "알려드림"
-            ? "오늘의 사기 소식"
-            : "실제 피해 사례를 모아봤어요"}
-        </motion.h2>
-      </AnimatePresence>
-      <main>
+      <main className="min-h-0 flex-1 overflow-y-hidden">
+        <CategoryTagGroup
+          tags={["알려드림", "인터뷰"]}
+          selected={articleCategory}
+          onSelect={setArticleCategory}
+          className="mt-header border-bg-50 border-b px-5 py-2.5"
+        />
         <AnimatePresence mode="wait">
           <motion.div
             key={articleCategory}
@@ -65,8 +51,22 @@ export const ContentListPage = () => {
             initial="hidden"
             animate="visible"
             exit={{ opacity: 0 }}
-            className="flex h-fit w-full flex-col gap-5 px-5"
+            className="flex h-full w-full flex-col gap-5 overflow-y-auto px-5 pb-19"
           >
+            <AnimatePresence mode="wait">
+              <motion.h2
+                key={articleCategory}
+                className="head-3-bold text-base-0 pt-5"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {articleCategory === "알려드림"
+                  ? "오늘의 사기 소식"
+                  : "실제 피해 사례를 모아봤어요"}
+              </motion.h2>
+            </AnimatePresence>
             {currentData.map((data) => (
               <ContentPreview
                 key={`${data.id}-${data.title}`}
