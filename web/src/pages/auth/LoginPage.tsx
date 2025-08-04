@@ -9,9 +9,10 @@ import CheatKeyTextLogo from "@/assets/logo/logo_cheatkey_text.svg?react";
 
 export const LoginPage = () => {
   return (
-    <div className="relative flex h-full w-full flex-1 flex-col items-center justify-center">
-      <CheatKeyLogo className="h-auto w-28" />
-      <CheatKeyTextLogo className="mt-11 h-auto w-40" />
+    <div className="safearea relative flex h-screen w-full flex-1 flex-col items-center justify-center">
+      <CheatKeyLogo className="h-auto w-28 -translate-y-10" />
+      <CheatKeyTextLogo className="mt-11 h-auto w-40 -translate-y-10" />
+
       <div className="absolute bottom-11 flex w-full flex-col items-center gap-8 px-5">
         <motion.div
           animate={{

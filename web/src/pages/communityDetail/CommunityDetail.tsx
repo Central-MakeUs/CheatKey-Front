@@ -24,13 +24,14 @@ export const CommunityDetail = () => {
   );
 
   return (
-    <div className="bg-bg-100 flex min-h-screen flex-col">
+    <div className="bg-bg-100 safearea flex h-screen flex-col">
       <AppHeader
         title={`${nickname}님의 글`}
         onPrev={() => navigate(-1)}
         onNotification={() => console.log("🚨알림 클릭됨")}
+        className="bg-bg-100"
       />
-      <div className="divide-bg-50 flex-1 divide-y pt-15">
+      <div className="divide-bg-50 flex-1 divide-y overflow-y-auto pt-15">
         <CommunityPostContent {...{ title, nickname, date, content, images }} />
         <p className="text-gray-system-400 body-2-medium px-5 py-2.5">
           댓글 30개

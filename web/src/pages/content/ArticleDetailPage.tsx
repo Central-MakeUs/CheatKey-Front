@@ -18,22 +18,24 @@ const ArticleDetailContent = () => {
   }
 
   return (
-    <div className="bg-bg-100 flex min-h-screen flex-col">
+    <div className="safearea bg-bg-100 flex h-screen flex-col">
       <ContentDetailHeader />
-      <ContentDetailTitle
-        className="mt-header border-b-bg-50 mx-5 border-b py-5"
-        category="알려드림"
-        title={data.title}
-        date={data.date}
-        original={data.original}
-      />
-      <ContentDetailMain
-        className="mb-10 p-5"
-        category="알려드림"
-        title={data.title}
-        image={data.image}
-        sections={data.sections}
-      />
+      <div className="flex flex-1 flex-col overflow-y-auto">
+        <ContentDetailTitle
+          className="mt-header border-b-bg-50 mx-5 border-b py-5"
+          category="알려드림"
+          title={data.title}
+          date={data.date}
+          original={data.original}
+        />
+        <ContentDetailMain
+          className="mb-10 p-5"
+          category="알려드림"
+          title={data.title}
+          image={data.image}
+          sections={data.sections}
+        />
+      </div>
     </div>
   );
 };
