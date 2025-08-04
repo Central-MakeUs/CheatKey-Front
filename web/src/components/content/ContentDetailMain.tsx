@@ -41,7 +41,7 @@ export const ContentDetailMain = ({
   const bodyFontSize = FONT_SIZE_CONFIG.main.body[fontKey];
 
   return (
-    <main className={cn("flex flex-col gap-[1.875rem]", className)}>
+    <main className={cn("flex flex-1 flex-col gap-[1.875rem]", className)}>
       <img
         src={image}
         alt={`${title}의 메인 사진`}

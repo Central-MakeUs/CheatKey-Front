@@ -35,9 +35,9 @@ export const ContentListPage = () => {
   const currentData = contentDataByCategory[articleCategory];
 
   return (
-    <div className="bg-bg-100 safearea flex h-screen flex-col">
+    <div className="safearea bg-bg-100 flex h-screen flex-col">
       <AppHeader title="콘텐츠" onNotification={() => console.log("알림")} />
-      <main className="min-h-0 flex-1 overflow-y-hidden">
+      <main className="flex-1 overflow-hidden">
         <CategoryTagGroup
           tags={["알려드림", "인터뷰"]}
           selected={articleCategory}
@@ -51,7 +51,7 @@ export const ContentListPage = () => {
             initial="hidden"
             animate="visible"
             exit={{ opacity: 0 }}
-            className="flex h-full w-full flex-col gap-5 overflow-y-auto px-5 pb-19"
+            className="flex h-full w-full flex-col gap-5 overflow-y-auto px-5 pb-50"
           >
             <AnimatePresence mode="wait">
               <motion.h2
