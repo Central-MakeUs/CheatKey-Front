@@ -14,14 +14,15 @@ export const TermsPage = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className="safearea bg-bg-100 flex h-screen flex-col">
       <AppHeader
         title="이용약관"
         onPrev={() => {
           navigate(-1);
         }}
+        className="bg-bg-100"
       />
-      <div className="bg-bg-100 pt-10 pb-14">
+      <div className="overflow-y-auto pt-10 pb-14">
         <TermItem
           title={TERMS_OF_SERVICE_CONTENT.title}
           content={TERMS_OF_SERVICE_CONTENT.content}
@@ -36,6 +37,6 @@ export const TermsPage = () => {
         />
       </div>
       <ToTop bottom="2rem" />
-    </>
+    </div>
   );
 };

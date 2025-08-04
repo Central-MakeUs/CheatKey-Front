@@ -16,10 +16,14 @@ export const MyAnalysisPage = () => {
   const [activeTab, setActiveTab] = useState<string>(MY_ANALYSIS_PAGE_TABS[0]);
 
   return (
-    <div className="bg-bg-100">
-      <AppHeader onPrev={() => navigate(-1)} title="분석 내역 보기" />
+    <div className="safearea bg-bg-100 flex h-screen flex-col">
+      <AppHeader
+        onPrev={() => navigate(-1)}
+        title="분석 내역 보기"
+        className="bg-bg-100"
+      />
 
-      <div className="divide-bg-50 divide-y pt-11">
+      <div className="divide-bg-50 divide-y overflow-y-auto pt-11">
         <MyAnalysisPageTab activeTab={activeTab} setActiveTab={setActiveTab} />
         <MyAnalysisList items={mockMyAnalysisPageData} />
       </div>
