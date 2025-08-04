@@ -18,8 +18,8 @@ export const SearchPage = () => {
   const hasNoSearchResult = query.trim() !== "" && filteredPosts.length === 0;
 
   return (
-    <>
-      <header className="bg-bg-100 fixed top-0 right-0 left-0 z-10 px-5 pt-6">
+    <div className="bg-bg-100 safearea flex h-screen flex-col">
+      <header className="fixed z-10 px-5 pt-6">
         <SearchBar
           placeholder="사기 사례를 검색해주세요."
           value={query}
@@ -27,7 +27,7 @@ export const SearchPage = () => {
         />
       </header>
 
-      <div className="bg-bg-100 min-h-screen px-5 pt-[4.25rem]">
+      <div className="overflow-y-auto px-5 pt-[4.25rem]">
         {hasNoSearchResult ? (
           <NoResult text="검색 결과를 찾을 수 없어요." type="none" />
         ) : (
@@ -46,6 +46,6 @@ export const SearchPage = () => {
       </div>
 
       <ToTop bottom="2rem" />
-    </>
+    </div>
   );
 };
