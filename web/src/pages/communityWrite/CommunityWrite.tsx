@@ -16,12 +16,12 @@ export const CommunityWrite = () => {
   const {
     form,
     updateForm,
-    toast,
-    setToast,
     modal,
     setModal,
     isValid,
-    validationErrors,
+    errors,
+    toastMessage,
+    showToast,
   } = useCommunityWriteState();
 
   const handleBack = () => {
@@ -36,21 +36,10 @@ export const CommunityWrite = () => {
 
   const handleSubmit = () => {
     if (!isValid) {
-      const newToastState = {
-        titleTooShort:
-          validationErrors.titleTooShort || validationErrors.contentTooShort,
-        boardEmpty: validationErrors.boardEmpty,
-        imageTooLarge: validationErrors.imageTooLarge,
-      };
-      setToast(newToastState);
-
-      setTimeout(() => {
-        setToast({
-          titleTooShort: false,
-          boardEmpty: false,
-          imageTooLarge: false,
-        });
-      }, 3000);
+      const firstError = Object.values(errors)[0];
+      if (firstError) {
+        showToast(firstError);
+      }
       return;
     }
 
@@ -63,19 +52,22 @@ export const CommunityWrite = () => {
       <div className="justify mx-5 mt-[4.6875rem] flex h-full flex-col gap-y-[1.5rem]">
         <TitleForm
           title={form.title}
-          onChange={(v) => updateForm("title", v)}
+          onChange={(value) => updateForm("title", value)}
         />
+
         <PostBoardSelect
           value={form.board}
-          onChange={(v) => updateForm("board", v)}
+          onChange={(value) => updateForm("board", value)}
         />
+
         <CommunityWriteForm
           value={form.content}
-          onChange={(v) => updateForm("content", v)}
+          onChange={(value) => updateForm("content", value)}
         />
+
         <PostImageUploader
           value={form.images}
-          onChange={(v) => updateForm("images", v)}
+          onChange={(value) => updateForm("images", value)}
         />
 
         <BottomFullButton
@@ -83,15 +75,8 @@ export const CommunityWrite = () => {
           onClick={handleSubmit}
           content="등록하기"
         />
-        {toast.imageTooLarge && (
-          <Toast text="사진 용량이 너무 커요." position="write" />
-        )}
-        {toast.titleTooShort && (
-          <Toast text="최소 10자 이상 작성해주세요." position="write" />
-        )}
-        {toast.boardEmpty && (
-          <Toast text="게시판을 선택해주세요." position="write" />
-        )}
+
+        {toastMessage && <Toast text={toastMessage} position="write" />}
 
         {modal.leave && (
           <ConfirmModal

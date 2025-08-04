@@ -1,9 +1,8 @@
 import { useState, useMemo } from "react";
 
-import type {
-  UploadedImage,
-  CommunityWriteValidationError,
-} from "@/types/community/community.types";
+import type { UploadedImage } from "@/types/community/community.types";
+
+import { communityWriteSchema } from "@/schemas/communityWriteSchema";
 
 export const useCommunityWriteState = () => {
   const [form, setForm] = useState({
@@ -13,46 +12,28 @@ export const useCommunityWriteState = () => {
     images: [] as UploadedImage[],
   });
 
-  const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB입니다
+  const validationResult = useMemo(() => {
+    return communityWriteSchema.safeParse(form);
+  }, [form]);
 
-  const validationErrors = useMemo<CommunityWriteValidationError>(() => {
-    const errors: CommunityWriteValidationError = {
-      titleTooShort: false,
-      contentTooShort: false,
-      boardEmpty: false,
-      imageTooLarge: false,
-    };
+  const errors = useMemo(() => {
+    if (validationResult.success) return {};
 
-    if (form.title.trim().length < 10) {
-      errors.titleTooShort = true;
-    }
-    if (form.content.trim().length < 10) {
-      errors.contentTooShort = true;
-    }
-    if (form.board.trim().length === 0) {
-      errors.boardEmpty = true;
-    }
-    if (form.images.some((img) => img.file.size > MAX_IMAGE_SIZE)) {
-      errors.imageTooLarge = true;
-    }
+    const formattedErrors: Record<string, string> = {};
+    validationResult.error.issues.forEach((error) => {
+      const pathKey = error.path[0];
+      if (typeof pathKey === "string" || typeof pathKey === "number") {
+        formattedErrors[pathKey] = error.message;
+      }
+    });
+    return formattedErrors;
+  }, [validationResult]);
 
-    return errors;
-  }, [form, MAX_IMAGE_SIZE]);
-
-  const isValid = useMemo(() => {
-    return (
-      !validationErrors.titleTooShort &&
-      !validationErrors.contentTooShort &&
-      !validationErrors.boardEmpty &&
-      !validationErrors.imageTooLarge
-    );
-  }, [validationErrors]);
-
-  const [toast, setToast] = useState({
-    titleTooShort: false,
-    boardEmpty: false,
-    imageTooLarge: false,
-  });
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
 
   const [modal, setModal] = useState({
     leave: false,
@@ -69,11 +50,11 @@ export const useCommunityWriteState = () => {
   return {
     form,
     updateForm,
-    toast,
-    setToast,
     modal,
     setModal,
-    isValid,
-    validationErrors,
+    errors,
+    isValid: validationResult.success,
+    toastMessage,
+    showToast,
   };
 };

@@ -69,6 +69,11 @@ export default tseslint.config(
               position: "after",
             },
             {
+              pattern: "@/schemas/**",
+              group: "internal",
+              position: "after",
+            },
+            {
               pattern: "@/assets/**",
               group: "internal",
               position: "after",
