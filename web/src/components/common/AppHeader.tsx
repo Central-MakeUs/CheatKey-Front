@@ -1,3 +1,5 @@
+import { cn } from "@/utils/cn";
+
 import Notification_On from "@/assets/icons/notification_on.svg?react";
 import Prev from "@/assets/icons/prev.svg?react";
 import Write from "@/assets/icons/write.svg?react";
@@ -8,6 +10,7 @@ export interface AppHeaderProps {
   onPrev?: () => void;
   onWrite?: () => void;
   onNotification?: () => void;
+  className?: string;
 }
 export const AppHeader = ({
   title,
@@ -15,9 +18,10 @@ export const AppHeader = ({
   onPrev,
   onWrite,
   onNotification,
+  className,
 }: AppHeaderProps) => {
   return (
-    <header className="fixed z-10 w-full max-w-lg bg-transparent py-2">
+    <header className={cn("fixed z-10 w-full max-w-lg py-2", className)}>
       <div className="absolute top-1/2 left-5 flex -translate-y-1/2 items-center">
         {onPrev && (
           <button
