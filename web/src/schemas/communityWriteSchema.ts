@@ -14,9 +14,11 @@ export const communityWriteSchema = z.object({
   images: z
     .array(
       z.object({
-        file: z.instanceof(File).refine((file) => file.size <= MAX_IMAGE_SIZE, {
-          message: IMAGE_TOO_LARGE_MSG,
-        }),
+        file: z
+          .instanceof(File)
+          .refine((file: File) => file.size <= MAX_IMAGE_SIZE, {
+            message: IMAGE_TOO_LARGE_MSG,
+          }),
       }),
     )
     .max(
