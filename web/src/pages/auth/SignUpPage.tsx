@@ -107,7 +107,7 @@ export const SignUpPage = () => {
   }
 
   return (
-    <div className="bg-bg-100 relative flex h-fit w-full flex-1 flex-col">
+    <div className="safearea bg-bg-100 relative flex h-screen w-full flex-1 flex-col">
       {stepState > 0 && (
         <>
           <AppHeader
