@@ -20,6 +20,6 @@ export const HOME_BANNER_DATA: HomeBannerData[] = [
 export const LEVEL_DATA_MAP = new Map<number, { name: string }>([
   [1, { name: "LV.1 탐지 훈련" }],
   [2, { name: "LV.2 1등 탐지견" }],
-  [3, { name: "LV.3 멍탐정 탐정" }],
+  [3, { name: "LV.3 멍탐정 커팅" }],
   [4, { name: "LV.4 커팅의 제왕" }],
 ]);
