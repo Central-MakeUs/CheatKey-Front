@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-
-import { createWebView } from "@webview-bridge/react-native";
-import { appBridge, appSchema } from "@/bridge";
-import { initializeKakaoSDK } from "@react-native-kakao/core";
-
 import {
   StatusBar,
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
+  View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { createWebView } from "@webview-bridge/react-native";
+import { appBridge, appSchema } from "@/bridge";
+import { initializeKakaoSDK } from "@react-native-kakao/core";
 
 const { WebView } = createWebView({
   bridge: appBridge,
@@ -19,6 +18,8 @@ const { WebView } = createWebView({
 });
 
 export default function WebViewScreen() {
+  const insets = useSafeAreaInsets();
+
   const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL || "";
   const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY || "";
 
@@ -31,19 +32,32 @@ export default function WebViewScreen() {
       }
     };
     initKakaoSDK();
-  }, []);
+  });
+
+  const injectedJavaScript = `
+    document.documentElement.style.setProperty('--safe-area-inset-top', '${insets.top}px');
+    document.documentElement.style.setProperty('--safe-area-inset-right', '${insets.right}px');
+    document.documentElement.style.setProperty('--safe-area-inset-bottom', '${insets.bottom}px');
+    document.documentElement.style.setProperty('--safe-area-inset-left', '${insets.left}px');
+    true; 
+  `;
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        translucent={true}
+        backgroundColor="transparent"
+      />
       <KeyboardAvoidingView
         style={styles.keyboardAvoidingView}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={insets.top}
       >
-        <StatusBar barStyle="light-content" backgroundColor="#161517" />
         <WebView
           source={{ uri: WEB_APP_URL }}
           style={styles.webview}
+          injectedJavaScript={injectedJavaScript}
           // JavaScript 관련
           javaScriptEnabled={true}
           javaScriptCanOpenWindowsAutomatically={false}
@@ -69,19 +83,19 @@ export default function WebViewScreen() {
           }}
         />
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
+  container: {
     flex: 1,
-    backgroundColor: "#161517",
   },
   keyboardAvoidingView: {
     flex: 1,
   },
   webview: {
     flex: 1,
+    backgroundColor: "transparent",
   },
 });

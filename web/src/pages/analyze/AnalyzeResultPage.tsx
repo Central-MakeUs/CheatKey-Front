@@ -35,7 +35,7 @@ export const AnalyzeResultPage = () => {
   return (
     <motion.div
       className={cn(
-        "relative flex h-full w-full flex-1 flex-col",
+        "safearea relative flex h-screen w-full flex-1 flex-col",
         style.background,
       )}
       variants={STAGGER_CONTAINER}
