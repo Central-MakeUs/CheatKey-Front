@@ -42,13 +42,14 @@ export const CommunityFeed = () => {
         );
 
   return (
-    <div className="bg-bg-100 min-h-screen pb-21">
+    <div className="bg-bg-100 safearea flex h-screen flex-col">
       <AppHeader
         title="커뮤니티"
         onWrite={() => navigate(path.community.write)}
         onNotification={() => console.log("🚨알림 클릭됨")}
+        className="bg-bg-100"
       />
-      <div className="px-5 pt-11">
+      <div className="pt-header h-screen overflow-y-auto px-5 pb-20">
         <SearchBarRedirect placeholder="사기 사례를 입력해주세요." />
         <CommunityFeedTab
           activeTab={selectedCategory}

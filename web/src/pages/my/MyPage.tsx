@@ -21,8 +21,8 @@ export const MyPage = () => {
   const [isToggleOn, setIsToggleOn] = useState(false);
 
   return (
-    <>
-      <AppHeader title="My" onNotification={() => {}} />
+    <div className="safearea bg-bg-100 relative h-screen">
+      <AppHeader title="My" onNotification={() => {}} className="bg-bg-100" />
       <div className="px-5">
         <MyProfile />
 
@@ -78,6 +78,6 @@ export const MyPage = () => {
 
         <MyAccount />
       </div>
-    </>
+    </div>
   );
 };

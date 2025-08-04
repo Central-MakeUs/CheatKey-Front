@@ -13,9 +13,13 @@ export const MyPostsPage = () => {
   const posts = mockMyPosts;
 
   return (
-    <div className="bg-bg-100 h-full">
-      <AppHeader title="작성글 보기" onPrev={() => navigate(-1)} />
-      <div className="px-5 pt-16">
+    <div className="safearea bg-bg-100 flex h-screen flex-col">
+      <AppHeader
+        title="작성글 보기"
+        onPrev={() => navigate(-1)}
+        className="bg-bg-100"
+      />
+      <div className="overflow-y-auto px-5 pt-16">
         <span className="text-base-0 head-4-semibold w-fit py-3">
           총 2개의 작성글
         </span>
