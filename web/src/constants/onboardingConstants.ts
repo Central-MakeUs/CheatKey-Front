@@ -2,7 +2,18 @@ import onboardImg1 from "@/assets/onboarding/onboarding_1.svg";
 import onboardImg2 from "@/assets/onboarding/onboarding_2.svg";
 import onboardImg3 from "@/assets/onboarding/onboarding_3.svg";
 import onboardImg4 from "@/assets/onboarding/onboarding_4.svg";
-export const ONBOARDING_CONSTANTS = {
+
+export interface OnboardingStep {
+  title: string;
+  subTitle: string;
+  image: string;
+}
+
+export interface OnboardingConstants {
+  [key: number]: OnboardingStep;
+}
+
+export const ONBOARDING_CONSTANTS: OnboardingConstants = {
   1: {
     title: "URL 분석하기",
     subTitle: `의심되는 링크를 복사하고\n사전에 미리 방지할 수 있어요!`,
