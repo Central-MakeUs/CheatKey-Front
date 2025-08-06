@@ -18,6 +18,7 @@ import {
   MyPostsPage,
   MyAnalysisPage,
   TermsPage,
+  OnboardingPage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -27,6 +28,10 @@ import { Layout } from "@/components/layout/Layout";
 import { path } from "./path";
 
 const AppRouter = createBrowserRouter([
+  {
+    path: path.onboarding,
+    element: <OnboardingPage />,
+  },
   {
     element: <BottomLayout />,
     children: [
