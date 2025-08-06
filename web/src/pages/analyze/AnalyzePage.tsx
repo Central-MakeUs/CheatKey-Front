@@ -6,7 +6,7 @@ import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { FormTextarea } from "@/components/common/FormTextarea";
 
-import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
+//import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 
 export const AnalyzePage = () => {
   const {
@@ -67,8 +67,10 @@ export const AnalyzePage = () => {
           className="mt-[3.125rem]"
         />
       </form>
+      {/*
+      // TODO: @Ki-Tak 1차 배포 이후 가이드 작업 예정
       <a
-        href="/" // TODO: @Ki-Tak 추후 라우팅 정해지면 수정
+        href="/" 
         className="body-4-medium text-gray-system-600 mt-10 flex items-center rounded-full bg-[#3c5187]/30 px-4 py-2"
       >
         AI 분석 가이드가 궁금하다면?
@@ -77,6 +79,7 @@ export const AnalyzePage = () => {
           className="text-gray-system-600 h-5 w-5"
         />
       </a>
+       */}
     </main>
   );
 };
