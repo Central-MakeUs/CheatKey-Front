@@ -1,5 +1,6 @@
 module.exports = () => {
   const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY;
+  const EAS_PROJECT_ID = process.env.EXPO_PUBLIC_EAS_PROJECT_ID;
 
   return {
     name: "native",
@@ -31,12 +32,20 @@ module.exports = () => {
       },
     },
     android: {
+      package: "com.cheatkey.app",
       adaptiveIcon: {
         foregroundImage: "./assets/images/adaptive-icon.png",
         backgroundColor: "#ffffff",
       },
       edgeToEdgeEnabled: true,
     },
+
+    extra: {
+      eas: {
+        projectId: EAS_PROJECT_ID,
+      },
+    },
+
     web: {
       bundler: "metro",
       output: "static",
