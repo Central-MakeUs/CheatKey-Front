@@ -5,6 +5,7 @@ import { TabSwitcher } from "@/components/analyze/TabSwitcher";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { FormTextarea } from "@/components/common/FormTextarea";
+import { Toast } from "@/components/common/Toast";
 
 //import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 
@@ -21,6 +22,7 @@ export const AnalyzePage = () => {
     handleNavigateBack,
     handleTabChange,
     handleSubmit,
+    toastMessage,
   } = useAnalyzePage();
 
   if (isAnalyzePending || isAnalyzeSuccess) {
@@ -67,6 +69,9 @@ export const AnalyzePage = () => {
           className="mt-[3.125rem]"
         />
       </form>
+      {toastMessage && (
+        <Toast position="ai" icon="warning" text={toastMessage} />
+      )}
       {/*
       // TODO: @Ki-Tak 1차 배포 이후 가이드 작업 예정
       <a
