@@ -35,3 +35,5 @@ export const ONBOARDING_CONSTANTS: OnboardingConstants = {
     image: onboardImg4,
   },
 };
+
+export const ONBOARDING_TOTAL_STEP = 4;

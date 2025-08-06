@@ -11,7 +11,10 @@ import { PageIndicator } from "@/components/common/PageIndicator";
 import { OnboardingContent } from "@/components/onboarding/OnboardingContent";
 
 import { SLIDE_ANIMATION } from "@/constants/animation/slideAnimation";
-import { ONBOARDING_CONSTANTS } from "@/constants/onboardingConstants";
+import {
+  ONBOARDING_CONSTANTS,
+  ONBOARDING_TOTAL_STEP,
+} from "@/constants/onboardingConstants";
 
 export const OnboardingPage = () => {
   const navigate = useNavigate();
@@ -22,12 +25,12 @@ export const OnboardingPage = () => {
     ONBOARDING_CONSTANTS[stepState as keyof typeof ONBOARDING_CONSTANTS];
 
   const handleNextStep = useCallback(() => {
-    if (stepState >= 4) return;
+    if (stepState >= ONBOARDING_TOTAL_STEP) return;
     setStepState((prev) => prev + 1);
   }, []);
 
   useEffect(() => {
-    if (stepState >= 4) {
+    if (stepState >= ONBOARDING_TOTAL_STEP) {
       return;
     }
 
@@ -56,7 +59,7 @@ export const OnboardingPage = () => {
               title={currentContent.title}
               subTitle={currentContent.subTitle}
               image={currentContent.image}
-              total={4}
+              total={ONBOARDING_TOTAL_STEP}
               step={stepState}
             />
           </motion.div>
