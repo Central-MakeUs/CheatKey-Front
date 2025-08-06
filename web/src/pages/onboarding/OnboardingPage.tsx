@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { AnimatePresence, motion } from "framer-motion";
+
+import { path } from "@/routes/path";
 
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { PageIndicator } from "@/components/common/PageIndicator";
@@ -10,6 +14,8 @@ import { SLIDE_ANIMATION } from "@/constants/animation/slideAnimation";
 import { ONBOARDING_CONSTANTS } from "@/constants/onboardingConstants";
 
 export const OnboardingPage = () => {
+  const navigate = useNavigate();
+
   const [stepState, setStepState] = useState<number>(1);
 
   const currentContent =
@@ -66,7 +72,7 @@ export const OnboardingPage = () => {
         <BottomFullButton
           content={"시작하기"}
           state={stepState === 4}
-          onClick={() => setStepState((prev) => prev + 1)}
+          onClick={() => navigate(path.auth.login)}
         />
       </div>
     </div>
