@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,10 @@ import { mockMyAnalysisPageData } from "@/mocks/mockMyAnalysisPageData";
 
 export const MyAnalysisPage = () => {
   const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState<string>(MY_ANALYSIS_PAGE_TABS[0]);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
@@ -28,7 +31,7 @@ export const MyAnalysisPage = () => {
         <MyAnalysisList items={mockMyAnalysisPageData} />
       </div>
 
-      <ToTop bottom="2rem" />
+      <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
 };

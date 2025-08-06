@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { createPortal } from "react-dom";
 
@@ -29,6 +29,15 @@ export const ConfirmModal = ({
 
   const bgClass = dimmedBackground === "dimmed" ? "bg-black/50" : "bg-black";
 
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const element = document.getElementById("modal-root");
+    if (element) {
+      setPortalElement(element);
+    }
+  }, []);
+
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
 
@@ -50,13 +59,13 @@ export const ConfirmModal = ({
       aria-describedby={description ? "modal-description" : undefined}
     >
       <div
-        className="text-base-0 bg-bg-50 mx-5 w-full rounded-[26px] px-5 pt-10 pb-5 text-center"
+        className="text-base-0 bg-bg-50 mx-5 w-full rounded-[1.625rem] px-5 pt-10 pb-5 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {illustration && (
           <div className="mb-5 flex justify-center">{illustration}</div>
         )}
-        <h2 className="head-3-bold pb-[6px]">{title}</h2>
+        <h2 className="head-3-bold pb-1.5">{title}</h2>
         {description && (
           <p className="body-3-regular text-gray-system-400 mt-1 break-words whitespace-pre-line">
             {description}
@@ -66,7 +75,7 @@ export const ConfirmModal = ({
           {showCancelButton && (
             <button
               onClick={onCancel}
-              className="bg-base-50 body-2-medium text-gray-system-500 h-[50px] flex-1 rounded-xl"
+              className="bg-base-50 body-2-medium text-gray-system-500 h-[3.125rem] flex-1 rounded-xl"
             >
               {cancelText}
             </button>
@@ -75,7 +84,7 @@ export const ConfirmModal = ({
           <button
             onClick={onConfirm}
             className={cn(
-              "bg-primary-400 body-1-bold text-base-0 h-[50px] rounded-xl py-2",
+              "bg-primary-400 body-1-bold text-base-0 h-[3.125rem] rounded-xl py-2",
               showCancelButton ? "flex-1" : "w-full",
             )}
           >
@@ -85,6 +94,7 @@ export const ConfirmModal = ({
       </div>
     </div>
   );
+  if (!portalElement) return null;
 
-  return createPortal(confirmModalContent, document.body);
+  return createPortal(confirmModalContent, portalElement);
 };

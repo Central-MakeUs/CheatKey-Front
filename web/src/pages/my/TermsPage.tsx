@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import { AppHeader } from "@/components/common/AppHeader";
@@ -12,6 +14,8 @@ import {
 
 export const TermsPage = () => {
   const navigate = useNavigate();
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
@@ -36,7 +40,7 @@ export const TermsPage = () => {
           content={MARKETING_CONSENT_CONTENT.content}
         />
       </div>
-      <ToTop bottom="2rem" />
+      <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +23,8 @@ export const CommunityFeed = () => {
   const [selectedSortOption, setSelectedSortOption] = useState("최신순");
 
   const [selectedCategory, setSelectedCategory] = useState("신고합니다");
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const filteredPosts = mockCommunityFeedPreviews.filter((post) => {
     const matchesCategory = COMMUNITY_FEED_TABS.includes(selectedCategory)
@@ -96,7 +98,7 @@ export const CommunityFeed = () => {
           </div>
         )}
       </div>
-      <ToTop />
+      <ToTop scrollContainerRef={scrollRef} />
     </div>
   );
 };

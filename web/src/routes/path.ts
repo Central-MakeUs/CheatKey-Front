@@ -1,4 +1,5 @@
 export const path = {
+  onboarding: "",
   home: "/home",
   community: {
     base: "/community",

@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import { AppHeader } from "@/components/common/AppHeader";
@@ -9,6 +11,8 @@ import { mockMyPosts } from "@/mocks/mockMyPosts";
 
 export const MyPostsPage = () => {
   const navigate = useNavigate();
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const posts = mockMyPosts;
 
@@ -48,7 +52,7 @@ export const MyPostsPage = () => {
           </div>
         )}
       </div>
-      <ToTop bottom="2rem" />
+      <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
 };
