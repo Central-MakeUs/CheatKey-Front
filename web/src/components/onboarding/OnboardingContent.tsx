@@ -1,5 +1,3 @@
-import { PageIndicator } from "../common/PageIndicator";
-
 export interface OnboardingContentProps {
   title: string;
   subTitle: string;
@@ -11,8 +9,6 @@ export const OnboardingContent = ({
   title,
   subTitle,
   image,
-  total,
-  step,
 }: OnboardingContentProps) => {
   return (
     <div className="flex w-full flex-1 flex-col justify-center gap-2.5 px-5">
@@ -23,12 +19,6 @@ export const OnboardingContent = ({
         </h2>
       </div>
       <img src={image} className="h-auto w-full" />
-      <PageIndicator
-        total={total}
-        current={step}
-        indicatorColor="bg-primary-400"
-        className="pt-6"
-      />
     </div>
   );
 };

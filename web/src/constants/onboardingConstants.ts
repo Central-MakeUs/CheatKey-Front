@@ -1,7 +1,7 @@
-import onboardImg1 from "@/assets/onboarding/onboarding_1.svg";
-import onboardImg2 from "@/assets/onboarding/onboarding_2.svg";
-import onboardImg3 from "@/assets/onboarding/onboarding_3.svg";
-import onboardImg4 from "@/assets/onboarding/onboarding_4.svg";
+import onboardImg1 from "@/assets/onboarding/onboarding_1.png";
+import onboardImg2 from "@/assets/onboarding/onboarding_2.png";
+import onboardImg3 from "@/assets/onboarding/onboarding_3.png";
+import onboardImg4 from "@/assets/onboarding/onboarding_4.png";
 
 export interface OnboardingStep {
   title: string;
