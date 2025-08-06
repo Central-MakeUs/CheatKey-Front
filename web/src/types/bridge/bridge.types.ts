@@ -16,6 +16,17 @@ export interface FailureBridgeResult {
   message: string;
 }
 
+export interface ShareSuccessResult {
+  success: true;
+}
+
+export interface ShareFailureResult {
+  success: false;
+  message: string;
+}
+
+export type BridgeShareResult = ShareSuccessResult | ShareFailureResult;
+
 export type BridgeLoginResult = SuccessBridgeResult | FailureBridgeResult;
 
 export interface AppState {
@@ -27,6 +38,10 @@ export interface NativeBridgeMethods {
   socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
   refreshTokens: () => Promise<{ accessToken: string | null }>;
+  shareUrl: (data: {
+    url: string;
+    message?: string;
+  }) => Promise<BridgeShareResult>;
 }
 
 export type AppBridgeSpec = AppState & NativeBridgeMethods;

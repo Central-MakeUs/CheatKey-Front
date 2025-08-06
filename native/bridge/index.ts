@@ -14,12 +14,17 @@ import type {
 } from "@/types/auth.types";
 import { authStorage } from "@/services/authStorage";
 import { postReissue } from "@/apis/postReissue";
+import { Share } from "react-native";
 
 interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
   socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
   refreshTokens: () => Promise<{ accessToken: string | null }>;
+  shareUrl: (data: {
+    url: string;
+    message?: string;
+  }) => Promise<{ success: boolean; message?: string }>;
 }
 
 export const appBridge = bridge<AppBridgeType>((store) => ({
@@ -85,6 +90,17 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
       return { accessToken: null };
     }
   },
+  shareUrl: async (data) => {
+    try {
+      await Share.share({
+        url: data.url,
+        message: data.message || data.url,
+      });
+      return { success: true };
+    } catch {
+      return { success: false, message: "공유에 실패했습니다." };
+    }
+  },
 }));
 
 // 웹에서 보낸 데이터의 유효성 검사 스키마
@@ -97,6 +113,15 @@ export const appSchema = postMessageSchema({
   },
   refreshTokens: {
     validate: () => z.object({}).parse({}),
+  },
+  shareUrl: {
+    validate: (data) =>
+      z
+        .object({
+          url: z.url("공유할 URL 형식이 올바르지 않습니다."),
+          message: z.string().optional(),
+        })
+        .parse(data),
   },
 });
 
