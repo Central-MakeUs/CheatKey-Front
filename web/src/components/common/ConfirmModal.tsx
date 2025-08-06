@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { createPortal } from "react-dom";
 
@@ -28,6 +28,15 @@ export const ConfirmModal = ({
   const showCancelButton = typeof onCancel === "function";
 
   const bgClass = dimmedBackground === "dimmed" ? "bg-black/50" : "bg-black";
+
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const element = document.getElementById("modal-root");
+    if (element) {
+      setPortalElement(element);
+    }
+  }, []);
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -85,6 +94,7 @@ export const ConfirmModal = ({
       </div>
     </div>
   );
+  if (!portalElement) return null;
 
-  return createPortal(confirmModalContent, document.body);
+  return createPortal(confirmModalContent, portalElement);
 };
