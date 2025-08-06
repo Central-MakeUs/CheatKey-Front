@@ -3,6 +3,7 @@ export type HomeBannerData = {
   title: string;
   content: string;
   bannerId: number;
+  navigate: string;
 };
 export type HomeTrendingPostData = {
   id: number;

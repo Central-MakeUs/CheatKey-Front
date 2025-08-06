@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import type { HomeBannerData } from "@/types/home/home.types";
 
 interface HomeBannerListProps {
   banners: HomeBannerData[];
 }
 export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
+  const navigate = useNavigate();
+
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   useEffect(() => {
     // 배너가 하나면 타이머 실행 X
@@ -28,13 +32,11 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
       {banners.map((banner, index) => (
         <a
           key={`banner-${index}`}
-          href={
-            `${banner.bannerId}` /* TODO: @Ki-Tak 배너 라우팅 정해지면 변경해야함 */
-          }
           className="absolute inset-0 flex items-center gap-3 transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(${(index - currentIndex) * 100}%)`,
           }}
+          onClick={() => navigate(banner.navigate)}
         >
           <img
             src={banner.image}
