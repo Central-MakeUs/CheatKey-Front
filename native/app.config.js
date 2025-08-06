@@ -3,7 +3,7 @@ module.exports = () => {
   const EAS_PROJECT_ID = process.env.EXPO_PUBLIC_EAS_PROJECT_ID;
 
   return {
-    name: "native",
+    name: "CheatKey",
     slug: "native",
     version: "1.0.0",
     orientation: "portrait",
