@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import * as SecureStore from "expo-secure-store";
 import { authStorage } from "@/services/authStorage";
-
-const ONBOARDING_KEY = "hasCompletedOnboarding";
+import { onboardingStorage } from "@/services/onboardingStorage";
 
 export const useInitialUrl = (webAppUrl: string) => {
   const [initialUrl, setInitialUrl] = useState<string | null>(null);
@@ -11,11 +9,10 @@ export const useInitialUrl = (webAppUrl: string) => {
   useEffect(() => {
     const determineInitialUrl = async () => {
       try {
-        const hasCompletedOnboarding = await SecureStore.getItemAsync(
-          ONBOARDING_KEY
-        );
+        const hasCompletedOnboarding =
+          await onboardingStorage.checkOnboardingStatus();
 
-        if (hasCompletedOnboarding !== "true") {
+        if (!hasCompletedOnboarding) {
           setInitialUrl(`${webAppUrl}`);
         } else {
           const refreshToken = await authStorage.getRefreshToken();

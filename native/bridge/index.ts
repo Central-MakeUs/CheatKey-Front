@@ -15,17 +15,18 @@ import type {
 import { authStorage } from "@/services/authStorage";
 import { postReissue } from "@/apis/postReissue";
 import { Share } from "react-native";
+import { onboardingStorage } from "@/services/onboardingStorage";
 
 interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
   socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
-  getRefreshToken: () => Promise<{ refreshToken: string | null }>;
   refreshTokens: () => Promise<{ accessToken: string | null }>;
   shareUrl: (data: {
     url: string;
     message?: string;
   }) => Promise<{ success: boolean; message?: string }>;
+  completeOnboarding: () => Promise<void>;
 }
 
 export const appBridge = bridge<AppBridgeType>((store) => ({
@@ -69,11 +70,6 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
     return { accessToken };
   },
 
-  getRefreshToken: async () => {
-    const refreshToken = await authStorage.getRefreshToken();
-    return { refreshToken };
-  },
-
   refreshTokens: async () => {
     try {
       const refreshToken = await authStorage.getRefreshToken();
@@ -107,6 +103,9 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
       return { success: false, message: "공유에 실패했습니다." };
     }
   },
+  completeOnboarding: async () => {
+    await onboardingStorage.completeOnboarding();
+  },
 }));
 
 // 웹에서 보낸 데이터의 유효성 검사 스키마
@@ -115,9 +114,6 @@ export const appSchema = postMessageSchema({
     validate: (data) => z.enum(["kakao", "apple"]).parse(data),
   },
   getAccessToken: {
-    validate: () => z.object({}).parse({}),
-  },
-  getRefreshToken: {
     validate: () => z.object({}).parse({}),
   },
   refreshTokens: {
@@ -131,6 +127,9 @@ export const appSchema = postMessageSchema({
           message: z.string().optional(),
         })
         .parse(data),
+  },
+  completeOnboarding: {
+    validate: () => z.object({}).parse({}),
   },
 });
 
