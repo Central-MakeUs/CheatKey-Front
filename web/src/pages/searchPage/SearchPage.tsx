@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
 
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { NoResult } from "@/components/common/NoResult";
 import { SearchBar } from "@/components/common/SearchBar";
 import { ToTop } from "@/components/common/ToTop";
@@ -81,8 +82,8 @@ export const SearchPage = () => {
                 ))}
               </ul>
               {hasNextPage && !isFetchingNextPage && (
-                <div ref={inViewRef} className="py-4 text-center">
-                  로딩 중...
+                <div ref={inViewRef} className="flex justify-center py-4">
+                  <LoadingSpinner width={16} height={16} />
                 </div>
               )}
             </>
