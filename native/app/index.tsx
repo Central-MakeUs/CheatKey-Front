@@ -5,11 +5,14 @@ import {
   KeyboardAvoidingView,
   Platform,
   View,
+  ActivityIndicator,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { createWebView } from "@webview-bridge/react-native";
 import { appBridge, appSchema } from "@/bridge";
 import { initializeKakaoSDK } from "@react-native-kakao/core";
+import { useInitialUrl } from "@/hooks/useInitialUrl";
+import { SplashScreen } from "expo-router";
 
 const { WebView } = createWebView({
   bridge: appBridge,
@@ -22,6 +25,12 @@ export default function WebViewScreen() {
 
   const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL || "";
   const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY || "";
+
+  const { initialUrl, isLoading } = useInitialUrl(WEB_APP_URL);
+
+  const handleWebViewLoadEnd = () => {
+    SplashScreen.hideAsync();
+  };
 
   useEffect(() => {
     const initKakaoSDK = async () => {
@@ -42,6 +51,20 @@ export default function WebViewScreen() {
     true; 
   `;
 
+  if (isLoading || !initialUrl) {
+    return (
+      <View
+        style={[
+          styles.container,
+          styles.center,
+          { backgroundColor: "#161517" },
+        ]}
+      >
+        <ActivityIndicator size="large" color={"#fff"} />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -55,7 +78,7 @@ export default function WebViewScreen() {
         keyboardVerticalOffset={insets.top}
       >
         <WebView
-          source={{ uri: WEB_APP_URL }}
+          source={{ uri: initialUrl }}
           style={styles.webview}
           injectedJavaScript={injectedJavaScript}
           // JavaScript 관련
@@ -81,6 +104,7 @@ export default function WebViewScreen() {
           onError={(e) => {
             console.error("WebView error:", e.nativeEvent);
           }}
+          onLoadEnd={handleWebViewLoadEnd}
         />
       </KeyboardAvoidingView>
     </View>
@@ -96,6 +120,10 @@ const styles = StyleSheet.create({
   },
   webview: {
     flex: 1,
-    backgroundColor: "transparent",
+    backgroundColor: "#161517",
+  },
+  center: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

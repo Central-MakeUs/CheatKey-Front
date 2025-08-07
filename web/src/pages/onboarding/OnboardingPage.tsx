@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { path } from "@/routes/path";
 
+import { bridge } from "@/bridge";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
@@ -33,6 +34,11 @@ export const OnboardingPage = () => {
     if (stepState >= ONBOARDING_TOTAL_STEP) return;
     setStepState((prev) => prev + 1);
   }, []);
+
+  const handleCompleteOnboarding = async () => {
+    await bridge.completeOnboarding();
+    navigate(path.auth.login);
+  };
 
   useEffect(() => {
     if (stepState >= ONBOARDING_TOTAL_STEP) {
@@ -90,8 +96,8 @@ export const OnboardingPage = () => {
       <div className="border-t-gray-system-800 w-full border-t px-5 py-3">
         <BottomFullButton
           content={"시작하기"}
-          state={stepState === 4}
-          onClick={() => navigate(path.auth.login)}
+          state={stepState === ONBOARDING_TOTAL_STEP}
+          onClick={handleCompleteOnboarding}
         />
       </div>
     </div>
