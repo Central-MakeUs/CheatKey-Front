@@ -37,6 +37,7 @@ export interface AppState {
 export interface NativeBridgeMethods {
   socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
+  getRefreshToken: () => Promise<{ refreshToken: string | null }>;
   refreshTokens: () => Promise<{ accessToken: string | null }>;
   shareUrl: (data: {
     url: string;

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
 
+import { path } from "@/routes/path";
+
 import { deleteAuthWithdraw } from "@/apis/auth/deleteAuthWithdraw";
 import { postAuthLogout } from "@/apis/auth/postAuthLogout";
 
@@ -18,16 +20,17 @@ export const MyAccount = () => {
   const logoutMutation = useMutation({
     mutationFn: postAuthLogout,
     onSuccess: () => {
-      //TODO: @tifsy 로그아웃 후 랜딩 경로 지정
-      navigate("/");
+      navigate(path.auth.login);
+    },
+    onError: (e) => {
+      console.log(e);
     },
   });
 
   const withdrawMutation = useMutation({
     mutationFn: deleteAuthWithdraw,
     onSuccess: () => {
-      //TODO: @tifsy 회원 탈퇴 후 랜딩 경로 지정
-      navigate("/");
+      navigate(path.auth.login);
     },
   });
 
