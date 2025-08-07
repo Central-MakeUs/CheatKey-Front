@@ -76,7 +76,7 @@ export const Home = () => {
             현재 인기 있는 게시글
           </h1>
           <a
-            onClick={() => navigate(path.community.base)}
+            onClick={() => navigate(path.community.feed)}
             aria-label="인기 게시글 더보기"
             className="caption-1-medium text-gray-system-600"
           >

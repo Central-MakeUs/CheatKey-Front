@@ -22,9 +22,6 @@ export const MyAccount = () => {
     onSuccess: () => {
       navigate(path.auth.login);
     },
-    onError: (e) => {
-      console.log(e);
-    },
   });
 
   const withdrawMutation = useMutation({
