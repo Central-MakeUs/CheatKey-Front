@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { path } from "@/routes/path";
+
+import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
+import { getMypageDashboard } from "@/apis/my/getMypageDashboard";
+import { useMyPageStore } from "@/store/useMypageStore";
+import { useMyPostsStore } from "@/store/useMyPostsStore";
 
 import { AppHeader } from "@/components/common/AppHeader";
 import { MyAccount } from "@/components/my/MyAccount";
@@ -20,6 +25,31 @@ export const MyPage = () => {
 
   const [isToggleOn, setIsToggleOn] = useState(false);
 
+  const { myInfo, setMyDashboardData } = useMyPageStore();
+  const { myPosts, setMyPosts } = useMyPostsStore();
+
+  useEffect(() => {
+    const fetchUserDashboard = async () => {
+      try {
+        const res = await getMypageDashboard();
+        setMyDashboardData(res);
+      } catch (e) {
+        console.error("❌마이페이지 데이터 불러오기 실패", e);
+      }
+    };
+
+    const fetchUserPosts = async () => {
+      try {
+        const res = await getMypageCommunityPostsManagement();
+        setMyPosts(res);
+      } catch (e) {
+        console.error("❌내 작성글 데이터 불러오기 실패", e);
+      }
+    };
+    fetchUserDashboard();
+    fetchUserPosts();
+  }, [setMyDashboardData, setMyPosts]);
+
   return (
     <div className="safearea bg-bg-100 relative h-screen">
       <AppHeader title="My" onNotification={() => {}} className="bg-bg-100" />
@@ -28,7 +58,9 @@ export const MyPage = () => {
 
         <div>
           <span className="text-base-0 mr-2.5">작성글</span>
-          <span className="text-gray-system-600">243</span>
+          <span className="text-gray-system-600">
+            {myPosts?.totalPosts ?? "로딩 중.."}
+          </span>
         </div>
 
         <button
@@ -58,7 +90,6 @@ export const MyPage = () => {
             isToggled={isToggleOn}
             onToggle={() => setIsToggleOn((prev) => !prev)}
           />
-
           <MyMenuItem
             icon={<AnalysisIcon />}
             label="분석 내역 보기"

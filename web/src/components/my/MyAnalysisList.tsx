@@ -1,55 +1,55 @@
-import { useNavigate } from "react-router-dom";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import type { MyAnalysisItem } from "@/types/my/my.types";
+import { getMypageDetectionHistory } from "@/apis/my/getMypageDetectionHistory";
 
 import { NoResult } from "@/components/common/NoResult";
-import { AnalysisLevelBadge } from "@/components/my/AnalysisLevelBadge";
-import { AnalysisTypeBadge } from "@/components/my/AnalysisTypeBadge";
-
-import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
+import { MyAnalysisListItem } from "@/components/my/MyAnalysisListItem";
 
 interface MyAnalysisListProps {
-  items: MyAnalysisItem[];
+  period: "today" | "week" | "month";
 }
 
-export const MyAnalysisList = ({ items }: MyAnalysisListProps) => {
-  const navigate = useNavigate();
+export const MyAnalysisList = ({ period }: MyAnalysisListProps) => {
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+  } = useInfiniteQuery({
+    queryKey: ["myDetectionHistory", period],
+    queryFn: ({ pageParam = 0 }) =>
+      getMypageDetectionHistory({ page: pageParam, size: 10, period }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      return lastPage.last ? undefined : lastPage.number + 1;
+    },
+  });
 
-  return items.length === 0 ? (
-    <NoResult text="분석 결과가 존재하지 않아요!" type="ai" />
-  ) : (
-    <>
-      {items.map((item) => {
-        return (
-          //TODO: @tifsy 분석 상세 보기 경로 수정
-          <a
-            type="link"
-            key={item.id}
-            onClick={() => navigate("/home")}
-            className={
-              "active:bg-gray-system-800 flex w-full flex-col px-5 py-5 text-left transition-colors duration-200"
-            }
-          >
-            <div className="mb-[0.9375rem] flex items-center justify-between">
-              <div className="flex gap-[7px]">
-                <AnalysisLevelBadge level={item.level} />
-                <AnalysisTypeBadge type={item.analysisType} />
-              </div>
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+  if (isError) {
+    return <div>❌ 데이터를 불러오지 못했습니다.</div>;
+  }
 
-              <ArrowRightIcon className="text-gray-system-700 h-5 w-5" />
-            </div>
-            <p className="text-base-0 body-1-bold mb-[0.3125rem] truncate">
-              {item.content}
-            </p>
-            <p className="text-gray-system-500 body-4-medium flex gap-[7px]">
-              판독 날짜
-              <span className="text-gray-system-600 body-5-regular">
-                {item.detectedAt}
-              </span>
-            </p>
-          </a>
-        );
-      })}
-    </>
+  const allItems = data?.pages.flatMap((page) => page.content) || [];
+
+  if (allItems.length === 0) {
+    return <NoResult text="분석 결과가 존재하지 않아요!" type="ai" />;
+  }
+
+  return (
+    <div>
+      {allItems.map((item) => (
+        <MyAnalysisListItem key={item.id} item={item} />
+      ))}
+      {hasNextPage && (
+        <button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+          {isFetchingNextPage ? "더 불러오는 중..." : "더보기"}
+        </button>
+      )}
+    </div>
   );
 };

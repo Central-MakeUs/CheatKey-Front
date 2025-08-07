@@ -9,13 +9,25 @@ import { MyAnalysisPageTab } from "@/components/my/MyAnalysisPageTab";
 
 import { MY_ANALYSIS_PAGE_TABS } from "@/constants/myAnalysisPageTabs";
 
-import { mockMyAnalysisPageData } from "@/mocks/mockMyAnalysisPageData";
-
 export const MyAnalysisPage = () => {
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState<string>(MY_ANALYSIS_PAGE_TABS[0]);
 
+  const getPeriodFromTab = (tab: string) => {
+    switch (tab) {
+      case "오늘":
+        return "today";
+      case "이번 주":
+        return "week";
+      case "이번 달":
+        return "month";
+      default:
+        return "today";
+    }
+  };
+
+  const period = getPeriodFromTab(activeTab);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -25,12 +37,10 @@ export const MyAnalysisPage = () => {
         title="분석 내역 보기"
         className="bg-bg-100"
       />
-
       <div className="divide-bg-50 divide-y overflow-y-auto pt-11">
         <MyAnalysisPageTab activeTab={activeTab} setActiveTab={setActiveTab} />
-        <MyAnalysisList items={mockMyAnalysisPageData} />
+        <MyAnalysisList period={period} />
       </div>
-
       <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
