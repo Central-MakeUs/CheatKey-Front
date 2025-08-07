@@ -1,19 +1,21 @@
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
+//import { path } from "@/routes/path";
 
-import { useMyPageStore } from "@/store/useMypageStore";
+import type { MyInfo } from "@/types/my/my.types";
 
 import { NameTag } from "@/components/common/NameTag";
 
 import { LEVEL_DATA_MAP } from "@/constants/homePageConstants";
 
-import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
+//import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 
-export const MyProfile = () => {
-  const navigate = useNavigate();
+interface MyProfileProps {
+  myInfo: MyInfo;
+}
 
-  const { myInfo } = useMyPageStore();
+export const MyProfile = ({ myInfo }: MyProfileProps) => {
+  //  const navigate = useNavigate();
 
   const level = myInfo?.level ?? 1;
   const levelInfo = LEVEL_DATA_MAP.get(level);
@@ -32,12 +34,15 @@ export const MyProfile = () => {
           <h1 className="head-3-bold text-base-0 truncate">
             {myInfo?.nickname}
           </h1>
+          {/**
+           * TODO: @Tifsy 추후 2차 배포 수정 예정
           <button
             aria-label="프로필 수정하기"
             onClick={() => navigate(path.my.edit)}
           >
             <ArrowRightIcon className="text-gray-system-700 h-5 w-5" />
           </button>
+           */}
         </div>
 
         <p className="body-5-regular text-gray-system-200 mt-2">

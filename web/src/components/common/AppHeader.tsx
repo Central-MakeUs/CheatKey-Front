@@ -1,6 +1,6 @@
 import { cn } from "@/utils/cn";
 
-import Notification_On from "@/assets/icons/notification_on.svg?react";
+//import Notification_On from "@/assets/icons/notification_on.svg?react";
 import Prev from "@/assets/icons/prev.svg?react";
 import Write from "@/assets/icons/write.svg?react";
 //import Notification_Off from "@/assets/icons/notification_off.svg?react";
@@ -17,7 +17,7 @@ export const AppHeader = ({
   onSkip,
   onPrev,
   onWrite,
-  onNotification,
+  //onNotification,
   className,
 }: AppHeaderProps) => {
   return (
@@ -57,6 +57,8 @@ export const AppHeader = ({
             <Write className="text-base-0 h-8 w-8" />
           </button>
         )}
+        {/** 
+         * TODO: @미정 2차 배포 알림 추가 
         {onNotification && (
           <button
             type="button"
@@ -64,10 +66,10 @@ export const AppHeader = ({
             onClick={onNotification}
             className="h-8 w-8"
           >
-            {/* 알림은 추후에 기능에 따라 컴포넌트로 변경해도 될 것으로 보입니다 */}
             <Notification_On className="text-base-0 h-8 w-8" />
           </button>
         )}
+        */}
       </div>
     </header>
   );

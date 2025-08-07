@@ -20,6 +20,7 @@ interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
   socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
+  getRefreshToken: () => Promise<{ refreshToken: string | null }>;
   refreshTokens: () => Promise<{ accessToken: string | null }>;
   shareUrl: (data: {
     url: string;
@@ -68,6 +69,11 @@ export const appBridge = bridge<AppBridgeType>((store) => ({
     return { accessToken };
   },
 
+  getRefreshToken: async () => {
+    const refreshToken = await authStorage.getRefreshToken();
+    return { refreshToken };
+  },
+
   refreshTokens: async () => {
     try {
       const refreshToken = await authStorage.getRefreshToken();
@@ -109,6 +115,9 @@ export const appSchema = postMessageSchema({
     validate: (data) => z.enum(["kakao", "apple"]).parse(data),
   },
   getAccessToken: {
+    validate: () => z.object({}).parse({}),
+  },
+  getRefreshToken: {
     validate: () => z.object({}).parse({}),
   },
   refreshTokens: {

@@ -2,7 +2,7 @@ export type CommunityPost = {
   id: number;
   nickname: string;
   date: string;
-  category: string;
+  category?: string;
   title: string;
   content: string;
   commentCount: number;

@@ -1,7 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 
+import { getAnalyzeResult } from "@/apis/analyze/getAnalyzeResult";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
 import { cn } from "@/utils/cn";
 
@@ -13,16 +15,33 @@ import {
   STAGGER_CONTAINER,
   FADE_IN_UP_ITEM,
 } from "@/constants/animation/enterAnimation";
+import { QUERY_KEYS } from "@/constants/apiConstants";
 
 import Close from "@/assets/icons/close.svg?react";
 
 export const AnalyzeResultPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { analyzeId } = useParams<{ analyzeId: string }>();
 
-  const responseData = location.state as AnalyzeResponse | null;
+  const { data: analyzeResultData, isLoading: isAnalyzeResultDataLoading } =
+    useQuery({
+      queryKey: [QUERY_KEYS.GET_DETECTION_RESULT, analyzeId],
+      queryFn: () => getAnalyzeResult({ detectionId: parseInt(analyzeId!) }),
+      enabled: !location.state && !!analyzeId,
+      select: (response) => {
+        return {
+          id: response.id,
+          group: response.group,
+          status: response.status,
+        };
+      },
+    });
 
-  if (!responseData) {
+  const responseData = (location.state ||
+    analyzeResultData) as AnalyzeResponse | null;
+
+  if (isAnalyzeResultDataLoading || !responseData) {
     return (
       <div className="flex h-screen w-screen items-center justify-center">
         <LoadingSpinner width={32} height={32} />

@@ -2,22 +2,35 @@ import { useRef } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { useMyPostsStore } from "@/store/useMyPostsStore";
+import { useQuery } from "@tanstack/react-query";
 
+import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
+
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";
 import { NoResult } from "@/components/common/NoResult";
 import { ToTop } from "@/components/common/ToTop";
 import { MyPostsPreview } from "@/components/my/MyPostsPreview";
 
+import { QUERY_KEYS } from "@/constants/apiConstants";
+
 export const MyPostsPage = () => {
   const navigate = useNavigate();
 
-  const { myPosts } = useMyPostsStore();
+  const { data: myPosts, isLoading: isPostsLoading } = useQuery({
+    queryKey: [QUERY_KEYS.MYPAGE_POST],
+    queryFn: getMypageCommunityPostsManagement,
+  });
   const total = myPosts?.totalPosts ?? 0;
   const posts = myPosts?.posts ?? [];
-  
+
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  if (isPostsLoading) {
+    <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
+      <LoadingSpinner width={32} height={32} />
+    </div>;
+  }
 
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
