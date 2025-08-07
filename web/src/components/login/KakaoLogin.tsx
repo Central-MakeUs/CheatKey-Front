@@ -19,13 +19,16 @@ export const KakaoLogin = () => {
 
       if (result.success) {
         useAuthStore.getState().setAccessToken(result.data.accessToken);
-        if (
-          result.data.userState === "PENDING" ||
-          result.data.userState === "SUSPENDED"
-        ) {
+        if (result.data.userState === "PENDING") {
           navigate(path.auth.signup);
         } else if (result.data.userState === "ACTIVE") {
           navigate(path.home);
+        } else if (result.data.userState === "BANNED") {
+          alert("임시 차단된 계정입니다.");
+        } else if (result.data.userState === "INACTIVE") {
+          alert("영구 정지된 계정입니다.");
+        } else if (result.data.userState === "WITHDRAWN") {
+          alert("이전에 탈퇴한 계정입니다.");
         }
       }
       // TODO: @Ki-Tak 에러 처리랑 카카오 로그인 실패 처리 로직 수정 필요

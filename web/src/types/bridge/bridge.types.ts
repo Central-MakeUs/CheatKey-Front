@@ -1,6 +1,11 @@
 import type { BridgeStore, RawJSON } from "@webview-bridge/web";
 
-export type UserState = "ACTIVE" | "PENDING" | "SUSPENDED";
+export type UserState =
+  | "ACTIVE"
+  | "PENDING"
+  | "WITHDRAWN"
+  | "INACTIVE"
+  | "BANNED";
 export type SocialType = "kakao" | "apple";
 
 export interface SuccessBridgeResult {
