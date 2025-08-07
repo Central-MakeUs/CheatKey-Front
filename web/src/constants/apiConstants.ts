@@ -5,6 +5,7 @@ export const API_DOMAINS = {
   DELETE_AUTH_WITHDRAW: "/v1/api/auth/withdraw",
   POST_ANALYZE_URL: "/v1/api/detection/url",
   POST_ANALYZE_CASE: "/v1/api/detection/case",
+  GET_ANALYZE_RESULT: "/v1/api/detection/history/:detectionId",
   GET_HOME_DASHBOARD: "/v1/api/home/dashboard",
   GET_MYPAGE_DASHBOARD: "/v1/api/mypage/dashboard",
   GET_MYPAGE_COMMUNITY_POSTS_MANAGEMENT:
@@ -17,4 +18,5 @@ export const QUERY_KEYS = {
   HOME_DASHBOARD: "homeDashboard",
   MYPAGE_DASHBOARD: "myPageDashboard",
   MYPAGE_POST: "myPagePosts",
+  GET_DETECTION_RESULT: "myDetectionResult",
 };
