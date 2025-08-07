@@ -48,8 +48,14 @@ export default function WebViewScreen() {
 
   if (isLoading || !initialUrl) {
     return (
-      <View style={[styles.container, styles.center]}>
-        <ActivityIndicator size="large" />
+      <View
+        style={[
+          styles.container,
+          styles.center,
+          { backgroundColor: "#161517" },
+        ]}
+      >
+        <ActivityIndicator size="large" color={"#fff"} />
       </View>
     );
   }

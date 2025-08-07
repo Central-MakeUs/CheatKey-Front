@@ -47,6 +47,7 @@ export interface NativeBridgeMethods {
     url: string;
     message?: string;
   }) => Promise<BridgeShareResult>;
+  completeOnboarding: () => Promise<void>;
 }
 
 export type AppBridgeSpec = AppState & NativeBridgeMethods;
