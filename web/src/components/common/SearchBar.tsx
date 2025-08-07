@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import type { ChangeEvent, KeyboardEvent } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -12,12 +13,14 @@ interface SearchBarProps {
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
+  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export const SearchBar = ({
   placeholder,
   value = "",
   onChange,
+  onKeyDown,
 }: SearchBarProps) => {
   const navigate = useNavigate();
 
@@ -41,7 +44,10 @@ export const SearchBar = ({
           type="text"
           placeholder={placeholder}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChange(e.target.value)
+          }
+          onKeyDown={onKeyDown}
           className={cn(
             "caret-primary-400 placeholder-gray-system-600 w-full bg-transparent focus:outline-none",
             isSearchBarFilled
