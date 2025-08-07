@@ -1,18 +1,43 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
+import { useMutation } from "@tanstack/react-query";
+
+import { deleteAuthWithdraw } from "@/apis/auth/deleteAuthWithdraw";
+import { postAuthLogout } from "@/apis/auth/postAuthLogout";
+
 import { MyAccountModalRenderer } from "@/components/my/MyAccountModalRenderer";
 
 export const MyAccount = () => {
+  const navigate = useNavigate();
+
   const [modalType, setModalType] = useState<"logout" | "delete" | null>(null);
   const closeModal = () => setModalType(null);
 
+  const logoutMutation = useMutation({
+    mutationFn: postAuthLogout,
+    onSuccess: () => {
+      //TODO: @tifsy 로그아웃 후 랜딩 경로 지정
+      navigate("/");
+    },
+  });
+
+  const withdrawMutation = useMutation({
+    mutationFn: deleteAuthWithdraw,
+    onSuccess: () => {
+      //TODO: @tifsy 회원 탈퇴 후 랜딩 경로 지정
+      navigate("/");
+    },
+  });
+
   const handleLogout = () => {
-    console.log("로그아웃 모달");
+    logoutMutation.mutate();
     closeModal();
   };
 
   const handleDeleteAccount = () => {
-    console.log("회원 탈퇴 모달");
+    withdrawMutation.mutate();
     closeModal();
   };
 
