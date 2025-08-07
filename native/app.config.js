@@ -2,7 +2,7 @@ module.exports = () => {
   const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY;
 
   return {
-    name: "native",
+    name: "CheatKey",
     slug: "native",
     version: "1.0.0",
     orientation: "portrait",
