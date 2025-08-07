@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 import { useQuery } from "@tanstack/react-query";
+
+import { path } from "@/routes/path";
 
 import { getHomeDashboard } from "@/apis/home/getHomeDashboard";
 
@@ -15,6 +19,7 @@ import {
 } from "@/constants/homePageConstants";
 
 export const Home = () => {
+  const navigate = useNavigate();
   // TODO: @Ki-Tak 추후, 로딩 및 에러 + staleTime 정해지면 변경해야함
   const { data: dashboardData } = useQuery({
     queryKey: [QUERY_KEYS.HOME_DASHBOARD],
@@ -70,9 +75,8 @@ export const Home = () => {
           <h1 className="body-1-bold text-gray-system-50">
             현재 인기 있는 게시글
           </h1>
-          {/* TODO: @Ki-Tak 추후에 인기 게시글 라우팅 정해지면 변경해야함 */}
           <a
-            href="/"
+            onClick={() => navigate(path.community.feed)}
             aria-label="인기 게시글 더보기"
             className="caption-1-medium text-gray-system-600"
           >

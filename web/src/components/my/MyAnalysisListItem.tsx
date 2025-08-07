@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
+import { path } from "@/routes/path";
+
 import type { MyAnalysisItem } from "@/types/my/my.types";
 
 import { AnalysisLevelBadge } from "@/components/my/AnalysisLevelBadge";
@@ -18,7 +20,11 @@ export const MyAnalysisListItem = ({ item }: MyAnalysisListItemProps) => {
     <button
       type="button"
       key={item.id}
-      onClick={() => navigate(`/analysis/${item.id}`)}
+      onClick={() =>
+        navigate(
+          `${path.analyze.base}/${path.analyze.specific.result(item.id)}`,
+        )
+      }
       className="active:bg-gray-system-800 flex w-full flex-col px-5 py-5 text-left transition-colors duration-200"
     >
       <div className="mb-[0.9375rem] flex w-full items-center justify-between">

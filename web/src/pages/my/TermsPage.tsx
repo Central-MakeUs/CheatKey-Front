@@ -17,6 +17,8 @@ export const TermsPage = () => {
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // TODO: @Ki-Tak 추후, 서버 연동
+
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
       <AppHeader

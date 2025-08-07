@@ -1,9 +1,9 @@
 import { login } from "@react-native-kakao/user";
 import { postSocialLogin } from "@/apis/postSocialLogin";
-import type { SocialLoginResult } from "@/apis/postSocialLogin";
+import type { SocialLoginApiResponse } from "@/types/auth.types";
 import { authStorage } from "@/services/authStorage";
 
-export const performKakaoLogin = async (): Promise<SocialLoginResult> => {
+export const performKakaoLogin = async (): Promise<SocialLoginApiResponse> => {
   try {
     const kakaoResult = await login();
 

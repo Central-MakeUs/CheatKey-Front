@@ -1,3 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
+import { path } from "@/routes/path";
+
 import type { HomeTrendingPostData } from "@/types/home/home.types";
 
 import { NameTag } from "@/components/common/NameTag";
@@ -9,10 +13,10 @@ export const HomeTrendingPost = ({
   authorProfileImageUrl,
   authorNickname,
 }: HomeTrendingPostData) => {
+  const navigate = useNavigate();
   return (
     <a
-      // TODO: @Ki-Tak 추후 커뮤니티 상세 UI 구현 시, 라우팅 변경 예정
-      href={`${id}`}
+      onClick={() => navigate(path.community.detail(String(id)))}
       className="bg-gray-system-800 flex w-73 shrink-0 flex-col gap-2.5 rounded-xl p-4"
     >
       <div className="flex w-full items-center gap-2">

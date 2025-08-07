@@ -1,13 +1,13 @@
-type AnalysisType = "URL" | "TEXT";
+import type { DetectionType } from "@/types/my/my.types";
 
 interface AnalysisTypeBadgeProps {
-  type: AnalysisType;
+  type: DetectionType;
 }
 
 export const AnalysisTypeBadge = ({ type }: AnalysisTypeBadgeProps) => {
-  const typeLabelMap: Record<AnalysisType, string> = {
+  const typeLabelMap: Record<DetectionType, string> = {
     URL: "URL 분석",
-    TEXT: "텍스트 분석",
+    CASE: "텍스트 분석",
   };
 
   return (

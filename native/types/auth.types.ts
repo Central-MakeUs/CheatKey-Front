@@ -1,5 +1,10 @@
 export type SocialType = "kakao" | "apple";
-export type UserState = "ACTIVE" | "PENDING" | "SUSPENDED";
+export type UserState =
+  | "ACTIVE"
+  | "PENDING"
+  | "WITHDRAWN"
+  | "INACTIVE"
+  | "BANNED";
 
 export interface SocialLoginApiRequest {
   provider: SocialType;

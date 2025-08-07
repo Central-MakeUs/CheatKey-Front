@@ -1,9 +1,9 @@
 import * as AppleAuthentication from "expo-apple-authentication";
 import { postSocialLogin } from "@/apis/postSocialLogin";
-import type { SocialLoginResult } from "@/apis/postSocialLogin";
+import type { SocialLoginApiResponse } from "@/types/auth.types";
 import { authStorage } from "@/services/authStorage";
 
-export const performAppleLogin = async (): Promise<SocialLoginResult> => {
+export const performAppleLogin = async (): Promise<SocialLoginApiResponse> => {
   try {
     const appleResult = await AppleAuthentication.signInAsync({
       requestedScopes: [

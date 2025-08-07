@@ -1,6 +1,11 @@
 import type { BridgeStore, RawJSON } from "@webview-bridge/web";
 
-export type UserState = "ACTIVE" | "PENDING" | "SUSPENDED";
+export type UserState =
+  | "ACTIVE"
+  | "PENDING"
+  | "WITHDRAWN"
+  | "INACTIVE"
+  | "BANNED";
 export type SocialType = "kakao" | "apple";
 
 export interface SuccessBridgeResult {
@@ -37,6 +42,7 @@ export interface AppState {
 export interface NativeBridgeMethods {
   socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
+  getRefreshToken: () => Promise<{ refreshToken: string | null }>;
   refreshTokens: () => Promise<{ accessToken: string | null }>;
   shareUrl: (data: {
     url: string;
