@@ -38,7 +38,8 @@ export const SearchPage = () => {
   const allPosts = data?.pages.flatMap((page) => page.content) || [];
 
   const handleSearch = () => {
-    setSearchKeyword(query);
+    if (query.trim() === "") return;
+    setSearchKeyword(query.trim());
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
