@@ -32,7 +32,7 @@ export const AnalyzeResultPage = () => {
       select: (response) => {
         return {
           id: response.id,
-          group: response.detectionType,
+          group: response.group,
           status: response.status,
         };
       },

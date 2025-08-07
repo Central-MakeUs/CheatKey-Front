@@ -1,4 +1,5 @@
 import { authAPI } from "@/apis/instance";
+import type { DetectionType } from "@/types/my/my.types";
 import { generateApiPath } from "@/utils/generateApiPath";
 
 import type {
@@ -10,11 +11,12 @@ import { API_DOMAINS } from "@/constants/apiConstants";
 export interface GetAnalyzeResultResponse {
   id: number;
   status: (typeof ANALYSIS_STATUS)[keyof typeof ANALYSIS_STATUS];
-  detectionType: (typeof ANALYSIS_CATEGORY)[keyof typeof ANALYSIS_CATEGORY];
+  detectionType: DetectionType;
   inputText: string;
   topScore: number;
   matchedCaseId: string;
   detectedAt: string;
+  group: (typeof ANALYSIS_CATEGORY)[keyof typeof ANALYSIS_CATEGORY];
 }
 
 export const getAnalyzeResult = async ({

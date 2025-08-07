@@ -37,12 +37,13 @@ export interface MyPostListResponse {
   posts: MyPostItem[];
   totalPosts: number;
 }
+export type DetectionType = "URL" | "CASE";
 
 //사기 분석 내역
 export interface MyAnalysisItem {
   id: number;
   status: "SAFE" | "WARNING" | "DANGER";
-  detectionType: "URL" | "TEXT";
+  detectionType: DetectionType;
   inputText: string;
   detectedAt: string;
   topScore: number;

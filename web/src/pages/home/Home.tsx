@@ -75,7 +75,6 @@ export const Home = () => {
           <h1 className="body-1-bold text-gray-system-50">
             현재 인기 있는 게시글
           </h1>
-          {/* TODO: @Ki-Tak 추후에 인기 게시글 라우팅 정해지면 변경해야함 */}
           <a
             onClick={() => navigate(path.community.base)}
             aria-label="인기 게시글 더보기"
