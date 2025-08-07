@@ -38,10 +38,12 @@ export const Home = () => {
       <div className="px-5">
         <SearchBarRedirect placeholder="사기 사례를 검색해주세요." />
       </div>
-      {/* 커팅이 사진과 닉네임 영역 */}
+      {/* 커팅이 사진과 닉네임 영역 
+          추후에, 서버에서 보내주는 이미지로 변경 예정
+      */}
       <div className="mt-[1.125rem] flex items-center gap-6 px-5">
         <img
-          src={userInfo.profileImageUrl}
+          src={levelInfo?.image}
           alt="유저의 커팅이 사진"
           className="border-primary-600/40 h-[8.125rem] w-[8.125rem] rounded-full border-[0.5px]"
         />

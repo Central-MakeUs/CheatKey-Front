@@ -6,6 +6,9 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { path } from "@/routes/path";
 
+import { useImagePreloader } from "@/hooks/useImagePreloader";
+
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { PageIndicator } from "@/components/common/PageIndicator";
 import { OnboardingContent } from "@/components/onboarding/OnboardingContent";
@@ -16,13 +19,15 @@ import {
   ONBOARDING_TOTAL_STEP,
 } from "@/constants/onboardingConstants";
 
+const onboardingImageUrls = Object.values(ONBOARDING_CONSTANTS).map(
+  (content) => content.image,
+);
+
 export const OnboardingPage = () => {
   const navigate = useNavigate();
-
   const [stepState, setStepState] = useState<number>(1);
 
-  const currentContent =
-    ONBOARDING_CONSTANTS[stepState as keyof typeof ONBOARDING_CONSTANTS];
+  const { imagesLoaded } = useImagePreloader(onboardingImageUrls);
 
   const handleNextStep = useCallback(() => {
     if (stepState >= ONBOARDING_TOTAL_STEP) return;
@@ -40,6 +45,17 @@ export const OnboardingPage = () => {
 
     return () => clearTimeout(timer);
   }, [stepState, handleNextStep]);
+
+  if (!imagesLoaded) {
+    return (
+      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
+        <LoadingSpinner width={32} height={32} />
+      </div>
+    );
+  }
+
+  const currentContent =
+    ONBOARDING_CONSTANTS[stepState as keyof typeof ONBOARDING_CONSTANTS];
 
   return (
     <div className="safearea bg-bg-100 relative flex h-screen w-full flex-1 flex-col justify-center">
