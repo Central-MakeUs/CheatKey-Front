@@ -1,16 +1,18 @@
 import { useNavigate } from "react-router-dom";
 
+import { useMyPostsStore } from "@/store/useMyPostsStore";
+
 import { AppHeader } from "@/components/common/AppHeader";
 import { NoResult } from "@/components/common/NoResult";
 import { ToTop } from "@/components/common/ToTop";
 import { MyPostsPreview } from "@/components/my/MyPostsPreview";
 
-import { mockMyPosts } from "@/mocks/mockMyPosts";
-
 export const MyPostsPage = () => {
   const navigate = useNavigate();
 
-  const posts = mockMyPosts;
+  const { myPosts } = useMyPostsStore();
+  const total = myPosts?.totalPosts ?? 0;
+  const posts = myPosts?.posts ?? [];
 
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
@@ -21,7 +23,7 @@ export const MyPostsPage = () => {
       />
       <div className="overflow-y-auto px-5 pt-16">
         <span className="text-base-0 head-4-semibold w-fit py-3">
-          총 2개의 작성글
+          총 {total}개의 작성글
         </span>
         {posts.length === 0 ? (
           <NoResult
@@ -35,14 +37,13 @@ export const MyPostsPage = () => {
             {posts.map((post) => (
               <MyPostsPreview
                 key={post.id}
-                nickname={post.nickname}
                 id={post.id}
-                date={post.date}
+                nickname={post.nickname}
                 title={post.title}
                 content={post.content}
+                date={post.createdAt}
                 commentCount={post.commentCount}
-                images={post.images}
-                category={post.category}
+                images={post.imageUrls}
               />
             ))}
           </div>
