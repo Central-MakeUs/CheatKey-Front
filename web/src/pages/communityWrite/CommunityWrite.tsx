@@ -1,5 +1,11 @@
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
+import {
+  postCommunityPosts,
+  postFilesUpload,
+} from "@/apis/community/postCommunity";
 import { useCommunityWriteState } from "@/hooks/useCommunityWriteState";
 
 import { AppHeader } from "@/components/common/AppHeader";
@@ -13,6 +19,8 @@ import { TitleForm } from "@/components/communityWrite/TitleForm";
 
 export const CommunityWrite = () => {
   const navigate = useNavigate();
+  const [lastPostedId, setLastPostedId] = useState<number | null>(null);
+
   const {
     form,
     updateForm,
@@ -34,7 +42,7 @@ export const CommunityWrite = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!isValid) {
       const firstError = Object.values(errors)[0];
       if (firstError) {
@@ -43,7 +51,33 @@ export const CommunityWrite = () => {
       return;
     }
 
-    setModal((prev) => ({ ...prev, complete: true }));
+    try {
+      let fileUploadIds: number[] = [];
+
+      if (form.images.length > 0) {
+        const files = form.images.map((img) => img.file);
+        const uploadResponse = await postFilesUpload(files);
+        fileUploadIds = uploadResponse.fileUploadIds;
+      }
+
+      const postData = {
+        //하드코딩 된 유저 정보 가져와야 합니다!
+        userId: 1,
+        nickname: "글렌",
+        title: form.title,
+        content: form.content,
+        category: form.board,
+        fileUploadIds,
+      };
+
+      const response = await postCommunityPosts(postData);
+      setLastPostedId(response.postId);
+      setModal((prev) => ({ ...prev, complete: true }));
+    } catch (error) {
+      showToast("글 작성에 실패했습니다. 다시 시도해주세요.");
+
+      console.error("❌글 작성 에러:", error);
+    }
   };
 
   return (
@@ -100,8 +134,7 @@ export const CommunityWrite = () => {
             confirmText="보러가기"
             cancelText="취소"
             onConfirm={() => {
-              // TODO: @tifsy 경로 수정
-              navigate("/community/my-post");
+              navigate(`/community/post/${lastPostedId}`);
             }}
             onCancel={() => navigate("/home")}
           />
