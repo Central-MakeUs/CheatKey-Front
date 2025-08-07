@@ -26,6 +26,7 @@ export interface UploadedImage {
   file: File;
 }
 
+//커뮤니티 글 작성 유효성
 export type CommunityWriteValidationError = {
   titleTooShort: boolean;
   contentTooShort: boolean;
