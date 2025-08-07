@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import { MY_ANALYSIS_PAGE_TABS } from "@/constants/myAnalysisPageTabs";
 
 export const MyAnalysisPage = () => {
   const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState<string>(MY_ANALYSIS_PAGE_TABS[0]);
 
   const getPeriodFromTab = (tab: string) => {
@@ -27,6 +28,7 @@ export const MyAnalysisPage = () => {
   };
 
   const period = getPeriodFromTab(activeTab);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
@@ -37,10 +39,9 @@ export const MyAnalysisPage = () => {
       />
       <div className="divide-bg-50 divide-y overflow-y-auto pt-11">
         <MyAnalysisPageTab activeTab={activeTab} setActiveTab={setActiveTab} />
-
         <MyAnalysisList period={period} />
       </div>
-      <ToTop bottom="2rem" />
+      <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
 };

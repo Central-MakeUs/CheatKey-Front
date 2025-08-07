@@ -1,7 +1,10 @@
+import { useRef } from "react";
+
 import { useParams } from "react-router-dom";
 
 import { FontSizeProvider } from "@/contexts/FontSizeContext";
 
+import { ToTop } from "@/components/common/ToTop";
 import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
 import { ContentDetailMain } from "@/components/content/ContentDetailMain";
 import { ContentDetailTitle } from "@/components/content/ContentDetailTitle";
@@ -10,6 +13,7 @@ import { articleMap } from "@/mocks/mockContentsData";
 
 const ArticleDetailContent = () => {
   const { articleId } = useParams();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const data = articleId ? articleMap.get(parseInt(articleId, 10)) : undefined;
 
@@ -20,7 +24,7 @@ const ArticleDetailContent = () => {
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
       <ContentDetailHeader />
-      <div className="flex flex-1 flex-col overflow-y-auto">
+      <div ref={scrollRef} className="flex flex-1 flex-col overflow-y-auto">
         <ContentDetailTitle
           className="mt-header border-b-bg-50 mx-5 border-b py-5"
           category="알려드림"
@@ -36,6 +40,7 @@ const ArticleDetailContent = () => {
           sections={data.sections}
         />
       </div>
+      <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
 };

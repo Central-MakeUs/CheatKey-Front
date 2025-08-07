@@ -6,6 +6,7 @@ import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types"
 import { cn } from "@/utils/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 
 import { ALL_ANALYSIS_DATA } from "@/constants/analyze/result";
 import {
@@ -22,8 +23,11 @@ export const AnalyzeResultPage = () => {
   const responseData = location.state as AnalyzeResponse | null;
 
   if (!responseData) {
-    // TODO: @Ki-Tak 추후, PR 머지 되면 로딩 스피너 보여줄 예정
-    return null;
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <LoadingSpinner width={32} height={32} />
+      </div>
+    );
   }
 
   const category = responseData.group;

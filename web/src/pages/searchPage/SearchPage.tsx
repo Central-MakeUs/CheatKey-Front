@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { NoResult } from "@/components/common/NoResult";
 import { SearchBar } from "@/components/common/SearchBar";
@@ -8,6 +8,8 @@ import { SearchResultPreview } from "@/components/searchPage/SearchResultPreview
 import { mockCommunityFeedPreviews } from "@/mocks/mockCommunityFeedPreviews";
 export const SearchPage = () => {
   const [query, setQuery] = useState("");
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const filteredPosts = mockCommunityFeedPreviews.filter(
     (post) =>
@@ -45,7 +47,7 @@ export const SearchPage = () => {
         )}
       </div>
 
-      <ToTop bottom="2rem" />
+      <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
 };

@@ -1,36 +1,58 @@
 import { useEffect, useState, useMemo } from "react";
 
+import { createPortal } from "react-dom";
+
 import { throttle } from "@/utils/throttle";
 
 import ToTopIcon from "@/assets/icons/arrow_up.svg?react";
 
 interface ToTopProps {
   bottom?: string;
+  scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export const ToTop = ({ bottom = "7rem" }: ToTopProps) => {
+export const ToTop = ({ bottom = "7rem", scrollContainerRef }: ToTopProps) => {
   const [isToTopButtonVisible, setIsToTopButtonVisible] = useState(false);
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 
   const throttledScrollHandler = useMemo(
     () =>
       throttle(() => {
-        setIsToTopButtonVisible(window.scrollY > 0);
+        let isScrolled = false;
+
+        if (scrollContainerRef?.current) {
+          isScrolled = scrollContainerRef.current.scrollTop > 0;
+        } else {
+          isScrolled = window.scrollY > 0;
+        }
+        setIsToTopButtonVisible(isScrolled);
       }, 200),
-    [],
+    [scrollContainerRef],
   );
 
   const handleToTopButtonClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const target = scrollContainerRef?.current || window;
+    target.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", throttledScrollHandler);
-    return () => window.removeEventListener("scroll", throttledScrollHandler);
-  }, [throttledScrollHandler]);
+    const element = document.getElementById("to-top-root");
+    if (element) {
+      setPortalElement(element);
+    }
+  }, []);
 
-  if (!isToTopButtonVisible) return null;
+  useEffect(() => {
+    const target = scrollContainerRef?.current || window;
+    target.addEventListener("scroll", throttledScrollHandler);
+    return () => {
+      target.removeEventListener("scroll", throttledScrollHandler);
+    };
+  }, [scrollContainerRef, throttledScrollHandler]);
 
-  return (
+  if (!isToTopButtonVisible || !portalElement) return null;
+
+  return createPortal(
     <button
       onClick={handleToTopButtonClick}
       aria-label="맨 위로 올라가기"
@@ -38,6 +60,7 @@ export const ToTop = ({ bottom = "7rem" }: ToTopProps) => {
       style={{ bottom }}
     >
       <ToTopIcon className="text-base-0 h-5 w-6" />
-    </button>
+    </button>,
+    portalElement,
   );
 };

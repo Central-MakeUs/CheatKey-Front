@@ -23,7 +23,7 @@ const ICON_MAP = {
 };
 
 const POSITION_MAP: Record<ToastProps["position"], string> = {
-  ai: "1.25rem",
+  ai: "3rem",
   write: "5.875rem",
 };
 
@@ -40,11 +40,21 @@ export const Toast = ({
   onDone,
 }: ToastProps) => {
   const [visible, setVisible] = useState(true);
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(false), 3000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const element = document.getElementById("toast-root");
+    if (element) {
+      setPortalElement(element);
+    }
+  }, []);
+
+  if (!portalElement) return null;
 
   return createPortal(
     <AnimatePresence onExitComplete={onDone}>
@@ -71,6 +81,6 @@ export const Toast = ({
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body,
+    portalElement,
   );
 };

@@ -24,21 +24,25 @@ export const DetailResultCard = ({
         className,
       )}
     >
-      <div className="flex flex-col justify-between text-left">
-        <h1 className={cn("head-4-semibold", style.questionColor)}>
-          {data.question}
-          <br />
-          <span
-            className={cn(
-              "head-2-semibold whitespace-pre-wrap",
-              style.primaryColor,
-            )}
-          >
-            {data.answer}
-          </span>
-        </h1>
-        <img src={data.image} className="h-auto w-full" />
-      </div>
+      <h1
+        className={cn(
+          "head-4-semibold flex flex-col text-left",
+          style.questionColor,
+        )}
+      >
+        {data.question}
+        <br />
+        <span
+          className={cn(
+            "head-2-semibold whitespace-pre-wrap",
+            style.primaryColor,
+          )}
+        >
+          {data.answer}
+        </span>
+      </h1>
+
+      <img src={data.image} className="h-auto w-full" />
       <div>
         <div
           className={cn(

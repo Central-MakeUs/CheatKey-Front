@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import { useMyPostsStore } from "@/store/useMyPostsStore";
@@ -13,6 +15,9 @@ export const MyPostsPage = () => {
   const { myPosts } = useMyPostsStore();
   const total = myPosts?.totalPosts ?? 0;
   const posts = myPosts?.posts ?? [];
+  
+  const scrollRef = useRef<HTMLDivElement>(null);
+
 
   return (
     <div className="safearea bg-bg-100 flex h-screen flex-col">
@@ -49,7 +54,7 @@ export const MyPostsPage = () => {
           </div>
         )}
       </div>
-      <ToTop bottom="2rem" />
+      <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
     </div>
   );
 };
