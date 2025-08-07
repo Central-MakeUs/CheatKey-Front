@@ -20,7 +20,10 @@ export const AppleLogin = () => {
 
       if (result.success) {
         useAuthStore.getState().setAccessToken(result.data.accessToken);
-        if (result.data.userState === "PENDING") {
+        if (
+          result.data.userState === "PENDING" ||
+          result.data.userState === "SUSPENDED"
+        ) {
           navigate(path.auth.signup);
         } else if (result.data.userState === "ACTIVE") {
           navigate(path.home);
