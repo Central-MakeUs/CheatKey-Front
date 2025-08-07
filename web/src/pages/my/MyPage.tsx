@@ -1,66 +1,59 @@
-import { useEffect, useState } from "react";
+//import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+
+import { useQuery } from "@tanstack/react-query";
 
 import { path } from "@/routes/path";
 
 import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
 import { getMypageDashboard } from "@/apis/my/getMypageDashboard";
-import { useMyPageStore } from "@/store/useMypageStore";
-import { useMyPostsStore } from "@/store/useMyPostsStore";
 
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";
 import { MyAccount } from "@/components/my/MyAccount";
 import { MyMenuItem } from "@/components/my/MyMenuItem";
 import { MyProfile } from "@/components/my/MyProfile";
 
+import { QUERY_KEYS } from "@/constants/apiConstants";
+
 import AddIcon from "@/assets/icons/add.svg?react";
 import AnalysisIcon from "@/assets/icons/analysis.svg?react";
-import NotificationOffIcon from "@/assets/icons/notification_off.svg?react";
+//import NotificationOffIcon from "@/assets/icons/notification_off.svg?react";
 import TermsIcon from "@/assets/icons/terms.svg?react";
 import WriteIcon from "@/assets/icons/write.svg?react";
 
 export const MyPage = () => {
   const navigate = useNavigate();
 
-  const [isToggleOn, setIsToggleOn] = useState(false);
+  // const [isToggleOn, setIsToggleOn] = useState(false);
 
-  const { myInfo, setMyDashboardData } = useMyPageStore();
-  const { myPosts, setMyPosts } = useMyPostsStore();
+  const { data: myInfo, isLoading: isDashboardLoading } = useQuery({
+    queryKey: [QUERY_KEYS.MYPAGE_DASHBOARD],
+    queryFn: getMypageDashboard,
+  });
 
-  useEffect(() => {
-    const fetchUserDashboard = async () => {
-      try {
-        const res = await getMypageDashboard();
-        setMyDashboardData(res);
-      } catch (e) {
-        console.error("❌마이페이지 데이터 불러오기 실패", e);
-      }
-    };
+  const { data: myPosts, isLoading: isPostsLoading } = useQuery({
+    queryKey: [QUERY_KEYS.MYPAGE_POST],
+    queryFn: getMypageCommunityPostsManagement,
+  });
 
-    const fetchUserPosts = async () => {
-      try {
-        const res = await getMypageCommunityPostsManagement();
-        setMyPosts(res);
-      } catch (e) {
-        console.error("❌내 작성글 데이터 불러오기 실패", e);
-      }
-    };
-    fetchUserDashboard();
-    fetchUserPosts();
-  }, [setMyDashboardData, setMyPosts]);
+  if (isDashboardLoading || isPostsLoading || !myInfo || !myPosts) {
+    return (
+      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
+        <LoadingSpinner width={32} height={32} />
+      </div>
+    );
+  }
 
   return (
     <div className="safearea bg-bg-100 relative h-screen">
       <AppHeader title="My" onNotification={() => {}} className="bg-bg-100" />
       <div className="px-5">
-        <MyProfile />
-
+        <MyProfile myInfo={myInfo.userInfo} />
         <div>
           <span className="text-base-0 mr-2.5">작성글</span>
-          <span className="text-gray-system-600">
-            {myPosts?.totalPosts ?? "로딩 중.."}
-          </span>
+          <span className="text-gray-system-600">{myPosts?.totalPosts}</span>
         </div>
 
         <button
@@ -81,6 +74,8 @@ export const MyPage = () => {
             className="rounded-t-xl"
             aria-label="작성글 보기"
           />
+          {/**
+           * TODO: @Tifsy 2차 배포 수정 예정 
           <MyMenuItem
             icon={<NotificationOffIcon className="h-6 w-6" />}
             label="알림 설정"
@@ -90,6 +85,7 @@ export const MyPage = () => {
             isToggled={isToggleOn}
             onToggle={() => setIsToggleOn((prev) => !prev)}
           />
+           */}
           <MyMenuItem
             icon={<AnalysisIcon />}
             label="분석 내역 보기"

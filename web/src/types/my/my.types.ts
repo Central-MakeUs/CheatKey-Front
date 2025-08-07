@@ -15,7 +15,7 @@ export interface ProfileImage {
 }
 
 export interface MypageDashboardResponse {
-  myInfo: MyInfo;
+  userInfo: MyInfo;
   profileImages: ProfileImage[];
 }
 

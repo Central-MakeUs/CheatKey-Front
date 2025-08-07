@@ -15,4 +15,6 @@ export const API_DOMAINS = {
 export const QUERY_KEYS = {
   GET_AUTH_REGISTER: "register",
   HOME_DASHBOARD: "homeDashboard",
+  MYPAGE_DASHBOARD: "myPageDashboard",
+  MYPAGE_POST: "myPagePosts",
 };
