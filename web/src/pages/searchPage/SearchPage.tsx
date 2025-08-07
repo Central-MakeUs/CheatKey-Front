@@ -20,14 +20,14 @@ export const SearchPage = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["searchPosts", searchKeyword],
-      queryFn: ({ pageParam = 0 }) =>
+      queryFn: ({ pageParam = 1 }) =>
         getCommunityPosts({
           keyword: searchKeyword,
           sort: "latest",
           page: pageParam,
           size: 20,
         }),
-      initialPageParam: 0,
+      initialPageParam: 1,
       getNextPageParam: (lastPage) => {
         return lastPage.last ? undefined : lastPage.number + 1;
       },
