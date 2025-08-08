@@ -150,9 +150,11 @@ export const CommunityWrite = () => {
             confirmText="보러가기"
             cancelText="취소"
             onConfirm={() => {
-              navigate(path.community.detail(String(lastPostedId)));
+              navigate(path.community.detail(String(lastPostedId)), {
+                replace: true,
+              });
             }}
-            onCancel={() => navigate("/home")}
+            onCancel={() => navigate(path.home, { replace: true })}
           />
         )}
       </div>
