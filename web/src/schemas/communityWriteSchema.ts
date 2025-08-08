@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const MIN_TEXT_LENGTH = 10;
-const MAX_IMAGE_SIZE = 1024 * 1024;
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const MAX_IMAGE_COUNT = 5;
 const TOO_SHORT_MSG = `최소 ${MIN_TEXT_LENGTH}자 이상 작성해주세요.`;
 const IMAGE_TOO_LARGE_MSG = "사진 용량이 너무 커요.";
