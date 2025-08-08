@@ -9,8 +9,6 @@ interface UploadResponse {
 
 //커뮤니티 글 작성 api 요청
 interface CommunityPostRequest {
-  userId: number;
-  nickname: string;
   title: string;
   content: string;
   category: string;

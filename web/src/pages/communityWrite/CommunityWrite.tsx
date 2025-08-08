@@ -61,9 +61,6 @@ export const CommunityWrite = () => {
       }
 
       const postData = {
-        //하드코딩 된 유저 정보 가져와야 합니다!
-        userId: 1,
-        nickname: "글렌",
         title: form.title,
         content: form.content,
         category: form.board,
