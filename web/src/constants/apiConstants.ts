@@ -15,6 +15,8 @@ export const API_DOMAINS = {
   POST_COMMUNITY_POSTS: "/v1/api/community/posts",
   POST_FILES_UPLOAD: "/v1/api/files/upload",
   DELETE_COMMUNITY_POST: "/v1/api/community/posts/:postId",
+  POST_REPORT: "/v1/api/community/posts/:postId/report",
+  POST_BLOCK: "/v1/api/community/posts/:postId/author/block",
 };
 
 export const QUERY_KEYS = {
@@ -23,4 +25,5 @@ export const QUERY_KEYS = {
   MYPAGE_DASHBOARD: "myPageDashboard",
   MYPAGE_POST: "myPagePosts",
   GET_DETECTION_RESULT: "myDetectionResult",
+  GET_COMMUNITY_FEED: "communityPosts",
 };

@@ -37,6 +37,10 @@ export const SearchPage = () => {
 
   const allPosts = data?.pages.flatMap((page) => page.content) || [];
 
+  useEffect(() => {
+    console.log(allPosts);
+  }, [allPosts]);
+
   const handleSearch = () => {
     if (query.trim() === "") return;
     setSearchKeyword(query.trim());

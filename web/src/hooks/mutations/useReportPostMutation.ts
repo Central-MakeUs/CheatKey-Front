@@ -4,30 +4,30 @@ import {
   type QueryKey,
 } from "@tanstack/react-query";
 
-import { deletePost } from "@/apis/community/deletePost";
+import { postReport } from "@/apis/community/postReport";
 
-interface UseDeletePostMutationOptions {
+interface UseReportPostMutationOptions {
   queryKeyToInvalidate: QueryKey;
   onSuccess?: () => void;
-  onError?: () => void;
+  onError?: (error: Error) => void;
 }
 
-export const useDeletePostMutation = ({
+export const useReportPostMutation = ({
   queryKeyToInvalidate,
   onSuccess,
   onError,
-}: UseDeletePostMutationOptions) => {
+}: UseReportPostMutationOptions) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deletePost,
+    mutationFn: postReport,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeyToInvalidate });
       onSuccess?.();
     },
     onError: (error) => {
-      console.error("게시글 삭제 실패:", error);
-      onError?.();
+      alert("사용자 신고에 실패하였습니다");
+      onError?.(error);
     },
   });
 };

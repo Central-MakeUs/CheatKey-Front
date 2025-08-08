@@ -1,12 +1,12 @@
 export type CommunityPost = {
   id: number;
-  nickname: string;
-  date: string;
+  authorNickname: string;
+  createdAt: string;
   category?: string;
   title: string;
   content: string;
   commentCount: number;
-  images?: string[];
+  thumbnailUrls?: string[];
 };
 
 export type Comment = {

@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
+import { useToast } from "@/hooks/useToast";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";
 import { NoResult } from "@/components/common/NoResult";
+import { Toast } from "@/components/common/Toast";
 import { ToTop } from "@/components/common/ToTop";
 import { MyPostsPreview } from "@/components/my/MyPostsPreview";
 
@@ -16,6 +18,8 @@ import { QUERY_KEYS } from "@/constants/apiConstants";
 
 export const MyPostsPage = () => {
   const navigate = useNavigate();
+
+  const { toastMessage, showToast } = useToast();
 
   const { data: myPosts, isLoading: isPostsLoading } = useQuery({
     queryKey: [QUERY_KEYS.MYPAGE_POST],
@@ -56,18 +60,20 @@ export const MyPostsPage = () => {
               <MyPostsPreview
                 key={post.id}
                 id={post.id}
-                nickname={post.nickname}
+                authorNickname={post.nickname}
                 title={post.title}
                 content={post.content}
-                date={post.createdAt}
+                createdAt={post.createdAt}
                 commentCount={post.commentCount}
-                images={post.imageUrls}
+                thumbnailUrls={post.imageUrls}
+                onDeleteSuccess={() => showToast("게시글이 삭제되었습니다.")}
               />
             ))}
           </div>
         )}
       </div>
       <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
+      {toastMessage && <Toast text={toastMessage} icon="check" position="ai" />}
     </div>
   );
 };
