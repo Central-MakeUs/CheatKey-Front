@@ -26,4 +26,5 @@ export const QUERY_KEYS = {
   MYPAGE_POST: "myPagePosts",
   GET_DETECTION_RESULT: "myDetectionResult",
   GET_COMMUNITY_FEED: "communityPosts",
+  GET_SEARCH_RESULT: "searchResult",
 };

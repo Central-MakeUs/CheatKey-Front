@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -78,10 +78,6 @@ export const CommunityFeed = () => {
     }
     close();
   };
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <div className="bg-bg-100 safearea flex h-screen flex-col">
