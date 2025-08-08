@@ -1,5 +1,7 @@
 import { motion } from "motion/react";
 
+import { getPlatform } from "@/utils/getPlatform";
+
 import { Bubble } from "@/components/common/Bubble";
 import { AppleLogin } from "@/components/login/AppleLogin";
 import { KakaoLogin } from "@/components/login/KakaoLogin";
@@ -8,6 +10,8 @@ import CheatKeyLogo from "@/assets/logo/logo_cheatkey.svg?react";
 import CheatKeyTextLogo from "@/assets/logo/logo_cheatkey_text.svg?react";
 
 export const LoginPage = () => {
+  const platform = getPlatform();
+
   return (
     <div className="safearea relative flex h-screen w-full flex-1 flex-col items-center justify-center">
       <CheatKeyLogo className="h-auto w-28 -translate-y-10" />
@@ -28,7 +32,7 @@ export const LoginPage = () => {
         </motion.div>
         <div className="w-full">
           <KakaoLogin />
-          <AppleLogin />
+          {platform === "ios" && <AppleLogin />}
         </div>
       </div>
     </div>
