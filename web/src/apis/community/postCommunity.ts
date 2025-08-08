@@ -3,9 +3,18 @@ import { authAPI } from "@/apis/instance";
 import { API_DOMAINS } from "@/constants/apiConstants";
 
 //커뮤니티 글 작성 이미지 업로드 api 응답
-export interface UploadResponse {
-  fileUploadIds: number[];
+
+export interface UploadObject {
+  fileUploadId: number;
+  originalName: string;
+  s3Key: string;
+  size: number;
+  contentType: string;
+  isTemp: boolean;
+  createdAt: string;
 }
+
+export type UploadResponse = UploadObject[];
 
 //커뮤니티 글 작성 api 요청
 export interface CommunityPostRequest {

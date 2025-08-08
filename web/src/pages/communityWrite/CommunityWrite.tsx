@@ -48,7 +48,9 @@ export const CommunityWrite = () => {
       if (formData.images.length > 0) {
         const files = formData.images.map((img) => img.file);
         const uploadResponse = await postFilesUpload(files);
-        fileUploadIds = uploadResponse.fileUploadIds;
+        fileUploadIds = uploadResponse.map(
+          (responseItem) => responseItem.fileUploadId,
+        );
       }
       const categoryForApi =
         BOARD_CATEGORY_MAP[formData.board] || formData.board;
