@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
+import { path } from "@/routes/path";
+
+import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
 import type { CommunityPost } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
 
@@ -20,9 +25,15 @@ export const MyPostsPreview = ({
   commentCount,
   images = [],
 }: CommunityPost) => {
+  const navigate = useNavigate();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const handleRemoveClick = () => {
+  const { mutate: deletePostMutation } = useDeletePostMutation(() =>
+    setIsDeleteModalOpen(false),
+  );
+
+  const handleRemoveClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsDeleteModalOpen(true);
   };
 
@@ -31,12 +42,14 @@ export const MyPostsPreview = ({
   };
 
   const handleDeletePost = () => {
-    console.log("🗑️게시글 삭제");
-    setIsDeleteModalOpen(false);
+    deletePostMutation({ postId: id });
   };
 
   return (
-    <div className="text-gray-system-600 space-y-2 py-3">
+    <div
+      onClick={() => navigate(path.community.detail(String(id)))}
+      className="text-gray-system-600 space-y-2 py-3"
+    >
       <div className="flex items-start justify-between">
         <div className="flex gap-3">
           {/* TODO: @tifsy 사용자 프로필 사진 불러오기 */}

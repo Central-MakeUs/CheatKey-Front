@@ -3,12 +3,12 @@ import { authAPI } from "@/apis/instance";
 import { API_DOMAINS } from "@/constants/apiConstants";
 
 //커뮤니티 글 작성 이미지 업로드 api 응답
-interface UploadResponse {
+export interface UploadResponse {
   fileUploadIds: number[];
 }
 
 //커뮤니티 글 작성 api 요청
-interface CommunityPostRequest {
+export interface CommunityPostRequest {
   title: string;
   content: string;
   category: string;
@@ -16,9 +16,7 @@ interface CommunityPostRequest {
 }
 
 //커뮤니티 글 작성 api 응답
-interface CommunityPostResponse {
-  postId: number;
-}
+export type CommunityPostResponse = number;
 
 export const postFilesUpload = async (
   files: File[],

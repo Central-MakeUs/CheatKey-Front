@@ -2,11 +2,15 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { useMutation } from "@tanstack/react-query";
+
 import {
   postCommunityPosts,
   postFilesUpload,
+  type CommunityPostResponse,
 } from "@/apis/community/postCommunity";
 import { useCommunityWriteState } from "@/hooks/useCommunityWriteState";
+import type { CommunityWriteFormState } from "@/types/community/community.types";
 
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
@@ -16,6 +20,8 @@ import { CommunityWriteForm } from "@/components/communityWrite/CommunityWriteFo
 import { PostBoardSelect } from "@/components/communityWrite/PostBoardSelect";
 import { PostImageUploader } from "@/components/communityWrite/PostImageUploader";
 import { TitleForm } from "@/components/communityWrite/TitleForm";
+
+import { BOARD_CATEGORY_MAP } from "@/constants/commnityFeedTabs";
 
 export const CommunityWrite = () => {
   const navigate = useNavigate();
@@ -31,6 +37,39 @@ export const CommunityWrite = () => {
     toastMessage,
     showToast,
   } = useCommunityWriteState();
+
+  const { mutate: createPost, isPending: isPosting } = useMutation<
+    CommunityPostResponse,
+    Error,
+    CommunityWriteFormState
+  >({
+    mutationFn: async (formData) => {
+      let fileUploadIds: number[] = [];
+      if (formData.images.length > 0) {
+        const files = formData.images.map((img) => img.file);
+        const uploadResponse = await postFilesUpload(files);
+        fileUploadIds = uploadResponse.fileUploadIds;
+      }
+      const categoryForApi =
+        BOARD_CATEGORY_MAP[formData.board] || formData.board;
+
+      const postData = {
+        title: formData.title,
+        content: formData.content,
+        category: categoryForApi,
+        fileUploadIds,
+      };
+      return postCommunityPosts(postData);
+    },
+    onSuccess: (response) => {
+      setLastPostedId(response);
+      setModal((prev) => ({ ...prev, complete: true }));
+    },
+    onError: (error) => {
+      showToast("글 작성에 실패했습니다. 다시 시도해주세요.");
+      console.error("❌글 작성 에러:", error);
+    },
+  });
 
   const handleBack = () => {
     const hasContent =
@@ -50,31 +89,7 @@ export const CommunityWrite = () => {
       }
       return;
     }
-
-    try {
-      let fileUploadIds: number[] = [];
-
-      if (form.images.length > 0) {
-        const files = form.images.map((img) => img.file);
-        const uploadResponse = await postFilesUpload(files);
-        fileUploadIds = uploadResponse.fileUploadIds;
-      }
-
-      const postData = {
-        title: form.title,
-        content: form.content,
-        category: form.board,
-        fileUploadIds,
-      };
-
-      const response = await postCommunityPosts(postData);
-      setLastPostedId(response.postId);
-      setModal((prev) => ({ ...prev, complete: true }));
-    } catch (error) {
-      showToast("글 작성에 실패했습니다. 다시 시도해주세요.");
-
-      console.error("❌글 작성 에러:", error);
-    }
+    createPost(form);
   };
 
   return (
@@ -106,9 +121,9 @@ export const CommunityWrite = () => {
         />
 
         <BottomFullButton
-          state={true}
+          state={!isPosting}
           onClick={handleSubmit}
-          content="등록하기"
+          content={isPosting ? "등록 중..." : "등록하기"}
         />
 
         {toastMessage && <Toast text={toastMessage} position="write" />}
