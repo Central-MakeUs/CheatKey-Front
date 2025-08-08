@@ -40,7 +40,7 @@ export const BottomNavBar = () => {
         background: `radial-gradient(circle at center 2px, transparent 36px, #2C2D30 36px)`,
       }}
     >
-      <div className="flex h-21 items-center justify-around px-2">
+      <div className="flex h-26 items-center justify-around px-2 pb-5">
         <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
         <BottomNavBarItem
           to={path.home}

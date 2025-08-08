@@ -29,7 +29,7 @@ export const HomeTrendingPost = ({
       </div>
       <div className="flex w-full flex-col gap-1">
         <h1 className="body-4-medium text-gray-system-200 truncate">{title}</h1>
-        <p className="caption-2-regular text-gray-system-500 line-clamp-2">
+        <p className="caption-2-regular text-gray-system-500 line-clamp-2 h-9">
           {content}
         </p>
       </div>

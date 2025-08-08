@@ -46,7 +46,7 @@ export const MyProfile = ({ myInfo }: MyProfileProps) => {
         </div>
 
         <p className="body-5-regular text-gray-system-200 mt-2">
-          오늘의 방문횟수 {myInfo?.totalVisitCount}회
+          총 방문 횟수 {myInfo?.totalVisitCount}회
         </p>
       </div>
     </div>
