@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  StatusBar,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  View,
-  ActivityIndicator,
-} from "react-native";
+import { StatusBar, StyleSheet, View, ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { createWebView } from "@webview-bridge/react-native";
 import { appBridge, appSchema } from "@/bridge";
@@ -72,50 +65,41 @@ export default function WebViewScreen() {
         translucent={true}
         backgroundColor="transparent"
       />
-      <KeyboardAvoidingView
-        style={styles.keyboardAvoidingView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={insets.top}
-      >
-        <WebView
-          source={{ uri: initialUrl }}
-          style={styles.webview}
-          injectedJavaScript={injectedJavaScript}
-          // JavaScript 관련
-          javaScriptEnabled={true}
-          javaScriptCanOpenWindowsAutomatically={false}
-          domStorageEnabled={true}
-          // 보안 설정
-          mixedContentMode="compatibility"
-          allowsInlineMediaPlayback={true}
-          mediaPlaybackRequiresUserAction={false}
-          // UI 설정
-          bounces={false}
-          scrollEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          // 성능 설정
-          cacheEnabled={true}
-          incognito={false}
-          // Tifsy 설정
-          keyboardDisplayRequiresUserAction={false}
-          automaticallyAdjustContentInsets={false}
-          contentInsetAdjustmentBehavior="never"
-          onError={(e) => {
-            console.error("WebView error:", e.nativeEvent);
-          }}
-          onLoadEnd={handleWebViewLoadEnd}
-        />
-      </KeyboardAvoidingView>
+      <WebView
+        source={{ uri: initialUrl }}
+        style={styles.webview}
+        injectedJavaScript={injectedJavaScript}
+        // JavaScript 관련
+        javaScriptEnabled={true}
+        javaScriptCanOpenWindowsAutomatically={false}
+        domStorageEnabled={true}
+        // 보안 설정
+        mixedContentMode="compatibility"
+        allowsInlineMediaPlayback={true}
+        mediaPlaybackRequiresUserAction={false}
+        // UI 설정
+        bounces={false}
+        scrollEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        // 성능 설정
+        cacheEnabled={true}
+        incognito={false}
+        // Tifsy 설정
+        keyboardDisplayRequiresUserAction={false}
+        automaticallyAdjustContentInsets={false}
+        contentInsetAdjustmentBehavior="never"
+        onError={(e) => {
+          console.error("WebView error:", e.nativeEvent);
+        }}
+        onLoadEnd={handleWebViewLoadEnd}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  keyboardAvoidingView: {
     flex: 1,
   },
   webview: {
