@@ -70,21 +70,30 @@ export const CommunityPostContent = ({
           {content}
         </p>
 
-        {images
-          .slice(0, images.length >= 3 ? images.length : 2)
-          .map((img, i) => (
-            <img
-              key={`${img}-${i}`}
-              src={img}
-              alt={`${nickname}님의 게시글 이미지 ${i + 1}`}
-              className={cn("h-[6.875rem] rounded-lg object-cover", {
-                "w-full": images.length === 1,
-                "w-1/2": images.length === 2,
-                "w-[8.125rem] flex-shrink-0": images.length >= 3,
-              })}
-              onClick={() => openImageCloseUp(img)}
-            />
-          ))}
+        {images.length > 0 && (
+          <div
+            className={cn(
+              "flex gap-[0.4375rem]",
+              images.length >= 3 && "scrollbar-hide overflow-x-auto",
+            )}
+          >
+            {images
+              .slice(0, images.length >= 3 ? images.length : 2)
+              .map((img, i) => (
+                <img
+                  key={`${img}-${i}`}
+                  src={img}
+                  alt={`${nickname}님의 게시글 이미지 ${i + 1}`}
+                  className={cn("h-[6.875rem] rounded-lg object-cover", {
+                    "w-full": images.length === 1,
+                    "w-1/2": images.length === 2,
+                    "w-[8.125rem] flex-shrink-0": images.length >= 3,
+                  })}
+                  onClick={() => openImageCloseUp(img)}
+                />
+              ))}
+          </div>
+        )}
       </div>
 
       {selectedImage && (
