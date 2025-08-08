@@ -9,6 +9,10 @@ export type CommunityPost = {
   thumbnailUrls?: string[];
 };
 
+export type PostStatus = "ACTIVE" | "PENDING" | "DELETED";
+
+export type CommentStatus = "ACTIVE" | "DELETED";
+
 export type Comment = {
   id: number;
   postId: number;
@@ -20,6 +24,16 @@ export type Comment = {
   createdAt: string;
   children: Comment[];
 };
+
+export interface FileUpload {
+  fileUploadId: number;
+  originalName: string;
+  s3Key: string;
+  size: number;
+  contentType: string;
+  isTemp: boolean;
+  createdAt: string;
+}
 
 export interface UploadedImage {
   previewUrl: string;
