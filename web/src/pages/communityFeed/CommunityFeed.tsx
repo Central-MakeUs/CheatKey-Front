@@ -61,6 +61,7 @@ export const CommunityFeed = () => {
         size: 20,
       }),
   });
+
   const {
     menuState,
     openMenu,

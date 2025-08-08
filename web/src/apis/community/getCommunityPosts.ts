@@ -36,6 +36,5 @@ export const getCommunityPosts = async (
   const response = await authAPI.get(API_DOMAINS.GET_COMMUNITY_POSTS, {
     params,
   });
-  console.log(response);
   return response.data;
 };

@@ -34,7 +34,7 @@ export const MyAnalysisListItem = ({ item }: MyAnalysisListItemProps) => {
         </div>
         <ArrowRightIcon className="text-gray-system-700 h-5 w-5" />
       </div>
-      <p className="text-base-0 body-1-bold mb-[0.3125rem] truncate">
+      <p className="text-base-0 body-1-bold mb-[0.3125rem] w-full truncate text-ellipsis">
         {item.inputText}
       </p>
       <p className="text-gray-system-500 body-4-medium flex gap-[7px]">

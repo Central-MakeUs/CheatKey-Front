@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
 
+import { path } from "@/routes/path";
+
 import {
   postCommunityPosts,
   postFilesUpload,
@@ -148,7 +150,7 @@ export const CommunityWrite = () => {
             confirmText="보러가기"
             cancelText="취소"
             onConfirm={() => {
-              navigate(`/community/post/${lastPostedId}`);
+              navigate(path.community.detail(String(lastPostedId)));
             }}
             onCancel={() => navigate("/home")}
           />

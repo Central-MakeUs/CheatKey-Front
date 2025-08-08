@@ -11,21 +11,26 @@ export const ImageCloseUpModal = ({
 }: ImageCloseUpModalProps) => {
   return (
     <div
-      className="bg-bg-100 fixed inset-0 z-50 flex items-center justify-center"
+      className="safearea bg-bg-100 fixed inset-0 z-50 flex h-screen w-full flex-col items-center"
       onClick={onClose}
     >
-      <img
-        src={imageUrl}
-        alt="확대한 이미지"
-        onClick={(e) => e.stopPropagation()}
-      />
-      <button
-        onClick={onClose}
-        className="text-base-0 absolute top-1.5 right-5 h-8 w-8"
-        aria-label="확대한 이미지 닫기"
-      >
-        <Close className="h-full w-full" />
-      </button>
+      <div className="flex h-fit w-full justify-end py-1.5 pr-5">
+        <button
+          onClick={onClose}
+          className="text-base-0 h-8 w-8"
+          aria-label="확대한 이미지 닫기"
+        >
+          <Close className="h-full w-full" />
+        </button>
+      </div>
+      <div className="flex w-full flex-1 items-center justify-center">
+        <img
+          src={imageUrl}
+          alt="확대한 이미지"
+          className="max-h-[75vh] w-full"
+          onClick={(e) => e.stopPropagation()}
+        />
+      </div>
     </div>
   );
 };

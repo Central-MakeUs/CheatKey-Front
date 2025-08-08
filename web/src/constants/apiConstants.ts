@@ -17,6 +17,7 @@ export const API_DOMAINS = {
   DELETE_COMMUNITY_POST: "/v1/api/community/posts/:postId",
   POST_REPORT: "/v1/api/community/posts/:postId/report",
   POST_BLOCK: "/v1/api/community/posts/:postId/author/block",
+  GET_COMMUNITY_DETAIL: "/v1/api/community/posts/:postId",
 };
 
 export const QUERY_KEYS = {
@@ -27,4 +28,5 @@ export const QUERY_KEYS = {
   GET_DETECTION_RESULT: "myDetectionResult",
   GET_COMMUNITY_FEED: "communityPosts",
   GET_SEARCH_RESULT: "searchResult",
+  GET_COMMUNITY_DETAIL: "communityDetail",
 };
