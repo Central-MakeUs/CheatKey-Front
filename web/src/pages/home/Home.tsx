@@ -61,7 +61,7 @@ export const Home = () => {
             </span>
           </h1>
           <h2 className="body-5-regular text-gray-system-300 mt-1">
-            오늘의 방문횟수 {userInfo.totalVisitCount}회
+            총 방문 횟수 {userInfo.totalVisitCount}회
           </h2>
         </div>
       </div>

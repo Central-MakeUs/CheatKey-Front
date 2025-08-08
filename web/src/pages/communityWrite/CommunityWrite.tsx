@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 
 import { path } from "@/routes/path";
 
@@ -70,8 +71,11 @@ export const CommunityWrite = () => {
       setModal((prev) => ({ ...prev, complete: true }));
     },
     onError: (error) => {
-      showToast("글 작성에 실패했습니다. 다시 시도해주세요.");
-      console.error("❌글 작성 에러:", error);
+      if (isAxiosError(error) && error.response?.status === 400) {
+        showToast("유호성 검사에 실패하였습니다.");
+      } else if (isAxiosError(error) && error.response?.status === 500) {
+        showToast("파일 용량이 너무 큽니다.");
+      }
     },
   });
 
@@ -150,9 +154,11 @@ export const CommunityWrite = () => {
             confirmText="보러가기"
             cancelText="취소"
             onConfirm={() => {
-              navigate(path.community.detail(String(lastPostedId)));
+              navigate(path.community.detail(String(lastPostedId)), {
+                replace: true,
+              });
             }}
-            onCancel={() => navigate("/home")}
+            onCancel={() => navigate(path.home, { replace: true })}
           />
         )}
       </div>
