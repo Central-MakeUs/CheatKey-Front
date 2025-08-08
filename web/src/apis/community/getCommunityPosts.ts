@@ -13,8 +13,18 @@ interface CommunityPostsResponse {
   size: number;
 }
 
+export interface PostItem {
+  id: number;
+  title: string;
+  authorNickname: string;
+  createdAt: string;
+  commentCount: number;
+  thumbnailUrls: string[];
+}
+
 interface SearchParams {
   keyword: string;
+  category?: string;
   sort?: string;
   page: number;
   size: number;
@@ -26,5 +36,6 @@ export const getCommunityPosts = async (
   const response = await authAPI.get(API_DOMAINS.GET_COMMUNITY_POSTS, {
     params,
   });
+  console.log(response);
   return response.data;
 };

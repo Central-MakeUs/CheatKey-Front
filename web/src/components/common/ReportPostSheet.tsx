@@ -1,23 +1,43 @@
 import { useState, useEffect } from "react";
 
+import { useReportPostMutation } from "@/hooks/mutations/useReportPostMutation";
+
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { SelectBox } from "@/components/common/SelectBox";
 
-import { REPORT_REASONS } from "@/constants/reportReasons";
+import { QUERY_KEYS } from "@/constants/apiConstants";
+import {
+  REPORT_REASON_MAP,
+  REPORT_REASONS,
+  type ReportType,
+} from "@/constants/reportReasons";
 
 interface ReportPostSheetProps {
+  postId: number;
   isOpen: boolean;
   onClose: () => void;
   onReportComplete: () => void;
 }
 
 export const ReportPostSheet = ({
+  postId,
   isOpen,
   onClose,
   onReportComplete,
 }: ReportPostSheetProps) => {
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
+
+  // TODO: 카테고리 Props로 받아서 초기화 시키기
+  const { mutate: postReport, isPending: isReporting } = useReportPostMutation({
+    queryKeyToInvalidate: [QUERY_KEYS.GET_COMMUNITY_FEED],
+    onSuccess: () => {
+      onClose();
+      setTimeout(() => {
+        onReportComplete();
+      }, 100);
+    },
+  });
 
   const handleSelect = (reason: string) => {
     setSelectedReason((prev) => (prev === reason ? null : reason));
@@ -25,11 +45,14 @@ export const ReportPostSheet = ({
 
   const handleReport = () => {
     if (selectedReason) {
-      console.log("🚨신고 사유:", selectedReason);
-      onClose();
-      setTimeout(() => {
-        onReportComplete();
-      }, 100);
+      const reasonCode = REPORT_REASON_MAP[selectedReason] as ReportType;
+      if (!reasonCode) {
+        // TODO: 에러 디자인 나오면 변경
+        alert("유효하지 않은 신고 사유입니다.");
+        return;
+      }
+
+      postReport({ postId, reasonCode });
     }
   };
 
@@ -64,9 +87,9 @@ export const ReportPostSheet = ({
             />
           ))}
           <BottomFullButton
-            state={!!selectedReason}
+            state={!!selectedReason || isReporting}
             onClick={handleReport}
-            content="신고하기"
+            content={isReporting ? "신고 중.." : "신고하기"}
             className="mt-5"
           />
         </div>

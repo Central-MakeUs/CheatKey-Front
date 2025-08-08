@@ -4,6 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
+import { useDebounce } from "@/hooks/useDebounce";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { NoResult } from "@/components/common/NoResult";
@@ -11,16 +12,20 @@ import { SearchBar } from "@/components/common/SearchBar";
 import { ToTop } from "@/components/common/ToTop";
 import { SearchResultPreview } from "@/components/searchPage/SearchResultPreview";
 
+import { QUERY_KEYS } from "@/constants/apiConstants";
+
 export const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
+
+  const debouncedQuery = useDebounce(query, 1000);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const { ref: inViewRef, inView } = useInView();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["searchPosts", searchKeyword],
+      queryKey: [QUERY_KEYS.GET_SEARCH_RESULT, searchKeyword],
       queryFn: ({ pageParam = 1 }) =>
         getCommunityPosts({
           keyword: searchKeyword,
@@ -37,16 +42,13 @@ export const SearchPage = () => {
 
   const allPosts = data?.pages.flatMap((page) => page.content) || [];
 
-  const handleSearch = () => {
-    if (query.trim() === "") return;
-    setSearchKeyword(query.trim());
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSearch();
+  useEffect(() => {
+    if (debouncedQuery.trim() !== "") {
+      setSearchKeyword(debouncedQuery.trim());
+    } else {
+      setSearchKeyword("");
     }
-  };
+  }, [debouncedQuery]);
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
@@ -61,7 +63,6 @@ export const SearchPage = () => {
           placeholder="사기 사례를 검색해주세요."
           value={query}
           onChange={setQuery}
-          onKeyDown={handleKeyPress}
         />
       </header>
 
