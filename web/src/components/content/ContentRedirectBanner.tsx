@@ -4,18 +4,18 @@ interface ContentRedirectBannerProps {
   image: string;
   title: string;
   content: string;
-  href: string;
+  navigate: () => void;
 }
 
 export const ContentRedirectBanner = ({
   image,
   title,
   content,
-  href,
+  navigate,
 }: ContentRedirectBannerProps) => {
   return (
     <a
-      href={href}
+      onClick={navigate}
       className="relative flex h-19 w-full items-center gap-2.5 overflow-hidden rounded-xl bg-[#212738] pr-5 pl-2"
     >
       <img src={image} aria-hidden="true" className="h-15 w-15 shrink-0" />

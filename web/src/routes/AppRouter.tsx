@@ -64,8 +64,7 @@ const AppRouter = createBrowserRouter([
     ],
   },
   {
-    //TODO: @tifsy 커뮤니티 글 상세보기 path 변경
-    path: path.community.detail(":id"),
+    path: path.community.detail(":postId"),
     element: <CommunityDetail />,
   },
   {

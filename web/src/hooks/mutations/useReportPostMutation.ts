@@ -3,6 +3,7 @@ import {
   useQueryClient,
   type QueryKey,
 } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 
 import { postReport } from "@/apis/community/postReport";
 
@@ -26,7 +27,11 @@ export const useReportPostMutation = ({
       onSuccess?.();
     },
     onError: (error) => {
-      alert("사용자 신고에 실패하였습니다");
+      if (isAxiosError(error) && error.response?.status === 400) {
+        alert("본인은 신고할 수 없습니다.");
+      } else {
+        alert("사용자 신고에 실패하였습니다. 잠시 후 다시 시도해주세요.");
+      }
       onError?.(error);
     },
   });

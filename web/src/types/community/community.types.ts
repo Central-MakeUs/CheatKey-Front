@@ -25,16 +25,6 @@ export type Comment = {
   children: Comment[];
 };
 
-export interface FileUpload {
-  fileUploadId: number;
-  originalName: string;
-  s3Key: string;
-  size: number;
-  contentType: string;
-  isTemp: boolean;
-  createdAt: string;
-}
-
 export interface UploadedImage {
   previewUrl: string;
   file: File;

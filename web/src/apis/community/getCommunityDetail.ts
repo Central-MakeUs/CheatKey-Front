@@ -1,5 +1,5 @@
 import { authAPI } from "@/apis/instance";
-import type { FileUpload, PostStatus } from "@/types/community/community.types";
+import type { PostStatus } from "@/types/community/community.types";
 import { generateApiPath } from "@/utils/generateApiPath";
 
 import { API_DOMAINS } from "@/constants/apiConstants";
@@ -11,7 +11,7 @@ export interface PostDetailResponse {
   authorNickname: string;
   createdAt: string;
   commentCount: number;
-  files: FileUpload[];
+  presignedUrls: string[];
   comments: Comment[];
   status: PostStatus;
   canDelete: boolean;

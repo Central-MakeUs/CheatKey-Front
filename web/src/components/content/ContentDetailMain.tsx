@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { path } from "@/routes/path";
 
 import { useFontSize } from "@/hooks/useFontSize";
@@ -33,6 +35,7 @@ export const ContentDetailMain = ({
   className,
 }: ContentDetailMainProps) => {
   const { isFontSizeLarge } = useFontSize();
+  const navigate = useNavigate();
 
   const categoryStyles = DETAIL_MAIN_STYLE_CONFIG[category];
   const fontKey: FontSizeKey = isFontSizeLarge ? "large" : "default";
@@ -78,7 +81,7 @@ export const ContentDetailMain = ({
         image={safe}
         title="의심되는 URL, 텍스트가 있나요?"
         content="AI로 5초 안에 분석하러 가기"
-        href={path.analyze.base}
+        navigate={() => navigate(path.analyze.base)}
       />
     </main>
   );

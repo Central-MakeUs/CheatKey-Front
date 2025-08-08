@@ -2,7 +2,11 @@ import { useState } from "react";
 
 type MenuType = "closed" | "menu" | "block" | "report" | "reportComplete";
 
-export const usePostMenu = () => {
+interface UsePostMenuOptions {
+  onReportComplete?: () => void;
+}
+
+export const usePostMenu = (options?: UsePostMenuOptions) => {
   const [menuState, setMenuState] = useState<{
     type: MenuType;
     postId: number | null;
@@ -13,8 +17,10 @@ export const usePostMenu = () => {
     setMenuState({ type: "block", postId });
   const openReportSheet = (postId: number) =>
     setMenuState({ type: "report", postId });
-  const showReportComplete = () =>
+  const showReportComplete = () => {
     setMenuState({ type: "reportComplete", postId: null });
+    options?.onReportComplete?.();
+  };
   const close = () => setMenuState({ type: "closed", postId: null });
 
   return {
