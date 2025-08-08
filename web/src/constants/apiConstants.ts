@@ -11,9 +11,10 @@ export const API_DOMAINS = {
   GET_MYPAGE_COMMUNITY_POSTS_MANAGEMENT:
     "/v1/api/mypage/community/posts/management",
   GET_MYPAGE_DETECTION_HISTORY: "/v1/api/mypage/detection/history",
-  GET_COMMUNITY_POSTS: "v1/api/community/posts",
-  POST_COMMUNITY_POSTS: "v1/api/community/posts",
-  POST_FILES_UPLOAD: "v1/api/files/upload",
+  GET_COMMUNITY_POSTS: "/v1/api/community/posts",
+  POST_COMMUNITY_POSTS: "/v1/api/community/posts",
+  POST_FILES_UPLOAD: "/v1/api/files/upload",
+  DELETE_COMMUNITY_POST: "/v1/api/community/posts/:postId",
 };
 
 export const QUERY_KEYS = {

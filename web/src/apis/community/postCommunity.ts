@@ -3,14 +3,21 @@ import { authAPI } from "@/apis/instance";
 import { API_DOMAINS } from "@/constants/apiConstants";
 
 //커뮤니티 글 작성 이미지 업로드 api 응답
-interface UploadResponse {
-  fileUploadIds: number[];
+
+export interface UploadObject {
+  fileUploadId: number;
+  originalName: string;
+  s3Key: string;
+  size: number;
+  contentType: string;
+  isTemp: boolean;
+  createdAt: string;
 }
 
+export type UploadResponse = UploadObject[];
+
 //커뮤니티 글 작성 api 요청
-interface CommunityPostRequest {
-  userId: number;
-  nickname: string;
+export interface CommunityPostRequest {
   title: string;
   content: string;
   category: string;
@@ -18,9 +25,7 @@ interface CommunityPostRequest {
 }
 
 //커뮤니티 글 작성 api 응답
-interface CommunityPostResponse {
-  postId: number;
-}
+export type CommunityPostResponse = number;
 
 export const postFilesUpload = async (
   files: File[],
