@@ -21,7 +21,7 @@ export const TitleForm = ({ title, onChange }: TitleFormProps) => {
       <label htmlFor="titleInput" className="relative h-fit w-full">
         <input
           id="titleInput"
-          placeholder="최소 10자 이상 작성해주세요."
+          placeholder="최소 2자 이상 작성해주세요."
           className={cn(
             "body-3-regular w-full border-b p-3 overflow-ellipsis transition-colors outline-none",
             isInputFocus
