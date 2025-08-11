@@ -95,7 +95,7 @@ export const PostImageUploader = ({
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/*"
+        accept="image/png, image/jpeg"
         multiple
         hidden
         onChange={handleChange}

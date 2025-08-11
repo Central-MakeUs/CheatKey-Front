@@ -42,7 +42,7 @@ export const DetailResultCard = ({
         </span>
       </h1>
 
-      <img src={data.image} className="h-auto w-full" />
+      <img src={data.image} className="mx-auto h-auto w-full max-w-sm" />
       <div>
         <div
           className={cn(

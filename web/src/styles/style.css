@@ -8,7 +8,7 @@
 }
 @layer components {
   .layout {
-    @apply bg-bg-100 mx-auto flex h-full min-h-dvh max-w-lg flex-col overflow-x-hidden overflow-y-auto;
+    @apply bg-bg-100 mx-auto flex h-full min-h-dvh max-w-3xl flex-col overflow-x-hidden overflow-y-auto;
   }
   .safearea {
     padding-top: var(--safe-area-inset-top);

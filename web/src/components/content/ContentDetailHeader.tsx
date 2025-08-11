@@ -30,7 +30,7 @@ export const ContentDetailHeader = () => {
   };
 
   return (
-    <header className="h-header bg-bg-100 fixed flex w-full max-w-lg items-center justify-between px-5">
+    <header className="h-header bg-bg-100 fixed flex w-full max-w-3xl items-center justify-between px-5">
       <button
         type="button"
         aria-label="뒤로 가기"

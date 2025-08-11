@@ -1,13 +1,14 @@
 export const getPlatform = (): "ios" | "android" | "web" => {
-  const ua = navigator.userAgent;
+  const ua = navigator.userAgent || "";
+  const maxTouchPoints = navigator.maxTouchPoints || 0;
 
-  if (/android/i.test(ua)) {
-    return "android";
-  }
+  const isAndroid = /Android/i.test(ua);
 
-  if (/iPhone|iPad|iPod/i.test(ua)) {
-    return "ios";
-  }
+  const isIPad =
+    /iPad/i.test(ua) || (ua.includes("Macintosh") && maxTouchPoints > 1);
+  const isIPhone = /iPhone|iPod/i.test(ua);
 
+  if (isAndroid) return "android";
+  if (isIPad || isIPhone) return "ios";
   return "web";
 };
