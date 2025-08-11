@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { WebView as RNWebView } from "react-native-webview";
+
 import { StatusBar, StyleSheet, View, ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { createWebView } from "@webview-bridge/react-native";
@@ -7,6 +7,7 @@ import { appBridge, appSchema } from "@/bridge";
 import { initializeKakaoSDK } from "@react-native-kakao/core";
 import { useInitialUrl } from "@/hooks/useInitialUrl";
 import { SplashScreen } from "expo-router";
+import { WebView as RNWebView } from "react-native-webview";
 
 const { WebView } = createWebView({
   bridge: appBridge,
@@ -23,7 +24,16 @@ export default function WebViewScreen() {
 
   const { initialUrl, isLoading } = useInitialUrl(WEB_APP_URL);
 
-  const handleWebViewLoadEnd = () => {
+  const handleWebViewLoad = () => {
+    const safeAreaScript = `
+      document.documentElement.style.setProperty('--safe-area-inset-top', '${insets.top}px');
+      document.documentElement.style.setProperty('--safe-area-inset-right', '${insets.right}px');
+      document.documentElement.style.setProperty('--safe-area-inset-bottom', '${insets.bottom}px');
+      document.documentElement.style.setProperty('--safe-area-inset-left', '${insets.left}px');
+      true;
+    `;
+
+    webViewRef.current?.injectJavaScript(safeAreaScript);
     SplashScreen.hideAsync();
   };
 
@@ -37,6 +47,15 @@ export default function WebViewScreen() {
     };
     initKakaoSDK();
   });
+
+  useEffect(() => {
+    appBridge.setState({
+      safeAreaTop: insets.top,
+      safeAreaRight: insets.right,
+      safeAreaBottom: insets.bottom,
+      safeAreaLeft: insets.left,
+    });
+  }, [insets]);
 
   const injectedJavaScript = `
     document.documentElement.style.setProperty('--safe-area-inset-top', '${insets.top}px');
@@ -95,19 +114,8 @@ export default function WebViewScreen() {
         onError={(e) => {
           console.error("WebView error:", e.nativeEvent);
         }}
-        onMessage={(event) => {
-          try {
-            const message = JSON.parse(event.nativeEvent.data);
-            if (message.type === "requestSafeAreaInsets") {
-              webViewRef.current?.postMessage(
-                JSON.stringify({ type: "safeAreaInsets", insets })
-              );
-            }
-          } catch (e) {
-            console.error("WebView Reload Error:", e);
-          }
-        }}
-        onLoadEnd={handleWebViewLoadEnd}
+        onLoad={handleWebViewLoad}
+        onLoadEnd={handleWebViewLoad}
       />
     </View>
   );

@@ -5,8 +5,6 @@ import { toast } from "react-toastify";
 
 import AppRouter from "@/routes/AppRouter";
 
-import { useSafeAreaListener } from "@/hooks/useSafeAreaListener";
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -22,7 +20,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  useSafeAreaListener();
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={AppRouter} />
