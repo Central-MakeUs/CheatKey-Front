@@ -11,7 +11,7 @@ export const OnboardingContent = ({
   image,
 }: OnboardingContentProps) => {
   return (
-    <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5 px-5 pt-5">
+    <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5 px-5">
       <div className="flex w-full flex-col gap-2 text-center">
         <h1 className="head-2-semibold text-base-0">{title}</h1>
         <h2 className="body-2-medium text-gray-system-400 whitespace-pre-line">

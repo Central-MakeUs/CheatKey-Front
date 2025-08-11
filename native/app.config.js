@@ -29,6 +29,12 @@ module.exports = () => {
           "kakaolink",
           "kakaoplus",
         ],
+        NSCameraUsageDescription:
+          "사진 촬영을 위해 카메라 접근 권한이 필요합니다.",
+        NSPhotoLibraryUsageDescription:
+          "사진을 불러오기 위해 앨범 접근 권한이 필요합니다.",
+        NSPhotoLibraryAddUsageDescription:
+          "사진을 저장하기 위해 앨범 쓰기 권한이 필요합니다.",
       },
     },
     android: {

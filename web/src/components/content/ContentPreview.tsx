@@ -53,7 +53,7 @@ export const ContentPreview = ({
   return (
     <motion.article
       variants={itemVariants}
-      className="bg-bg-50 mx-auto flex cursor-pointer flex-col gap-2.5 rounded-2xl p-3"
+      className="bg-bg-50 flex cursor-pointer flex-col gap-2.5 rounded-2xl p-3"
       onClick={handleNavigate}
     >
       <img

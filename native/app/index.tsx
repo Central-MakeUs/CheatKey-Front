@@ -146,6 +146,9 @@ export default function WebViewScreen() {
         }}
         onLoad={handleWebViewLoad}
         onLoadEnd={handleWebViewLoad}
+        allowFileAccess
+        allowFileAccessFromFileURLs
+        allowUniversalAccessFromFileURLs
       />
     </View>
   );
