@@ -35,7 +35,7 @@ export const BottomNavBar = () => {
 
   return (
     <nav
-      className="fixed bottom-0 z-50 w-full max-w-lg rounded-t-2xl shadow-[0_-4px_5px_0_rgba(39,61,174,0.1)]"
+      className="fixed bottom-0 z-50 w-full max-w-3xl rounded-t-2xl shadow-[0_-4px_5px_0_rgba(39,61,174,0.1)]"
       style={{
         background: `radial-gradient(circle at center 2px, transparent 36px, #2C2D30 36px)`,
       }}

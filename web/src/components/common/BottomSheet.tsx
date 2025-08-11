@@ -74,7 +74,7 @@ export const BottomSheet = ({
           <motion.div
             role="dialog"
             aria-modal="true"
-            className="bg-bg-50 fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-lg rounded-t-[1.625rem] shadow-lg"
+            className="bg-bg-50 fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-3xl rounded-t-[1.625rem] shadow-lg"
             variants={sheetVariants}
             initial="hidden"
             animate={animationControls}

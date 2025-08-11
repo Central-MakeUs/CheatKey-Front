@@ -33,7 +33,7 @@ export const SearchBar = ({
   const isSearchBarFilled = value.trim().length > 0;
 
   return (
-    <div className="mb-[0.625rem] flex items-center gap-[5px]">
+    <div className="mb-[0.625rem] flex w-full items-center gap-[5px]">
       <button className="text-base-0 h-6 w-6" onClick={() => navigate(-1)}>
         <PrevIcon />
       </button>

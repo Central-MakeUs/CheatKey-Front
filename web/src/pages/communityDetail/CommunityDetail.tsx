@@ -93,7 +93,7 @@ export const CommunityDetail = () => {
   }
 
   return (
-    <div className="bg-bg-100 safearea flex h-screen flex-col">
+    <div className="bg-bg-100 safearea layout flex h-screen flex-col">
       <AppHeader
         title={`${postDetail?.authorNickname}님의 글`}
         onPrev={() => navigate(-1)}

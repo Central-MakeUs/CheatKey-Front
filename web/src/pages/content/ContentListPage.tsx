@@ -35,7 +35,7 @@ export const ContentListPage = () => {
   const currentData = contentDataByCategory[articleCategory];
 
   return (
-    <div className="safearea bg-bg-100 flex h-screen flex-col">
+    <div className="safearea bg-bg-100 flex h-screen w-full flex-col">
       <AppHeader title="콘텐츠" onNotification={() => console.log("알림")} />
       <main className="flex-1 overflow-hidden">
         <CategoryTagGroup

@@ -42,9 +42,7 @@ export const ContentDetailTitle = ({
       <div className="caption-1-medium bg-bg-50 text-gray-system-500 flex h-[1.875rem] w-16 items-center justify-center rounded-full px-2">
         {category}
       </div>
-      <h1 className={cn("text-base-0 line-clamp-2", headingFontSize)}>
-        {title}
-      </h1>
+      <h1 className={cn("text-base-0", headingFontSize)}>{title}</h1>
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-2">
           <img

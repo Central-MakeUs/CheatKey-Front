@@ -57,8 +57,8 @@ export const SearchPage = () => {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div className="bg-bg-100 safearea flex h-screen flex-col">
-      <header className="fixed z-10 px-5 pt-6">
+    <div className="safearea layout flex h-screen w-full flex-col">
+      <header className="fixed z-10 w-full max-w-3xl px-5 pt-6">
         <SearchBar
           placeholder="사기 사례를 검색해주세요."
           value={query}
