@@ -1,6 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { StatusBar, StyleSheet, View, ActivityIndicator } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  BackHandler,
+  Platform,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { createWebView } from "@webview-bridge/react-native";
 import { appBridge, appSchema } from "@/bridge";
@@ -18,6 +25,8 @@ const { WebView } = createWebView({
 export default function WebViewScreen() {
   const insets = useSafeAreaInsets();
   const webViewRef = useRef<RNWebView>(null);
+
+  const [canGoBack, setCanGoBack] = useState(false);
 
   const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL || "";
   const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY || "";
@@ -48,6 +57,26 @@ export default function WebViewScreen() {
     initKakaoSDK();
   });
 
+  useEffect(() => {
+    if (Platform.OS === "ios") return;
+
+    const backAction = () => {
+      if (canGoBack && webViewRef.current) {
+        webViewRef.current.goBack();
+        return true;
+      }
+
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, [canGoBack]);
+
   const injectedJavaScript = `
     document.documentElement.style.setProperty('--safe-area-inset-top', '${insets.top}px');
     document.documentElement.style.setProperty('--safe-area-inset-right', '${insets.right}px');
@@ -71,7 +100,14 @@ export default function WebViewScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        Platform.OS === "android" && {
+          paddingBottom: insets.bottom,
+        },
+      ]}
+    >
       <StatusBar
         barStyle="light-content"
         translucent={true}
@@ -104,6 +140,9 @@ export default function WebViewScreen() {
         contentInsetAdjustmentBehavior="never"
         onError={(e) => {
           console.error("WebView error:", e.nativeEvent);
+        }}
+        onNavigationStateChange={(navState) => {
+          setCanGoBack(navState.canGoBack);
         }}
         onLoad={handleWebViewLoad}
         onLoadEnd={handleWebViewLoad}
