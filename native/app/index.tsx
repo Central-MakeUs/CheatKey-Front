@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { WebView as RNWebView } from "react-native-webview";
 import { StatusBar, StyleSheet, View, ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { createWebView } from "@webview-bridge/react-native";
@@ -15,6 +16,7 @@ const { WebView } = createWebView({
 
 export default function WebViewScreen() {
   const insets = useSafeAreaInsets();
+  const webViewRef = useRef<RNWebView>(null);
 
   const WEB_APP_URL = process.env.EXPO_PUBLIC_WEB_URL || "";
   const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY || "";
@@ -66,6 +68,7 @@ export default function WebViewScreen() {
         backgroundColor="transparent"
       />
       <WebView
+        ref={webViewRef}
         source={{ uri: initialUrl }}
         style={styles.webview}
         injectedJavaScript={injectedJavaScript}
@@ -91,6 +94,18 @@ export default function WebViewScreen() {
         contentInsetAdjustmentBehavior="never"
         onError={(e) => {
           console.error("WebView error:", e.nativeEvent);
+        }}
+        onMessage={(event) => {
+          try {
+            const message = JSON.parse(event.nativeEvent.data);
+            if (message.type === "requestSafeAreaInsets") {
+              webViewRef.current?.postMessage(
+                JSON.stringify({ type: "safeAreaInsets", insets })
+              );
+            }
+          } catch (e) {
+            console.error("WebView Reload Error:", e);
+          }
         }}
         onLoadEnd={handleWebViewLoadEnd}
       />
