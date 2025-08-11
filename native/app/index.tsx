@@ -48,15 +48,6 @@ export default function WebViewScreen() {
     initKakaoSDK();
   });
 
-  useEffect(() => {
-    appBridge.setState({
-      safeAreaTop: insets.top,
-      safeAreaRight: insets.right,
-      safeAreaBottom: insets.bottom,
-      safeAreaLeft: insets.left,
-    });
-  }, [insets]);
-
   const injectedJavaScript = `
     document.documentElement.style.setProperty('--safe-area-inset-top', '${insets.top}px');
     document.documentElement.style.setProperty('--safe-area-inset-right', '${insets.right}px');

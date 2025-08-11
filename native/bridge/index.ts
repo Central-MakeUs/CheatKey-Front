@@ -19,10 +19,6 @@ import { onboardingStorage } from "@/services/onboardingStorage";
 
 interface AppBridgeType extends Bridge {
   isLoggedIn: boolean;
-  safeAreaTop: number;
-  safeAreaRight: number;
-  safeAreaBottom: number;
-  safeAreaLeft: number;
 
   socialLogin: (type: SocialType) => Promise<BridgeLoginResult>;
   getAccessToken: () => Promise<{ accessToken: string | null }>;
@@ -36,10 +32,6 @@ interface AppBridgeType extends Bridge {
 
 export const appBridge = bridge<AppBridgeType>((store) => ({
   isLoggedIn: false,
-  safeAreaTop: 0,
-  safeAreaRight: 0,
-  safeAreaBottom: 0,
-  safeAreaLeft: 0,
 
   socialLogin: async (type: SocialType): Promise<BridgeLoginResult> => {
     try {

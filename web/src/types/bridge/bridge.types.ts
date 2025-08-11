@@ -37,10 +37,6 @@ export type BridgeLoginResult = SuccessBridgeResult | FailureBridgeResult;
 export interface AppState {
   [key: string]: RawJSON;
   isLoggedIn: boolean;
-  safeAreaTop: number;
-  safeAreaRight: number;
-  safeAreaBottom: number;
-  safeAreaLeft: number;
 }
 
 export interface NativeBridgeMethods {
