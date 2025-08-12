@@ -113,7 +113,7 @@ export const SignUpPage = () => {
           <AppHeader
             title={SIGNUP_HEADER_CONFIG[stepState]}
             onPrev={handlePrevStep}
-            onSkip={stepState === 4 || stepState === 5 ? handleSkip : undefined}
+            onSkip={stepState !== 1 ? handleSkip : undefined}
           />
           <div className="mt-header relative mx-5 pt-2">
             <div className="bg-bg-50 absolute top-1/2 h-[3px] w-full -translate-y-1/2 rounded-full" />
