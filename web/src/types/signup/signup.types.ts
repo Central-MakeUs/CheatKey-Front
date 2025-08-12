@@ -45,8 +45,8 @@ export interface RegisterResponse {
 
 export interface RegisterRequest {
   nickname: string;
-  ageCode: string;
-  genderCode: string;
+  ageCode: string | null;
+  genderCode: string | null;
   tradeMethodCodeList: string[];
   tradeItemCodeList: string[];
   agreedRequiredTerms: number[];

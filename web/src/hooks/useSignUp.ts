@@ -91,11 +91,7 @@ export const useSignUp = () => {
 
   // 회원가입 페이로드 함수
   const createRegisterPayload = (): RegisterRequest | null => {
-    if (
-      !signupFormData.nickname ||
-      !signupFormData.ageCode ||
-      !signupFormData.genderCode
-    ) {
+    if (!signupFormData.nickname) {
       alert("필수 입력값이 누락되었습니다.");
       return null;
     }
