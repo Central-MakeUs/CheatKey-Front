@@ -87,6 +87,7 @@ export const FONT_SIZE_CONFIG: FontSizeConfig = {
   },
 };
 
-export const GOOGLE_PLAY_URL = "market://details?id=com.cheatkey.app";
+export const GOOGLE_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=com.cheatkey.app";
 export const APP_STORE_URL =
   "https://apps.apple.com/kr/app/%EC%B9%98%ED%8A%B8%ED%82%A4-ai-%EC%82%AC%EA%B8%B0%ED%83%90%EC%A7%80-%ED%94%8C%EB%9E%AB%ED%8F%BC/id6749635626";
