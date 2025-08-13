@@ -5,7 +5,7 @@ module.exports = () => {
   return {
     name: "CheatKey",
     slug: "native",
-    version: "1.0.0",
+    version: "1.0.1",
     orientation: "portrait",
     icon: "./assets/images/cheatkey_icon.png",
     scheme: "native",
@@ -44,6 +44,7 @@ module.exports = () => {
         backgroundColor: "#161517",
       },
       edgeToEdgeEnabled: true,
+      versionCode: 2,
     },
 
     extra: {
