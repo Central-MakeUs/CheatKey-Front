@@ -18,7 +18,7 @@ export const ContentDetailHeader = () => {
     try {
       const result = await bridge.shareUrl({
         url: currentUrl,
-        message: "치트키의 콘텐츠를 확인해보세요!",
+        message: `치트키의 사기 방지 콘텐츠를 지금 확인해보세요!\n\n`,
       });
 
       if (!result.success) {
