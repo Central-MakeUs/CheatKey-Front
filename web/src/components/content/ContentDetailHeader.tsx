@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 import { bridge } from "@/bridge";
 import { useFontSize } from "@/hooks/useFontSize";
+import { cn } from "@/utils/cn";
+import { getPlatform } from "@/utils/getPlatform";
 
 import Export from "@/assets/icons/export.svg?react";
 import Prev from "@/assets/icons/prev.svg?react";
@@ -18,7 +20,7 @@ export const ContentDetailHeader = () => {
     try {
       const result = await bridge.shareUrl({
         url: currentUrl,
-        message: "치트키의 콘텐츠를 확인해보세요!",
+        message: `치트키의 사기 방지 콘텐츠를 지금 확인해보세요!\n\n`,
       });
 
       if (!result.success) {
@@ -30,15 +32,25 @@ export const ContentDetailHeader = () => {
   };
 
   return (
-    <header className="h-header bg-bg-100 fixed flex w-full max-w-3xl items-center justify-between px-5">
-      <button
-        type="button"
-        aria-label="뒤로 가기"
-        onClick={() => navigate(-1)}
-        className="h-6 w-6"
-      >
-        <Prev className="text-base-0 h-full w-full" />
-      </button>
+    <header
+      className={cn(
+        "h-header bg-bg-100 fixed flex w-full max-w-3xl items-center px-5",
+        {
+          "justify-between": getPlatform() !== "web",
+          "justify-end": getPlatform() === "web",
+        },
+      )}
+    >
+      {getPlatform() !== "web" && (
+        <button
+          type="button"
+          aria-label="뒤로 가기"
+          onClick={() => navigate(-1)}
+          className="h-6 w-6"
+        >
+          <Prev className="text-base-0 h-full w-full" />
+        </button>
+      )}
       <div className="flex items-center gap-1" role="toolbar">
         <button
           type="button"
@@ -48,14 +60,16 @@ export const ContentDetailHeader = () => {
         >
           <Resize className="h-full w-full" />
         </button>
-        <button
-          type="button"
-          aria-label="URL 공유하기"
-          onClick={handleShare}
-          className="h-8 w-8"
-        >
-          <Export className="text-gray-system-50 h-full w-full" />
-        </button>
+        {getPlatform() !== "web" && (
+          <button
+            type="button"
+            aria-label="URL 공유하기"
+            onClick={handleShare}
+            className="h-8 w-8"
+          >
+            <Export className="text-gray-system-50 h-full w-full" />
+          </button>
+        )}
       </div>
     </header>
   );

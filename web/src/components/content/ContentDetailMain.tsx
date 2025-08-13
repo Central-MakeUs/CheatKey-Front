@@ -9,15 +9,20 @@ import type {
   FontSizeKey,
 } from "@/types/content/content.types";
 import { cn } from "@/utils/cn";
+import { getPlatform } from "@/utils/getPlatform";
 
 import { ContentRedirectBanner } from "@/components/content/ContentRedirectBanner";
 
 import {
   DETAIL_MAIN_STYLE_CONFIG,
   FONT_SIZE_CONFIG,
+  APP_STORE_URL,
+  GOOGLE_PLAY_URL,
 } from "@/constants/contentPageConstants";
 
 import safe from "@/assets/images/result/safe.svg";
+import android from "@/assets/logo/logo_store_android.svg";
+import ios from "@/assets/logo/logo_store_ios.svg";
 
 interface ContentDetailMainProps {
   category: ContentCategory;
@@ -77,12 +82,30 @@ export const ContentDetailMain = ({
           </section>
         ))}
       </div>
-      <ContentRedirectBanner
-        image={safe}
-        title="의심되는 URL, 텍스트가 있나요?"
-        content="AI로 5초 안에 분석하러 가기"
-        navigate={() => navigate(path.analyze.base)}
-      />
+      {getPlatform() !== "web" && (
+        <ContentRedirectBanner
+          image={safe}
+          title="의심되는 URL, 텍스트가 있나요?"
+          content="AI로 5초 안에 분석하러 가기"
+          navigate={() => navigate(path.analyze.base)}
+        />
+      )}
+      {getPlatform() === "web" && (
+        <div className="flex flex-col gap-3">
+          <ContentRedirectBanner
+            image={android}
+            title="지금 치트키를 만나보세요!"
+            content="플레이 스토어에서 다운 받기"
+            navigate={() => (window.location.href = GOOGLE_PLAY_URL)}
+          />
+          <ContentRedirectBanner
+            image={ios}
+            title="지금 치트키를 만나보세요!"
+            content="앱 스토어에서 다운 받기"
+            navigate={() => (window.location.href = APP_STORE_URL)}
+          />
+        </div>
+      )}
     </main>
   );
 };
