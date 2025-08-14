@@ -1,11 +1,15 @@
+import { useEffect } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
 import { path } from "@/routes/path";
 
+import { getCommentList } from "@/apis/comment/getCommentList";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
+import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation";
 import { usePostMenu } from "@/hooks/usePostMenu";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
@@ -15,11 +19,10 @@ import { BottomSheet } from "@/components/common/BottomSheet";
 import { ConfirmModal } from "@/components/common/ConfirmModal";
 import { ReportPostSheet } from "@/components/common/ReportPostSheet";
 import { SelectBox } from "@/components/common/SelectBox";
-//import { CommentInput } from "@/components/communityDetail/CommentInput";
-//import { CommentSection } from "@/components/communityDetail/CommentSection";
+import { CommentInput } from "@/components/communityDetail/CommentInput";
+import { CommentSection } from "@/components/communityDetail/CommentSection";
 import { CommunityPostContent } from "@/components/communityDetail/CommunityPostContent";
 
-//import { mockCommunityDetailCommentsData } from "@/mocks/mockCommunityDetailCommentsData";
 import { QUERY_KEYS } from "@/constants/apiConstants";
 
 export const CommunityDetail = () => {
@@ -35,6 +38,27 @@ export const CommunityDetail = () => {
     queryFn: () => getCommunityDetail({ postId: parseInt(postId!) }),
     enabled: !!postId,
   });
+
+  const {
+    data: commentList,
+    isLoading: isCommentListLoading,
+    isError: isCommentListError,
+  } = useQuery({
+    queryKey: [QUERY_KEYS.GET_COMMENT_LIST, postId],
+    queryFn: () => getCommentList({ postId: parseInt(postId!) }),
+    enabled: !!postId,
+  });
+
+  const { mutate: postComment, isPending: isCommentSubmitting } =
+    usePostCommentMutation();
+
+  const handleCommentSubmit = (content: string) => {
+    postComment({
+      postId: parseInt(postId!),
+      content,
+      // parentId: ...  대댓글
+    });
+  };
 
   const {
     menuState,
@@ -59,7 +83,11 @@ export const CommunityDetail = () => {
     close();
   };
 
-  if (isPostDetailLoading) {
+  useEffect(() => {
+    console.log(commentList);
+  }, [commentList]);
+
+  if (isPostDetailLoading || isCommentListLoading) {
     return (
       <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
         <LoadingSpinner />
@@ -67,7 +95,7 @@ export const CommunityDetail = () => {
     );
   }
 
-  if (isPostDetailError || !postDetail) {
+  if (isPostDetailError || isCommentListError || !postDetail) {
     return (
       <div className="bg-bg-100 safearea flex h-screen flex-col">
         <AppHeader
@@ -111,18 +139,20 @@ export const CommunityDetail = () => {
           canDelete={postDetail.canDelete}
           onOpenMenu={openMenu}
         />
-        {/* 2차 배포 이후 댓글 기능 구현 예정
+
         <p className="text-gray-system-400 body-2-medium px-5 py-2.5">
           댓글 30개
         </p>
-        <CommentSection comments={commentsForPost} />
-        */}
+        <CommentSection comments={commentList} />
       </div>
-      {/*  2차 배포 이후 댓글 기능 구현 예정
-      <div className="border-t-1">
-        <CommentInput />
+
+      <div className="mt-25 border-t-1">
+        <CommentInput
+          onCommentSubmit={handleCommentSubmit}
+          isSubmitting={isCommentSubmitting}
+        />
       </div>
-      */}
+
       <BottomSheet isOpen={menuState.type === "menu"} onClose={close}>
         <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
           <SelectBox

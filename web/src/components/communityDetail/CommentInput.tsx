@@ -4,21 +4,32 @@ import { cn } from "@/utils/cn";
 
 import UploadCommentIcon from "@/assets/icons/arrow_up.svg?react";
 
-export const CommentInput = () => {
+interface CommentInputProps {
+  onCommentSubmit: (content: string) => void;
+  isSubmitting: boolean;
+}
+
+export const CommentInput = ({
+  onCommentSubmit,
+  isSubmitting,
+}: CommentInputProps) => {
   const [comment, setComment] = useState("");
 
-  const isDisabled = !comment.trim();
+  const isDisabled = !comment.trim() || isSubmitting;
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     if (isDisabled) return;
-    console.log("📩 댓글 전송됨:", {
-      content: comment,
-    });
+
+    onCommentSubmit(comment);
     setComment("");
   };
 
   return (
-    <form className="bg-bg-100 border-bg-50 fixed right-0 bottom-0 left-0 z-10 flex items-center gap-3 border-t px-5 py-2.5">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-bg-100 border-bg-50 fixed right-0 bottom-5 left-0 z-10 flex items-center gap-3 border-t px-5 py-2.5"
+    >
       <textarea
         aria-label="댓글을 작성해주세요."
         value={comment}
@@ -26,13 +37,13 @@ export const CommentInput = () => {
         rows={1}
         placeholder="댓글을 작성해주세요."
         className="body-3-regular text-gray-system-200 placeholder-gray-system-600 bg-bg-50 box-border max-h-[100px] min-h-12 flex-1 resize-none content-center-safe overflow-y-auto rounded-xl px-2.5 py-2 leading-[1.4] outline-none"
+        disabled={isSubmitting}
       />
 
       <button
         type="submit"
-        onClick={handleSubmit}
         className="disabled:bg-base-50 bg-primary-400 flex h-12 w-12 items-center justify-center rounded-xl"
-        disabled={!comment.trim()}
+        disabled={isDisabled}
         aria-label="댓글 전송하기"
       >
         <UploadCommentIcon

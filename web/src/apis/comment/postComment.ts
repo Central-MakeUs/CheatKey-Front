@@ -18,10 +18,7 @@ export const postComment = async ({
     content,
     ...(parentId && { parentId }),
   };
-  const response = await authAPI.post(
-    API_DOMAINS.GET_COMMENT_LIST,
-    requestBody,
-  );
+  const response = await authAPI.post(API_DOMAINS.POST_COMMENT, requestBody);
 
   return response.data;
 };
