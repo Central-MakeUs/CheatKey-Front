@@ -44,9 +44,9 @@ export const BottomNavBar = () => {
       }}
     >
       <div
-        className={cn("flex h-26 items-center justify-around px-2", {
-          "pb-5": getPlatform() === "ios",
-          "pb-0": getPlatform() !== "ios",
+        className={cn("flex items-center justify-around px-2 pb-5", {
+          "h-26": getPlatform() === "ios",
+          "h-21": getPlatform() !== "ios",
         })}
       >
         <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
