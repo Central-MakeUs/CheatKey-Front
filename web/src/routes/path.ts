@@ -18,6 +18,7 @@ export const path = {
     base: "/analyze",
     specific: {
       result: (analyzeId: string | number) => `result/${analyzeId}`,
+      unknown: "result/unknown",
     },
   },
   content: {

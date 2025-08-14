@@ -43,8 +43,12 @@ export const useAnalyzePage = () => {
       return postAnalyzeCase({ text: inputValue });
     },
     onSuccess: (data) => {
-      const resultId = data.detectionId;
-      navigate(path.analyze.specific.result(resultId), { state: data });
+      if (data.status === "UNKNOWN") {
+        navigate(path.analyze.specific.unknown);
+      } else {
+        const resultId = data.detectionId;
+        navigate(path.analyze.specific.result(resultId), { state: data });
+      }
     },
     onError: () => {
       if (activeTab === "url") {
