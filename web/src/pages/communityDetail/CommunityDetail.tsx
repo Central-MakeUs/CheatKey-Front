@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { path } from "@/routes/path";
 
 import { getCommentList } from "@/apis/comment/getCommentList";
+import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
 import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation";
@@ -28,6 +29,15 @@ import { QUERY_KEYS } from "@/constants/apiConstants";
 export const CommunityDetail = () => {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
+  const commentInputRef = useRef<HTMLTextAreaElement>(null);
+
+  const [selectedCommentId, setSelectedCommentId] = useState<number | null>(
+    null,
+  );
+
+  const handleSelectComment = (commentId: number) => {
+    setSelectedCommentId((prev) => (prev === commentId ? null : commentId));
+  };
 
   const {
     data: postDetail,
@@ -53,11 +63,16 @@ export const CommunityDetail = () => {
     usePostCommentMutation();
 
   const handleCommentSubmit = (content: string) => {
-    postComment({
+    const commentData: CommentPostRequest = {
       postId: parseInt(postId!),
       content,
-      // parentId: ...  대댓글
-    });
+    };
+
+    if (selectedCommentId !== null) {
+      commentData.parentId = selectedCommentId;
+    }
+
+    postComment(commentData);
   };
 
   const {
@@ -86,6 +101,12 @@ export const CommunityDetail = () => {
   useEffect(() => {
     console.log(commentList);
   }, [commentList]);
+
+  useEffect(() => {
+    if (selectedCommentId !== null) {
+      commentInputRef.current?.focus();
+    }
+  }, [selectedCommentId]);
 
   if (isPostDetailLoading || isCommentListLoading) {
     return (
@@ -128,7 +149,10 @@ export const CommunityDetail = () => {
         onNotification={() => console.log("🚨알림 클릭됨")}
         className="bg-bg-100"
       />
-      <div className="divide-bg-50 flex-1 divide-y overflow-y-auto pt-15">
+      <div
+        onClick={() => setSelectedCommentId(null)}
+        className="divide-bg-50 flex-1 divide-y overflow-y-auto pt-15"
+      >
         <CommunityPostContent
           postId={postDetail.id}
           title={postDetail.title}
@@ -141,15 +165,21 @@ export const CommunityDetail = () => {
         />
 
         <p className="text-gray-system-400 body-2-medium px-5 py-2.5">
-          댓글 30개
+          댓글 {postDetail.commentCount}개
         </p>
-        <CommentSection comments={commentList} />
+        <CommentSection
+          comments={commentList}
+          selectedCommentId={selectedCommentId}
+          onSelectComment={handleSelectComment}
+        />
       </div>
 
       <div className="mt-25 border-t-1">
         <CommentInput
+          ref={commentInputRef}
           onCommentSubmit={handleCommentSubmit}
           isSubmitting={isCommentSubmitting}
+          isReplying={selectedCommentId !== null}
         />
       </div>
 

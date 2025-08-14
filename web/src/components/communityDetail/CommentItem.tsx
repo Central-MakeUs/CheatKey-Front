@@ -1,4 +1,6 @@
 import type { Comment } from "@/types/community/community.types";
+import { cn } from "@/utils/cn";
+import { formatDetailDate } from "@/utils/formatUTCtoKR";
 
 import { NameTag } from "@/components/common/NameTag";
 import { ReplyCommentItem } from "@/components/communityDetail/ReplyCommentItem";
@@ -6,10 +8,31 @@ import { ReplyCommentItem } from "@/components/communityDetail/ReplyCommentItem"
 import RemoveIcon from "@/assets/icons/remove.svg?react";
 import TemporaryProfilePic from "@/assets/icons/temporary_profile_pic.svg";
 
-export const CommentItem = ({ comment }: { comment: Comment }) => {
+interface CommentItemProps {
+  comment: Comment;
+  isSelected: boolean;
+  onSelect: () => void;
+}
+
+export const CommentItem = ({
+  comment,
+  isSelected,
+  onSelect,
+}: CommentItemProps) => {
+  const handleSelect = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onSelect();
+  };
+
   return (
     <>
-      <div className="active:bg-gray-system-800 px-5 py-3.5">
+      <div
+        onClick={handleSelect}
+        className={cn(
+          "px-5 py-3.5",
+          isSelected ? "bg-gray-system-800" : "bg-bg-100",
+        )}
+      >
         <div className="mb-2.5 flex items-center justify-between">
           <div className="flex items-center">
             <img
@@ -20,12 +43,12 @@ export const CommentItem = ({ comment }: { comment: Comment }) => {
 
             {/* TODO: @tifsy 작성자일 때 type=commmunity_primary 처리 */}
             <NameTag
-              name={comment.userNickname}
+              name={comment.authorNickname}
               type="community_mono"
               className="mr-3 ml-2"
             />
             <p className="text-gray-system-700 body-5-regular">
-              {comment.createdAt}
+              {formatDetailDate(comment.createdAt)}
             </p>
           </div>
 

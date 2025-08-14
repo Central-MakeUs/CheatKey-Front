@@ -18,7 +18,7 @@ export type Comment = {
   postId: number;
   parentId: number | null;
   userId: number;
-  userNickname: string;
+  authorNickname: string;
   content: string;
   status: string;
   createdAt: string;
