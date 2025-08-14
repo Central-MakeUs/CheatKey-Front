@@ -18,6 +18,9 @@ export const API_DOMAINS = {
   POST_REPORT: "/v1/api/community/posts/:postId/report",
   POST_BLOCK: "/v1/api/community/posts/:postId/author/block",
   GET_COMMUNITY_DETAIL: "/v1/api/community/posts/:postId",
+  GET_COMMENT_LIST: "/v1/api/community/posts/:postId/comments",
+  POST_COMMENT: "/v1/api/community/comments",
+  DELETE_COMMENT: "/v1/api/community/comments/:commentId",
 };
 
 export const QUERY_KEYS = {
@@ -29,4 +32,5 @@ export const QUERY_KEYS = {
   GET_COMMUNITY_FEED: "communityPosts",
   GET_SEARCH_RESULT: "searchResult",
   GET_COMMUNITY_DETAIL: "communityDetail",
+  GET_COMMENT_LIST: "commentList",
 };

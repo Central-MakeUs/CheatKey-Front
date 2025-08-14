@@ -3,10 +3,10 @@ import { generateApiPath } from "@/utils/generateApiPath";
 
 import { API_DOMAINS } from "@/constants/apiConstants";
 
-export const postBlock = async ({ postId }: { postId: number }) => {
-  const response = await authAPI.post(
-    generateApiPath(API_DOMAINS.POST_BLOCK, { postId }),
-    { reason: "HATE" },
+export const getCommentList = async ({ postId }: { postId: number }) => {
+  const response = await authAPI.get(
+    generateApiPath(API_DOMAINS.GET_COMMENT_LIST, { postId }),
   );
+
   return response.data;
 };
