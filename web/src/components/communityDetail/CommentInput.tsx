@@ -16,12 +16,21 @@ export const CommentInput = forwardRef<HTMLTextAreaElement, CommentInputProps>(
 
     const isDisabled = !comment.trim() || isSubmitting;
 
+    const handleResizeHeight = (element: HTMLTextAreaElement) => {
+      element.style.height = "auto";
+      element.style.height = `${element.scrollHeight}px`;
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       if (isDisabled) return;
 
       onCommentSubmit(comment);
       setComment("");
+
+      if (ref && "current" in ref && ref.current) {
+        ref.current.style.height = "auto";
+      }
     };
 
     useEffect(() => {
@@ -39,10 +48,13 @@ export const CommentInput = forwardRef<HTMLTextAreaElement, CommentInputProps>(
           ref={ref}
           aria-label="댓글을 작성해주세요."
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={(e) => {
+            setComment(e.target.value);
+            handleResizeHeight(e.target);
+          }}
           rows={1}
           placeholder="댓글을 작성해주세요."
-          className="body-3-regular text-gray-system-200 placeholder-gray-system-600 bg-bg-50 box-border max-h-[100px] min-h-12 flex-1 resize-none content-center-safe overflow-y-auto rounded-xl px-2.5 py-2 leading-[1.4] outline-none"
+          className="body-3-regular text-gray-system-200 placeholder-gray-system-600 bg-bg-50 box-border max-h-[82px] min-h-12 flex-1 resize-none content-center-safe overflow-y-auto rounded-xl px-2.5 py-2 outline-none"
           disabled={isSubmitting}
         />
 
