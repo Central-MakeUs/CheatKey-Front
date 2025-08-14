@@ -1,11 +1,18 @@
+import { useEffect, useState, useRef } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
 import { path } from "@/routes/path";
 
+import { getCommentList } from "@/apis/comment/getCommentList";
+import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
+import { useDeleteCommentMutation } from "@/hooks/mutations/useDeleteCommentMutation";
+import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
+import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation";
 import { usePostMenu } from "@/hooks/usePostMenu";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
@@ -15,32 +22,82 @@ import { BottomSheet } from "@/components/common/BottomSheet";
 import { ConfirmModal } from "@/components/common/ConfirmModal";
 import { ReportPostSheet } from "@/components/common/ReportPostSheet";
 import { SelectBox } from "@/components/common/SelectBox";
-//import { CommentInput } from "@/components/communityDetail/CommentInput";
-//import { CommentSection } from "@/components/communityDetail/CommentSection";
+import { CommentInput } from "@/components/communityDetail/CommentInput";
+import { CommentSection } from "@/components/communityDetail/CommentSection";
 import { CommunityPostContent } from "@/components/communityDetail/CommunityPostContent";
 
-//import { mockCommunityDetailCommentsData } from "@/mocks/mockCommunityDetailCommentsData";
 import { QUERY_KEYS } from "@/constants/apiConstants";
 
 export const CommunityDetail = () => {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
+  const commentInputRef = useRef<HTMLTextAreaElement>(null);
+
+  const [selectedCommentId, setSelectedCommentId] = useState<number | null>(
+    null,
+  );
+
+  const handleSelectComment = (commentId: number) => {
+    setSelectedCommentId((prev) => (prev === commentId ? null : commentId));
+  };
+
+  const postDetailQueryKey = [QUERY_KEYS.GET_COMMUNITY_DETAIL, postId];
+  const commentListQueryKey = [QUERY_KEYS.GET_COMMENT_LIST, postId];
 
   const {
     data: postDetail,
     isLoading: isPostDetailLoading,
     isError: isPostDetailError,
   } = useQuery({
-    queryKey: [QUERY_KEYS.GET_COMMUNITY_DETAIL, postId],
+    queryKey: commentListQueryKey,
     queryFn: () => getCommunityDetail({ postId: parseInt(postId!) }),
     enabled: !!postId,
   });
+
+  const { mutate: deletePost } = useDeletePostMutation({
+    queryKeyToInvalidate: [QUERY_KEYS.GET_COMMUNITY_FEED],
+    onSuccess: () => navigate(-1),
+  });
+
+  const {
+    data: commentList,
+    isLoading: isCommentListLoading,
+    isError: isCommentListError,
+  } = useQuery({
+    queryKey: postDetailQueryKey,
+    queryFn: () => getCommentList({ postId: parseInt(postId!) }),
+    enabled: !!postId,
+  });
+
+  const { mutate: postComment, isPending: isCommentSubmitting } =
+    usePostCommentMutation([postDetailQueryKey, commentListQueryKey]);
+
+  const { mutate: deleteComment } = useDeleteCommentMutation([
+    postDetailQueryKey,
+    commentListQueryKey,
+  ]);
+
+  const handleCommentSubmit = (content: string) => {
+    const commentData: CommentPostRequest = {
+      postId: parseInt(postId!),
+      content,
+    };
+
+    if (selectedCommentId !== null) {
+      commentData.parentId = selectedCommentId;
+    }
+
+    postComment(commentData);
+    setSelectedCommentId(null);
+  };
 
   const {
     menuState,
     openMenu,
     openBlockConfirm,
     openReportSheet,
+    openPostDeleteConfirm,
+    openCommentDeleteConfirm,
     showReportComplete,
     close,
   } = usePostMenu({
@@ -53,13 +110,33 @@ export const CommunityDetail = () => {
   ]);
 
   const handleBlockConfirm = () => {
-    if (menuState.postId) {
-      blockUser({ postId: menuState.postId });
+    if (menuState.id) {
+      blockUser({ postId: menuState.id });
     }
     close();
   };
 
-  if (isPostDetailLoading) {
+  const handlePostDelete = () => {
+    if (menuState.id) {
+      deletePost({ postId: menuState.id });
+    }
+    close();
+  };
+
+  const handleCommentDelete = () => {
+    if (menuState.id) {
+      deleteComment({ commentId: menuState.id });
+    }
+    close();
+  };
+
+  useEffect(() => {
+    if (selectedCommentId !== null) {
+      commentInputRef.current?.focus();
+    }
+  }, [selectedCommentId]);
+
+  if (isPostDetailLoading || isCommentListLoading) {
     return (
       <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
         <LoadingSpinner />
@@ -67,7 +144,7 @@ export const CommunityDetail = () => {
     );
   }
 
-  if (isPostDetailError || !postDetail) {
+  if (isPostDetailError || isCommentListError || !postDetail) {
     return (
       <div className="bg-bg-100 safearea flex h-screen flex-col">
         <AppHeader
@@ -100,7 +177,10 @@ export const CommunityDetail = () => {
         onNotification={() => console.log("🚨알림 클릭됨")}
         className="bg-bg-100"
       />
-      <div className="divide-bg-50 flex-1 divide-y overflow-y-auto pt-15">
+      <div
+        onClick={() => setSelectedCommentId(null)}
+        className="divide-bg-50 flex-1 divide-y overflow-y-auto pt-15"
+      >
         <CommunityPostContent
           postId={postDetail.id}
           title={postDetail.title}
@@ -111,30 +191,49 @@ export const CommunityDetail = () => {
           canDelete={postDetail.canDelete}
           onOpenMenu={openMenu}
         />
-        {/* 2차 배포 이후 댓글 기능 구현 예정
+
         <p className="text-gray-system-400 body-2-medium px-5 py-2.5">
-          댓글 30개
+          댓글 {postDetail.commentCount}개
         </p>
-        <CommentSection comments={commentsForPost} />
-        */}
+        <CommentSection
+          comments={commentList}
+          selectedCommentId={selectedCommentId}
+          onSelectComment={handleSelectComment}
+          onDeleteComment={openCommentDeleteConfirm}
+        />
       </div>
-      {/*  2차 배포 이후 댓글 기능 구현 예정
+
       <div className="border-t-1">
-        <CommentInput />
+        <CommentInput
+          ref={commentInputRef}
+          onCommentSubmit={handleCommentSubmit}
+          isSubmitting={isCommentSubmitting}
+          isReplying={selectedCommentId !== null}
+        />
       </div>
-      */}
+
       <BottomSheet isOpen={menuState.type === "menu"} onClose={close}>
         <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
-          <SelectBox
-            type="postMenu"
-            label="해당 유저 차단하기"
-            onClick={() => openBlockConfirm(menuState.postId!)}
-          />
-          <SelectBox
-            type="postMenu"
-            label="신고하기"
-            onClick={() => openReportSheet(menuState.postId!)}
-          />
+          {postDetail.canDelete ? (
+            <SelectBox
+              type="postMenu"
+              label="삭제하기"
+              onClick={() => openPostDeleteConfirm(menuState.id!)}
+            />
+          ) : (
+            <>
+              <SelectBox
+                type="postMenu"
+                label="해당 유저 차단하기"
+                onClick={() => openBlockConfirm(menuState.id!)}
+              />
+              <SelectBox
+                type="postMenu"
+                label="신고하기"
+                onClick={() => openReportSheet(menuState.id!)}
+              />
+            </>
+          )}
         </div>
       </BottomSheet>
       {menuState.type === "block" && (
@@ -147,10 +246,29 @@ export const CommunityDetail = () => {
           onCancel={close}
         />
       )}
+      {menuState.type === "deletePost" && (
+        <ConfirmModal
+          title="게시물을 삭제하시겠어요?"
+          description="삭제하면 다시는 볼 수 없어요!"
+          confirmText="확인"
+          cancelText="취소"
+          onConfirm={handlePostDelete}
+          onCancel={close}
+        />
+      )}
+      {menuState.type === "deleteComment" && (
+        <ConfirmModal
+          title="댓글을 삭제하시겠어요?"
+          confirmText="확인"
+          cancelText="취소"
+          onConfirm={handleCommentDelete}
+          onCancel={close}
+        />
+      )}
 
       <ReportPostSheet
         isOpen={menuState.type === "report"}
-        postId={menuState.postId!}
+        postId={menuState.id!}
         onClose={close}
         onReportComplete={showReportComplete}
       />

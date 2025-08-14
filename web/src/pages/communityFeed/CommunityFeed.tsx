@@ -74,8 +74,8 @@ export const CommunityFeed = () => {
   const { mutate: blockUser } = useBlockUserMutation(communityPostsQueryKey);
 
   const handleBlockConfirm = () => {
-    if (menuState.postId) {
-      blockUser({ postId: menuState.postId });
+    if (menuState.id) {
+      blockUser({ postId: menuState.id });
     }
     close();
   };
@@ -143,12 +143,12 @@ export const CommunityFeed = () => {
           <SelectBox
             type="postMenu"
             label="해당 유저 차단하기"
-            onClick={() => openBlockConfirm(menuState.postId!)}
+            onClick={() => openBlockConfirm(menuState.id!)}
           />
           <SelectBox
             type="postMenu"
             label="신고하기"
-            onClick={() => openReportSheet(menuState.postId!)}
+            onClick={() => openReportSheet(menuState.id!)}
           />
         </div>
       </BottomSheet>
@@ -166,7 +166,7 @@ export const CommunityFeed = () => {
 
       <ReportPostSheet
         isOpen={menuState.type === "report"}
-        postId={menuState.postId!}
+        postId={menuState.id!}
         onClose={close}
         onReportComplete={showReportComplete}
       />

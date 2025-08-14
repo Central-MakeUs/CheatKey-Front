@@ -6,6 +6,7 @@ import { path } from "@/routes/path";
 
 import { getHomeDashboard } from "@/apis/home/getHomeDashboard";
 
+import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { NameTag } from "@/components/common/NameTag";
 import { SearchBarRedirect } from "@/components/common/SearchBarRedirect";
 import { HomeBannerList } from "@/components/home/HomeBannerList";
@@ -27,7 +28,11 @@ export const Home = () => {
   });
 
   if (!dashboardData) {
-    return null;
+    return (
+      <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   const { userInfo, popularPosts } = dashboardData;

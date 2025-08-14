@@ -21,3 +21,44 @@ export const formatUTCtoKR = (dateString: string): string => {
     .replace(/\. /g, ".")
     .slice(0, -1);
 };
+
+/**
+ * 상세 페이지용으로 날짜 문자열(UTC)을 상황에 맞게 변환
+ * - 같은 날짜: "HH:MM"
+ * - 하루 이상 차이: "YYYY.MM.DD"
+ * @param dateString - API로부터 받은 날짜/시간 문자열
+ * @returns {string} 변환된 시간 또는 날짜 문자열
+ */
+
+export const formatDetailDate = (dateString: string): string => {
+  const date = new Date(
+    dateString.endsWith("Z") ? dateString : dateString + "Z",
+  );
+  const now = new Date();
+
+  if (isNaN(date.getTime())) {
+    return "유효하지 않은 날짜";
+  }
+
+  const isSameDay =
+    date.getFullYear() === now.getFullYear() &&
+    date.getMonth() === now.getMonth() &&
+    date.getDate() === now.getDate();
+
+  if (isSameDay) {
+    return date.toLocaleTimeString("ko-KR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  } else {
+    return date
+      .toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/\. /g, ".")
+      .slice(0, -1);
+  }
+};

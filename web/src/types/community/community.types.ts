@@ -17,11 +17,11 @@ export type Comment = {
   id: number;
   postId: number;
   parentId: number | null;
-  userId: number;
-  userNickname: string;
+  authorNickname: string;
   content: string;
   status: string;
   createdAt: string;
+  canDelete: boolean;
   children: Comment[];
 };
 

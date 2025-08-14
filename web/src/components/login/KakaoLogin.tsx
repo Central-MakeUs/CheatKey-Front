@@ -28,7 +28,7 @@ export const KakaoLogin = () => {
         } else if (result.data.userState === "INACTIVE") {
           alert("영구 정지된 계정입니다.");
         } else if (result.data.userState === "WITHDRAWN") {
-          alert("이전에 탈퇴한 계정입니다.");
+          alert("탈퇴 후 30일이 지나야 재가입이 가능합니다.");
         }
       }
       // TODO: @Ki-Tak 에러 처리랑 카카오 로그인 실패 처리 로직 수정 필요

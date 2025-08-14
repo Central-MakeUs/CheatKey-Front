@@ -59,9 +59,8 @@ export const CommunityPostContent = ({
               </span>
             </div>
           </div>
-          {!canDelete && (
-            <PostMenuButton postId={postId} onOpenMenu={onOpenMenu} />
-          )}
+
+          <PostMenuButton postId={postId} onOpenMenu={onOpenMenu} />
         </div>
 
         <div className="text-gray-system-100 body-1-bold">{title}</div>
