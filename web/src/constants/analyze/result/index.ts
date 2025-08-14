@@ -9,6 +9,7 @@ import {
   SAFE_STYLE,
   WARNING_STYLE,
   DANGER_STYLE,
+  UNKNOWN_STYLE,
 } from "@/constants/analyze/result/common";
 import { DETAIL_CARD_CONTENT } from "@/constants/analyze/result/detailCards";
 import {
@@ -25,6 +26,7 @@ const createAnalysisData = (
     SAFE: SAFE_STYLE,
     WARNING: WARNING_STYLE,
     DANGER: DANGER_STYLE,
+    UNKNOWN: UNKNOWN_STYLE,
   };
   const firstCard = FIRST_CARD_CONTENT[status];
   const detailContent = DETAIL_CARD_CONTENT[categoryKey];
@@ -54,6 +56,7 @@ export const ALL_ANALYSIS_DATA: AllAnalysisData = {
     [ANALYSIS_STATUS.SAFE]: createAnalysisData("URL", "SAFE"),
     [ANALYSIS_STATUS.WARNING]: createAnalysisData("URL", "WARNING"),
     [ANALYSIS_STATUS.DANGER]: createAnalysisData("URL", "DANGER"),
+    [ANALYSIS_STATUS.UNKNOWN]: createAnalysisData("URL", "UNKNOWN"),
   },
   // 현재 서버에서 URL과 피싱 사례 분석을 같은 값을 주고 있어서 겹치는 오류가 나서 주석 처리하였습니다.
   /*[ANALYSIS_CATEGORY.PHISHING]: {
@@ -65,6 +68,7 @@ export const ALL_ANALYSIS_DATA: AllAnalysisData = {
     [ANALYSIS_STATUS.SAFE]: createAnalysisData("INVESTMENT", "SAFE"),
     [ANALYSIS_STATUS.WARNING]: createAnalysisData("INVESTMENT", "WARNING"),
     [ANALYSIS_STATUS.DANGER]: createAnalysisData("INVESTMENT", "DANGER"),
+    [ANALYSIS_STATUS.UNKNOWN]: createAnalysisData("INVESTMENT", "UNKNOWN"),
   },
 };
 

@@ -65,6 +65,12 @@ type AnalysisResultUnion<DetailsType> =
       title: string;
       style: ResultCardStyle;
       details: DetailsType;
+    }
+  | {
+      status: typeof ANALYSIS_STATUS.UNKNOWN;
+      title: string;
+      style: ResultCardStyle;
+      details: DetailsType;
     };
 export type CategoryAnalysisResult = AnalysisResultUnion<CategoryResultDetails>;
 
