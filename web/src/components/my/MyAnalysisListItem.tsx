@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import type { MyAnalysisItem } from "@/types/my/my.types";
+import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
 import { AnalysisLevelBadge } from "@/components/my/AnalysisLevelBadge";
 import { AnalysisTypeBadge } from "@/components/my/AnalysisTypeBadge";
@@ -40,11 +41,7 @@ export const MyAnalysisListItem = ({ item }: MyAnalysisListItemProps) => {
       <p className="text-gray-system-500 body-4-medium flex gap-[7px]">
         판독 날짜
         <span className="text-gray-system-600 body-5-regular">
-          {new Date(item.detectedAt).toLocaleDateString("ko-KR", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          })}
+          {formatUTCtoKR(item.detectedAt)}
         </span>
       </p>
     </button>
