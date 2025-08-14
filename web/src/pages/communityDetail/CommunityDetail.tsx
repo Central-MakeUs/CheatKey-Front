@@ -10,6 +10,8 @@ import { getCommentList } from "@/apis/comment/getCommentList";
 import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
+import { useDeleteCommentMutation } from "@/hooks/mutations/useDeleteCommentMutation";
+import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
 import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation";
 import { usePostMenu } from "@/hooks/usePostMenu";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
@@ -39,14 +41,22 @@ export const CommunityDetail = () => {
     setSelectedCommentId((prev) => (prev === commentId ? null : commentId));
   };
 
+  const postDetailQueryKey = [QUERY_KEYS.GET_COMMUNITY_DETAIL, postId];
+  const commentListQueryKey = [QUERY_KEYS.GET_COMMENT_LIST, postId];
+
   const {
     data: postDetail,
     isLoading: isPostDetailLoading,
     isError: isPostDetailError,
   } = useQuery({
-    queryKey: [QUERY_KEYS.GET_COMMUNITY_DETAIL, postId],
+    queryKey: commentListQueryKey,
     queryFn: () => getCommunityDetail({ postId: parseInt(postId!) }),
     enabled: !!postId,
+  });
+
+  const { mutate: deletePost } = useDeletePostMutation({
+    queryKeyToInvalidate: [QUERY_KEYS.GET_COMMUNITY_FEED],
+    onSuccess: () => navigate(-1),
   });
 
   const {
@@ -54,13 +64,18 @@ export const CommunityDetail = () => {
     isLoading: isCommentListLoading,
     isError: isCommentListError,
   } = useQuery({
-    queryKey: [QUERY_KEYS.GET_COMMENT_LIST, postId],
+    queryKey: postDetailQueryKey,
     queryFn: () => getCommentList({ postId: parseInt(postId!) }),
     enabled: !!postId,
   });
 
   const { mutate: postComment, isPending: isCommentSubmitting } =
-    usePostCommentMutation();
+    usePostCommentMutation([postDetailQueryKey, commentListQueryKey]);
+
+  const { mutate: deleteComment } = useDeleteCommentMutation([
+    postDetailQueryKey,
+    commentListQueryKey,
+  ]);
 
   const handleCommentSubmit = (content: string) => {
     const commentData: CommentPostRequest = {
@@ -73,6 +88,7 @@ export const CommunityDetail = () => {
     }
 
     postComment(commentData);
+    setSelectedCommentId(null);
   };
 
   const {
@@ -80,6 +96,8 @@ export const CommunityDetail = () => {
     openMenu,
     openBlockConfirm,
     openReportSheet,
+    openPostDeleteConfirm,
+    openCommentDeleteConfirm,
     showReportComplete,
     close,
   } = usePostMenu({
@@ -92,8 +110,22 @@ export const CommunityDetail = () => {
   ]);
 
   const handleBlockConfirm = () => {
-    if (menuState.postId) {
-      blockUser({ postId: menuState.postId });
+    if (menuState.id) {
+      blockUser({ postId: menuState.id });
+    }
+    close();
+  };
+
+  const handlePostDelete = () => {
+    if (menuState.id) {
+      deletePost({ postId: menuState.id });
+    }
+    close();
+  };
+
+  const handleCommentDelete = () => {
+    if (menuState.id) {
+      deleteComment({ commentId: menuState.id });
     }
     close();
   };
@@ -171,10 +203,11 @@ export const CommunityDetail = () => {
           comments={commentList}
           selectedCommentId={selectedCommentId}
           onSelectComment={handleSelectComment}
+          onDeleteComment={openCommentDeleteConfirm}
         />
       </div>
 
-      <div className="mt-25 border-t-1">
+      <div className="border-t-1">
         <CommentInput
           ref={commentInputRef}
           onCommentSubmit={handleCommentSubmit}
@@ -185,16 +218,26 @@ export const CommunityDetail = () => {
 
       <BottomSheet isOpen={menuState.type === "menu"} onClose={close}>
         <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
-          <SelectBox
-            type="postMenu"
-            label="해당 유저 차단하기"
-            onClick={() => openBlockConfirm(menuState.postId!)}
-          />
-          <SelectBox
-            type="postMenu"
-            label="신고하기"
-            onClick={() => openReportSheet(menuState.postId!)}
-          />
+          {postDetail.canDelete ? (
+            <SelectBox
+              type="postMenu"
+              label="삭제하기"
+              onClick={() => openPostDeleteConfirm(menuState.id!)}
+            />
+          ) : (
+            <>
+              <SelectBox
+                type="postMenu"
+                label="해당 유저 차단하기"
+                onClick={() => openBlockConfirm(menuState.id!)}
+              />
+              <SelectBox
+                type="postMenu"
+                label="신고하기"
+                onClick={() => openReportSheet(menuState.id!)}
+              />
+            </>
+          )}
         </div>
       </BottomSheet>
       {menuState.type === "block" && (
@@ -207,10 +250,29 @@ export const CommunityDetail = () => {
           onCancel={close}
         />
       )}
+      {menuState.type === "deletePost" && (
+        <ConfirmModal
+          title="게시물을 삭제하시겠어요?"
+          description="삭제하면 다시는 볼 수 없어요!"
+          confirmText="확인"
+          cancelText="취소"
+          onConfirm={handlePostDelete}
+          onCancel={close}
+        />
+      )}
+      {menuState.type === "deleteComment" && (
+        <ConfirmModal
+          title="댓글을 삭제하시겠어요?"
+          confirmText="확인"
+          cancelText="취소"
+          onConfirm={handleCommentDelete}
+          onCancel={close}
+        />
+      )}
 
       <ReportPostSheet
         isOpen={menuState.type === "report"}
-        postId={menuState.postId!}
+        postId={menuState.id!}
         onClose={close}
         onReportComplete={showReportComplete}
       />

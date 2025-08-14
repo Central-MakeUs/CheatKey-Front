@@ -4,15 +4,15 @@ import {
   type QueryKey,
 } from "@tanstack/react-query";
 
-import { postComment } from "@/apis/comment/postComment";
+import { deleteComment } from "@/apis/comment/deleteComment";
 
-export const usePostCommentMutation = (
+export const useDeleteCommentMutation = (
   queryKeyToInvalidate: QueryKey | QueryKey[],
 ) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postComment,
+    mutationFn: deleteComment,
     onSuccess: () => {
       const keysToInvalidate = Array.isArray(queryKeyToInvalidate[0])
         ? (queryKeyToInvalidate as QueryKey[])

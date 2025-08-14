@@ -12,12 +12,14 @@ interface CommentItemProps {
   comment: Comment;
   isSelected: boolean;
   onSelect: () => void;
+  onDelete: (commentId: number) => void;
 }
 
 export const CommentItem = ({
   comment,
   isSelected,
   onSelect,
+  onDelete,
 }: CommentItemProps) => {
   const handleSelect = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -41,10 +43,9 @@ export const CommentItem = ({
               className="h-[1.875rem] w-[1.875rem] rounded-full"
             />
 
-            {/* TODO: @tifsy 작성자일 때 type=commmunity_primary 처리 */}
             <NameTag
               name={comment.authorNickname}
-              type="community_mono"
+              type={comment.canDelete ? "community_primary" : "community_mono"}
               className="mr-3 ml-2"
             />
             <p className="text-gray-system-700 body-5-regular">
@@ -52,9 +53,19 @@ export const CommentItem = ({
             </p>
           </div>
 
-          <button className="댓글 삭제" type="button">
-            <RemoveIcon />
-          </button>
+          {comment.canDelete && (
+            <button
+              onClick={(e: React.MouseEvent) => {
+                e.stopPropagation();
+                onDelete(comment.id);
+              }}
+              aria-label="댓글 삭제"
+              type="button"
+              className="h-6 w-6"
+            >
+              <RemoveIcon className="h-full w-full" />
+            </button>
+          )}
         </div>
         <p className="body-5-regular text-gray-system-500">{comment.content}</p>
       </div>
@@ -66,6 +77,7 @@ export const CommentItem = ({
               key={reply.id}
               reply={reply}
               isFirst={index === 0}
+              onDelete={onDelete}
             />
           ))}
         </div>

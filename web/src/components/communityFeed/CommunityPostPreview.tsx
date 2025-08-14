@@ -9,7 +9,7 @@ import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 import { NameTag } from "@/components/common/NameTag";
 import { PostMenuButton } from "@/components/common/PostMenuButton";
 
-//import CommentIcon from "@/assets/icons/comment.svg?react";
+import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
 import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
 
@@ -24,7 +24,7 @@ export const CommunityPostPreview = ({
   createdAt,
   title,
   content,
-  //commentCount,
+  commentCount,
   thumbnailUrls = [],
 }: CommunityPostPreviewProps) => {
   const navigate = useNavigate();
@@ -86,12 +86,11 @@ export const CommunityPostPreview = ({
             ))}
         </div>
       )}
-      {/** TODO: @Tifsy 2차 배포시, 댓글 추가 
+
       <div className="text-gray-system-500 body-5-regular flex items-center justify-end gap-1 pt-1">
         <span>{commentCount}</span>
         <CommentIcon className="h-5 w-5" />
       </div>
-       */}
     </div>
   );
 };
