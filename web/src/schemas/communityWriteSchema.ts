@@ -1,16 +1,18 @@
 import { z } from "zod";
 
+const MIN_TITLE_LENGTH = 2;
 const MIN_TEXT_LENGTH = 10;
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const MAX_IMAGE_COUNT = 5;
-const TOO_SHORT_MSG = `최소 ${MIN_TEXT_LENGTH}자 이상 작성해주세요.`;
+const TOO_TITLE_SHORT_MSG = `제목을 최소 ${MIN_TITLE_LENGTH}자 이상 작성해주세요.`;
+const TOO_TEXT_SHORT_MSG = `내용을 최소 ${MIN_TEXT_LENGTH}자 이상 작성해주세요.`;
 const IMAGE_TOO_LARGE_MSG = "사진 용량이 너무 커요.";
 const NO_BOARD_SELECTED_MSG = "게시판을 선택해주세요.";
 
 export const communityWriteSchema = z.object({
-  title: z.string().trim().min(MIN_TEXT_LENGTH, TOO_SHORT_MSG),
+  title: z.string().trim().min(MIN_TITLE_LENGTH, TOO_TITLE_SHORT_MSG),
   board: z.string().trim().min(1, NO_BOARD_SELECTED_MSG),
-  content: z.string().trim().min(MIN_TEXT_LENGTH, TOO_SHORT_MSG),
+  content: z.string().trim().min(MIN_TEXT_LENGTH, TOO_TEXT_SHORT_MSG),
   images: z
     .array(
       z.object({
