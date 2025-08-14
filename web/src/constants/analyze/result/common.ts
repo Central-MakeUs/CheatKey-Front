@@ -4,6 +4,7 @@ export const ANALYSIS_STATUS = {
   SAFE: "SAFE",
   WARNING: "WARNING",
   DANGER: "DANGER",
+  UNKNOWN: "UNKNOWN",
 } as const;
 
 export const ANALYSIS_CATEGORY = {
@@ -16,6 +17,7 @@ export const STATUS_TEXT_MAP = {
   [ANALYSIS_STATUS.SAFE]: "양호",
   [ANALYSIS_STATUS.WARNING]: "주의",
   [ANALYSIS_STATUS.DANGER]: "위험",
+  [ANALYSIS_STATUS.UNKNOWN]: "분석 불가",
 };
 
 export const SAFE_STYLE: ResultCardStyle = {
@@ -55,4 +57,17 @@ export const DANGER_STYLE: ResultCardStyle = {
   primaryColor: "text-error-50",
   indicatorColor: "bg-error-100",
   questionColor: "text-[#fff2f2]",
+};
+
+export const UNKNOWN_STYLE: ResultCardStyle = {
+  background:
+    "bg-linear-[180deg,rgba(125,81,255,0.2)_0%,rgba(73,48,147,0.1)_30%,rgba(73,48,147,0.1)_78.11%,rgba(73,48,147,0.2)_100%]",
+  statusBackground: "bg-[#362c5e]",
+  cardBackground:
+    "bg-linear-[158deg,rgba(73,48,147,0.35)_2.67%,rgba(73,48,147,0.23)_34.34%,rgba(73,48,147,0.14)_104.73%]",
+  cardInnerBackground: "bg-[#4c4e78]/20",
+  borderColor: "border-[#a15eff]/20",
+  primaryColor: "text-[#b5a3f5]",
+  indicatorColor: "bg-[#362c5e]",
+  questionColor: "text-[#362c5e]",
 };

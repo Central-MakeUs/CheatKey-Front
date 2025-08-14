@@ -61,6 +61,7 @@ export const DETAIL_CARD_CONTENT = {
       SAFE: [safeFishing1, safeFishing2],
       WARNING: [warnFishing1, warnFishing2],
       DANGER: [dangerFishing1, dangerFishing2],
+      UNKNOWN: [warnFishing1, warnFishing2],
     },
   },
   PHISHING: {
@@ -69,6 +70,7 @@ export const DETAIL_CARD_CONTENT = {
       SAFE: [safeFishing1, safeFishing2],
       WARNING: [warnFishing1, warnFishing2],
       DANGER: [dangerFishing1, dangerFishing2],
+      UNKNOWN: [warnFishing1, warnFishing2],
     },
   },
   INVESTMENT: {
@@ -77,6 +79,7 @@ export const DETAIL_CARD_CONTENT = {
       SAFE: [safeInvest1, safeInvest2, safeInvest3],
       WARNING: [warnInvest1, warnInvest2, warnInvest3],
       DANGER: [dangerInvest1, dangerInvest2, dangerInvest3],
+      UNKNOWN: [warnFishing1, warnFishing2],
     },
   },
 };

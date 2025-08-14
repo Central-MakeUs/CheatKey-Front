@@ -19,6 +19,7 @@ import {
   MyAnalysisPage,
   TermsPage,
   OnboardingPage,
+  AnalyzeUnknownPage,
 } from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
@@ -110,6 +111,10 @@ const AppRouter = createBrowserRouter([
       {
         path: path.analyze.specific.result(":analyzeId"),
         element: <AnalyzeResultPage />,
+      },
+      {
+        path: path.analyze.specific.unknown,
+        element: <AnalyzeUnknownPage />,
       },
     ],
   },

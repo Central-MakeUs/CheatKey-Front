@@ -16,3 +16,4 @@ export { MyPostsPage } from "./my/MyPostsPage";
 export { MyAnalysisPage } from "./my/MyAnalysisPage";
 export { TermsPage } from "./my/TermsPage";
 export { OnboardingPage } from "./onboarding/OnboardingPage";
+export { AnalyzeUnknownPage } from "./analyze/AnalyzeUnknownPage";

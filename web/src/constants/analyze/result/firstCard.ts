@@ -2,6 +2,7 @@ import type { AnalysisFirstFooterItem } from "@/types/analyzeResult/analyzeResul
 
 import danger from "@/assets/images/result/danger.svg";
 import safe from "@/assets/images/result/safe.svg";
+import unknown from "@/assets/images/result/unknown.svg";
 import warning from "@/assets/images/result/warning.svg";
 
 export const FIRST_CARD_CONTENT = {
@@ -16,9 +17,14 @@ export const FIRST_CARD_CONTENT = {
     image: warning,
   },
   DANGER: {
-    title: " AI 분석 결과, 안전하지 않을 수 있어요.",
+    title: "AI 분석 결과, 안전하지 않을 수 있어요.",
     explain: `분석 결과 50% 이상으로 확인되었어요.\n위험도가 높아 주의가 필요합니다.`,
     image: danger,
+  },
+  UNKNOWN: {
+    title: "분석 결과, AI가 판단할 수 없어요.",
+    explain: `해당 주제의 데이터가 없어 분석할 수 없어요!\n분석을 위해 정보를 더 구체적으로 알려주세요.`,
+    image: unknown,
   },
 };
 

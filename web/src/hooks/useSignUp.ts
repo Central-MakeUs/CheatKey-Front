@@ -44,7 +44,7 @@ export const useSignUp = () => {
   const { mutate: register, isPending: isRegistering } = useMutation({
     mutationFn: postAuthRegister,
     onSuccess: () => {
-      navigate(path.home, { replace: true });
+      navigate(path.home, { state: { fromSignup: true }, replace: true });
     },
     onError: (error) => {
       const axiosError = error as AxiosError;
