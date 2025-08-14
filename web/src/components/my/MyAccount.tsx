@@ -29,9 +29,6 @@ export const MyAccount = () => {
     onSuccess: () => {
       navigate(path.auth.login);
     },
-    onError: (e) => {
-      console.error(e);
-    },
   });
 
   const handleLogout = () => {

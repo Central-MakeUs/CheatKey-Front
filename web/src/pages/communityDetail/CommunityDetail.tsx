@@ -131,10 +131,6 @@ export const CommunityDetail = () => {
   };
 
   useEffect(() => {
-    console.log(commentList);
-  }, [commentList]);
-
-  useEffect(() => {
     if (selectedCommentId !== null) {
       commentInputRef.current?.focus();
     }
