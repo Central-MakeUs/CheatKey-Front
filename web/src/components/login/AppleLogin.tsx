@@ -30,7 +30,7 @@ export const AppleLogin = () => {
         } else if (result.data.userState === "INACTIVE") {
           alert("영구 정지된 계정입니다.");
         } else if (result.data.userState === "WITHDRAWN") {
-          alert("이전에 탈퇴한 계정입니다.");
+          alert("30일 이내 재가입은 불가능합니다.");
         }
       } else {
         alert(
