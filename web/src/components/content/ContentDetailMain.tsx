@@ -53,7 +53,7 @@ export const ContentDetailMain = ({
       <img
         src={image}
         alt={`${title}의 메인 사진`}
-        className="aspect-[335/200] h-auto w-full"
+        className="aspect-[335/200] h-auto w-full rounded-xl"
       />
       <div className={cn("flex flex-col gap-[1.875rem]")}>
         {sections.map((section, index) => (
