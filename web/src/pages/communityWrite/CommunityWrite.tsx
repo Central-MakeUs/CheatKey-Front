@@ -72,7 +72,7 @@ export const CommunityWrite = () => {
     },
     onError: (error) => {
       if (isAxiosError(error) && error.response?.status === 400) {
-        showToast("유호성 검사에 실패하였습니다.");
+        showToast("유효성 검사에 실패하였습니다.");
       } else if (isAxiosError(error) && error.response?.status === 500) {
         showToast("파일 용량이 너무 큽니다.");
       } else {

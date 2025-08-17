@@ -89,7 +89,7 @@ export const CommunityFeed = () => {
         className="bg-bg-100"
       />
       <div className="pt-header h-screen overflow-y-auto px-5 pb-20">
-        <SearchBarRedirect placeholder="사기 사례를 입력해주세요." />
+        <SearchBarRedirect placeholder="사기 사례를 검색해주세요." />
         <CommunityFeedTab
           activeTab={selectedCategory}
           setActiveTab={setSelectedCategory}
