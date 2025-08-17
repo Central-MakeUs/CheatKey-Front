@@ -35,7 +35,7 @@ const tailPlacementStyles: Record<Placement, string> = {
 
 interface TooltipBubbleProps {
   children: React.ReactNode;
-  isOpen: boolean;
+  isOpen?: boolean;
   onClose?: () => void;
   placement?: Placement;
   className?: string;
@@ -43,7 +43,7 @@ interface TooltipBubbleProps {
 
 export const TooltipBubble = ({
   children,
-  isOpen,
+  isOpen = true,
   onClose,
   placement = "top",
   className,
@@ -52,12 +52,16 @@ export const TooltipBubble = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
+          initial={{ opacity: 0, scale: 0.7, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.7, y: 10 }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 15,
+          }}
           className={cn(
-            "bg-primary-500 relative w-fit rounded-xl p-2.5 text-[#F7F7F8]",
+            "body-4-medium bg-primary-500 relative w-fit rounded-xl p-2.5 text-[#F7F7F8]",
             className,
           )}
         >
