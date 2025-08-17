@@ -56,7 +56,10 @@ export const CommunityDetail = () => {
   });
 
   const { mutate: deletePost } = useDeletePostMutation({
-    queryKeyToInvalidate: [QUERY_KEYS.GET_COMMUNITY_FEED],
+    queryKeyToInvalidate: [
+      [QUERY_KEYS.GET_COMMUNITY_FEED],
+      [QUERY_KEYS.MYPAGE_POST],
+    ],
     onSuccess: () => navigate(-1),
   });
 

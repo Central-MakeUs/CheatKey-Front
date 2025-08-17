@@ -37,7 +37,10 @@ export const MyPostsPreview = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const { mutate: deletePostMutation } = useDeletePostMutation({
-    queryKeyToInvalidate: [QUERY_KEYS.MYPAGE_POST],
+    queryKeyToInvalidate: [
+      [QUERY_KEYS.MYPAGE_POST],
+      [QUERY_KEYS.GET_COMMUNITY_FEED],
+    ],
     onSuccess: onDeleteSuccess,
   });
 

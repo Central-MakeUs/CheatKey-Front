@@ -7,7 +7,7 @@ import {
 import { deletePost } from "@/apis/community/deletePost";
 
 interface UseDeletePostMutationOptions {
-  queryKeyToInvalidate: QueryKey;
+  queryKeyToInvalidate: QueryKey | QueryKey[];
   onSuccess?: () => void;
   onError?: () => void;
 }
@@ -22,7 +22,13 @@ export const useDeletePostMutation = ({
   return useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeyToInvalidate });
+      const keysToInvalidate = Array.isArray(queryKeyToInvalidate[0])
+        ? (queryKeyToInvalidate as QueryKey[])
+        : ([queryKeyToInvalidate] as QueryKey[]);
+
+      keysToInvalidate.forEach((key) => {
+        queryClient.invalidateQueries({ queryKey: key });
+      });
       onSuccess?.();
     },
     onError: (error) => {
