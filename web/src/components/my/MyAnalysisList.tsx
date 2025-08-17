@@ -5,6 +5,8 @@ import { getMypageDetectionHistory } from "@/apis/my/getMypageDetectionHistory";
 import { NoResult } from "@/components/common/NoResult";
 import { MyAnalysisListItem } from "@/components/my/MyAnalysisListItem";
 
+import { QUERY_KEYS } from "@/constants/apiConstants";
+
 interface MyAnalysisListProps {
   period: "today" | "week" | "month";
 }
@@ -18,13 +20,14 @@ export const MyAnalysisList = ({ period }: MyAnalysisListProps) => {
     isLoading,
     isError,
   } = useInfiniteQuery({
-    queryKey: ["myDetectionHistory", period],
+    queryKey: [QUERY_KEYS.GET_MY_ANALYZE_HISTORY, period],
     queryFn: ({ pageParam = 0 }) =>
       getMypageDetectionHistory({ page: pageParam, size: 10, period }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage.last ? undefined : lastPage.number + 1;
     },
+    staleTime: 60 * 1000,
   });
 
   if (isLoading) {

@@ -52,6 +52,7 @@ export const CommunityDetail = () => {
     queryKey: commentListQueryKey,
     queryFn: () => getCommunityDetail({ postId: parseInt(postId!) }),
     enabled: !!postId,
+    staleTime: 10 * 1000,
   });
 
   const { mutate: deletePost } = useDeletePostMutation({
@@ -66,6 +67,7 @@ export const CommunityDetail = () => {
   } = useQuery({
     queryKey: postDetailQueryKey,
     queryFn: () => getCommentList({ postId: parseInt(postId!) }),
+    staleTime: 10 * 1000,
     enabled: !!postId,
   });
 

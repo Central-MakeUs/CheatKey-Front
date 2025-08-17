@@ -60,6 +60,7 @@ export const CommunityFeed = () => {
         page: 1,
         size: 20,
       }),
+    staleTime: 60 * 1000,
   });
 
   const {

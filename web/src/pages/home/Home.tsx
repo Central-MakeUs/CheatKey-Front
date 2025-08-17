@@ -36,6 +36,7 @@ export const Home = () => {
   const { data: dashboardData } = useQuery({
     queryKey: [QUERY_KEYS.HOME_DASHBOARD],
     queryFn: getHomeDashboard,
+    staleTime: 5 * 60 * 1000,
   });
 
   const handleConfirmWelcome = () => {
