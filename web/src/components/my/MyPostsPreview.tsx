@@ -17,7 +17,7 @@ import { NameTag } from "@/components/common/NameTag";
 import { QUERY_KEYS } from "@/constants/apiConstants";
 
 import RemoveIcon from "@/assets/icons/remove.svg?react";
-import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
+import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
 
 interface MyPostsPreviewProps extends CommunityPost {
   onDeleteSuccess: () => void;

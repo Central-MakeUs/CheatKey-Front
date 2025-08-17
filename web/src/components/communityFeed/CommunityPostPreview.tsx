@@ -11,7 +11,7 @@ import { PostMenuButton } from "@/components/common/PostMenuButton";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
-import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
+import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
 
 interface CommunityPostPreviewProps extends CommunityPost {
   onOpenMenu: (postId: number) => void;
