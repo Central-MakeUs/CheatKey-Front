@@ -21,12 +21,14 @@ import HomeFocusedIcon from "@/assets/icons/home_focused.svg?react";
 import MyIcon from "@/assets/icons/my.svg?react";
 import MyFocusedIcon from "@/assets/icons/my_focused.svg?react";
 
+import { TooltipBubble } from "./TooltipBubble";
+
 export const BottomNavBar = () => {
   const navigate = useNavigate();
-  const controls = useAnimation();
+  const analyzeIconControls = useAnimation();
 
-  const handleClick = useCallback(async () => {
-    await controls.start({
+  const handleAnalyzeIconClick = useCallback(async () => {
+    await analyzeIconControls.start({
       y: [0, -10, 0, -5, 0],
       transition: {
         duration: 0.6,
@@ -34,7 +36,7 @@ export const BottomNavBar = () => {
       },
     });
     navigate(path.analyze.base);
-  }, [controls, navigate]);
+  }, [analyzeIconControls, navigate]);
 
   return (
     <nav
@@ -61,15 +63,27 @@ export const BottomNavBar = () => {
           FocusedIcon={ContentsFocusedIcon}
         />
 
-        <motion.div
-          className="z-20 translate-y-[-40px] rounded-full shadow-[0_4px_15px_0_rgba(0,89,255,0.3)]"
-          animate={controls}
-          onClick={handleClick}
-          role="button"
-          aria-label="AI 분석 이동"
-        >
-          <AiAnalysisIcon className="h-15 w-15" />
-        </motion.div>
+        <div className="relative z-20 translate-y-[-40px]">
+          <motion.div
+            className="rounded-full shadow-[0_4px_15px_0_rgba(0,89,255,0.3)]"
+            animate={analyzeIconControls}
+            onClick={handleAnalyzeIconClick}
+            role="button"
+            aria-label="AI 분석 이동"
+          >
+            <AiAnalysisIcon className="h-15 w-15" />
+          </motion.div>
+
+          <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 -translate-y-5">
+            <TooltipBubble
+              isOpen={true}
+              onClose={() => console.log(123)}
+              placement={"bottom"}
+            >
+              <p className="whitespace-nowrap">AI로 분석하기</p>
+            </TooltipBubble>
+          </div>
+        </div>
 
         <BottomNavBarItem
           to={path.community.feed}
