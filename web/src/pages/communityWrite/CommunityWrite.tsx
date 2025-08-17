@@ -75,6 +75,8 @@ export const CommunityWrite = () => {
         showToast("유호성 검사에 실패하였습니다.");
       } else if (isAxiosError(error) && error.response?.status === 500) {
         showToast("파일 용량이 너무 큽니다.");
+      } else {
+        showToast("업로드 중 오류가 발생하였습니다.");
       }
     },
   });
@@ -126,6 +128,7 @@ export const CommunityWrite = () => {
         <PostImageUploader
           value={form.images}
           onChange={(value) => updateForm("images", value)}
+          showToast={showToast}
         />
 
         <BottomFullButton

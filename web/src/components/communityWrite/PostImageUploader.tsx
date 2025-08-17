@@ -3,39 +3,90 @@ import { useRef, useEffect } from "react";
 import type { UploadedImage } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
 
+import {
+  imageFileSchema,
+  imagesSchema,
+  MAX_IMAGE_COUNT,
+  MAX_IMAGE_SIZE_MB,
+} from "@/schemas/communityWriteSchema";
+
 import AddIcon from "@/assets/icons/add.svg?react";
 import DeleteIcon from "@/assets/icons/delete.svg?react";
+
+interface PostImageUploaderProps {
+  value: UploadedImage[];
+  onChange: (value: UploadedImage[]) => void;
+  showToast: (message: string) => void;
+}
 
 export const PostImageUploader = ({
   value,
   onChange,
-}: {
-  value: UploadedImage[];
-  onChange: (value: UploadedImage[]) => void;
-}) => {
+  showToast,
+}: PostImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
     fileInputRef.current?.click();
   };
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
-    const fileArray = Array.from(files).slice(0, 5 - value.length);
+    const validFilesToAdd: UploadedImage[] = [];
+    let oversizedFilesFound = false;
 
-    const previews = fileArray.map((file) => ({
-      file,
-      previewUrl: URL.createObjectURL(file),
-    }));
+    for (const file of Array.from(files)) {
+      const newImage: UploadedImage = {
+        file,
+        previewUrl: URL.createObjectURL(file),
+      };
 
-    onChange([...value, ...previews]);
+      const result = imageFileSchema.safeParse(newImage);
+      if (result.success) {
+        validFilesToAdd.push(result.data);
+      } else {
+        oversizedFilesFound = true;
+        URL.revokeObjectURL(newImage.previewUrl);
+      }
+    }
+
+    if (oversizedFilesFound) {
+      showToast(`사진 용량이 ${MAX_IMAGE_SIZE_MB}MB를 초과해요.`);
+    }
+
+    if (validFilesToAdd.length === 0) {
+      if (event.target) event.target.value = "";
+      return;
+    }
+
+    const combinedImages = [...value, ...validFilesToAdd];
+    const arrayResult = imagesSchema.safeParse(combinedImages);
+
+    if (arrayResult.success) {
+      onChange(arrayResult.data);
+    } else {
+      const maxCountError = arrayResult.error.issues.find(
+        (issue) => issue.code === "too_big",
+      );
+      if (maxCountError) {
+        showToast(maxCountError.message);
+      }
+
+      onChange(combinedImages.slice(0, MAX_IMAGE_COUNT));
+    }
+
+    if (event.target) {
+      event.target.value = "";
+    }
   };
 
   const handleRemoveImage = (indexToRemove: number) => {
+    const imageToRemove = value[indexToRemove];
+    if (imageToRemove) {
+      URL.revokeObjectURL(imageToRemove.previewUrl);
+    }
     const updatedImages = value.filter((_, index) => index !== indexToRemove);
-    URL.revokeObjectURL(value[indexToRemove].previewUrl);
     onChange(updatedImages);
   };
 

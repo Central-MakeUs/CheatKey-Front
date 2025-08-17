@@ -5,7 +5,7 @@ import { NameTag } from "@/components/common/NameTag";
 
 import CommentReplyIcon from "@/assets/icons/comment_reply.svg?react";
 import RemoveIcon from "@/assets/icons/remove.svg?react";
-import TemporaryProfilePic from "@/assets/icons/temporary_profile_pic.svg";
+import TemporaryProfilePic from "@/assets/images/temporary_profile_pic.png";
 
 interface ReplyCommentItemProps {
   reply: Comment;

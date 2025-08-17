@@ -12,12 +12,11 @@ import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 import { DeleteModal } from "@/components/common/DeleteModal";
 import { NameTag } from "@/components/common/NameTag";
 
-//import CommentIcon from "@/assets/icons/comment.svg?react";
-//TODO: @tifsy 임시 프로필 이미지 제거
 import { QUERY_KEYS } from "@/constants/apiConstants";
 
+import CommentIcon from "@/assets/icons/comment.svg?react";
 import RemoveIcon from "@/assets/icons/remove.svg?react";
-import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
+import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
 
 interface MyPostsPreviewProps extends CommunityPost {
   onDeleteSuccess: () => void;
@@ -31,7 +30,7 @@ export const MyPostsPreview = ({
   createdAt,
   title,
   content,
-  //commentCount,
+  commentCount,
   thumbnailUrls = [],
 }: MyPostsPreviewProps) => {
   const navigate = useNavigate();
@@ -111,12 +110,12 @@ export const MyPostsPreview = ({
             ))}
         </div>
       )}
-      {/** TODO: @Tifsy 2차 배포시, 댓글 추가 
+
       <div className="text-gray-system-500 body-5-regular flex items-center justify-end gap-1 pt-1">
         <span>{commentCount}</span>
         <CommentIcon className="h-5 w-5" />
       </div>
-      */}
+
       {isDeleteModalOpen && (
         <DeleteModal
           onCancel={handleCloseModal}

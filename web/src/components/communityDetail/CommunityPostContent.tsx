@@ -2,10 +2,9 @@ import { useImageCloseUp } from "@/hooks/useImageCloseUp";
 import { cn } from "@/utils/cn";
 
 import { PostMenuButton } from "@/components/common/PostMenuButton";
-//TODO: @tifsy 임시 프로필 이미지 제거
 import { ImageCloseUpModal } from "@/components/communityDetail/ImageCloseUpModal";
 
-import TemporaryProfilePicIcon from "@/assets/icons/temporary_profile_pic.svg";
+import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
 
 type CommunityPostContentProps = {
   postId: number;

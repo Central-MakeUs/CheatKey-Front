@@ -6,7 +6,7 @@ import type {
 } from "@/types/content/content.types";
 
 import report from "@/assets/icons/report.svg";
-import authorProfile from "@/assets/icons/temporary_profile_pic.svg";
+import authorProfile from "@/assets/images/temporary_profile_pic.png";
 
 /**
  * @description 원본 출처(original) 유무와 카테고리에 따른 저자 정보
