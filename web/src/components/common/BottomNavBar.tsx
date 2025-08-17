@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ import { cn } from "@/utils/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
 import { BottomNavBarItem } from "@/components/common/BottomNavBarItem";
+import { TooltipBubble } from "@/components/common/TooltipBubble";
 
 import AiAnalysisIcon from "@/assets/icons/ai_analysis.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
@@ -21,11 +22,18 @@ import HomeFocusedIcon from "@/assets/icons/home_focused.svg?react";
 import MyIcon from "@/assets/icons/my.svg?react";
 import MyFocusedIcon from "@/assets/icons/my_focused.svg?react";
 
-import { TooltipBubble } from "./TooltipBubble";
+const BUBBLE_STORAGE_KEY = "hasClosedAIBubble";
 
 export const BottomNavBar = () => {
   const navigate = useNavigate();
   const analyzeIconControls = useAnimation();
+
+  const [isBubbleVisible, setIsBubbleVisible] = useState(false);
+
+  const handleCloseBubble = useCallback(() => {
+    setIsBubbleVisible(false);
+    localStorage.setItem(BUBBLE_STORAGE_KEY, "true");
+  }, []);
 
   const handleAnalyzeIconClick = useCallback(async () => {
     await analyzeIconControls.start({
@@ -37,6 +45,14 @@ export const BottomNavBar = () => {
     });
     navigate(path.analyze.base);
   }, [analyzeIconControls, navigate]);
+
+  useEffect(() => {
+    const hasClosed = localStorage.getItem(BUBBLE_STORAGE_KEY);
+
+    if (hasClosed !== "true") {
+      setIsBubbleVisible(true);
+    }
+  }, []);
 
   return (
     <nav
@@ -76,8 +92,8 @@ export const BottomNavBar = () => {
 
           <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 -translate-y-5">
             <TooltipBubble
-              isOpen={true}
-              onClose={() => console.log(123)}
+              isOpen={isBubbleVisible}
+              onClose={handleCloseBubble}
               placement={"bottom"}
             >
               <p className="whitespace-nowrap">AI로 분석하기</p>
