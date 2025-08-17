@@ -36,6 +36,7 @@ export const AnalyzeResultPage = () => {
           status: response.status,
         };
       },
+      staleTime: 5 * 60 * 1000,
     });
 
   const responseData = (location.state ||

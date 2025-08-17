@@ -1,4 +1,4 @@
-import { useImageCloseUp } from "@/hooks/useImageCloseUp";
+import { useImageSlider } from "@/hooks/useImageSlider";
 import { cn } from "@/utils/cn";
 
 import { PostMenuButton } from "@/components/common/PostMenuButton";
@@ -27,8 +27,13 @@ export const CommunityPostContent = ({
   canDelete,
   onOpenMenu,
 }: CommunityPostContentProps) => {
-  const { selectedImage, openImageCloseUp, closeImageCloseUp } =
-    useImageCloseUp();
+  const {
+    isSliderOpen,
+    sliderImages,
+    initialIndex,
+    openImageSlider,
+    closeImageSlider,
+  } = useImageSlider();
 
   return (
     <>
@@ -85,17 +90,18 @@ export const CommunityPostContent = ({
                     "w-1/2": images.length === 2,
                     "w-[8.125rem] flex-shrink-0": images.length >= 3,
                   })}
-                  onClick={() => openImageCloseUp(img)}
+                  onClick={() => openImageSlider(images, i)}
                 />
               ))}
           </div>
         )}
       </div>
 
-      {selectedImage && (
+      {isSliderOpen && (
         <ImageCloseUpModal
-          imageUrl={selectedImage}
-          onClose={closeImageCloseUp}
+          images={sliderImages}
+          initialIndex={initialIndex}
+          onClose={closeImageSlider}
         />
       )}
     </>

@@ -24,7 +24,7 @@ export const AUTHOR_INFO_CONFIG: {
     withoutOriginal: {
       icon: authorProfile,
       altText: "콘텐츠 작성자의 프로필",
-      name: "커팅이",
+      name: "커팅이 (관리자)",
       textColor: "text-primary-200",
     },
   },

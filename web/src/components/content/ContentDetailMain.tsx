@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
+// 배너 부분 데모데이 이후 다시 적용 예정
+//import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
+//import { path } from "@/routes/path";
 
 import { useFontSize } from "@/hooks/useFontSize";
 import type {
@@ -20,7 +21,7 @@ import {
   GOOGLE_PLAY_URL,
 } from "@/constants/contentPageConstants";
 
-import safe from "@/assets/images/result/safe.svg";
+//import safe from "@/assets/images/result/safe.svg";
 import android from "@/assets/logo/logo_store_android.svg";
 import ios from "@/assets/logo/logo_store_ios.svg";
 
@@ -40,7 +41,7 @@ export const ContentDetailMain = ({
   className,
 }: ContentDetailMainProps) => {
   const { isFontSizeLarge } = useFontSize();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const categoryStyles = DETAIL_MAIN_STYLE_CONFIG[category];
   const fontKey: FontSizeKey = isFontSizeLarge ? "large" : "default";
@@ -82,6 +83,7 @@ export const ContentDetailMain = ({
           </section>
         ))}
       </div>
+      {/*
       {getPlatform() !== "web" && (
         <ContentRedirectBanner
           image={safe}
@@ -90,6 +92,7 @@ export const ContentDetailMain = ({
           navigate={() => navigate(path.analyze.base)}
         />
       )}
+        */}
       {getPlatform() === "web" && (
         <div className="flex flex-col gap-3">
           <ContentRedirectBanner

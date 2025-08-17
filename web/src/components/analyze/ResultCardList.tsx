@@ -1,4 +1,4 @@
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { useCarousel } from "@/hooks/useCarousel";
 import type { CategoryAnalysisResult } from "@/types/analyzeResult/analyzeResult.types";
@@ -12,13 +12,9 @@ import { CARD_ANIMATION } from "@/constants/animation/cardAnimationConstants";
 
 interface ResultCardListProps {
   currentData: CategoryAnalysisResult;
-  variants?: Variants;
 }
 
-export const ResultCardList = ({
-  currentData,
-  variants,
-}: ResultCardListProps) => {
+export const ResultCardList = ({ currentData }: ResultCardListProps) => {
   const totalCards = 1 + currentData.details.detailCards.length;
 
   const { containerRef, cardWidth, motionProps, navigation } = useCarousel({
@@ -28,10 +24,7 @@ export const ResultCardList = ({
   const { currentIndex, goToCard, isTransitioning } = navigation;
 
   return (
-    <motion.div
-      className="flex flex-col items-center justify-between gap-6"
-      variants={variants}
-    >
+    <motion.div className="flex flex-col items-center justify-between gap-6">
       <div
         ref={containerRef}
         className={cn("relative h-120 w-full cursor-grab overflow-hidden", {

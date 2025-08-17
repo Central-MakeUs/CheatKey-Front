@@ -33,4 +33,5 @@ export const QUERY_KEYS = {
   GET_SEARCH_RESULT: "searchResult",
   GET_COMMUNITY_DETAIL: "communityDetail",
   GET_COMMENT_LIST: "commentList",
+  GET_MY_ANALYZE_HISTORY: "myDetectionHistory",
 };

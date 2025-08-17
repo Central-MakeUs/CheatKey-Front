@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 
 import { path } from "@/routes/path";
@@ -24,10 +24,12 @@ import { PostBoardSelect } from "@/components/communityWrite/PostBoardSelect";
 import { PostImageUploader } from "@/components/communityWrite/PostImageUploader";
 import { TitleForm } from "@/components/communityWrite/TitleForm";
 
+import { QUERY_KEYS } from "@/constants/apiConstants";
 import { BOARD_CATEGORY_MAP } from "@/constants/commnityFeedTabs";
 
 export const CommunityWrite = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [lastPostedId, setLastPostedId] = useState<number | null>(null);
 
   const {
@@ -69,6 +71,12 @@ export const CommunityWrite = () => {
     onSuccess: (response) => {
       setLastPostedId(response);
       setModal((prev) => ({ ...prev, complete: true }));
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_COMMUNITY_FEED],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.MYPAGE_POST],
+      });
     },
     onError: (error) => {
       if (isAxiosError(error) && error.response?.status === 400) {

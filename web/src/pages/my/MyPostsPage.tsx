@@ -24,6 +24,7 @@ export const MyPostsPage = () => {
   const { data: myPosts, isLoading: isPostsLoading } = useQuery({
     queryKey: [QUERY_KEYS.MYPAGE_POST],
     queryFn: getMypageCommunityPostsManagement,
+    staleTime: 5 * 60 * 1000,
   });
   const total = myPosts?.totalPosts ?? 0;
   const posts = myPosts?.posts ?? [];

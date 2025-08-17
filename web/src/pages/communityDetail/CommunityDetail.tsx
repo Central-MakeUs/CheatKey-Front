@@ -52,10 +52,14 @@ export const CommunityDetail = () => {
     queryKey: commentListQueryKey,
     queryFn: () => getCommunityDetail({ postId: parseInt(postId!) }),
     enabled: !!postId,
+    staleTime: 10 * 1000,
   });
 
   const { mutate: deletePost } = useDeletePostMutation({
-    queryKeyToInvalidate: [QUERY_KEYS.GET_COMMUNITY_FEED],
+    queryKeyToInvalidate: [
+      [QUERY_KEYS.GET_COMMUNITY_FEED],
+      [QUERY_KEYS.MYPAGE_POST],
+    ],
     onSuccess: () => navigate(-1),
   });
 
@@ -66,6 +70,7 @@ export const CommunityDetail = () => {
   } = useQuery({
     queryKey: postDetailQueryKey,
     queryFn: () => getCommentList({ postId: parseInt(postId!) }),
+    staleTime: 10 * 1000,
     enabled: !!postId,
   });
 
