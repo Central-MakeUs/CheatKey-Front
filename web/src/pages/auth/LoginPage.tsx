@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 import { getPlatform } from "@/utils/getPlatform";
 
-import { Bubble } from "@/components/common/Bubble";
+import { TooltipBubble } from "@/components/common/TooltipBubble";
 import { AppleLogin } from "@/components/login/AppleLogin";
 import { KakaoLogin } from "@/components/login/KakaoLogin";
 
@@ -28,8 +28,11 @@ export const LoginPage = () => {
             ease: "easeInOut",
           }}
         >
-          <Bubble dir="bottom_center" text="3초만에 로그인 하기!" />
+          <TooltipBubble placement="bottom">
+            <p>3초만에 로그인 하기!</p>
+          </TooltipBubble>
         </motion.div>
+
         <div className="w-full">
           <KakaoLogin />
           {platform === "ios" && <AppleLogin />}
