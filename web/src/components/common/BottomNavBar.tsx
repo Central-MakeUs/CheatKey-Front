@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { motion, useAnimation } from "framer-motion";
 
@@ -27,8 +27,11 @@ const BUBBLE_STORAGE_KEY = "hasClosedAIBubble";
 export const BottomNavBar = () => {
   const navigate = useNavigate();
   const analyzeIconControls = useAnimation();
+  const location = useLocation();
 
   const [isBubbleVisible, setIsBubbleVisible] = useState(false);
+
+  const isHomePage = location.pathname === path.home;
 
   const handleCloseBubble = useCallback(() => {
     setIsBubbleVisible(false);
@@ -49,10 +52,12 @@ export const BottomNavBar = () => {
   useEffect(() => {
     const hasClosed = localStorage.getItem(BUBBLE_STORAGE_KEY);
 
-    if (hasClosed !== "true") {
+    if (isHomePage && hasClosed !== "true") {
       setIsBubbleVisible(true);
+    } else {
+      setIsBubbleVisible(false);
     }
-  }, []);
+  }, [isHomePage]);
 
   return (
     <nav

@@ -20,17 +20,17 @@ export type Placement =
 
 const tailPlacementStyles: Record<Placement, string> = {
   top: "bottom-full left-1/2 translate-y-1/2 -translate-x-1/2",
-  "top-start": "bottom-full left-3 translate-y-1/2 translate-x-1/2",
-  "top-end": "bottom-full right-3  translate-y-1/2 -translate-x-1/2",
+  "top-start": "bottom-full left-2.5 translate-y-1/2 translate-x-1/2",
+  "top-end": "bottom-full right-2.5  translate-y-1/2 -translate-x-1/2",
   bottom: "top-full left-1/2 -translate-y-1/2 -translate-x-1/2",
-  "bottom-start": "top-full left-3 -translate-y-1/2 translate-x-1/2",
-  "bottom-end": "top-full right-3 -translate-y-1/2 -translate-x-1/2",
+  "bottom-start": "top-full left-2.5 -translate-y-1/2 translate-x-1/2",
+  "bottom-end": "top-full right-2.5 -translate-y-1/2 -translate-x-1/2",
   left: "right-full top-1/2 -translate-y-1/2 translate-x-1/2",
-  "left-start": "right-full top-2 translate-y-1/2 translate-x-1/2",
-  "left-end": "right-full bottom-2 -translate-y-1/2 translate-x-1/2",
+  "left-start": "right-full top-2.5 translate-y-1/2 translate-x-1/2",
+  "left-end": "right-full bottom-2.5 -translate-y-1/2 translate-x-1/2",
   right: "left-full top-1/2 -translate-y-1/2 -translate-x-1/2",
-  "right-start": "left-full top-2 translate-y-1/2 -translate-x-1/2",
-  "right-end": "left-full bottom-2 -translate-y-1/2  -translate-x-1/2",
+  "right-start": "left-full top-2.5 translate-y-1/2 -translate-x-1/2",
+  "right-end": "left-full bottom-2.5 -translate-y-1/2  -translate-x-1/2",
 };
 
 interface TooltipBubbleProps {
@@ -52,9 +52,9 @@ export const TooltipBubble = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.7, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.7, y: 10 }}
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.7 }}
           transition={{
             type: "spring",
             stiffness: 300,
