@@ -22,7 +22,7 @@ export const AnalyzePage = () => {
     handleNavigateBack,
     handleTabChange,
     handleSubmit,
-    toastMessage,
+    toastInfo,
   } = useAnalyzePage();
 
   if (isAnalyzePending || isAnalyzeSuccess) {
@@ -69,8 +69,8 @@ export const AnalyzePage = () => {
           className="mt-[3.125rem]"
         />
       </form>
-      {toastMessage && (
-        <Toast position="ai" icon="warning" text={toastMessage} />
+      {toastInfo && (
+        <Toast position="ai" icon={toastInfo.icon} text={toastInfo.message} />
       )}
       {/*
       // TODO: @Ki-Tak 1차 배포 이후 가이드 작업 예정
