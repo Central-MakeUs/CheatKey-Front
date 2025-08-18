@@ -6,14 +6,13 @@ import type { CommunityPost } from "@/types/community/community.types";
 import { cn } from "@/utils/cn";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
+import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { NameTag } from "@/components/common/NameTag";
 import { PostMenuButton } from "@/components/common/PostMenuButton";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
 import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
-
-import { ImageWithLoader } from "../common/ImageWithLoader";
 
 interface CommunityPostPreviewProps extends CommunityPost {
   onOpenMenu: (postId: number) => void;

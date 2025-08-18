@@ -10,9 +10,9 @@ import type {
   SourceStateKey,
 } from "@/types/content/content.types";
 
-import { AUTHOR_INFO_CONFIG } from "@/constants/contentPageConstants";
+import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 
-import { ImageWithLoader } from "../common/ImageWithLoader";
+import { AUTHOR_INFO_CONFIG } from "@/constants/contentPageConstants";
 
 interface ContentPreviewProps extends ContentType {
   author: ContentCategory;
@@ -58,12 +58,14 @@ export const ContentPreview = ({
       className="bg-bg-50 flex cursor-pointer flex-col gap-2.5 rounded-2xl p-3"
       onClick={handleNavigate}
     >
-      <ImageWithLoader
-        src={image}
-        alt={`${title}의 미리보기 이미지`}
-        rounded="xl"
-        className="h-[8.75rem] w-full rounded-xl bg-white object-cover"
-      />
+      <div className="h-[8.75rem] w-full">
+        <ImageWithLoader
+          src={image}
+          alt={`${title}의 미리보기 이미지`}
+          className="rounded-xl object-cover"
+          rounded="xl"
+        />
+      </div>
       <h3 className="body-1-bold text-gray-system-50 mb-1 w-full truncate">
         {title}
       </h3>

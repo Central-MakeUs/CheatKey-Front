@@ -17,7 +17,7 @@ export const ImageWithLoader = ({
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative h-fit w-fit">
+    <div className="relative h-full w-full">
       {isLoading && (
         <div
           className={cn(
@@ -33,10 +33,10 @@ export const ImageWithLoader = ({
         src={src}
         alt={alt}
         className={cn(
-          "h-full w-full",
+          "h-full w-full transition-opacity duration-300",
           {
             "opacity-0": isLoading,
-            "opacity-100 transition-opacity duration-300": !isLoading,
+            "opacity-100": !isLoading,
           },
           className,
         )}

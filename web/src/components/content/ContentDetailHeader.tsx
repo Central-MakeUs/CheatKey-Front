@@ -57,7 +57,7 @@ export const ContentDetailHeader = () => {
   return (
     <header
       className={cn(
-        "h-header bg-bg-100 fixed flex w-full max-w-3xl items-center px-5",
+        "h-header bg-bg-100 fixed z-10 flex w-full max-w-3xl items-center px-5",
         {
           "justify-between": getPlatform() !== "web",
           "justify-end": getPlatform() === "web",

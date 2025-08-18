@@ -1,12 +1,11 @@
 import { useImageSlider } from "@/hooks/useImageSlider";
 import { cn } from "@/utils/cn";
 
+import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { PostMenuButton } from "@/components/common/PostMenuButton";
 import { ImageCloseUpModal } from "@/components/communityDetail/ImageCloseUpModal";
 
 import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
-
-import { ImageWithLoader } from "../common/ImageWithLoader";
 
 type CommunityPostContentProps = {
   postId: number;
