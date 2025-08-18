@@ -66,8 +66,8 @@ export const CommunityFeedSortOptionDropdown = ({
               return (
                 <motion.li
                   key={option}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{
                     duration: 0.15,
                     delay: index * 0.05,

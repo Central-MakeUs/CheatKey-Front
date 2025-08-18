@@ -54,7 +54,7 @@ export const ImageCloseUpModal = ({
           <Close className="h-full w-full" />
         </button>
       </div>
-      <div className="relative flex h-full w-full flex-1 flex-col items-center justify-center gap-y-4">
+      <div className="relative flex h-full w-full flex-1 -translate-y-[1.375rem] flex-col items-center justify-center gap-y-4">
         <div className="relative flex h-[65vh] w-full items-center justify-center overflow-hidden">
           <AnimatePresence initial={false} custom={direction}>
             <motion.img
