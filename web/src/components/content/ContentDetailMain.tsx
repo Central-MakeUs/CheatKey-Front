@@ -25,6 +25,8 @@ import {
 import android from "@/assets/logo/logo_store_android.svg";
 import ios from "@/assets/logo/logo_store_ios.svg";
 
+import { ImageWithLoader } from "../common/ImageWithLoader";
+
 interface ContentDetailMainProps {
   category: ContentCategory;
   title: string;
@@ -51,10 +53,11 @@ export const ContentDetailMain = ({
 
   return (
     <main className={cn("flex flex-1 flex-col gap-[1.875rem]", className)}>
-      <img
+      <ImageWithLoader
         src={image}
         alt={`${title}의 메인 사진`}
         className="aspect-[335/200] h-auto w-full rounded-xl"
+        rounded="xl"
       />
       <div className={cn("flex flex-col gap-[1.875rem]")}>
         {sections.map((section, index) => (
