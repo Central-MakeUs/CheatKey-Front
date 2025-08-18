@@ -81,7 +81,7 @@ export const useAnalyzePage = () => {
   const handleTabChange = (tab: TabCategory) => {
     if (!hasShownUrlToast && tab === "url") {
       showToast(
-        `URL 자체 기준으로, 피싱이 포함된 내용 자체는 사례 검색이나 추가 확인이 필요할 수 있어요.`,
+        `URL 자체 기준으로, 피싱이 포함된 내용은 사례 검색 및 확인이 필요할 수 있어요.`,
         "alert",
       );
       setHasShownUrlToast(true);
