@@ -12,6 +12,8 @@ import type {
 
 import { AUTHOR_INFO_CONFIG } from "@/constants/contentPageConstants";
 
+import { ImageWithLoader } from "../common/ImageWithLoader";
+
 interface ContentPreviewProps extends ContentType {
   author: ContentCategory;
 }
@@ -56,9 +58,10 @@ export const ContentPreview = ({
       className="bg-bg-50 flex cursor-pointer flex-col gap-2.5 rounded-2xl p-3"
       onClick={handleNavigate}
     >
-      <img
+      <ImageWithLoader
         src={image}
         alt={`${title}의 미리보기 이미지`}
+        rounded="xl"
         className="h-[8.75rem] w-full rounded-xl bg-white object-cover"
       />
       <h3 className="body-1-bold text-gray-system-50 mb-1 w-full truncate">

@@ -64,7 +64,7 @@ export const ReportPostSheet = ({
 
   return (
     <BottomSheet isOpen={isOpen} onClose={onClose}>
-      <div className="mb-3 flex flex-col gap-5 text-center">
+      <div className="flex max-h-[85vh] flex-col gap-5 overflow-y-auto pb-10 text-center">
         <h2 className="text-gray-system-100 head-3-bold my-3">신고하기</h2>
         <div>
           <p className="text-gray-system-200 head-4-semibold mb-1">

@@ -6,6 +6,8 @@ import { ImageCloseUpModal } from "@/components/communityDetail/ImageCloseUpModa
 
 import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
 
+import { ImageWithLoader } from "../common/ImageWithLoader";
+
 type CommunityPostContentProps = {
   postId: number;
   nickname: string;
@@ -81,17 +83,21 @@ export const CommunityPostContent = ({
             {images
               .slice(0, images.length >= 3 ? images.length : 2)
               .map((img, i) => (
-                <img
+                <div
                   key={`${img}-${i}`}
-                  src={img}
-                  alt={`${nickname}님의 게시글 이미지 ${i + 1}`}
-                  className={cn("h-[6.875rem] rounded-lg object-cover", {
+                  className={cn("h-[6.875rem] overflow-hidden rounded-lg", {
                     "w-full": images.length === 1,
                     "w-1/2": images.length === 2,
                     "w-[8.125rem] flex-shrink-0": images.length >= 3,
                   })}
                   onClick={() => openImageSlider(images, i)}
-                />
+                >
+                  <ImageWithLoader
+                    src={img}
+                    alt={`${nickname}님의 게시글 이미지 ${i + 1}`}
+                    className="object-cover"
+                  />
+                </div>
               ))}
           </div>
         )}

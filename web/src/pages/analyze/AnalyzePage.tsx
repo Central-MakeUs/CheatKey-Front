@@ -7,7 +7,7 @@ import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { FormTextarea } from "@/components/common/FormTextarea";
 import { Toast } from "@/components/common/Toast";
 
-//import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
+import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 
 export const AnalyzePage = () => {
   const {
@@ -20,9 +20,10 @@ export const AnalyzePage = () => {
     isAnalyzeSuccess,
     isButtonEnabled,
     handleNavigateBack,
+    handleNavigateCommunity,
     handleTabChange,
     handleSubmit,
-    toastMessage,
+    toastInfo,
   } = useAnalyzePage();
 
   if (isAnalyzePending || isAnalyzeSuccess) {
@@ -69,22 +70,20 @@ export const AnalyzePage = () => {
           className="mt-[3.125rem]"
         />
       </form>
-      {toastMessage && (
-        <Toast position="ai" icon="warning" text={toastMessage} />
+      {toastInfo && (
+        <Toast position="ai" icon={toastInfo.icon} text={toastInfo.message} />
       )}
-      {/*
-      // TODO: @Ki-Tak 1차 배포 이후 가이드 작업 예정
+
       <a
-        href="/" 
+        onClick={handleNavigateCommunity}
         className="body-4-medium text-gray-system-600 mt-10 flex items-center rounded-full bg-[#3c5187]/30 px-4 py-2"
       >
-        AI 분석 가이드가 궁금하다면?
+        함께 얘기 나누기
         <GuideIcon
           aria-hidden="true"
           className="text-gray-system-600 h-5 w-5"
         />
       </a>
-       */}
     </main>
   );
 };

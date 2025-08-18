@@ -13,6 +13,7 @@ import { postAnalyzeURL } from "@/apis/analyze/postAnalyzeURL";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
 
 import type { TabCategory } from "@/components/analyze/TabSwitcher";
+import type { ToastIconType } from "@/components/common/Toast";
 
 import { analysisTabsData } from "@/constants/analyze/page/analyzePageConstants";
 
@@ -27,9 +28,13 @@ const CASE_ERROR_MSG = "분석할 수 없는 유형이에요.";
 export const useAnalyzePage = () => {
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState<TabCategory>("url");
+  const [activeTab, setActiveTab] = useState<TabCategory>("case");
   const [inputValue, setInputValue] = useState<string>("");
-  const [toastMessage, setToastMessage] = useState<string | null>("");
+  const [toastInfo, setToastInfo] = useState<{
+    message: string;
+    icon: ToastIconType;
+  } | null>(null);
+  const [hasShownUrlToast, setHasShownUrlToast] = useState<boolean>(false);
 
   const {
     mutate: analyze,
@@ -59,25 +64,36 @@ export const useAnalyzePage = () => {
     },
   });
 
-  const showToast = (message: string) => {
-    setToastMessage(message);
-    setTimeout(() => setToastMessage(null), 3500);
+  const showToast = (message: string, icon: ToastIconType = "warning") => {
+    setToastInfo({ message, icon });
+    setTimeout(() => setToastInfo(null), 3500);
   };
 
   const currentTabInfo = analysisTabsData.find((tab) => tab.id === activeTab)!;
   const controlledPanelId = "analysis-panel";
-  const isButtonEnabled = inputValue !== "" && !isAnalyzePending;
+  const isButtonEnabled =
+    inputValue !== "" && !isAnalyzePending && toastInfo === null;
 
   const handleNavigateBack = () => navigate(-1);
 
+  const handleNavigateCommunity = () => navigate(path.community.feed);
+
   const handleTabChange = (tab: TabCategory) => {
+    if (!hasShownUrlToast && tab === "url") {
+      showToast(
+        `URL 자체 기준으로, 피싱이 포함된 내용 자체는 사례 검색이나 추가 확인이 필요할 수 있어요.`,
+        "alert",
+      );
+      setHasShownUrlToast(true);
+    }
+
     setActiveTab(tab);
     setInputValue("");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setToastMessage(null);
+    setToastInfo(null);
     if (!isButtonEnabled) return;
 
     if (activeTab === "url") {
@@ -101,8 +117,9 @@ export const useAnalyzePage = () => {
     isAnalyzeSuccess,
     isButtonEnabled,
     handleNavigateBack,
+    handleNavigateCommunity,
     handleTabChange,
     handleSubmit,
-    toastMessage,
+    toastInfo,
   };
 };

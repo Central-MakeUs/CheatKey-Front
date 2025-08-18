@@ -13,7 +13,7 @@ export const MyAnalysisPageTab = ({
 }: MyAnalysisPageTabProps) => {
   return (
     //TODO: @tifsy 커뮤니티 피드랑 이 페이지 탭 컴포넌트화
-    <div className="border-gray-system-700 mx-5 border-b">
+    <div className="mx-5">
       <div className="flex w-full justify-between">
         {MY_ANALYSIS_PAGE_TABS.map((tab) => {
           const isActive = activeTab === tab;
@@ -26,10 +26,10 @@ export const MyAnalysisPageTab = ({
               aria-label={`${tab} 탭`}
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "h-10 flex-1 border-b-[0.5px]",
+                "h-10 flex-1 transition-colors duration-300 ease-in-out",
                 isActive
-                  ? "text-primary-400 border-primary-400 body-1-bold border-b"
-                  : "text-gray-system-600 border-bg-50 body-2-medium",
+                  ? "text-primary-400 border-primary-400 body-1-bold border-b-[1.5px]"
+                  : "text-gray-system-600 border-bg-50 body-2-medium border-b",
               )}
             >
               {tab}

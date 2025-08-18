@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 import { cn } from "@/utils/cn";
 
 import DropDownIcon from "@/assets/icons/dropdown.svg?react";
@@ -33,47 +35,63 @@ export const CommunityFeedSortOptionDropdown = ({
   }, []);
 
   return (
-    <div
-      ref={dropdownRef}
-      className="relative flex w-full justify-end pt-[0.875rem]"
-    >
+    <div ref={dropdownRef} className="relative flex w-full justify-end pt-3.5">
       <button
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls="scam-type-listbox"
         onClick={() => setIsOpen(!isOpen)}
-        className="text-gray-system-600 body-1-bold flex h-[2.625rem] w-[6.25rem] items-center justify-end gap-[0.0625rem]"
+        className="text-gray-system-600 body-1-bold flex h-[2.625rem] w-25 items-center justify-end gap-0.5"
       >
         {selectedSortOption}
         <DropDownIcon className="ml-1 h-4 w-4" aria-hidden />
       </button>
 
-      {isOpen && (
-        <ul className="bg-bg-50 caption-1-medium absolute top-full z-10 mt-[0.5rem] w-[6.25rem] overflow-hidden rounded-lg">
-          {SORT_OPTIONS.map((option) => {
-            const isSelected = selectedSortOption === option;
+      <AnimatePresence>
+        {isOpen && (
+          <motion.ul
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{
+              duration: 0.2,
+              ease: "easeIn",
+            }}
+            className="bg-bg-50 caption-1-medium absolute top-full z-10 mt-2 w-25 overflow-hidden rounded-lg"
+            style={{ transformOrigin: "top" }}
+          >
+            {SORT_OPTIONS.map((option, index) => {
+              const isSelected = selectedSortOption === option;
 
-            return (
-              <li
-                key={option}
-                onClick={() => {
-                  onSelect(option);
-                  setIsOpen(false);
-                }}
-                aria-selected={isSelected}
-                className={cn(
-                  "h-[2.375rem] cursor-pointer p-[0.625rem]",
-                  isSelected
-                    ? "bg-base-50 text-gray-system-100"
-                    : "bg-bg-50 text-gray-system-500",
-                )}
-              >
-                {option}
-              </li>
-            );
-          })}
-        </ul>
-      )}
+              return (
+                <motion.li
+                  key={option}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.15,
+                    delay: index * 0.05,
+                    ease: "easeIn",
+                  }}
+                  onClick={() => {
+                    onSelect(option);
+                    setIsOpen(false);
+                  }}
+                  aria-selected={isSelected}
+                  className={cn(
+                    "h-[2.375rem] cursor-pointer p-2.5 transition-colors duration-150",
+                    isSelected
+                      ? "bg-base-50 text-gray-system-100"
+                      : "bg-bg-50 text-gray-system-500",
+                  )}
+                >
+                  {option}
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
