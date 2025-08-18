@@ -71,9 +71,12 @@ export const useAnalyzePage = () => {
 
   const currentTabInfo = analysisTabsData.find((tab) => tab.id === activeTab)!;
   const controlledPanelId = "analysis-panel";
-  const isButtonEnabled = inputValue !== "" && !isAnalyzePending;
+  const isButtonEnabled =
+    inputValue !== "" && !isAnalyzePending && toastInfo === null;
 
   const handleNavigateBack = () => navigate(-1);
+
+  const handleNavigateCommunity = () => navigate(path.community.feed);
 
   const handleTabChange = (tab: TabCategory) => {
     if (!hasShownUrlToast && tab === "url") {
@@ -114,6 +117,7 @@ export const useAnalyzePage = () => {
     isAnalyzeSuccess,
     isButtonEnabled,
     handleNavigateBack,
+    handleNavigateCommunity,
     handleTabChange,
     handleSubmit,
     toastInfo,

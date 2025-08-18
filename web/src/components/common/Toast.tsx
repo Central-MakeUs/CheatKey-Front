@@ -26,7 +26,7 @@ const ICON_MAP = {
 };
 
 const POSITION_MAP: Record<ToastProps["position"], string> = {
-  ai: "3rem",
+  ai: "3.5rem",
   write: "5.875rem",
 };
 
