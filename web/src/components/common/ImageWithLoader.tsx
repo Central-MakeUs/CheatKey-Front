@@ -17,7 +17,7 @@ export const ImageWithLoader = ({
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-fit w-fit">
       {isLoading && (
         <div
           className={cn(
