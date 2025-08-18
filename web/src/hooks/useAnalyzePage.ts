@@ -27,7 +27,7 @@ const CASE_ERROR_MSG = "분석할 수 없는 유형이에요.";
 export const useAnalyzePage = () => {
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState<TabCategory>("url");
+  const [activeTab, setActiveTab] = useState<TabCategory>("case");
   const [inputValue, setInputValue] = useState<string>("");
   const [toastMessage, setToastMessage] = useState<string | null>("");
 

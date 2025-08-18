@@ -20,7 +20,7 @@ export const TabSwitcher = ({
   useEffect(() => {
     const indicator = indicatorRef.current;
     if (indicator) {
-      if (activeTab === "url") {
+      if (activeTab === "case") {
         indicator.style.transform = "translateX(0%)";
       } else {
         indicator.style.transform = "translateX(100%)";
@@ -44,22 +44,6 @@ export const TabSwitcher = ({
       <button
         type="button"
         role="tab"
-        aria-selected={activeTab === "url"}
-        aria-controls={ariaControls}
-        onClick={() => onTabChange("url")}
-        className={cn(
-          "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
-          {
-            "text-gray-system-500": activeTab === "url",
-            "text-gray-system-700": activeTab !== "url",
-          },
-        )}
-      >
-        URL 분석
-      </button>
-      <button
-        type="button"
-        role="tab"
         aria-selected={activeTab === "case"}
         aria-controls={ariaControls}
         onClick={() => onTabChange("case")}
@@ -72,6 +56,22 @@ export const TabSwitcher = ({
         )}
       >
         사례 분석
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected={activeTab === "url"}
+        aria-controls={ariaControls}
+        onClick={() => onTabChange("url")}
+        className={cn(
+          "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
+          {
+            "text-gray-system-500": activeTab === "url",
+            "text-gray-system-700": activeTab !== "url",
+          },
+        )}
+      >
+        URL 분석
       </button>
     </div>
   );
