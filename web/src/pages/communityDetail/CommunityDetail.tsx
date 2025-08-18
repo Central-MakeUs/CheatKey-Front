@@ -49,7 +49,7 @@ export const CommunityDetail = () => {
     isLoading: isPostDetailLoading,
     isError: isPostDetailError,
   } = useQuery({
-    queryKey: commentListQueryKey,
+    queryKey: postDetailQueryKey,
     queryFn: () => getCommunityDetail({ postId: parseInt(postId!) }),
     enabled: !!postId,
     staleTime: 10 * 1000,
@@ -68,7 +68,7 @@ export const CommunityDetail = () => {
     isLoading: isCommentListLoading,
     isError: isCommentListError,
   } = useQuery({
-    queryKey: postDetailQueryKey,
+    queryKey: commentListQueryKey,
     queryFn: () => getCommentList({ postId: parseInt(postId!) }),
     staleTime: 10 * 1000,
     enabled: !!postId,
@@ -159,13 +159,13 @@ export const CommunityDetail = () => {
         />
 
         <div className="flex flex-1 flex-col items-center justify-center gap-4">
-          <p className="text-gray-system-400">
+          <p className="body-2-medium text-gray-system-600">
             게시글을 불러오는 데 실패했습니다.
           </p>
 
           <button
             onClick={() => navigate(-1)}
-            className="bg-bg-50 body-2-medium rounded-lg px-4 py-2 text-white"
+            className="bg-primary-400 body-2-medium rounded-lg px-4 py-2 text-white"
           >
             뒤로 가기
           </button>
