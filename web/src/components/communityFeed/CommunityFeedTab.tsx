@@ -12,7 +12,7 @@ export const CommunityFeedTab = ({
   setActiveTab,
 }: CommunityFeedTabProps) => {
   return (
-    <div className="border-gray-system-700 border-b">
+    <div>
       <div className="flex w-full justify-between">
         {COMMUNITY_FEED_TABS.map((tab) => {
           const isActive = activeTab === tab;
@@ -25,10 +25,10 @@ export const CommunityFeedTab = ({
               aria-label={`${tab} 탭`}
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "h-10 flex-1 border-b",
+                "h-10 flex-1 transition-colors duration-300 ease-in-out",
                 isActive
-                  ? "text-primary-400 border-primary-400 body-1-bold border-b-[1px]"
-                  : "text-gray-system-600 border-bg-50 body-2-medium border-b-[0.5px]",
+                  ? "text-primary-400 border-primary-400 body-1-bold border-b-[1.5px]"
+                  : "text-gray-system-600 border-bg-50 body-2-medium border-b-[1px]",
               )}
             >
               {tab}

@@ -37,7 +37,7 @@ export const MyAnalysisPage = () => {
         title="분석 내역 보기"
         className="bg-bg-100"
       />
-      <div className="divide-bg-50 divide-y overflow-hidden overflow-y-auto pt-11">
+      <div className="overflow-hidden overflow-y-auto pt-11">
         <MyAnalysisPageTab activeTab={activeTab} setActiveTab={setActiveTab} />
         <MyAnalysisList period={period} />
       </div>
