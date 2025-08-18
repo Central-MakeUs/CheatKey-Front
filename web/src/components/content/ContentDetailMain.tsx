@@ -12,6 +12,7 @@ import type {
 import { cn } from "@/utils/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
+import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { ContentRedirectBanner } from "@/components/content/ContentRedirectBanner";
 
 import {
@@ -24,8 +25,6 @@ import {
 //import safe from "@/assets/images/result/safe.svg";
 import android from "@/assets/logo/logo_store_android.svg";
 import ios from "@/assets/logo/logo_store_ios.svg";
-
-import { ImageWithLoader } from "../common/ImageWithLoader";
 
 interface ContentDetailMainProps {
   category: ContentCategory;
@@ -53,12 +52,14 @@ export const ContentDetailMain = ({
 
   return (
     <main className={cn("flex flex-1 flex-col gap-[1.875rem]", className)}>
-      <ImageWithLoader
-        src={image}
-        alt={`${title}의 메인 사진`}
-        className="aspect-[335/200] h-auto w-full rounded-xl"
-        rounded="xl"
-      />
+      <div className="aspect-[335/200] h-auto w-full rounded-xl">
+        <ImageWithLoader
+          src={image}
+          alt={`${title}의 메인 사진`}
+          className="aspect-[335/200] rounded-xl"
+          rounded="xl"
+        />
+      </div>
       <div className={cn("flex flex-col gap-[1.875rem]")}>
         {sections.map((section, index) => (
           <section
