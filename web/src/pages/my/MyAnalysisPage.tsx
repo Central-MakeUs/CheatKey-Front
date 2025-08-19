@@ -18,9 +18,9 @@ export const MyAnalysisPage = () => {
     switch (tab) {
       case "오늘":
         return "today";
-      case "이번 주":
+      case "일주일":
         return "week";
-      case "이번 달":
+      case "3개월":
         return "month";
       default:
         return "today";
