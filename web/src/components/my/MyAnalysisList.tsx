@@ -27,7 +27,7 @@ export const MyAnalysisList = ({ period }: MyAnalysisListProps) => {
     getNextPageParam: (lastPage) => {
       return lastPage.last ? undefined : lastPage.number + 1;
     },
-    staleTime: 60 * 1000,
+    staleTime: 5 * 60 * 1000,
   });
 
   if (isLoading) {

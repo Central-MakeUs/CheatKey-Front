@@ -33,12 +33,18 @@ export const SearchBar = ({
   const isSearchBarFilled = value.trim().length > 0;
 
   return (
-    <div className="mb-[0.625rem] flex w-full items-center gap-[5px]">
+    <div className="flex w-full items-center gap-[5px]">
       <button className="text-base-0 h-6 w-6" onClick={() => navigate(-1)}>
         <PrevIcon />
       </button>
       <div className="bg-base-75 flex h-[2.625rem] w-full items-center gap-1 rounded-full px-3">
-        <SearchIcon className="text-gray-system-600 h-5 w-5" aria-hidden />
+        <SearchIcon
+          className={cn("h-5 w-5", {
+            "text-gray-system-600": isSearchBarFilled,
+            "text-gray-system-700": !isSearchBarFilled,
+          })}
+          aria-hidden
+        />
         <input
           ref={inputRef}
           type="text"

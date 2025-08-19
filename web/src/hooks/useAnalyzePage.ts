@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { z } from "zod";
 
@@ -16,6 +16,7 @@ import type { TabCategory } from "@/components/analyze/TabSwitcher";
 import type { ToastIconType } from "@/components/common/Toast";
 
 import { analysisTabsData } from "@/constants/analyze/page/analyzePageConstants";
+import { QUERY_KEYS } from "@/constants/apiConstants";
 
 interface AnalyzeVariables {
   activeTab: TabCategory;
@@ -27,6 +28,7 @@ const CASE_ERROR_MSG = "분석할 수 없는 유형이에요.";
 
 export const useAnalyzePage = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [activeTab, setActiveTab] = useState<TabCategory>("case");
   const [inputValue, setInputValue] = useState<string>("");
@@ -54,6 +56,9 @@ export const useAnalyzePage = () => {
         const resultId = data.detectionId;
         navigate(path.analyze.specific.result(resultId), { state: data });
       }
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_MY_ANALYZE_HISTORY],
+      });
     },
     onError: () => {
       if (activeTab === "url") {
