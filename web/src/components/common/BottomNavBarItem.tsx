@@ -11,7 +11,7 @@ export const BottomNavBarItem = ({
   Icon,
   FocusedIcon,
 }: BottomNavBarItemProps) => (
-  <NavLink to={to}>
+  <NavLink to={to} draggable="false" onDragStart={(e) => e.preventDefault()}>
     {({ isActive }) =>
       isActive ? (
         <FocusedIcon className="h-15 w-15" />
