@@ -1,23 +1,43 @@
-import { NavLink } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { cn } from "@/utils/cn";
 
 interface BottomNavBarItemProps {
-  to: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  FocusedIcon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  path: string;
+  DefaultIcon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  ActiveIcon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  label: string;
 }
 
 export const BottomNavBarItem = ({
-  to,
-  Icon,
-  FocusedIcon,
-}: BottomNavBarItemProps) => (
-  <NavLink to={to} draggable="false" onDragStart={(e) => e.preventDefault()}>
-    {({ isActive }) =>
-      isActive ? (
-        <FocusedIcon className="h-15 w-15" />
+  path,
+  DefaultIcon,
+  ActiveIcon,
+  label,
+}: BottomNavBarItemProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActive = location.pathname === path;
+
+  return (
+    <a
+      onClick={() => navigate(path)}
+      className="flex h-15 w-15 flex-col items-center justify-center gap-[0.1875rem]"
+    >
+      {isActive ? (
+        <ActiveIcon className="h-8 w-8" />
       ) : (
-        <Icon className="h-15 w-15" />
-      )
-    }
-  </NavLink>
-);
+        <DefaultIcon className="h-8 w-8" />
+      )}
+      <span
+        className={cn("caption-1-medium", {
+          "text-primary-300": isActive,
+          "text-gray-system-600": !isActive,
+        })}
+      >
+        {label}
+      </span>
+    </a>
+  );
+};
