@@ -14,13 +14,13 @@ import { TooltipBubble } from "@/components/common/TooltipBubble";
 
 import AiAnalysisIcon from "@/assets/icons/ai_analysis.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
-import CommunityFocusedIcon from "@/assets/icons/community_focused.svg?react";
-import ContentsIcon from "@/assets/icons/contents.svg?react";
-import ContentsFocusedIcon from "@/assets/icons/contents_focused.svg?react";
+import ActiveCommunityIcon from "@/assets/icons/community_active.svg?react";
+import ContentIcon from "@/assets/icons/content.svg?react";
+import ActiveContentIcon from "@/assets/icons/content_active.svg?react";
 import HomeIcon from "@/assets/icons/home.svg?react";
-import HomeFocusedIcon from "@/assets/icons/home_focused.svg?react";
+import ActiveHomeIcon from "@/assets/icons/home_active.svg?react";
 import MyIcon from "@/assets/icons/my.svg?react";
-import MyFocusedIcon from "@/assets/icons/my_focused.svg?react";
+import ActiveMyIcon from "@/assets/icons/my_active.svg?react";
 
 const BUBBLE_STORAGE_KEY = "hasClosedAIBubble";
 
@@ -74,14 +74,16 @@ export const BottomNavBar = () => {
       >
         <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
         <BottomNavBarItem
-          to={path.home}
-          Icon={HomeIcon}
-          FocusedIcon={HomeFocusedIcon}
+          path={path.home}
+          DefaultIcon={HomeIcon}
+          ActiveIcon={ActiveHomeIcon}
+          label="홈"
         />
         <BottomNavBarItem
-          to={path.content.base}
-          Icon={ContentsIcon}
-          FocusedIcon={ContentsFocusedIcon}
+          path={path.content.base}
+          DefaultIcon={ContentIcon}
+          ActiveIcon={ActiveContentIcon}
+          label="콘텐츠"
         />
 
         <div className="relative z-20 translate-y-[-40px]">
@@ -107,14 +109,16 @@ export const BottomNavBar = () => {
         </div>
 
         <BottomNavBarItem
-          to={path.community.feed}
-          Icon={CommunityIcon}
-          FocusedIcon={CommunityFocusedIcon}
+          path={path.community.feed}
+          DefaultIcon={CommunityIcon}
+          ActiveIcon={ActiveCommunityIcon}
+          label="커뮤니티"
         />
         <BottomNavBarItem
-          to={path.my.base}
-          Icon={MyIcon}
-          FocusedIcon={MyFocusedIcon}
+          path={path.my.base}
+          DefaultIcon={MyIcon}
+          ActiveIcon={ActiveMyIcon}
+          label="My"
         />
       </div>
     </nav>
