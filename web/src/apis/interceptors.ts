@@ -8,7 +8,7 @@ import type {
 import { path } from "@/routes/path";
 
 import { bridge } from "@/bridge";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retryCount?: number;

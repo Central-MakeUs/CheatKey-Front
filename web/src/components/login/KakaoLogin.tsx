@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import { bridge } from "@/bridge";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 import kakaoLogo from "@/assets/logo/logo_kakao.svg";
 
