@@ -3,7 +3,7 @@ import type { ChangeEvent, KeyboardEvent } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import EraseIcon from "@/assets/icons/erase.svg?react";
 import PrevIcon from "@/assets/icons/prev.svg?react";

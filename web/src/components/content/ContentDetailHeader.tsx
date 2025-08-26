@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { bridge } from "@/bridge";
 import { useFontSize } from "@/hooks/useFontSize";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
 import { TooltipBubble } from "@/components/common/TooltipBubble";

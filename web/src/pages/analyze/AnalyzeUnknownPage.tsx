@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
 

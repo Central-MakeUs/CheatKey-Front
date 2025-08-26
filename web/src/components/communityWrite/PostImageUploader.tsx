@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 
+import { cn } from "@/lib/cn";
 import type { UploadedImage } from "@/types/community/community.types";
-import { cn } from "@/utils/cn";
 
 import {
   imageFileSchema,

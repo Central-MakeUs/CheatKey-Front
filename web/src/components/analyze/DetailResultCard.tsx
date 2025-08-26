@@ -1,8 +1,8 @@
+import { cn } from "@/lib/cn";
 import type {
   AnalysisDetailCardData,
   ResultCardStyle,
 } from "@/types/analyzeResult/analyzeResult.types";
-import { cn } from "@/utils/cn";
 
 interface DetailResultCardProps {
   data: AnalysisDetailCardData;

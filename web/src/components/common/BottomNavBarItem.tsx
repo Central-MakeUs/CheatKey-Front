@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 interface BottomNavBarItemProps {
   path: string;

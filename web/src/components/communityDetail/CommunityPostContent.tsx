@@ -1,5 +1,5 @@
 import { useImageSlider } from "@/hooks/useImageSlider";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { PostMenuButton } from "@/components/common/PostMenuButton";

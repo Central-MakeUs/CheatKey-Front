@@ -4,12 +4,12 @@
 //import { path } from "@/routes/path";
 
 import { useFontSize } from "@/hooks/useFontSize";
+import { cn } from "@/lib/cn";
 import type {
   ContentCategory,
   ContentSectionType,
   FontSizeKey,
 } from "@/types/content/content.types";
-import { cn } from "@/utils/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";

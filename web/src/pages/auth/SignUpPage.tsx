@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 
 import { useSignUp } from "@/hooks/useSignUp";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";

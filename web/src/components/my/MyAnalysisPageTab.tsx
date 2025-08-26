@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import { MY_ANALYSIS_PAGE_TABS } from "@/constants/myAnalysisPageTabs";
 

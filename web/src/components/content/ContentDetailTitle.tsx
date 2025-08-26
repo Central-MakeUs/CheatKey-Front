@@ -1,10 +1,10 @@
 import { useFontSize } from "@/hooks/useFontSize";
+import { cn } from "@/lib/cn";
 import type {
   ContentCategory,
   FontSizeKey,
   SourceStateKey,
 } from "@/types/content/content.types";
-import { cn } from "@/utils/cn";
 
 import {
   AUTHOR_INFO_CONFIG,

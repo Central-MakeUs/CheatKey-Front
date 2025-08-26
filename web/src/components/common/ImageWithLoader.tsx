@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 interface ImageWithLoaderProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {

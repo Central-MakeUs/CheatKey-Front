@@ -6,7 +6,7 @@ import { motion, useAnimation } from "framer-motion";
 
 import { path } from "@/routes/path";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
 import { BottomNavBarItem } from "@/components/common/BottomNavBarItem";

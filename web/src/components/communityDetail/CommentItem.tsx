@@ -1,5 +1,5 @@
+import { cn } from "@/lib/cn";
 import type { Comment } from "@/types/community/community.types";
-import { cn } from "@/utils/cn";
 import { formatDetailDate } from "@/utils/formatUTCtoKR";
 
 import { NameTag } from "@/components/common/NameTag";

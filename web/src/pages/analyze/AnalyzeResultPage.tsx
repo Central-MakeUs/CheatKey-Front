@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 
 import { getAnalyzeResult } from "@/apis/analyze/getAnalyzeResult";
+import { cn } from "@/lib/cn";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
-import { cn } from "@/utils/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";

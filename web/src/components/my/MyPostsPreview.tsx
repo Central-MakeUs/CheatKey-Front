@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { path } from "@/routes/path";
 
 import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
+import { cn } from "@/lib/cn";
 import type { CommunityPost } from "@/types/community/community.types";
-import { cn } from "@/utils/cn";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
 import { DeleteModal } from "@/components/common/DeleteModal";
