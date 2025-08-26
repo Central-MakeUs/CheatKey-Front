@@ -4,8 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { path } from "@/routes/path";
-
 import { getHomeDashboard } from "@/apis/home/getHomeDashboard";
 
 import { ConfettiExplosion } from "@/components/animation/ConfettiExplosion";
@@ -22,6 +20,7 @@ import {
   HOME_BANNER_DATA,
   LEVEL_DATA_MAP,
 } from "@/constants/homePageConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 import GoodCutting from "@/assets/images/cutting_good.svg?react";
 
@@ -117,7 +116,7 @@ export const Home = () => {
               현재 인기 있는 게시글
             </h1>
             <a
-              onClick={() => navigate(path.community.feed)}
+              onClick={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.FEED)}
               aria-label="인기 게시글 더보기"
               className="caption-1-medium text-gray-system-600"
             >

@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { path } from "@/routes/path";
-
 import { bridge } from "@/bridge";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
@@ -20,6 +18,7 @@ import {
   ONBOARDING_CONSTANTS,
   ONBOARDING_TOTAL_STEP,
 } from "@/constants/onboardingConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 const onboardingImageUrls = Object.values(ONBOARDING_CONSTANTS).map(
   (content) => content.image,
@@ -46,7 +45,7 @@ export const OnboardingPage = () => {
 
   const handleCompleteOnboarding = async () => {
     await bridge.completeOnboarding();
-    navigate(path.auth.login);
+    navigate(PAGE_PATH.AUTH.LOGIN);
   };
 
   if (!imagesLoaded) {

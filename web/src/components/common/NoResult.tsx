@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
+import { PAGE_PATH } from "@/constants/path";
 
 import AnalysisStarIcon from "@/assets/icons/analysis_star.svg?react";
 import WriteIcon from "@/assets/icons/write_off.svg?react";
@@ -16,9 +16,9 @@ export const NoResult = ({ text, type = "none" }: NoResultProps) => {
 
   const handleClick = () => {
     if (type === "write") {
-      navigate(path.community.write);
+      navigate(PAGE_PATH.COMMUNITY.SPECIFIC.WRITE);
     } else if (type === "ai") {
-      navigate(path.analyze.base);
+      navigate(PAGE_PATH.ANALYZE.BASE);
     }
   };
 

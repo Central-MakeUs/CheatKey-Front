@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
-
 import { cn } from "@/lib/cn";
 import type { CommunityPost } from "@/types/community/community.types";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
+import { generatePath } from "@/utils/generatePath";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { NameTag } from "@/components/common/NameTag";
 import { PostMenuButton } from "@/components/common/PostMenuButton";
+
+import { PAGE_PATH } from "@/constants/path";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
@@ -33,7 +34,13 @@ export const CommunityPostPreview = ({
   return (
     <div
       className="text-gray-system-600 space-y-2 py-3"
-      onClick={() => navigate(path.community.detail(String(id)))}
+      onClick={() =>
+        navigate(
+          generatePath(PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL, {
+            postId: id,
+          }),
+        )
+      }
     >
       <div className="flex items-start justify-between">
         <div className="flex gap-3">

@@ -26,54 +26,54 @@ import { BottomLayout } from "@/layout/BottomLayout";
 
 import { Layout } from "@/components/layout/Layout";
 
-import { path } from "./path";
+import { PAGE_PATH } from "@/constants/path";
 
 const AppRouter = createBrowserRouter([
   {
-    path: path.onboarding,
+    path: PAGE_PATH.ONBOARDING,
     element: <OnboardingPage />,
   },
   {
     element: <BottomLayout />,
     children: [
       {
-        path: path.home,
+        path: PAGE_PATH.HOME,
         element: <Home />,
       },
       {
-        path: path.community.feed,
+        path: PAGE_PATH.COMMUNITY.SPECIFIC.FEED,
         element: <CommunityFeed />,
       },
     ],
   },
   {
-    path: path.content.base,
+    path: PAGE_PATH.CONTENT.BASE,
     element: <BottomLayout />,
     children: [
       {
-        path: "",
+        index: true,
         element: <ContentListPage />,
       },
       {
-        path: path.content.specific.article(":articleId"),
+        path: PAGE_PATH.CONTENT.SPECIFIC.ARTICLE,
         element: <ArticleDetailPage />,
       },
       {
-        path: path.content.specific.interview(":interviewId"),
+        path: PAGE_PATH.CONTENT.SPECIFIC.INTERVIEW,
         element: <InterviewDetailPage />,
       },
     ],
   },
   {
-    path: path.community.detail(":postId"),
+    path: PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL,
     element: <CommunityDetail />,
   },
   {
-    path: path.community.write,
+    path: PAGE_PATH.COMMUNITY.SPECIFIC.WRITE,
     element: <CommunityWrite />,
   },
   {
-    path: path.search.base,
+    path: PAGE_PATH.SEARCH.BASE,
     element: (
       <Layout>
         <SearchPage />
@@ -81,7 +81,7 @@ const AppRouter = createBrowserRouter([
     ),
   },
   {
-    path: path.auth.login,
+    path: PAGE_PATH.AUTH.LOGIN,
     element: (
       <Layout>
         <LoginPage />
@@ -89,7 +89,7 @@ const AppRouter = createBrowserRouter([
     ),
   },
   {
-    path: path.auth.signup,
+    path: PAGE_PATH.AUTH.SIGNUP,
     element: (
       <Layout>
         <SignUpPage />
@@ -97,7 +97,7 @@ const AppRouter = createBrowserRouter([
     ),
   },
   {
-    path: path.analyze.base,
+    path: PAGE_PATH.ANALYZE.BASE,
     element: (
       <Layout>
         <Outlet />
@@ -105,15 +105,15 @@ const AppRouter = createBrowserRouter([
     ),
     children: [
       {
-        path: "",
+        index: true,
         element: <AnalyzePage />,
       },
       {
-        path: path.analyze.specific.result(":analyzeId"),
+        path: PAGE_PATH.ANALYZE.SPECIFIC.RESULT,
         element: <AnalyzeResultPage />,
       },
       {
-        path: path.analyze.specific.unknown,
+        path: PAGE_PATH.ANALYZE.SPECIFIC.UNKNOWN,
         element: <AnalyzeUnknownPage />,
       },
     ],
@@ -122,31 +122,26 @@ const AppRouter = createBrowserRouter([
     element: <BottomLayout />,
     children: [
       {
-        path: path.my.base,
+        path: PAGE_PATH.MY.BASE,
         element: <MyPage />,
       },
     ],
   },
   {
-    path: path.my.base,
-    children: [
-      {
-        path: path.my.edit,
-        element: <MyEditPage />,
-      },
-      {
-        path: path.my.posts,
-        element: <MyPostsPage />,
-      },
-      {
-        path: path.my.analysis,
-        element: <MyAnalysisPage />,
-      },
-      {
-        path: path.my.terms,
-        element: <TermsPage />,
-      },
-    ],
+    path: PAGE_PATH.MY.SPECIFIC.EDIT,
+    element: <MyEditPage />,
+  },
+  {
+    path: PAGE_PATH.MY.SPECIFIC.POSTS,
+    element: <MyPostsPage />,
+  },
+  {
+    path: PAGE_PATH.MY.SPECIFIC.ANALYSIS,
+    element: <MyAnalysisPage />,
+  },
+  {
+    path: PAGE_PATH.MY.SPECIFIC.TERMS,
+    element: <TermsPage />,
   },
 ]);
 

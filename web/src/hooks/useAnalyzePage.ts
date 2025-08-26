@@ -6,17 +6,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { z } from "zod";
 
-import { path } from "@/routes/path";
-
 import { postAnalyzeCase } from "@/apis/analyze/postAnalyzeCase";
 import { postAnalyzeURL } from "@/apis/analyze/postAnalyzeURL";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
+import { generatePath } from "@/utils/generatePath";
 
 import type { TabCategory } from "@/components/analyze/TabSwitcher";
 import type { ToastIconType } from "@/components/common/Toast";
 
 import { analysisTabsData } from "@/constants/analyze/page/analyzePageConstants";
 import { QUERY_KEYS } from "@/constants/apiConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 interface AnalyzeVariables {
   activeTab: TabCategory;
@@ -51,10 +51,15 @@ export const useAnalyzePage = () => {
     },
     onSuccess: (data) => {
       if (data.status === "UNKNOWN") {
-        navigate(path.analyze.specific.unknown);
+        navigate(PAGE_PATH.ANALYZE.SPECIFIC.UNKNOWN);
       } else {
         const resultId = data.detectionId;
-        navigate(path.analyze.specific.result(resultId), { state: data });
+        navigate(
+          generatePath(PAGE_PATH.ANALYZE.SPECIFIC.RESULT, {
+            resultId: resultId,
+          }),
+          { state: data },
+        );
       }
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_MY_ANALYZE_HISTORY],
@@ -81,7 +86,8 @@ export const useAnalyzePage = () => {
 
   const handleNavigateBack = () => navigate(-1);
 
-  const handleNavigateCommunity = () => navigate(path.community.feed);
+  const handleNavigateCommunity = () =>
+    navigate(PAGE_PATH.COMMUNITY.SPECIFIC.FEED);
 
   const handleTabChange = (tab: TabCategory) => {
     if (!hasShownUrlToast && tab === "url") {

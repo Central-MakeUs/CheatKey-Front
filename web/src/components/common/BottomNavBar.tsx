@@ -4,13 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { motion, useAnimation } from "framer-motion";
 
-import { path } from "@/routes/path";
-
 import { cn } from "@/lib/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
 import { BottomNavBarItem } from "@/components/common/BottomNavBarItem";
 import { TooltipBubble } from "@/components/common/TooltipBubble";
+
+import { PAGE_PATH } from "@/constants/path";
 
 import AiAnalysisIcon from "@/assets/icons/ai_analysis.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";
@@ -31,7 +31,7 @@ export const BottomNavBar = () => {
 
   const [isBubbleVisible, setIsBubbleVisible] = useState(false);
 
-  const isHomePage = location.pathname === path.home;
+  const isHomePage = location.pathname === PAGE_PATH.HOME;
 
   const handleCloseBubble = useCallback(() => {
     setIsBubbleVisible(false);
@@ -46,7 +46,7 @@ export const BottomNavBar = () => {
         ease: "easeInOut",
       },
     });
-    navigate(path.analyze.base);
+    navigate(PAGE_PATH.ANALYZE.BASE);
   }, [analyzeIconControls, navigate]);
 
   useEffect(() => {
@@ -74,13 +74,13 @@ export const BottomNavBar = () => {
       >
         <div className="absolute top-0 left-1/2 z-0 h-[35px] w-[70px] -translate-x-1/2 rounded-b-full" />
         <BottomNavBarItem
-          path={path.home}
+          path={PAGE_PATH.HOME}
           DefaultIcon={HomeIcon}
           ActiveIcon={ActiveHomeIcon}
           label="홈"
         />
         <BottomNavBarItem
-          path={path.content.base}
+          path={PAGE_PATH.CONTENT.BASE}
           DefaultIcon={ContentIcon}
           ActiveIcon={ActiveContentIcon}
           label="콘텐츠"
@@ -109,13 +109,13 @@ export const BottomNavBar = () => {
         </div>
 
         <BottomNavBarItem
-          path={path.community.feed}
+          path={PAGE_PATH.COMMUNITY.SPECIFIC.FEED}
           DefaultIcon={CommunityIcon}
           ActiveIcon={ActiveCommunityIcon}
           label="커뮤니티"
         />
         <BottomNavBarItem
-          path={path.my.base}
+          path={PAGE_PATH.MY.BASE}
           DefaultIcon={MyIcon}
           ActiveIcon={ActiveMyIcon}
           label="My"

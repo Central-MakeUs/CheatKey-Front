@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
-
 import type { MyAnalysisItem } from "@/types/my/my.types";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
+import { generatePath } from "@/utils/generatePath";
 
 import { AnalysisLevelBadge } from "@/components/my/AnalysisLevelBadge";
 import { AnalysisTypeBadge } from "@/components/my/AnalysisTypeBadge";
+
+import { PAGE_PATH } from "@/constants/path";
 
 import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 
@@ -23,7 +24,9 @@ export const MyAnalysisListItem = ({ item }: MyAnalysisListItemProps) => {
       key={item.id}
       onClick={() =>
         navigate(
-          `${path.analyze.base}/${path.analyze.specific.result(item.id)}`,
+          generatePath(PAGE_PATH.ANALYZE.SPECIFIC.RESULT, {
+            analyzeId: item.id,
+          }),
         )
       }
       className="active:bg-gray-system-800 flex w-full flex-col px-5 py-5 text-left transition-colors duration-200"

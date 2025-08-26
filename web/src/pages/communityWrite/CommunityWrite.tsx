@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 
-import { path } from "@/routes/path";
-
 import {
   postCommunityPosts,
   postFilesUpload,
@@ -14,6 +12,7 @@ import {
 } from "@/apis/community/postCommunity";
 import { useCommunityWriteState } from "@/hooks/useCommunityWriteState";
 import type { CommunityWriteFormState } from "@/types/community/community.types";
+import { generatePath } from "@/utils/generatePath";
 
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
@@ -26,6 +25,7 @@ import { TitleForm } from "@/components/communityWrite/TitleForm";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
 import { BOARD_CATEGORY_MAP } from "@/constants/commnityFeedTabs";
+import { PAGE_PATH } from "@/constants/path";
 
 export const CommunityWrite = () => {
   const navigate = useNavigate();
@@ -165,11 +165,14 @@ export const CommunityWrite = () => {
             confirmText="보러가기"
             cancelText="취소"
             onConfirm={() => {
-              navigate(path.community.detail(String(lastPostedId)), {
-                replace: true,
-              });
+              navigate(
+                generatePath(PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL, {
+                  postId: String(lastPostedId),
+                }),
+                { replace: true },
+              );
             }}
-            onCancel={() => navigate(path.home, { replace: true })}
+            onCancel={() => navigate(PAGE_PATH.HOME, { replace: true })}
           />
         )}
       </div>

@@ -1,11 +1,11 @@
 import { authAPI } from "@/apis/instance";
-import { generateApiPath } from "@/utils/generateApiPath";
+import { generatePath } from "@/utils/generatePath";
 
 import { API_DOMAINS } from "@/constants/apiConstants";
 
 export const postBlock = async ({ postId }: { postId: number }) => {
   const response = await authAPI.post(
-    generateApiPath(API_DOMAINS.POST_BLOCK, { postId }),
+    generatePath(API_DOMAINS.POST_BLOCK, { postId }),
     { reason: "HATE" },
   );
   return response.data;

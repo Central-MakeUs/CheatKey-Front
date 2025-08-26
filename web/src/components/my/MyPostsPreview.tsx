@@ -2,17 +2,17 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
-
 import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
 import { cn } from "@/lib/cn";
 import type { CommunityPost } from "@/types/community/community.types";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
+import { generatePath } from "@/utils/generatePath";
 
 import { DeleteModal } from "@/components/common/DeleteModal";
 import { NameTag } from "@/components/common/NameTag";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 import RemoveIcon from "@/assets/icons/remove.svg?react";
@@ -61,7 +61,13 @@ export const MyPostsPreview = ({
 
   return (
     <div
-      onClick={() => navigate(path.community.detail(String(id)))}
+      onClick={() =>
+        navigate(
+          generatePath(PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL, {
+            postId: id,
+          }),
+        )
+      }
       className="text-gray-system-600 space-y-2 py-3"
     >
       <div className="flex items-start justify-between">

@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { path } from "@/routes/path";
-
 import { deleteAuthWithdraw } from "@/apis/auth/deleteAuthWithdraw";
 import { postAuthLogout } from "@/apis/auth/postAuthLogout";
 
 import { MyAccountModalRenderer } from "@/components/my/MyAccountModalRenderer";
+
+import { PAGE_PATH } from "@/constants/path";
 
 export const MyAccount = () => {
   const navigate = useNavigate();
@@ -20,14 +20,14 @@ export const MyAccount = () => {
   const logoutMutation = useMutation({
     mutationFn: postAuthLogout,
     onSuccess: () => {
-      navigate(path.auth.login);
+      navigate(PAGE_PATH.AUTH.LOGIN);
     },
   });
 
   const withdrawMutation = useMutation({
     mutationFn: deleteAuthWithdraw,
     onSuccess: () => {
-      navigate(path.auth.login);
+      navigate(PAGE_PATH.AUTH.LOGIN);
     },
   });
 

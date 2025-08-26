@@ -1,11 +1,11 @@
 import { useLocation, Outlet } from "react-router-dom";
 
-import { path } from "@/routes/path";
-
 import { BottomNavBar } from "@/components/common/BottomNavBar";
 
+import { PAGE_PATH } from "@/constants/path";
+
 const HIDDEN_PATHS = [
-  path.community.write,
+  PAGE_PATH.COMMUNITY.SPECIFIC.WRITE,
   /^\/community\/\d+$/,
   /^\/content\/(?:article|interview)\/[^/]+$/,
 ];

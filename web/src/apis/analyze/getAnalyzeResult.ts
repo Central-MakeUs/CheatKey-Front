@@ -1,6 +1,6 @@
 import { authAPI } from "@/apis/instance";
 import type { DetectionType } from "@/types/my/my.types";
-import { generateApiPath } from "@/utils/generateApiPath";
+import { generatePath } from "@/utils/generatePath";
 
 import type {
   ANALYSIS_CATEGORY,
@@ -25,7 +25,7 @@ export const getAnalyzeResult = async ({
   detectionId: number;
 }): Promise<GetAnalyzeResultResponse> => {
   const response = await authAPI.get(
-    generateApiPath(API_DOMAINS.GET_ANALYZE_RESULT, { detectionId }),
+    generatePath(API_DOMAINS.GET_ANALYZE_RESULT, { detectionId }),
   );
   return response.data;
 };

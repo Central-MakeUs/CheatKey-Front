@@ -4,8 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { path } from "@/routes/path";
-
 import { getCommentList } from "@/apis/comment/getCommentList";
 import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
@@ -27,6 +25,7 @@ import { CommentSection } from "@/components/communityDetail/CommentSection";
 import { CommunityPostContent } from "@/components/communityDetail/CommunityPostContent";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 export const CommunityDetail = () => {
   const navigate = useNavigate();
@@ -106,7 +105,7 @@ export const CommunityDetail = () => {
     showReportComplete,
     close,
   } = usePostMenu({
-    onReportComplete: () => navigate(path.community.feed),
+    onReportComplete: () => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.FEED),
   });
 
   const { mutate: blockUser } = useBlockUserMutation([

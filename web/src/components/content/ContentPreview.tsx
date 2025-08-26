@@ -2,17 +2,17 @@ import { useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
-import { path } from "@/routes/path";
-
 import type {
   ContentType,
   ContentCategory,
   SourceStateKey,
 } from "@/types/content/content.types";
+import { generatePath } from "@/utils/generatePath";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 
 import { AUTHOR_INFO_CONFIG } from "@/constants/contentPageConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 interface ContentPreviewProps extends ContentType {
   author: ContentCategory;
@@ -26,13 +26,14 @@ const itemVariants = {
     transition: { duration: 0.3 },
   },
 };
-
 const getDetailPath = (author: ContentCategory, id: number) => {
-  const pathBuilder = {
-    알려드림: path.content.specific.article,
-    인터뷰: path.content.specific.interview,
-  };
-  return pathBuilder[author](id);
+  if (author === "알려드림") {
+    return generatePath(PAGE_PATH.CONTENT.SPECIFIC.ARTICLE, { articleId: id });
+  } else {
+    return generatePath(PAGE_PATH.CONTENT.SPECIFIC.INTERVIEW, {
+      interviewId: id,
+    });
+  }
 };
 
 export const ContentPreview = ({

@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
-
 import type { HomeTrendingPostData } from "@/types/home/home.types";
+import { generatePath } from "@/utils/generatePath";
 
 import { NameTag } from "@/components/common/NameTag";
+
+import { PAGE_PATH } from "@/constants/path";
 
 export const HomeTrendingPost = ({
   id,
@@ -16,7 +17,13 @@ export const HomeTrendingPost = ({
   const navigate = useNavigate();
   return (
     <a
-      onClick={() => navigate(path.community.detail(String(id)))}
+      onClick={() =>
+        navigate(
+          generatePath(PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL, {
+            postId: String(id),
+          }),
+        )
+      }
       className="bg-gray-system-800 flex w-73 shrink-0 flex-col gap-2.5 rounded-xl p-4"
     >
       <div className="flex w-full items-center gap-2">
