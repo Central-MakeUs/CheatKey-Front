@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { FontSizeProvider } from "@/contexts/FontSizeContext";
+import { FontSizeProvider } from "@/provider/FontSizeProvider";
 
 import { ToTop } from "@/components/common/ToTop";
 import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
