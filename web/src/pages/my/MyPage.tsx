@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
 import { getMypageDashboard } from "@/apis/my/getMypageDashboard";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
 import { MyAccount } from "@/components/my/MyAccount";
 import { MyMenuItem } from "@/components/my/MyMenuItem";
@@ -40,11 +40,7 @@ export const MyPage = () => {
   });
 
   if (isDashboardLoading || isPostsLoading || !myInfo || !myPosts) {
-    return (
-      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner width={32} height={32} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

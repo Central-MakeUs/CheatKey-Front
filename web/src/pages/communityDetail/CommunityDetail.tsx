@@ -14,7 +14,7 @@ import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation
 import { usePostMenu } from "@/hooks/usePostMenu";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { ConfirmModal } from "@/components/common/ConfirmModal";
@@ -141,11 +141,7 @@ export const CommunityDetail = () => {
   }, [selectedCommentId]);
 
   if (isPostDetailLoading || isCommentListLoading) {
-    return (
-      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (isPostDetailError || isCommentListError || !postDetail) {

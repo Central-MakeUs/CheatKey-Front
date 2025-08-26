@@ -64,7 +64,7 @@ export const Home = () => {
   if (!dashboardData) {
     return (
       <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
-        <LoadingSpinner />
+        <LoadingSpinner width={32} height={32} />
       </div>
     );
   }

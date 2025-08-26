@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 
 import { ALL_ANALYSIS_DATA } from "@/constants/analyze/result";
 import {
@@ -43,11 +43,7 @@ export const AnalyzeResultPage = () => {
     analyzeResultData) as AnalyzeResponse | null;
 
   if (isAnalyzeResultDataLoading || !responseData) {
-    return (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner width={32} height={32} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   const category = responseData.group;

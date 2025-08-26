@@ -1,147 +1,99 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
-import {
-  Home,
-  CommunityDetail,
-  CommunityFeed,
-  CommunityWrite,
-  LoginPage,
-  SignUpPage,
-  SearchPage,
-  AnalyzePage,
-  ContentListPage,
-  ArticleDetailPage,
-  InterviewDetailPage,
-  AnalyzeResultPage,
-  MyPage,
-  MyEditPage,
-  MyPostsPage,
-  MyAnalysisPage,
-  TermsPage,
-  OnboardingPage,
-  AnalyzeUnknownPage,
-} from "@/pages";
+import * as Pages from "@/pages";
 
 import { BottomLayout } from "@/layout/BottomLayout";
-
-import { Layout } from "@/components/layout/Layout";
+import { RootLayout } from "@/layout/RootLayout";
 
 import { PAGE_PATH } from "@/constants/path";
 
 const AppRouter = createBrowserRouter([
   {
-    path: PAGE_PATH.ONBOARDING,
-    element: <OnboardingPage />,
-  },
-  {
-    element: <BottomLayout />,
+    path: "",
+    Component: RootLayout,
     children: [
       {
-        path: PAGE_PATH.HOME,
-        element: <Home />,
+        Component: BottomLayout,
+        children: [
+          {
+            path: PAGE_PATH.HOME,
+            Component: Pages.Home,
+          },
+          {
+            path: PAGE_PATH.COMMUNITY.SPECIFIC.FEED,
+            Component: Pages.CommunityFeed,
+          },
+          {
+            path: PAGE_PATH.CONTENT.BASE,
+            Component: Pages.ContentListPage,
+          },
+          {
+            path: PAGE_PATH.MY.BASE,
+            Component: Pages.MyPage,
+          },
+        ],
       },
       {
-        path: PAGE_PATH.COMMUNITY.SPECIFIC.FEED,
-        element: <CommunityFeed />,
-      },
-    ],
-  },
-  {
-    path: PAGE_PATH.CONTENT.BASE,
-    element: <BottomLayout />,
-    children: [
-      {
-        index: true,
-        element: <ContentListPage />,
+        path: PAGE_PATH.ONBOARDING,
+        Component: Pages.OnboardingPage,
       },
       {
         path: PAGE_PATH.CONTENT.SPECIFIC.ARTICLE,
-        element: <ArticleDetailPage />,
+        Component: Pages.ArticleDetailPage,
       },
       {
         path: PAGE_PATH.CONTENT.SPECIFIC.INTERVIEW,
-        element: <InterviewDetailPage />,
+        Component: Pages.InterviewDetailPage,
       },
-    ],
-  },
-  {
-    path: PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL,
-    element: <CommunityDetail />,
-  },
-  {
-    path: PAGE_PATH.COMMUNITY.SPECIFIC.WRITE,
-    element: <CommunityWrite />,
-  },
-  {
-    path: PAGE_PATH.SEARCH.BASE,
-    element: (
-      <Layout>
-        <SearchPage />
-      </Layout>
-    ),
-  },
-  {
-    path: PAGE_PATH.AUTH.LOGIN,
-    element: (
-      <Layout>
-        <LoginPage />
-      </Layout>
-    ),
-  },
-  {
-    path: PAGE_PATH.AUTH.SIGNUP,
-    element: (
-      <Layout>
-        <SignUpPage />
-      </Layout>
-    ),
-  },
-  {
-    path: PAGE_PATH.ANALYZE.BASE,
-    element: (
-      <Layout>
-        <Outlet />
-      </Layout>
-    ),
-    children: [
       {
-        index: true,
-        element: <AnalyzePage />,
+        path: PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL,
+        Component: Pages.CommunityDetail,
+      },
+      {
+        path: PAGE_PATH.COMMUNITY.SPECIFIC.WRITE,
+        Component: Pages.CommunityWrite,
+      },
+      {
+        path: PAGE_PATH.SEARCH.BASE,
+        Component: Pages.SearchPage,
+      },
+      {
+        path: PAGE_PATH.AUTH.LOGIN,
+        Component: Pages.LoginPage,
+      },
+      {
+        path: PAGE_PATH.AUTH.SIGNUP,
+        Component: Pages.SignUpPage,
+      },
+      {
+        path: PAGE_PATH.ANALYZE.BASE,
+        Component: Pages.AnalyzePage,
       },
       {
         path: PAGE_PATH.ANALYZE.SPECIFIC.RESULT,
-        element: <AnalyzeResultPage />,
+        Component: Pages.AnalyzeResultPage,
       },
       {
         path: PAGE_PATH.ANALYZE.SPECIFIC.UNKNOWN,
-        element: <AnalyzeUnknownPage />,
+        Component: Pages.AnalyzeUnknownPage,
       },
-    ],
-  },
-  {
-    element: <BottomLayout />,
-    children: [
       {
-        path: PAGE_PATH.MY.BASE,
-        element: <MyPage />,
+        path: PAGE_PATH.MY.SPECIFIC.EDIT,
+        Component: Pages.MyEditPage,
+      },
+      {
+        path: PAGE_PATH.MY.SPECIFIC.POSTS,
+        Component: Pages.MyPostsPage,
+      },
+      {
+        path: PAGE_PATH.MY.SPECIFIC.ANALYSIS,
+        Component: Pages.MyAnalysisPage,
+      },
+      {
+        path: PAGE_PATH.MY.SPECIFIC.TERMS,
+        Component: Pages.TermsPage,
       },
     ],
-  },
-  {
-    path: PAGE_PATH.MY.SPECIFIC.EDIT,
-    element: <MyEditPage />,
-  },
-  {
-    path: PAGE_PATH.MY.SPECIFIC.POSTS,
-    element: <MyPostsPage />,
-  },
-  {
-    path: PAGE_PATH.MY.SPECIFIC.ANALYSIS,
-    element: <MyAnalysisPage />,
-  },
-  {
-    path: PAGE_PATH.MY.SPECIFIC.TERMS,
-    element: <TermsPage />,
   },
 ]);
 

@@ -18,9 +18,9 @@ export const BottomLayout = () => {
   );
 
   return (
-    <div className="layout">
+    <>
       <Outlet />
       {!hideBottomNavBar && <BottomNavBar />}
-    </div>
+    </>
   );
 };

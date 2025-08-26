@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { bridge } from "@/bridge";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { PageIndicator } from "@/components/common/PageIndicator";
@@ -49,11 +49,7 @@ export const OnboardingPage = () => {
   };
 
   if (!imagesLoaded) {
-    return (
-      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner width={32} height={32} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   const currentContent =
