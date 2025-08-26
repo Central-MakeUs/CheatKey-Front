@@ -58,7 +58,7 @@ export const OnboardingPage = () => {
   const isLastStep = stepState === ONBOARDING_TOTAL_STEP;
 
   return (
-    <div className="safearea bg-bg-100 relative flex h-screen w-full flex-1 flex-col justify-center">
+    <div className="safearea bg-bg-100 page justify-center">
       <div className="relative flex w-full flex-1">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div

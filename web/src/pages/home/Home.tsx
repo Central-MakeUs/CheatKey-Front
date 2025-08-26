@@ -76,7 +76,7 @@ export const Home = () => {
   const levelName = levelInfo?.name ?? `LV.${userInfo.level} 측정 불가`;
   return (
     <>
-      <main className="safearea flex flex-1 flex-col bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
+      <main className="safearea page bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]">
         {/* 로고와 알림 */}
         <HomeHeader />
         {/* 검색 창 */}

@@ -54,10 +54,7 @@ export const AnalyzeResultPage = () => {
 
   return (
     <motion.div
-      className={cn(
-        "safearea relative flex h-screen w-full flex-1 flex-col",
-        style.background,
-      )}
+      className={cn("safearea page", style.background)}
       variants={STAGGER_CONTAINER}
       initial="hidden"
       animate="visible"

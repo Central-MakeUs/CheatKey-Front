@@ -44,7 +44,7 @@ export const MyPage = () => {
   }
 
   return (
-    <div className="safearea bg-bg-100 relative h-screen">
+    <div className="safearea page bg-bg-100">
       <AppHeader title="My" onNotification={() => {}} className="bg-bg-100" />
       <div className="px-5">
         <MyProfile myInfo={myInfo.userInfo} />

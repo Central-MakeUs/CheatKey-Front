@@ -111,7 +111,7 @@ export const CommunityWrite = () => {
   };
 
   return (
-    <div className="bg-bg-100 safearea layout flex h-screen flex-col pb-5">
+    <div className="safearea page bg-bg-100 pb-5">
       <AppHeader
         onPrev={handleBack}
         title="글 작성하기"

@@ -13,7 +13,7 @@ export const LoginPage = () => {
   const platform = getPlatform();
 
   return (
-    <div className="safearea relative flex h-screen w-full flex-1 flex-col items-center justify-center">
+    <div className="safearea page bg-bg-100 items-center justify-center">
       <CheatKeyLogo className="h-auto w-28 -translate-y-10" />
       <CheatKeyTextLogo className="mt-11 h-auto w-40 -translate-y-10" />
 

@@ -20,7 +20,7 @@ export const TermsPage = () => {
   // TODO: @Ki-Tak 추후, 서버 연동
 
   return (
-    <div className="safearea layout bg-bg-100 flex h-screen flex-col">
+    <div className="safearea page bg-bg-100">
       <AppHeader
         title="이용약관"
         onPrev={() => {

@@ -22,7 +22,7 @@ const ArticleDetailContent = () => {
   }
 
   return (
-    <div className="safearea bg-bg-100 flex h-screen flex-col">
+    <div className="safearea page bg-bg-100">
       <ContentDetailHeader />
       <div ref={scrollRef} className="flex flex-1 flex-col overflow-y-auto">
         <ContentDetailTitle

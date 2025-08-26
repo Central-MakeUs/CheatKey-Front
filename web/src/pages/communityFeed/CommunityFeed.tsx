@@ -81,7 +81,7 @@ export const CommunityFeed = () => {
   };
 
   return (
-    <div className="bg-bg-100 safearea flex h-screen flex-col">
+    <div className="safearea page bg-bg-100">
       <AppHeader
         title="커뮤니티"
         onWrite={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.WRITE)}
