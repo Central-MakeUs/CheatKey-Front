@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 import CheckOffIcon from "@/assets/icons/check_off.svg?react";

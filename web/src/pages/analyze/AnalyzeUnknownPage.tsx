@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
 
@@ -25,10 +25,7 @@ export const AnalyzeUnknownPage = () => {
 
   return (
     <motion.div
-      className={cn(
-        "safearea relative flex h-screen w-full flex-1 flex-col",
-        style.background,
-      )}
+      className={cn("safearea page", style.background)}
       variants={STAGGER_CONTAINER}
       initial="hidden"
       animate="visible"

@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 
 import { getAnalyzeResult } from "@/apis/analyze/getAnalyzeResult";
+import { cn } from "@/lib/cn";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
-import { cn } from "@/utils/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 
 import { ALL_ANALYSIS_DATA } from "@/constants/analyze/result";
 import {
@@ -43,11 +43,7 @@ export const AnalyzeResultPage = () => {
     analyzeResultData) as AnalyzeResponse | null;
 
   if (isAnalyzeResultDataLoading || !responseData) {
-    return (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner width={32} height={32} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   const category = responseData.group;
@@ -58,10 +54,7 @@ export const AnalyzeResultPage = () => {
 
   return (
     <motion.div
-      className={cn(
-        "safearea relative flex h-screen w-full flex-1 flex-col",
-        style.background,
-      )}
+      className={cn("safearea page", style.background)}
       variants={STAGGER_CONTAINER}
       initial="hidden"
       animate="visible"

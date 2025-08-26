@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
-
 import { bridge } from "@/bridge";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/stores/useAuthStore";
+
+import { PAGE_PATH } from "@/constants/path";
 
 import appleLogo from "@/assets/logo/logo_apple.svg";
 
@@ -22,9 +22,9 @@ export const AppleLogin = () => {
       if (result.success) {
         useAuthStore.getState().setAccessToken(result.data.accessToken);
         if (result.data.userState === "PENDING") {
-          navigate(path.auth.signup);
+          navigate(PAGE_PATH.AUTH.SIGNUP);
         } else if (result.data.userState === "ACTIVE") {
-          navigate(path.home);
+          navigate(PAGE_PATH.HOME);
         } else if (result.data.userState === "BANNED") {
           alert("임시 차단된 계정입니다.");
         } else if (result.data.userState === "INACTIVE") {

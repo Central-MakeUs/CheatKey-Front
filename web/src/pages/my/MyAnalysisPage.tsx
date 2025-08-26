@@ -31,7 +31,7 @@ export const MyAnalysisPage = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="safearea layout bg-bg-100 flex h-screen flex-col">
+    <div className="safearea page bg-bg-100">
       <AppHeader
         onPrev={() => navigate(-1)}
         title="분석 내역 보기"

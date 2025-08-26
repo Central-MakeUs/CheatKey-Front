@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import CloseIcon from "@/assets/icons/close.svg?react";
 

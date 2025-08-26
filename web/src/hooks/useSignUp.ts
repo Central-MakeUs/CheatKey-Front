@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
-import { path } from "@/routes/path";
-
 import { getAuthRegister } from "@/apis/auth/getAuthRegister.api";
 import { postAuthRegister } from "@/apis/auth/postAuthRegister";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
@@ -18,6 +16,7 @@ import type {
 } from "@/types/signup/signup.types";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ export const useSignUp = () => {
   const { mutate: register, isPending: isRegistering } = useMutation({
     mutationFn: postAuthRegister,
     onSuccess: () => {
-      navigate(path.home, { state: { fromSignup: true }, replace: true });
+      navigate(PAGE_PATH.HOME, { state: { fromSignup: true }, replace: true });
     },
     onError: (error) => {
       const axiosError = error as AxiosError;
@@ -135,7 +134,7 @@ export const useSignUp = () => {
     if (stepState > 0) {
       setStepState((prev) => prev - 1);
     } else {
-      navigate(path.auth.login, { replace: true });
+      navigate(PAGE_PATH.AUTH.LOGIN, { replace: true });
     }
   };
 

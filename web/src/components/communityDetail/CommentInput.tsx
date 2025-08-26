@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useState } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import UploadCommentIcon from "@/assets/icons/arrow_up.svg?react";
 

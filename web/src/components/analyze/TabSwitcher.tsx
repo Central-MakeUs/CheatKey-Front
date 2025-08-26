@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 export type TabCategory = "url" | "case";
 
@@ -32,13 +32,13 @@ export const TabSwitcher = ({
     <div
       role="tablist"
       aria-label="유형 선택"
-      className="body-2-medium bg-base-50 relative flex w-fit items-center justify-center rounded-full p-0.5"
+      className="body-2-medium relative flex w-fit items-center justify-center rounded-full bg-[#0b1128]/60 p-0.5"
     >
       <div
         ref={indicatorRef}
         className="absolute top-0 left-0 h-full w-1/2 p-0.5 transition-transform duration-300 ease-in-out"
       >
-        <div className="bg-base-50 h-full w-full rounded-full" />
+        <div className="h-full w-full rounded-full bg-[#242a51]" />
       </div>
 
       <button
@@ -48,10 +48,10 @@ export const TabSwitcher = ({
         aria-controls={ariaControls}
         onClick={() => onTabChange("case")}
         className={cn(
-          "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
+          "z-10 rounded-full px-7 py-2 transition-colors duration-300 ease-in-out",
           {
-            "text-gray-system-500": activeTab === "case",
-            "text-gray-system-700": activeTab !== "case",
+            "text-primary-100": activeTab === "case",
+            "text-gray-system-500": activeTab !== "case",
           },
         )}
       >
@@ -64,10 +64,10 @@ export const TabSwitcher = ({
         aria-controls={ariaControls}
         onClick={() => onTabChange("url")}
         className={cn(
-          "rounded-full px-7 py-2 text-sm transition-colors duration-300 ease-in-out",
+          "z-10 rounded-full px-7 py-2 transition-colors duration-300 ease-in-out",
           {
-            "text-gray-system-500": activeTab === "url",
-            "text-gray-system-700": activeTab !== "url",
+            "text-primary-100": activeTab === "url",
+            "text-gray-system-500": activeTab !== "url",
           },
         )}
       >

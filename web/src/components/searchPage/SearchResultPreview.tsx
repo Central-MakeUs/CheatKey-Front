@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
-import { path } from "@/routes/path";
+import { generatePath } from "@/utils/generatePath";
+
+import { PAGE_PATH } from "@/constants/path";
 
 interface SearchResultItemProps {
   id: number;
@@ -18,7 +20,13 @@ export const SearchResultPreview = ({
   return (
     <div
       role="link"
-      onClick={() => navigate(path.community.detail(String(id)))}
+      onClick={() =>
+        navigate(
+          generatePath(PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL, {
+            postId: id,
+          }),
+        )
+      }
       className="active:bg-gray-system-800 cursor-pointer rounded-xl px-1 py-3 transition"
     >
       <h2 className="body-2-medium text-gray-system-200 mb-1 line-clamp-1">

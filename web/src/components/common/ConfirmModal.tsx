@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { createPortal } from "react-dom";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 interface ConfirmModalProps {
   title: string;

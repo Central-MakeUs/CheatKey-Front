@@ -1,9 +1,9 @@
 import { motion, AnimatePresence } from "motion/react";
 
 import { useSignUp } from "@/hooks/useSignUp";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
@@ -99,15 +99,11 @@ export const SignUpPage = () => {
   };
 
   if (isRegisterLoading) {
-    return (
-      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner width={32} height={32} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
-    <div className="safearea bg-bg-100 relative flex h-screen w-full flex-1 flex-col">
+    <div className="safearea page bg-bg-100">
       {stepState > 0 && (
         <>
           <AppHeader

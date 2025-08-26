@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import DropDownIcon from "@/assets/icons/dropdown.svg?react";
 

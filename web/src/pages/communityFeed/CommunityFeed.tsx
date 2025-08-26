@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { path } from "@/routes/path";
-
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
 import { usePostMenu } from "@/hooks/usePostMenu";
@@ -24,6 +22,7 @@ import { CommunityPostPreview } from "@/components/communityFeed/CommunityPostPr
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
 import { BOARD_CATEGORY_MAP } from "@/constants/commnityFeedTabs";
+import { PAGE_PATH } from "@/constants/path";
 
 import WriteOff from "@/assets/icons/write_off.svg?react";
 
@@ -82,10 +81,10 @@ export const CommunityFeed = () => {
   };
 
   return (
-    <div className="bg-bg-100 safearea flex h-screen flex-col">
+    <div className="safearea page bg-bg-100">
       <AppHeader
         title="커뮤니티"
-        onWrite={() => navigate(path.community.write)}
+        onWrite={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.WRITE)}
         onNotification={() => console.log("🚨알림 클릭됨")}
         className="bg-bg-100"
       />
@@ -114,7 +113,7 @@ export const CommunityFeed = () => {
                 </p>
                 <button
                   className="bg-bg-50 body-1-bold text-gray-system-500 flex h-[42px] w-[120px] items-center justify-center gap-[1px] rounded-full"
-                  onClick={() => navigate(path.community.write)}
+                  onClick={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.WRITE)}
                 >
                   <span className="body-1-bold">글 작성하기</span>
                   <WriteOff

@@ -31,7 +31,7 @@ export const AnalyzePage = () => {
   }
 
   return (
-    <main className="safearea relative flex h-screen w-full flex-1 flex-col items-center bg-linear-[180deg,rgba(0,40,255,0.2)_0%,rgba(34,68,109,0.1)_30%,rgba(34,68,109,0.1)_78.11%,rgba(23,40,134,0.2)_100%] px-5">
+    <div className="safearea page items-center bg-linear-[180deg,rgba(0,40,255,0.2)_0%,rgba(34,68,109,0.1)_30%,rgba(34,68,109,0.1)_78.11%,rgba(23,40,134,0.2)_100%] px-5">
       <AppHeader title="분석하기" onPrev={handleNavigateBack} />
       <div className="mt-header flex w-full justify-center pt-3">
         <TabSwitcher
@@ -84,6 +84,6 @@ export const AnalyzePage = () => {
           className="text-gray-system-600 h-5 w-5"
         />
       </a>
-    </main>
+    </div>
   );
 };

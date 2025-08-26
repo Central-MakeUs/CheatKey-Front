@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import CloseButton from "@/assets/icons/close_button.svg?react";
 

@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 //import Notification_On from "@/assets/icons/notification_on.svg?react";
 import Prev from "@/assets/icons/prev.svg?react";

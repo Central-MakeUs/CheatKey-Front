@@ -1,5 +1,5 @@
+import { cn } from "@/lib/cn";
 import type { GenderCode } from "@/types/signup/signup.types";
-import { cn } from "@/utils/cn";
 
 import CheckOff from "@/assets/icons/check_off.svg?react";
 import CheckOn from "@/assets/icons/check_on.svg?react";

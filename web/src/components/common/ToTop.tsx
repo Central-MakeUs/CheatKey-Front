@@ -1,8 +1,8 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import { createPortal } from "react-dom";
 
-import { throttle } from "@/utils/throttle";
+import { useThrottle } from "@/hooks/useThrottle";
 
 import ToTopIcon from "@/assets/icons/arrow_up.svg?react";
 
@@ -15,20 +15,18 @@ export const ToTop = ({ bottom = "7rem", scrollContainerRef }: ToTopProps) => {
   const [isToTopButtonVisible, setIsToTopButtonVisible] = useState(false);
   const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 
-  const throttledScrollHandler = useMemo(
-    () =>
-      throttle(() => {
-        let isScrolled = false;
+  const scrollHandler = useCallback(() => {
+    let isScrolled = false;
 
-        if (scrollContainerRef?.current) {
-          isScrolled = scrollContainerRef.current.scrollTop > 0;
-        } else {
-          isScrolled = window.scrollY > 0;
-        }
-        setIsToTopButtonVisible(isScrolled);
-      }, 200),
-    [scrollContainerRef],
-  );
+    if (scrollContainerRef?.current) {
+      isScrolled = scrollContainerRef.current.scrollTop > 0;
+    } else {
+      isScrolled = window.scrollY > 0;
+    }
+    setIsToTopButtonVisible(isScrolled);
+  }, [scrollContainerRef]);
+
+  const throttledScrollHandler = useThrottle(scrollHandler, 200);
 
   const handleToTopButtonClick = () => {
     const target = scrollContainerRef?.current || window;

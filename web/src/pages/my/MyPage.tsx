@@ -4,18 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { path } from "@/routes/path";
-
 import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
 import { getMypageDashboard } from "@/apis/my/getMypageDashboard";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
 import { MyAccount } from "@/components/my/MyAccount";
 import { MyMenuItem } from "@/components/my/MyMenuItem";
 import { MyProfile } from "@/components/my/MyProfile";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 import AddIcon from "@/assets/icons/add.svg?react";
 import AnalysisIcon from "@/assets/icons/analysis.svg?react";
@@ -41,15 +40,11 @@ export const MyPage = () => {
   });
 
   if (isDashboardLoading || isPostsLoading || !myInfo || !myPosts) {
-    return (
-      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner width={32} height={32} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
-    <div className="safearea bg-bg-100 relative h-screen">
+    <div className="safearea page bg-bg-100">
       <AppHeader title="My" onNotification={() => {}} className="bg-bg-100" />
       <div className="px-5">
         <MyProfile myInfo={myInfo.userInfo} />
@@ -59,7 +54,7 @@ export const MyPage = () => {
         </div>
 
         <button
-          onClick={() => navigate(path.community.write)}
+          onClick={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.WRITE)}
           className="text-primary-400 active:bg-primary-0 mt-[0.8125rem] flex h-[50px] w-full items-center justify-center gap-1 rounded-xl border"
           aria-label="글 작성하기"
         >
@@ -72,7 +67,7 @@ export const MyPage = () => {
             icon={<WriteIcon className="h-6 w-6" />}
             label="작성글 보기"
             type="link"
-            onClick={() => navigate(path.my.posts)}
+            onClick={() => navigate(PAGE_PATH.MY.SPECIFIC.POSTS)}
             className="rounded-t-xl"
             aria-label="작성글 보기"
           />
@@ -92,14 +87,14 @@ export const MyPage = () => {
             icon={<AnalysisIcon />}
             label="분석 내역 보기"
             type="link"
-            onClick={() => navigate(path.my.analysis)}
+            onClick={() => navigate(PAGE_PATH.MY.SPECIFIC.ANALYSIS)}
             aria-label="분석 내역 보기"
           />
           <MyMenuItem
             icon={<TermsIcon />}
             label="이용약관"
             type="link"
-            onClick={() => navigate(path.my.terms)}
+            onClick={() => navigate(PAGE_PATH.MY.SPECIFIC.TERMS)}
             className="rounded-b-xl"
             aria-label="이용약관"
           />

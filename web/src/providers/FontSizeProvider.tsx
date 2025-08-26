@@ -1,11 +1,9 @@
-import { createContext, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
-interface FontSizeContextType {
-  isFontSizeLarge: boolean;
-  toggleFontSize: () => void;
-}
-
-export const FontSizeContext = createContext<FontSizeContextType | null>(null);
+import {
+  FontSizeContext,
+  type FontSizeContextType,
+} from "@/contexts/FontSizeContext";
 
 export const FontSizeProvider = ({ children }: { children: ReactNode }) => {
   const [isFontSizeLarge, setIsFontSizeLarge] = useState(false);
@@ -14,7 +12,10 @@ export const FontSizeProvider = ({ children }: { children: ReactNode }) => {
     setIsFontSizeLarge((prev) => !prev);
   };
 
-  const value = { isFontSizeLarge, toggleFontSize };
+  const value: FontSizeContextType = {
+    isFontSizeLarge,
+    toggleFontSize,
+  };
 
   return (
     <FontSizeContext.Provider value={value}>

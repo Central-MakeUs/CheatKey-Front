@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
 import { useToast } from "@/hooks/useToast";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
 import { NoResult } from "@/components/common/NoResult";
 import { Toast } from "@/components/common/Toast";
@@ -32,13 +32,11 @@ export const MyPostsPage = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   if (isPostsLoading) {
-    <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-      <LoadingSpinner width={32} height={32} />
-    </div>;
+    <LoadingScreen />;
   }
 
   return (
-    <div className="safearea layout bg-bg-100 flex h-screen flex-col">
+    <div className="safearea page bg-bg-100">
       <AppHeader
         title="작성글 보기"
         onPrev={() => navigate(-1)}

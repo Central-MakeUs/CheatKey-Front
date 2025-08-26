@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 interface CategoryTagGroupProps<T extends string> {
   tags: readonly T[];

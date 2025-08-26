@@ -4,8 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { path } from "@/routes/path";
-
 import { getCommentList } from "@/apis/comment/getCommentList";
 import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
@@ -16,7 +14,7 @@ import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation
 import { usePostMenu } from "@/hooks/usePostMenu";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { ConfirmModal } from "@/components/common/ConfirmModal";
@@ -27,6 +25,7 @@ import { CommentSection } from "@/components/communityDetail/CommentSection";
 import { CommunityPostContent } from "@/components/communityDetail/CommunityPostContent";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 export const CommunityDetail = () => {
   const navigate = useNavigate();
@@ -106,7 +105,7 @@ export const CommunityDetail = () => {
     showReportComplete,
     close,
   } = usePostMenu({
-    onReportComplete: () => navigate(path.community.feed),
+    onReportComplete: () => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.FEED),
   });
 
   const { mutate: blockUser } = useBlockUserMutation([
@@ -142,16 +141,12 @@ export const CommunityDetail = () => {
   }, [selectedCommentId]);
 
   if (isPostDetailLoading || isCommentListLoading) {
-    return (
-      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (isPostDetailError || isCommentListError || !postDetail) {
     return (
-      <div className="bg-bg-100 safearea flex h-screen flex-col">
+      <div className="bg-bg-100 safearea flex h-screen w-full flex-1 flex-col">
         <AppHeader
           title="오류"
           onPrev={() => navigate(-1)}
@@ -175,7 +170,7 @@ export const CommunityDetail = () => {
   }
 
   return (
-    <div className="bg-bg-100 safearea layout flex h-screen flex-col">
+    <div className="safearea page bg-bg-100">
       <AppHeader
         title={`${postDetail?.authorNickname}님의 글`}
         onPrev={() => navigate(-1)}

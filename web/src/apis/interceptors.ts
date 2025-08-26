@@ -5,10 +5,10 @@ import type {
   AxiosResponse,
 } from "axios";
 
-import { path } from "@/routes/path";
-
 import { bridge } from "@/bridge";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/stores/useAuthStore";
+
+import { PAGE_PATH } from "@/constants/path";
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retryCount?: number;
@@ -88,7 +88,7 @@ export const onResponseError = async (
       useAuthStore.getState().clearAccessToken();
       processQueue(refreshError as AxiosError, null);
 
-      window.location.href = path.auth.login;
+      window.location.href = PAGE_PATH.AUTH.LOGIN;
       return Promise.reject(refreshError);
     } finally {
       isRefreshing = false;

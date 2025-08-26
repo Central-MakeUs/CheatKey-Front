@@ -1,6 +1,6 @@
 import { authAPI } from "@/apis/instance";
 import type { PostStatus } from "@/types/community/community.types";
-import { generateApiPath } from "@/utils/generateApiPath";
+import { generatePath } from "@/utils/generatePath";
 
 import { API_DOMAINS } from "@/constants/apiConstants";
 
@@ -25,7 +25,7 @@ export const getCommunityDetail = async ({
   postId: number;
 }): Promise<PostDetailResponse> => {
   const response = await authAPI.get(
-    generateApiPath(API_DOMAINS.GET_COMMUNITY_DETAIL, { postId }),
+    generatePath(API_DOMAINS.GET_COMMUNITY_DETAIL, { postId }),
   );
   return response.data;
 };

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { createPortal } from "react-dom";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 
 import AlertIcon from "@/assets/icons/alert.svg?react";
 import CheckOnIcon from "@/assets/icons/check_on.svg?react";

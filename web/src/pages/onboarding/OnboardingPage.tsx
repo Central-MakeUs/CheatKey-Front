@@ -4,12 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { path } from "@/routes/path";
-
 import { bridge } from "@/bridge";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
-import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
+import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSignupButton } from "@/components/common/BottomSignupButton";
 import { PageIndicator } from "@/components/common/PageIndicator";
@@ -20,6 +18,7 @@ import {
   ONBOARDING_CONSTANTS,
   ONBOARDING_TOTAL_STEP,
 } from "@/constants/onboardingConstants";
+import { PAGE_PATH } from "@/constants/path";
 
 const onboardingImageUrls = Object.values(ONBOARDING_CONSTANTS).map(
   (content) => content.image,
@@ -46,15 +45,11 @@ export const OnboardingPage = () => {
 
   const handleCompleteOnboarding = async () => {
     await bridge.completeOnboarding();
-    navigate(path.auth.login);
+    navigate(PAGE_PATH.AUTH.LOGIN);
   };
 
   if (!imagesLoaded) {
-    return (
-      <div className="bg-bg-100 flex h-screen w-screen items-center justify-center">
-        <LoadingSpinner width={32} height={32} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   const currentContent =
@@ -63,7 +58,7 @@ export const OnboardingPage = () => {
   const isLastStep = stepState === ONBOARDING_TOTAL_STEP;
 
   return (
-    <div className="safearea bg-bg-100 relative flex h-screen w-full flex-1 flex-col justify-center">
+    <div className="safearea page bg-bg-100 justify-center">
       <div className="relative flex w-full flex-1">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
