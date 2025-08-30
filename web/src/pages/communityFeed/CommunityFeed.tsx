@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
@@ -60,6 +60,7 @@ export const CommunityFeed = () => {
         size: 20,
       }),
     staleTime: 60 * 1000,
+    placeholderData: keepPreviousData,
   });
 
   const {
