@@ -88,7 +88,7 @@ export const CommunityFeed = () => {
         onNotification={() => console.log("🚨알림 클릭됨")}
         className="bg-bg-100"
       />
-      <div className="pt-header h-screen overflow-y-auto px-5 pb-20">
+      <div className="pt-header flex flex-1 flex-col overflow-y-auto px-5 pb-20">
         <SearchBarRedirect placeholder="사기 사례를 검색해주세요." />
         <CommunityFeedTab
           activeTab={selectedCategory}
