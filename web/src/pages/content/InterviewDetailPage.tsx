@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { FontSizeProvider } from "@/providers/FontSizeProvider";
+import { FontSizeProvider } from "@/contexts/FontSizeContext";
 
 import { ToTop } from "@/components/common/ToTop";
 import { ContentDetailHeader } from "@/components/content/ContentDetailHeader";
@@ -24,7 +24,7 @@ const InterviewDetailContent = () => {
   }
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <ContentDetailHeader />
       <div ref={scrollRef} className="flex flex-1 flex-col overflow-y-auto">
         <ContentDetailTitle
@@ -43,7 +43,7 @@ const InterviewDetailContent = () => {
         />
       </div>
       <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
-    </div>
+    </>
   );
 };
 

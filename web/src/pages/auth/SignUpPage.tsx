@@ -103,7 +103,7 @@ export const SignUpPage = () => {
   }
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       {stepState > 0 && (
         <>
           <AppHeader
@@ -199,6 +199,6 @@ export const SignUpPage = () => {
         title={selectedTerm?.title ?? ""}
         content={selectedTerm?.content ?? ""}
       />
-    </div>
+    </>
   );
 };

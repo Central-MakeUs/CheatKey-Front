@@ -1,7 +1,10 @@
+import { useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
+import { useBackgroundColor } from "@/contexts/BackgroundColorContext";
 import { cn } from "@/lib/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
@@ -17,15 +20,25 @@ import Close from "@/assets/icons/close.svg?react";
 export const AnalyzeUnknownPage = () => {
   const navigate = useNavigate();
 
+  const { setBgColor } = useBackgroundColor();
+
   const category = "NORMAL";
   const status = "UNKNOWN";
 
   const currentData = ALL_ANALYSIS_DATA[category][status];
   const { style } = currentData;
 
+  useEffect(() => {
+    setBgColor(style.background);
+
+    return () => {
+      setBgColor("bg-bg-100");
+    };
+  }, [setBgColor, style]);
+
   return (
     <motion.div
-      className={cn("safearea page", style.background)}
+      className={cn("flex flex-1 flex-col")}
       variants={STAGGER_CONTAINER}
       initial="hidden"
       animate="visible"

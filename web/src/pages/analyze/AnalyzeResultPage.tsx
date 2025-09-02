@@ -1,9 +1,12 @@
+import { useEffect } from "react";
+
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 
 import { getAnalyzeResult } from "@/apis/analyze/getAnalyzeResult";
+import { useBackgroundColor } from "@/contexts/BackgroundColorContext";
 import { cn } from "@/lib/cn";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
 
@@ -24,6 +27,8 @@ export const AnalyzeResultPage = () => {
   const location = useLocation();
   const { analyzeId } = useParams<{ analyzeId: string }>();
 
+  const { setBgColor } = useBackgroundColor();
+
   const { data: analyzeResultData, isLoading: isAnalyzeResultDataLoading } =
     useQuery({
       queryKey: [QUERY_KEYS.GET_DETECTION_RESULT, analyzeId],
@@ -42,19 +47,31 @@ export const AnalyzeResultPage = () => {
   const responseData = (location.state ||
     analyzeResultData) as AnalyzeResponse | null;
 
+  useEffect(() => {
+    if (responseData) {
+      const style =
+        ALL_ANALYSIS_DATA[responseData.group]?.[responseData.status]?.style;
+
+      if (style) {
+        setBgColor(style.background);
+      }
+    }
+
+    return () => {
+      setBgColor("bg-bg-100");
+    };
+  }, [setBgColor, responseData]);
+
   if (isAnalyzeResultDataLoading || !responseData) {
     return <LoadingScreen />;
   }
 
-  const category = responseData.group;
-  const status = responseData.status;
-
-  const currentData = ALL_ANALYSIS_DATA[category][status];
-  const { style } = currentData;
+  const currentData =
+    ALL_ANALYSIS_DATA[responseData.group]?.[responseData.status];
 
   return (
     <motion.div
-      className={cn("safearea page", style.background)}
+      className={cn("flex flex-1 flex-col overflow-y-auto")}
       variants={STAGGER_CONTAINER}
       initial="hidden"
       animate="visible"

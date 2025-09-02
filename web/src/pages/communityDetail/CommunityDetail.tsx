@@ -146,7 +146,7 @@ export const CommunityDetail = () => {
 
   if (isPostDetailError || isCommentListError || !postDetail) {
     return (
-      <div className="bg-bg-100 safearea flex h-screen w-full flex-1 flex-col">
+      <>
         <AppHeader
           title="오류"
           onPrev={() => navigate(-1)}
@@ -165,12 +165,12 @@ export const CommunityDetail = () => {
             뒤로 가기
           </button>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <AppHeader
         title={`${postDetail?.authorNickname}님의 글`}
         onPrev={() => navigate(-1)}
@@ -281,6 +281,6 @@ export const CommunityDetail = () => {
           onConfirm={close}
         />
       )}
-    </div>
+    </>
   );
 };

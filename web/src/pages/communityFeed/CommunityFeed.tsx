@@ -49,7 +49,7 @@ export const CommunityFeed = () => {
     selectedSortOption,
   ];
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: communityPostsQueryKey,
     queryFn: () =>
       getCommunityPosts({
@@ -82,7 +82,7 @@ export const CommunityFeed = () => {
   };
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <AppHeader
         title="커뮤니티"
         onWrite={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.WRITE)}
@@ -99,11 +99,10 @@ export const CommunityFeed = () => {
           selectedSortOption={selectedSortOption}
           onSelect={setSelectedSortOption}
         />
-        {/* isError 에러 처리 */}
 
         {isLoading && <LoadingSpinner width={16} height={16} />}
 
-        {!isLoading && !isError && data && (
+        {!isLoading && data && (
           <>
             {data.content.length === 0 ? (
               <div className="flex flex-col items-center">
@@ -179,6 +178,6 @@ export const CommunityFeed = () => {
           onConfirm={close}
         />
       )}
-    </div>
+    </>
   );
 };

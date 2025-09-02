@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { bridge } from "@/bridge";
-import { useFontSize } from "@/hooks/useFontSize";
+import { useFontSize } from "@/contexts/FontSizeContext";
 import { cn } from "@/lib/cn";
 import { getPlatform } from "@/utils/getPlatform";
 

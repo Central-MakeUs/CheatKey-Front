@@ -36,11 +36,3 @@ export interface CommunityWriteFormState {
   content: string;
   images: UploadedImage[];
 }
-
-//커뮤니티 글 작성 유효성
-export type CommunityWriteValidationError = {
-  titleTooShort: boolean;
-  contentTooShort: boolean;
-  boardEmpty: boolean;
-  imageTooLarge: boolean;
-};

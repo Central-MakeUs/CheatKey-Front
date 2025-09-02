@@ -31,17 +31,21 @@ export const MyAnalysisPage = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <AppHeader
         onPrev={() => navigate(-1)}
         title="분석 내역 보기"
         className="bg-bg-100"
       />
-      <div className="overflow-hidden overflow-y-auto pt-11">
-        <MyAnalysisPageTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      <MyAnalysisPageTab
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        className="pt-header"
+      />
+      <div className="overflow-hidden overflow-y-auto">
         <MyAnalysisList period={period} />
       </div>
       <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
-    </div>
+    </>
   );
 };
