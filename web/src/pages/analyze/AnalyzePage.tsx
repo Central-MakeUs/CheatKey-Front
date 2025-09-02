@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+
+import { useBackgroundColor } from "@/contexts/BackgroundColorContext";
 import { useAnalyzePage } from "@/hooks/useAnalyzePage";
 
 import { AnalyzeLoading } from "@/components/analyze/AnalyzeLoading";
@@ -10,6 +13,7 @@ import { Toast } from "@/components/common/Toast";
 import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 
 export const AnalyzePage = () => {
+  const { setBgColor } = useBackgroundColor();
   const {
     activeTab,
     inputValue,
@@ -26,12 +30,21 @@ export const AnalyzePage = () => {
     toastInfo,
   } = useAnalyzePage();
 
+  useEffect(() => {
+    setBgColor(
+      "bg-gradient-to-b from-[rgba(11,49,255,0.3)] via-[rgba(31,32,47,0)] via-45% to-[rgba(11,49,255,0.09)]",
+    );
+    return () => {
+      setBgColor("bg-bg-100");
+    };
+  }, [setBgColor]);
+
   if (isAnalyzePending || isAnalyzeSuccess) {
     return <AnalyzeLoading />;
   }
 
   return (
-    <div className="safearea page items-center bg-linear-[180deg,rgba(0,40,255,0.2)_0%,rgba(34,68,109,0.1)_30%,rgba(34,68,109,0.1)_78.11%,rgba(23,40,134,0.2)_100%] px-5">
+    <div className="flex flex-1 flex-col items-center px-5">
       <AppHeader title="분석하기" onPrev={handleNavigateBack} />
       <div className="mt-header flex w-full justify-center pt-3">
         <TabSwitcher

@@ -35,7 +35,7 @@ export const ContentListPage = () => {
   const currentData = contentDataByCategory[articleCategory];
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <AppHeader title="콘텐츠" onNotification={() => console.log("알림")} />
       <main className="flex-1 overflow-hidden">
         <CategoryTagGroup
@@ -82,6 +82,6 @@ export const ContentListPage = () => {
           </motion.div>
         </AnimatePresence>
       </main>
-    </div>
+    </>
   );
 };

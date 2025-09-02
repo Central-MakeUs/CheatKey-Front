@@ -8,10 +8,7 @@
 }
 @layer components {
   .layout {
-    @apply bg-bg-100 mx-auto flex h-full min-h-dvh max-w-3xl flex-col overflow-x-hidden overflow-y-auto;
-  }
-  .page {
-    @apply relative flex h-screen w-full flex-col overflow-y-auto;
+    @apply relative mx-auto flex h-screen w-full max-w-3xl flex-col overflow-x-hidden overflow-y-auto;
   }
   .safearea {
     padding-top: var(--safe-area-inset-top);
@@ -44,6 +41,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    margin: 0;
+    padding: 0;
   }
 
   a {

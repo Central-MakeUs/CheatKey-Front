@@ -36,7 +36,7 @@ export const MyPostsPage = () => {
   }
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <AppHeader
         title="작성글 보기"
         onPrev={() => navigate(-1)}
@@ -73,6 +73,6 @@ export const MyPostsPage = () => {
       </div>
       <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
       {toastMessage && <Toast text={toastMessage} icon="check" position="ai" />}
-    </div>
+    </>
   );
 };

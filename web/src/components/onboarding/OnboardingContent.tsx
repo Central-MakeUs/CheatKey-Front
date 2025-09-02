@@ -18,7 +18,7 @@ export const OnboardingContent = ({
           {subTitle}
         </h2>
       </div>
-      <img src={image} className="h-auto w-full max-w-2xl" />
+      <img src={image} className="h-auto w-full max-w-xl" />
     </div>
   );
 };

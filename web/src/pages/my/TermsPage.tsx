@@ -20,7 +20,7 @@ export const TermsPage = () => {
   // TODO: @Ki-Tak 추후, 서버 연동
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <AppHeader
         title="이용약관"
         onPrev={() => {
@@ -43,6 +43,6 @@ export const TermsPage = () => {
         />
       </div>
       <ToTop bottom="2rem" scrollContainerRef={scrollRef} />
-    </div>
+    </>
   );
 };

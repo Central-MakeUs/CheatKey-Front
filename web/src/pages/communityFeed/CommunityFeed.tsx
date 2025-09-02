@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
@@ -49,7 +49,7 @@ export const CommunityFeed = () => {
     selectedSortOption,
   ];
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: communityPostsQueryKey,
     queryFn: () =>
       getCommunityPosts({
@@ -60,6 +60,7 @@ export const CommunityFeed = () => {
         size: 20,
       }),
     staleTime: 60 * 1000,
+    placeholderData: keepPreviousData,
   });
 
   const {
@@ -81,14 +82,14 @@ export const CommunityFeed = () => {
   };
 
   return (
-    <div className="safearea page bg-bg-100">
+    <>
       <AppHeader
         title="커뮤니티"
         onWrite={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.WRITE)}
         onNotification={() => console.log("🚨알림 클릭됨")}
         className="bg-bg-100"
       />
-      <div className="pt-header h-screen overflow-y-auto px-5 pb-20">
+      <div className="pt-header flex flex-1 flex-col overflow-y-auto px-5 pb-20">
         <SearchBarRedirect placeholder="사기 사례를 검색해주세요." />
         <CommunityFeedTab
           activeTab={selectedCategory}
@@ -98,11 +99,10 @@ export const CommunityFeed = () => {
           selectedSortOption={selectedSortOption}
           onSelect={setSelectedSortOption}
         />
-        {/* isError 에러 처리 */}
 
         {isLoading && <LoadingSpinner width={16} height={16} />}
 
-        {!isLoading && !isError && data && (
+        {!isLoading && data && (
           <>
             {data.content.length === 0 ? (
               <div className="flex flex-col items-center">
@@ -178,6 +178,6 @@ export const CommunityFeed = () => {
           onConfirm={close}
         />
       )}
-    </div>
+    </>
   );
 };

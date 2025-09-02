@@ -5,15 +5,17 @@ import { MY_ANALYSIS_PAGE_TABS } from "@/constants/myAnalysisPageTabs";
 interface MyAnalysisPageTabProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  className?: string;
 }
 
 export const MyAnalysisPageTab = ({
   activeTab,
   setActiveTab,
+  className,
 }: MyAnalysisPageTabProps) => {
   return (
     //TODO: @tifsy 커뮤니티 피드랑 이 페이지 탭 컴포넌트화
-    <div className="mx-5">
+    <div className={cn("mx-5", className)}>
       <div className="flex w-full justify-between">
         {MY_ANALYSIS_PAGE_TABS.map((tab) => {
           const isActive = activeTab === tab;

@@ -1,4 +1,4 @@
-import { useFontSize } from "@/hooks/useFontSize";
+import { useFontSize } from "@/contexts/FontSizeContext";
 import { cn } from "@/lib/cn";
 import type {
   ContentCategory,

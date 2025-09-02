@@ -111,13 +111,13 @@ export const CommunityWrite = () => {
   };
 
   return (
-    <div className="safearea page bg-bg-100 pb-5">
+    <>
       <AppHeader
         onPrev={handleBack}
         title="글 작성하기"
         className="bg-bg-100"
       />
-      <div className="justify mx-5 mt-[4.6875rem] flex h-full flex-col gap-y-6">
+      <div className="mt-[4.6875rem] flex h-full flex-col gap-y-6 px-5 pb-5">
         <TitleForm
           title={form.title}
           onChange={(value) => updateForm("title", value)}
@@ -176,6 +176,6 @@ export const CommunityWrite = () => {
           />
         )}
       </div>
-    </div>
+    </>
   );
 };

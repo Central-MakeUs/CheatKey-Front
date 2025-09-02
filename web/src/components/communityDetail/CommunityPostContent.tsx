@@ -70,7 +70,9 @@ export const CommunityPostContent = ({
 
         <div className="text-gray-system-100 body-1-bold">{title}</div>
 
-        <p className="text-gray-system-400 body-5-regular">{content}</p>
+        <p className="text-gray-system-400 body-5-regular whitespace-pre-line">
+          {content}
+        </p>
 
         {images.length > 0 && (
           <div

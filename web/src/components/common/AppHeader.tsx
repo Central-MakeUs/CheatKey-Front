@@ -21,7 +21,7 @@ export const AppHeader = ({
   className,
 }: AppHeaderProps) => {
   return (
-    <header className={cn("fixed z-10 w-full max-w-3xl py-2", className)}>
+    <header className={cn("absolute z-10 w-full max-w-3xl py-2", className)}>
       <div className="absolute top-1/2 left-5 flex -translate-y-1/2 items-center">
         {onPrev && (
           <button
