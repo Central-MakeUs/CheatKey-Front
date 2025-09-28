@@ -29,13 +29,12 @@ export const CommentItem = ({
   return (
     <>
       <div
-        onClick={handleSelect}
         className={cn(
-          "px-5 py-3.5",
+          "flex flex-col gap-2.5 px-5 py-3.5",
           isSelected ? "bg-gray-system-800" : "bg-bg-100",
         )}
       >
-        <div className="mb-2.5 flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <div className="flex items-center">
             <img
               src={TemporaryProfilePic}
@@ -68,6 +67,17 @@ export const CommentItem = ({
           )}
         </div>
         <p className="body-5-regular text-gray-system-500">{comment.content}</p>
+        <div className="flex h-7.5 w-full justify-end">
+          {!comment.canDelete && (
+            <button
+              type="button"
+              className="caption-1-medium text-gray-system-600 px-2 py-1"
+              onClick={handleSelect}
+            >
+              답글 달기
+            </button>
+          )}
+        </div>
       </div>
 
       {comment.children?.length > 0 && (
