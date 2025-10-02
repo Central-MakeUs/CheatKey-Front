@@ -55,6 +55,8 @@ export const ReplyCommentItem = ({
           )}
         </div>
         <p className="body-5-regular text-gray-system-500">{reply.content}</p>
+        {/** 추후, 언급하기 기능 추가시 변경 예정 */}
+        <div className="flex h-7.5 w-full justify-end" />
       </div>
     </div>
   );

@@ -68,15 +68,13 @@ export const CommentItem = ({
         </div>
         <p className="body-5-regular text-gray-system-500">{comment.content}</p>
         <div className="flex h-7.5 w-full justify-end">
-          {!comment.canDelete && (
-            <button
-              type="button"
-              className="caption-1-medium text-gray-system-600 px-2 py-1"
-              onClick={handleSelect}
-            >
-              답글 달기
-            </button>
-          )}
+          <button
+            type="button"
+            className="caption-1-medium text-gray-system-600 px-2 py-1"
+            onClick={handleSelect}
+          >
+            답글 달기
+          </button>
         </div>
       </div>
 
