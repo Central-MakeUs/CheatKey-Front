@@ -5,32 +5,32 @@ import {
 } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 
-import { postBlock } from "@/apis/community/postBlock";
+import { postReportComment } from "@/apis/community/postReportComment";
 
-interface UseBlockUserMutationOptions {
+interface UseReportCommentMutationOptions {
   queryKeyToInvalidate: QueryKey;
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useBlockUserMutation = ({
+export const useReportCommentMutation = ({
   queryKeyToInvalidate,
   onSuccess,
   onError,
-}: UseBlockUserMutationOptions) => {
+}: UseReportCommentMutationOptions) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postBlock,
+    mutationFn: postReportComment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeyToInvalidate });
       onSuccess?.();
     },
     onError: (error) => {
       if (isAxiosError(error) && error.response?.status === 400) {
-        alert("본인은 차단할 수 없습니다.");
+        alert("이미 신고한 댓글이거나 본인은 신고할 수 없습니다.");
       } else {
-        alert("사용자 차단에 실패하였습니다. 잠시 후 다시 시도해주세요.");
+        alert("사용자 신고에 실패하였습니다. 잠시 후 다시 시도해주세요.");
       }
       onError?.(error);
     },

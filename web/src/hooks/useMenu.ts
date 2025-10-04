@@ -1,52 +1,63 @@
 import { useState } from "react";
 
-type MenuType =
+export type MenuType =
   | "closed"
-  | "menu"
+  | "postMenu"
+  | "commentMenu"
   | "block"
-  | "report"
+  | "reportPost"
+  | "reportComment"
   | "reportComplete"
   | "deletePost"
   | "deleteComment";
 
-interface UsePostMenuOptions {
-  onReportComplete?: () => void;
-}
-
-export const usePostMenu = (options?: UsePostMenuOptions) => {
+export const useMenu = () => {
   const [menuState, setMenuState] = useState<{
     type: MenuType;
     id: number | null;
   }>({ type: "closed", id: null });
 
-  const openMenu = (id: number) => setMenuState({ type: "menu", id });
+  const openPostMenu = (id: number) => setMenuState({ type: "postMenu", id });
+
+  const openCommentMenu = (id: number) =>
+    setMenuState({ type: "commentMenu", id });
+
   const openBlockConfirm = (id: number) => setMenuState({ type: "block", id });
-  const openReportSheet = (id: number) => setMenuState({ type: "report", id });
+
+  const openReportPostSheet = (id: number) =>
+    setMenuState({ type: "reportPost", id });
+
+  const openReportCommentSheet = (id: number) =>
+    setMenuState({ type: "reportComment", id });
+
   const openPostDeleteConfirm = (id: number) =>
     setMenuState({
       type: "deletePost",
       id,
     });
+
   const openCommentDeleteConfirm = (id: number) =>
     setMenuState({
       type: "deleteComment",
       id,
     });
+
   const showReportComplete = () => {
     setMenuState({ type: "reportComplete", id: null });
-    options?.onReportComplete?.();
   };
+
   const close = () => setMenuState({ type: "closed", id: null });
 
   return {
     menuState,
-    openMenu,
+    openPostMenu,
+    openCommentMenu,
     openBlockConfirm,
-    openReportSheet,
+    openReportPostSheet,
+    openReportCommentSheet,
     openPostDeleteConfirm,
     openCommentDeleteConfirm,
     showReportComplete,
-
     close,
   };
 };

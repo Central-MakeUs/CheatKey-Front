@@ -2,6 +2,7 @@ import { cn } from "@/lib/cn";
 import type { Comment } from "@/types/community/community.types";
 import { formatDetailDate } from "@/utils/formatUTCtoKR";
 
+import { MenuButton } from "@/components/common/MenuButton";
 import { NameTag } from "@/components/common/NameTag";
 import { ReplyCommentItem } from "@/components/communityDetail/ReplyCommentItem";
 
@@ -13,6 +14,7 @@ interface CommentItemProps {
   isSelected: boolean;
   onSelect: () => void;
   onDelete: (commentId: number) => void;
+  onOpenMenu: (commentId: number) => void;
 }
 
 export const CommentItem = ({
@@ -20,6 +22,7 @@ export const CommentItem = ({
   isSelected,
   onSelect,
   onDelete,
+  onOpenMenu,
 }: CommentItemProps) => {
   const handleSelect = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -52,7 +55,7 @@ export const CommentItem = ({
             </p>
           </div>
 
-          {comment.canDelete && (
+          {comment.canDelete ? (
             <button
               onClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
@@ -64,6 +67,8 @@ export const CommentItem = ({
             >
               <RemoveIcon className="h-full w-full" />
             </button>
+          ) : (
+            <MenuButton id={comment.id} onOpenMenu={onOpenMenu} />
           )}
         </div>
         <p className="body-5-regular text-gray-system-500">{comment.content}</p>

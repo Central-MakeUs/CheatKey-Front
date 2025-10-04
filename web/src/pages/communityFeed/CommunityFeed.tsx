@@ -6,13 +6,13 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
 import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
-import { usePostMenu } from "@/hooks/usePostMenu";
+import { useMenu } from "@/hooks/useMenu";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { ConfirmModal } from "@/components/common/ConfirmModal";
-import { ReportPostSheet } from "@/components/common/ReportPostSheet";
+import { ReportSheet } from "@/components/common/ReportSheet";
 import { SearchBarRedirect } from "@/components/common/SearchBarRedirect";
 import { SelectBox } from "@/components/common/SelectBox";
 import { ToTop } from "@/components/common/ToTop";
@@ -65,14 +65,16 @@ export const CommunityFeed = () => {
 
   const {
     menuState,
-    openMenu,
+    openPostMenu,
     openBlockConfirm,
-    openReportSheet,
+    openReportPostSheet,
     showReportComplete,
     close,
-  } = usePostMenu();
+  } = useMenu();
 
-  const { mutate: blockUser } = useBlockUserMutation(communityPostsQueryKey);
+  const { mutate: blockUser } = useBlockUserMutation({
+    queryKeyToInvalidate: communityPostsQueryKey,
+  });
 
   const handleBlockConfirm = () => {
     if (menuState.id) {
@@ -129,7 +131,7 @@ export const CommunityFeed = () => {
                   <CommunityPostPreview
                     key={post.id}
                     {...post}
-                    onOpenMenu={openMenu}
+                    onOpenMenu={openPostMenu}
                   />
                 ))}
               </div>
@@ -138,17 +140,17 @@ export const CommunityFeed = () => {
         )}
       </div>
       <ToTop scrollContainerRef={scrollRef} />
-      <BottomSheet isOpen={menuState.type === "menu"} onClose={close}>
+      <BottomSheet isOpen={menuState.type === "postMenu"} onClose={close}>
         <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
           <SelectBox
-            type="postMenu"
+            type="menu"
             label="해당 유저 차단하기"
             onClick={() => openBlockConfirm(menuState.id!)}
           />
           <SelectBox
-            type="postMenu"
+            type="menu"
             label="신고하기"
-            onClick={() => openReportSheet(menuState.id!)}
+            onClick={() => openReportPostSheet(menuState.id!)}
           />
         </div>
       </BottomSheet>
@@ -164,9 +166,11 @@ export const CommunityFeed = () => {
         />
       )}
 
-      <ReportPostSheet
-        isOpen={menuState.type === "report"}
-        postId={menuState.id!}
+      <ReportSheet
+        isOpen={menuState.type === "reportPost"}
+        id={menuState.id!}
+        reportType={menuState.type}
+        queryKeyToInvalidate={[communityPostsQueryKey]}
         onClose={close}
         onReportComplete={showReportComplete}
       />

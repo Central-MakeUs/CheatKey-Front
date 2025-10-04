@@ -1,43 +1,61 @@
 import { useState, useEffect } from "react";
 
+import type { QueryKey } from "@tanstack/react-query";
+
+import { useReportCommentMutation } from "@/hooks/mutations/useReportCommentMutation";
 import { useReportPostMutation } from "@/hooks/mutations/useReportPostMutation";
+import type { MenuType } from "@/hooks/useMenu";
 
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { SelectBox } from "@/components/common/SelectBox";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
 import {
   REPORT_REASON_MAP,
   REPORT_REASONS,
   type ReportType,
 } from "@/constants/reportReasons";
 
-interface ReportPostSheetProps {
-  postId: number;
+interface ReportSheetProps {
+  id: number;
   isOpen: boolean;
+  reportType: MenuType;
+  queryKeyToInvalidate: QueryKey[];
   onClose: () => void;
   onReportComplete: () => void;
 }
 
-export const ReportPostSheet = ({
-  postId,
+export const ReportSheet = ({
+  id,
   isOpen,
+  reportType,
+  queryKeyToInvalidate,
   onClose,
   onReportComplete,
-}: ReportPostSheetProps) => {
+}: ReportSheetProps) => {
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
 
-  // TODO: 카테고리 Props로 받아서 초기화 시키기
-  const { mutate: postReport, isPending: isReporting } = useReportPostMutation({
-    queryKeyToInvalidate: [QUERY_KEYS.GET_COMMUNITY_FEED],
-    onSuccess: () => {
-      onClose();
-      setTimeout(() => {
-        onReportComplete();
-      }, 100);
-    },
-  });
+  const { mutate: postReport, isPending: isReportingPost } =
+    useReportPostMutation({
+      queryKeyToInvalidate: queryKeyToInvalidate,
+      onSuccess: () => {
+        onClose();
+        setTimeout(() => {
+          onReportComplete();
+        }, 100);
+      },
+    });
+
+  const { mutate: commentReport, isPending: isReportingComment } =
+    useReportCommentMutation({
+      queryKeyToInvalidate: queryKeyToInvalidate,
+      onSuccess: () => {
+        onClose();
+        setTimeout(() => {
+          onReportComplete();
+        }, 100);
+      },
+    });
 
   const handleSelect = (reason: string) => {
     setSelectedReason((prev) => (prev === reason ? null : reason));
@@ -52,7 +70,11 @@ export const ReportPostSheet = ({
         return;
       }
 
-      postReport({ postId, reasonCode });
+      if (reportType === "reportPost") {
+        postReport({ postId: id, reasonCode });
+      } else if (reportType === "reportComment") {
+        commentReport({ commentId: id, reasonCode });
+      }
     }
   };
 
@@ -87,9 +109,11 @@ export const ReportPostSheet = ({
             />
           ))}
           <BottomFullButton
-            state={!!selectedReason || isReporting}
+            state={!!selectedReason || isReportingPost || isReportingComment}
             onClick={handleReport}
-            content={isReporting ? "신고 중.." : "신고하기"}
+            content={
+              isReportingPost || isReportingComment ? "신고 중.." : "신고하기"
+            }
             className="mt-5"
           />
         </div>

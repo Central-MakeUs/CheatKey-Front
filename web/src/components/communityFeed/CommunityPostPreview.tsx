@@ -6,8 +6,8 @@ import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 import { generatePath } from "@/utils/generatePath";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
+import { MenuButton } from "@/components/common/MenuButton";
 import { NameTag } from "@/components/common/NameTag";
-import { PostMenuButton } from "@/components/common/PostMenuButton";
 
 import { PAGE_PATH } from "@/constants/path";
 
@@ -62,7 +62,7 @@ export const CommunityPostPreview = ({
           </div>
         </div>
 
-        <PostMenuButton postId={id} onOpenMenu={onOpenMenu} />
+        <MenuButton id={id} onOpenMenu={onOpenMenu} />
       </div>
 
       <div className="text-gray-system-100 body-1-bold">{title}</div>
