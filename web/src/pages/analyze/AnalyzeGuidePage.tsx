@@ -14,7 +14,7 @@ export const AnalyzeGuidePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative flex flex-1 flex-col">
+    <div className="relative flex flex-1 flex-col overflow-y-auto">
       <AppHeader title="AI 분석 가이드" onPrev={() => navigate(-1)} />
       <section className="border-b-bg-50 mt-header mb-10 flex w-full flex-col items-center gap-3 border-b px-5 pt-10 pb-9 text-center">
         <mark className="body-1-bold bg-primary-500 text-primary-50 w-fit rounded-md px-2 py-1">
