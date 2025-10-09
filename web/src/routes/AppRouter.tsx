@@ -77,6 +77,10 @@ const AppRouter = createBrowserRouter([
         Component: Pages.AnalyzeUnknownPage,
       },
       {
+        path: PAGE_PATH.ANALYZE.SPECIFIC.GUIDE,
+        Component: Pages.AnalyzeGuidePage,
+      },
+      {
         path: PAGE_PATH.MY.SPECIFIC.EDIT,
         Component: Pages.MyEditPage,
       },

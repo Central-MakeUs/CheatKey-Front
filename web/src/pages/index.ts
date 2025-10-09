@@ -46,6 +46,11 @@ export const AnalyzeUnknownPage = lazy(() =>
     default: module.AnalyzeUnknownPage,
   })),
 );
+export const AnalyzeGuidePage = lazy(() =>
+  import("./analyze/AnalyzeGuidePage").then((module) => ({
+    default: module.AnalyzeGuidePage,
+  })),
+);
 export const ContentListPage = lazy(() =>
   import("./content/ContentListPage").then((module) => ({
     default: module.ContentListPage,

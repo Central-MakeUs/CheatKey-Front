@@ -21,6 +21,7 @@ export const PAGE_PATH = {
     SPECIFIC: {
       RESULT: "/analyze/result/:analyzeId",
       UNKNOWN: "/analyze/result/unknown",
+      GUIDE: "/analyze/guide",
     },
   },
   CONTENT: {
