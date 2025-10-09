@@ -14,7 +14,7 @@ import { generatePath } from "@/utils/generatePath";
 import type { TabCategory } from "@/components/analyze/TabSwitcher";
 import type { ToastIconType } from "@/components/common/Toast";
 
-import { analysisTabsData } from "@/constants/analyze/page/analyzePageConstants";
+import { ANALYZE_TABS_DATA } from "@/constants/analyze/page/analyzePageConstants";
 import { QUERY_KEYS } from "@/constants/apiConstants";
 import { PAGE_PATH } from "@/constants/path";
 
@@ -79,7 +79,7 @@ export const useAnalyzePage = () => {
     setTimeout(() => setToastInfo(null), 3500);
   };
 
-  const currentTabInfo = analysisTabsData.find((tab) => tab.id === activeTab)!;
+  const currentTabInfo = ANALYZE_TABS_DATA.find((tab) => tab.id === activeTab)!;
   const controlledPanelId = "analysis-panel";
   const isButtonEnabled =
     inputValue !== "" && !isAnalyzePending && toastInfo === null;

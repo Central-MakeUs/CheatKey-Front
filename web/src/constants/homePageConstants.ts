@@ -22,7 +22,7 @@ export const HOME_BANNER_DATA: HomeBannerData[] = [
     title: "AI 분석? 커팅이가 알려드려요!",
     content: "5초 안에 분석하는 AI 가이드",
     image: ai_banner,
-    navigate: PAGE_PATH.ANALYZE.BASE,
+    navigate: PAGE_PATH.ANALYZE.SPECIFIC.GUIDE,
   },
 ];
 export const LEVEL_DATA_MAP = new Map<number, { name: string; image: string }>([
