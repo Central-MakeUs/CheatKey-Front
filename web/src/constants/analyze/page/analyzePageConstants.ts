@@ -1,4 +1,4 @@
-export const analysisTabsData = [
+export const ANALYZE_TABS_DATA = [
   {
     id: "url",
     mainHeading: "의심이 가는 URL을 분석합니다.",
