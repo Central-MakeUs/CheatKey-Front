@@ -11,7 +11,11 @@ export type CommunityPost = {
 
 export type PostStatus = "ACTIVE" | "PENDING" | "DELETED";
 
-export type CommentStatus = "ACTIVE" | "DELETED";
+export type CommentStatus =
+  | "ACTIVE"
+  | "DELETED"
+  | "REPORTED"
+  | "BLOCKED_BY_USER";
 
 export type Comment = {
   id: number;
@@ -19,7 +23,7 @@ export type Comment = {
   parentId: number | null;
   authorNickname: string;
   content: string;
-  status: string;
+  status: CommentStatus;
   createdAt: string;
   canDelete: boolean;
   children: Comment[];

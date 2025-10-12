@@ -7,16 +7,20 @@ import CommentReplyIcon from "@/assets/icons/comment_reply.svg?react";
 import RemoveIcon from "@/assets/icons/remove.svg?react";
 import TemporaryProfilePic from "@/assets/images/temporary_profile_pic.png";
 
+import { MenuButton } from "../common/MenuButton";
+
 interface ReplyCommentItemProps {
   reply: Comment;
   isFirst: boolean;
   onDelete: (commentId: number) => void;
+  onOpenMenu: (commentId: number) => void;
 }
 
 export const ReplyCommentItem = ({
   reply,
   isFirst,
   onDelete,
+  onOpenMenu,
 }: ReplyCommentItemProps) => {
   return (
     <div className="flex gap-1 py-3.5">
@@ -40,19 +44,21 @@ export const ReplyCommentItem = ({
               {formatDetailDate(reply.createdAt)}
             </p>
           </div>
-
-          {reply.canDelete && (
-            <button
-              onClick={(e: React.MouseEvent) => {
-                e.stopPropagation();
-                onDelete(reply.id);
-              }}
-              aria-label="답글 삭제하기"
-              className="h-6 w-6"
-            >
-              <RemoveIcon className="h-full w-full" />
-            </button>
-          )}
+          {reply.status === "ACTIVE" &&
+            (reply.canDelete ? (
+              <button
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation();
+                  onDelete(reply.id);
+                }}
+                aria-label="답글 삭제하기"
+                className="h-6 w-6"
+              >
+                <RemoveIcon className="h-full w-full" />
+              </button>
+            ) : (
+              <MenuButton id={reply.id} onOpenMenu={onOpenMenu} />
+            ))}
         </div>
         <p className="body-5-regular text-gray-system-500">{reply.content}</p>
         {/** 추후, 언급하기 기능 추가시 변경 예정 */}

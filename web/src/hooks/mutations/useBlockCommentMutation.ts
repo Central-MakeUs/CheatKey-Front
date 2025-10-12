@@ -5,25 +5,27 @@ import {
 } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 
-import { postBlock } from "@/apis/community/postBlock";
+import { postBlockComment } from "@/apis/community/postBlockComment";
 
-interface UseBlockUserMutationOptions {
-  queryKeyToInvalidate: QueryKey;
+interface UseBlockCommentMutationOptions {
+  queryKeyToInvalidate: QueryKey[];
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useBlockUserMutation = ({
+export const useBlockCommentMutation = ({
   queryKeyToInvalidate,
   onSuccess,
   onError,
-}: UseBlockUserMutationOptions) => {
+}: UseBlockCommentMutationOptions) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postBlock,
+    mutationFn: postBlockComment,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeyToInvalidate });
+      queryKeyToInvalidate.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
       onSuccess?.();
     },
     onError: (error) => {

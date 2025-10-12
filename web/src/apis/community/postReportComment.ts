@@ -12,7 +12,7 @@ export const postReportComment = async ({
   commentId: number;
 }) => {
   const response = await authAPI.post(
-    generatePath(API_DOMAINS.POST_COMMENT_POST, { commentId }),
+    generatePath(API_DOMAINS.POST_REPORT_COMMENT, { commentId }),
     { reasonCode },
   );
   return response.data;

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
-import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
+import { useBlockPostMutation } from "@/hooks/mutations/useBlockPostMutation";
 import { useMenu } from "@/hooks/useMenu";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
@@ -66,19 +66,19 @@ export const CommunityFeed = () => {
   const {
     menuState,
     openPostMenu,
-    openBlockConfirm,
+    openBlockPostConfirm,
     openReportPostSheet,
     showReportComplete,
     close,
   } = useMenu();
 
-  const { mutate: blockUser } = useBlockUserMutation({
-    queryKeyToInvalidate: communityPostsQueryKey,
+  const { mutate: blockPost } = useBlockPostMutation({
+    queryKeyToInvalidate: [communityPostsQueryKey],
   });
 
-  const handleBlockConfirm = () => {
+  const handleBlockPostConfirm = () => {
     if (menuState.id) {
-      blockUser({ postId: menuState.id });
+      blockPost({ postId: menuState.id });
     }
     close();
   };
@@ -145,7 +145,7 @@ export const CommunityFeed = () => {
           <SelectBox
             type="menu"
             label="해당 유저 차단하기"
-            onClick={() => openBlockConfirm(menuState.id!)}
+            onClick={() => openBlockPostConfirm(menuState.id!)}
           />
           <SelectBox
             type="menu"
@@ -155,13 +155,13 @@ export const CommunityFeed = () => {
         </div>
       </BottomSheet>
 
-      {menuState.type === "block" && (
+      {menuState.type === "blockPost" && (
         <ConfirmModal
           title="해당 유저를 차단하시겠어요?"
           description={`차단 시, 이 유저의 게시물을\n더 이상 볼 수 없습니다.`}
           confirmText="차단하기"
           cancelText="취소"
-          onConfirm={handleBlockConfirm}
+          onConfirm={handleBlockPostConfirm}
           onCancel={close}
         />
       )}

@@ -54,22 +54,22 @@ export const CommentItem = ({
               {formatDetailDate(comment.createdAt)}
             </p>
           </div>
-
-          {comment.canDelete ? (
-            <button
-              onClick={(e: React.MouseEvent) => {
-                e.stopPropagation();
-                onDelete(comment.id);
-              }}
-              aria-label="댓글 삭제"
-              type="button"
-              className="h-6 w-6"
-            >
-              <RemoveIcon className="h-full w-full" />
-            </button>
-          ) : (
-            <MenuButton id={comment.id} onOpenMenu={onOpenMenu} />
-          )}
+          {comment.status === "ACTIVE" &&
+            (comment.canDelete ? (
+              <button
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation();
+                  onDelete(comment.id);
+                }}
+                aria-label="댓글 삭제"
+                type="button"
+                className="h-6 w-6"
+              >
+                <RemoveIcon className="h-full w-full" />
+              </button>
+            ) : (
+              <MenuButton id={comment.id} onOpenMenu={onOpenMenu} />
+            ))}
         </div>
         <p className="body-5-regular text-gray-system-500">{comment.content}</p>
         <div className="flex h-7.5 w-full justify-end">
@@ -91,6 +91,7 @@ export const CommentItem = ({
               reply={reply}
               isFirst={index === 0}
               onDelete={onDelete}
+              onOpenMenu={onOpenMenu}
             />
           ))}
         </div>

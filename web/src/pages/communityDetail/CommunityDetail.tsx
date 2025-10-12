@@ -7,7 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getCommentList } from "@/apis/comment/getCommentList";
 import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
-import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
+import { useBlockCommentMutation } from "@/hooks/mutations/useBlockCommentMutation";
+import { useBlockPostMutation } from "@/hooks/mutations/useBlockPostMutation";
 import { useDeleteCommentMutation } from "@/hooks/mutations/useDeleteCommentMutation";
 import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
 import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation";
@@ -98,7 +99,8 @@ export const CommunityDetail = () => {
     menuState,
     openPostMenu,
     openCommentMenu,
-    openBlockConfirm,
+    openBlockPostConfirm,
+    openBlockCommentConfirm,
     openReportPostSheet,
     openReportCommentSheet,
     openPostDeleteConfirm,
@@ -107,13 +109,24 @@ export const CommunityDetail = () => {
     close,
   } = useMenu();
 
-  const { mutate: blockUser } = useBlockUserMutation({
+  const { mutate: blockPost } = useBlockPostMutation({
     queryKeyToInvalidate: [postDetailQueryKey, commentListQueryKey],
   });
 
-  const handleBlockConfirm = () => {
+  const { mutate: blockComment } = useBlockCommentMutation({
+    queryKeyToInvalidate: [postDetailQueryKey, commentListQueryKey],
+  });
+
+  const handleBlockPostConfirm = () => {
     if (menuState.id) {
-      blockUser({ postId: menuState.id });
+      blockPost({ postId: menuState.id });
+    }
+    close();
+  };
+
+  const handleBlockCommentConfirm = () => {
+    if (menuState.id) {
+      blockComment({ commentId: menuState.id });
     }
     close();
   };
@@ -229,7 +242,11 @@ export const CommunityDetail = () => {
               <SelectBox
                 type="menu"
                 label="해당 유저 차단하기"
-                onClick={() => openBlockConfirm(menuState.id!)}
+                onClick={() =>
+                  menuState.type === "postMenu"
+                    ? openBlockPostConfirm(menuState.id!)
+                    : openBlockCommentConfirm(menuState.id!)
+                }
               />
               <SelectBox
                 type="menu"
@@ -244,13 +261,23 @@ export const CommunityDetail = () => {
           )}
         </div>
       </BottomSheet>
-      {menuState.type === "block" && (
+      {menuState.type === "blockPost" && (
         <ConfirmModal
           title="해당 유저를 차단하시겠어요?"
           description={`차단 시, 이 유저의 게시물을\n더 이상 볼 수 없습니다.`}
           confirmText="차단하기"
           cancelText="취소"
-          onConfirm={handleBlockConfirm}
+          onConfirm={handleBlockPostConfirm}
+          onCancel={close}
+        />
+      )}
+      {menuState.type === "blockComment" && (
+        <ConfirmModal
+          title="해당 유저를 차단하시겠어요?"
+          description={`차단 시, 이 유저의 댓글을\n더 이상 볼 수 없으며, 해제할 수 없습니다.`}
+          confirmText="차단하기"
+          cancelText="취소"
+          onConfirm={handleBlockCommentConfirm}
           onCancel={close}
         />
       )}

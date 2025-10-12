@@ -4,7 +4,8 @@ export type MenuType =
   | "closed"
   | "postMenu"
   | "commentMenu"
-  | "block"
+  | "blockPost"
+  | "blockComment"
   | "reportPost"
   | "reportComment"
   | "reportComplete"
@@ -22,7 +23,11 @@ export const useMenu = () => {
   const openCommentMenu = (id: number) =>
     setMenuState({ type: "commentMenu", id });
 
-  const openBlockConfirm = (id: number) => setMenuState({ type: "block", id });
+  const openBlockPostConfirm = (id: number) =>
+    setMenuState({ type: "blockPost", id });
+
+  const openBlockCommentConfirm = (id: number) =>
+    setMenuState({ type: "blockComment", id });
 
   const openReportPostSheet = (id: number) =>
     setMenuState({ type: "reportPost", id });
@@ -52,7 +57,8 @@ export const useMenu = () => {
     menuState,
     openPostMenu,
     openCommentMenu,
-    openBlockConfirm,
+    openBlockPostConfirm,
+    openBlockCommentConfirm,
     openReportPostSheet,
     openReportCommentSheet,
     openPostDeleteConfirm,
