@@ -3,7 +3,6 @@ import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import AppRouter from "@/routes/AppRouter";
-import RouteChangeTracker from "@/routes/RouteChangeTracker";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,7 +20,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={AppRouter} />
-      <RouteChangeTracker />
     </QueryClientProvider>
   );
 }
