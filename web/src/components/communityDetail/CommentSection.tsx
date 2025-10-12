@@ -8,6 +8,7 @@ interface CommentSectionProps {
   selectedCommentId: number | null;
   onSelectComment: (commentId: number) => void;
   onDeleteComment: (commentId: number) => void;
+  onOpenMenu: (commentId: number) => void;
 }
 
 export const CommentSection = ({
@@ -15,6 +16,7 @@ export const CommentSection = ({
   selectedCommentId,
   onSelectComment,
   onDeleteComment,
+  onOpenMenu,
 }: CommentSectionProps) => {
   return (
     <div className="divide-bg-50 mb-25 divide-y">
@@ -31,6 +33,7 @@ export const CommentSection = ({
             isSelected={selectedCommentId === comment.id}
             onSelect={() => onSelectComment(comment.id)}
             onDelete={onDeleteComment}
+            onOpenMenu={onOpenMenu}
           />
         ))
       )}

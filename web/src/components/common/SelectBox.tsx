@@ -6,7 +6,7 @@ import CheckOnIcon from "@/assets/icons/check_on.svg?react";
 import CheckboxOffIcon from "@/assets/icons/checkbox_off.svg?react";
 import CheckboxOnIcon from "@/assets/icons/checkbox_on.svg?react";
 
-type SelectBoxType = "onboarding" | "postMenu" | "reportSheet";
+type SelectBoxType = "onboarding" | "menu" | "reportSheet";
 
 interface SelectBoxProps {
   type: SelectBoxType;
@@ -29,7 +29,7 @@ const SELECT_BOX_CONFIG: Record<
       "bg-primary-0 text-primary-200 border-blue-300 border-[1px] border-primary-400",
     icon: (isSelected) => (isSelected ? <CheckOnIcon /> : <CheckOffIcon />),
   },
-  postMenu: {
+  menu: {
     default: "bg-base-50 text-gray-system-200",
     icon: () => <ArrowRightIcon />,
   },

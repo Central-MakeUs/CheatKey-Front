@@ -2,7 +2,7 @@ import { useImageSlider } from "@/hooks/useImageSlider";
 import { cn } from "@/lib/cn";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
-import { PostMenuButton } from "@/components/common/PostMenuButton";
+import { MenuButton } from "@/components/common/MenuButton";
 import { ImageCloseUpModal } from "@/components/communityDetail/ImageCloseUpModal";
 
 import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
@@ -65,7 +65,7 @@ export const CommunityPostContent = ({
             </div>
           </div>
 
-          <PostMenuButton postId={postId} onOpenMenu={onOpenMenu} />
+          <MenuButton id={postId} onOpenMenu={onOpenMenu} />
         </div>
 
         <div className="text-gray-system-100 body-1-bold">{title}</div>

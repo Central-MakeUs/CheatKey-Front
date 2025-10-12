@@ -65,14 +65,14 @@
   .caption-1-medium {
     font-weight: 500;
     font-size: 0.8125rem; /* 13px */
-    line-height: 1.0625rem;
+    line-height: 1.125rem;
     letter-spacing: 0rem;
   }
 
   .caption-2-regular {
     font-weight: 400;
     font-size: 0.8125rem;
-    line-height: 1.0625rem;
+    line-height: 1.125rem;
     letter-spacing: 0rem;
   }
 }

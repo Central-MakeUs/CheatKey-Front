@@ -7,25 +7,25 @@ import { useQuery } from "@tanstack/react-query";
 import { getCommentList } from "@/apis/comment/getCommentList";
 import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
-import { useBlockUserMutation } from "@/hooks/mutations/useBlockUserMutation";
+import { useBlockCommentMutation } from "@/hooks/mutations/useBlockCommentMutation";
+import { useBlockPostMutation } from "@/hooks/mutations/useBlockPostMutation";
 import { useDeleteCommentMutation } from "@/hooks/mutations/useDeleteCommentMutation";
 import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
 import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation";
-import { usePostMenu } from "@/hooks/usePostMenu";
+import { useMenu } from "@/hooks/useMenu";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { ConfirmModal } from "@/components/common/ConfirmModal";
-import { ReportPostSheet } from "@/components/common/ReportPostSheet";
+import { ReportSheet } from "@/components/common/ReportSheet";
 import { SelectBox } from "@/components/common/SelectBox";
 import { CommentInput } from "@/components/communityDetail/CommentInput";
 import { CommentSection } from "@/components/communityDetail/CommentSection";
 import { CommunityPostContent } from "@/components/communityDetail/CommunityPostContent";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
-import { PAGE_PATH } from "@/constants/path";
 
 export const CommunityDetail = () => {
   const navigate = useNavigate();
@@ -97,25 +97,36 @@ export const CommunityDetail = () => {
 
   const {
     menuState,
-    openMenu,
-    openBlockConfirm,
-    openReportSheet,
+    openPostMenu,
+    openCommentMenu,
+    openBlockPostConfirm,
+    openBlockCommentConfirm,
+    openReportPostSheet,
+    openReportCommentSheet,
     openPostDeleteConfirm,
     openCommentDeleteConfirm,
     showReportComplete,
     close,
-  } = usePostMenu({
-    onReportComplete: () => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.FEED),
+  } = useMenu();
+
+  const { mutate: blockPost } = useBlockPostMutation({
+    queryKeyToInvalidate: [postDetailQueryKey, commentListQueryKey],
   });
 
-  const { mutate: blockUser } = useBlockUserMutation([
-    QUERY_KEYS.GET_COMMUNITY_DETAIL,
-    postId,
-  ]);
+  const { mutate: blockComment } = useBlockCommentMutation({
+    queryKeyToInvalidate: [postDetailQueryKey, commentListQueryKey],
+  });
 
-  const handleBlockConfirm = () => {
+  const handleBlockPostConfirm = () => {
     if (menuState.id) {
-      blockUser({ postId: menuState.id });
+      blockPost({ postId: menuState.id });
+    }
+    close();
+  };
+
+  const handleBlockCommentConfirm = () => {
+    if (menuState.id) {
+      blockComment({ commentId: menuState.id });
     }
     close();
   };
@@ -189,7 +200,7 @@ export const CommunityDetail = () => {
           content={postDetail.content}
           images={postDetail.presignedUrls}
           canDelete={postDetail.canDelete}
-          onOpenMenu={openMenu}
+          onOpenMenu={openPostMenu}
         />
 
         <p className="text-gray-system-400 body-2-medium px-5 py-2.5">
@@ -200,6 +211,7 @@ export const CommunityDetail = () => {
           selectedCommentId={selectedCommentId}
           onSelectComment={handleSelectComment}
           onDeleteComment={openCommentDeleteConfirm}
+          onOpenMenu={openCommentMenu}
         />
       </div>
 
@@ -212,37 +224,60 @@ export const CommunityDetail = () => {
         />
       </div>
 
-      <BottomSheet isOpen={menuState.type === "menu"} onClose={close}>
+      <BottomSheet
+        isOpen={
+          menuState.type === "postMenu" || menuState.type === "commentMenu"
+        }
+        onClose={close}
+      >
         <div className="mx-5 my-[1.875rem] flex flex-col gap-2.5">
-          {postDetail.canDelete ? (
+          {postDetail.canDelete && menuState.type === "postMenu" ? (
             <SelectBox
-              type="postMenu"
+              type="menu"
               label="삭제하기"
               onClick={() => openPostDeleteConfirm(menuState.id!)}
             />
           ) : (
             <>
               <SelectBox
-                type="postMenu"
+                type="menu"
                 label="해당 유저 차단하기"
-                onClick={() => openBlockConfirm(menuState.id!)}
+                onClick={() =>
+                  menuState.type === "postMenu"
+                    ? openBlockPostConfirm(menuState.id!)
+                    : openBlockCommentConfirm(menuState.id!)
+                }
               />
               <SelectBox
-                type="postMenu"
+                type="menu"
                 label="신고하기"
-                onClick={() => openReportSheet(menuState.id!)}
+                onClick={() =>
+                  menuState.type === "postMenu"
+                    ? openReportPostSheet(menuState.id!)
+                    : openReportCommentSheet(menuState.id!)
+                }
               />
             </>
           )}
         </div>
       </BottomSheet>
-      {menuState.type === "block" && (
+      {menuState.type === "blockPost" && (
         <ConfirmModal
           title="해당 유저를 차단하시겠어요?"
           description={`차단 시, 이 유저의 게시물을\n더 이상 볼 수 없습니다.`}
           confirmText="차단하기"
           cancelText="취소"
-          onConfirm={handleBlockConfirm}
+          onConfirm={handleBlockPostConfirm}
+          onCancel={close}
+        />
+      )}
+      {menuState.type === "blockComment" && (
+        <ConfirmModal
+          title="해당 유저를 차단하시겠어요?"
+          description={`차단 시, 이 유저의 댓글을\n더 이상 볼 수 없으며, 해제할 수 없습니다.`}
+          confirmText="차단하기"
+          cancelText="취소"
+          onConfirm={handleBlockCommentConfirm}
           onCancel={close}
         />
       )}
@@ -266,11 +301,21 @@ export const CommunityDetail = () => {
         />
       )}
 
-      <ReportPostSheet
-        isOpen={menuState.type === "report"}
-        postId={menuState.id!}
+      <ReportSheet
+        isOpen={
+          menuState.type === "reportPost" || menuState.type === "reportComment"
+        }
+        id={menuState.id!}
+        reportType={menuState.type}
+        queryKeyToInvalidate={
+          menuState.type === "reportPost"
+            ? [postDetailQueryKey]
+            : [postDetailQueryKey, commentListQueryKey]
+        }
         onClose={close}
-        onReportComplete={showReportComplete}
+        onReportComplete={() => {
+          showReportComplete();
+        }}
       />
 
       {menuState.type === "reportComplete" && (
