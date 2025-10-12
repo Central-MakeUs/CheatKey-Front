@@ -2,6 +2,8 @@ import { Suspense } from "react";
 
 import { Outlet } from "react-router-dom";
 
+import RouteChangeTracker from "@/routes/RouteChangeTracker";
+
 import {
   BackgroundColorProvider,
   useBackgroundColor,
@@ -23,8 +25,11 @@ const ActualLayout = () => {
 
 export const RootLayout = () => {
   return (
-    <BackgroundColorProvider>
-      <ActualLayout />
-    </BackgroundColorProvider>
+    <>
+      <RouteChangeTracker />
+      <BackgroundColorProvider>
+        <ActualLayout />
+      </BackgroundColorProvider>
+    </>
   );
 };
