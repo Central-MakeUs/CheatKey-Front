@@ -6,6 +6,7 @@ import { MenuButton } from "@/components/common/MenuButton";
 import { NameTag } from "@/components/common/NameTag";
 import { ReplyCommentItem } from "@/components/communityDetail/ReplyCommentItem";
 
+import BlockIcon from "@/assets/icons/block.svg";
 import RemoveIcon from "@/assets/icons/remove.svg?react";
 import TemporaryProfilePic from "@/assets/images/temporary_profile_pic.png";
 
@@ -31,58 +32,70 @@ export const CommentItem = ({
 
   return (
     <>
-      <div
-        className={cn(
-          "flex flex-col gap-2.5 px-5 py-3.5",
-          isSelected ? "bg-gray-system-800" : "bg-bg-100",
-        )}
-      >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <img
-              src={TemporaryProfilePic}
-              alt="유저의 프로필 사진"
-              className="h-[1.875rem] w-[1.875rem] rounded-full"
-            />
+      {comment.status !== "BLOCKED_BY_USER" ? (
+        <div
+          className={cn(
+            "flex flex-col gap-2.5 px-5 py-3.5",
+            isSelected ? "bg-gray-system-800" : "bg-bg-100",
+          )}
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <img
+                src={TemporaryProfilePic}
+                alt="유저의 프로필 사진"
+                className="h-[1.875rem] w-[1.875rem] rounded-full"
+              />
 
-            <NameTag
-              name={comment.authorNickname}
-              type={comment.canDelete ? "community_primary" : "community_mono"}
-              className="mr-3 ml-2"
-            />
-            <p className="text-gray-system-700 body-5-regular">
-              {formatDetailDate(comment.createdAt)}
-            </p>
+              <NameTag
+                name={comment.authorNickname}
+                type={
+                  comment.canDelete ? "community_primary" : "community_mono"
+                }
+                className="mr-3 ml-2"
+              />
+              <p className="text-gray-system-700 body-5-regular">
+                {formatDetailDate(comment.createdAt)}
+              </p>
+            </div>
+            {comment.status === "ACTIVE" &&
+              (comment.canDelete ? (
+                <button
+                  onClick={(e: React.MouseEvent) => {
+                    e.stopPropagation();
+                    onDelete(comment.id);
+                  }}
+                  aria-label="댓글 삭제"
+                  type="button"
+                  className="h-6 w-6"
+                >
+                  <RemoveIcon className="h-full w-full" />
+                </button>
+              ) : (
+                <MenuButton id={comment.id} onOpenMenu={onOpenMenu} />
+              ))}
           </div>
-          {comment.status === "ACTIVE" &&
-            (comment.canDelete ? (
-              <button
-                onClick={(e: React.MouseEvent) => {
-                  e.stopPropagation();
-                  onDelete(comment.id);
-                }}
-                aria-label="댓글 삭제"
-                type="button"
-                className="h-6 w-6"
-              >
-                <RemoveIcon className="h-full w-full" />
-              </button>
-            ) : (
-              <MenuButton id={comment.id} onOpenMenu={onOpenMenu} />
-            ))}
+          <p className="body-5-regular text-gray-system-500">
+            {comment.content}
+          </p>
+          <div className="flex h-7.5 w-full justify-end">
+            <button
+              type="button"
+              className="caption-1-medium text-gray-system-600 px-2 py-1"
+              onClick={handleSelect}
+            >
+              답글 달기
+            </button>
+          </div>
         </div>
-        <p className="body-5-regular text-gray-system-500">{comment.content}</p>
-        <div className="flex h-7.5 w-full justify-end">
-          <button
-            type="button"
-            className="caption-1-medium text-gray-system-600 px-2 py-1"
-            onClick={handleSelect}
-          >
-            답글 달기
-          </button>
+      ) : (
+        <div className="flex items-center gap-2 px-5 py-3.5">
+          <img className="h-7.5 w-7.5" src={BlockIcon} alt="차단된 유저" />
+          <p className="body-5-regular text-gray-system-500">
+            차단한 작성자의 댓글입니다.
+          </p>
         </div>
-      </div>
-
+      )}
       {comment.children?.length > 0 && (
         <div className="px-5">
           {comment.children.map((reply, index) => (
