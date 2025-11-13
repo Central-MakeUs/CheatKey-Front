@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { bridge } from "@/bridge";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
@@ -19,6 +18,8 @@ import {
   ONBOARDING_TOTAL_STEP,
 } from "@/constants/onboardingConstants";
 import { PAGE_PATH } from "@/constants/path";
+
+import { bridge } from "@/lib/bridge";
 
 const onboardingImageUrls = Object.values(ONBOARDING_CONSTANTS).map(
   (content) => content.image,

@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { bridge } from "@/bridge";
 import { useFontSize } from "@/contexts/FontSizeContext";
-import { cn } from "@/lib/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
 import { TooltipBubble } from "@/components/common/TooltipBubble";
+
+import { bridge } from "@/lib/bridge";
+import { cn } from "@/lib/cn";
 
 import Export from "@/assets/icons/export.svg?react";
 import Prev from "@/assets/icons/prev.svg?react";

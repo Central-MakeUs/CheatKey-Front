@@ -5,10 +5,11 @@ import type {
   AxiosResponse,
 } from "axios";
 
-import { bridge } from "@/bridge";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 import { PAGE_PATH } from "@/constants/path";
+
+import { bridge } from "@/lib/bridge";
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retryCount?: number;

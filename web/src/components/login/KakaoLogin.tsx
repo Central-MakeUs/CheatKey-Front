@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-import { bridge } from "@/bridge";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 import { PAGE_PATH } from "@/constants/path";
+
+import { bridge } from "@/lib/bridge";
 
 import kakaoLogo from "@/assets/logo/logo_kakao.svg";
 
