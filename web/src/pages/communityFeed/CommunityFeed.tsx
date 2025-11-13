@@ -21,7 +21,7 @@ import { CommunityFeedTab } from "@/components/communityFeed/CommunityFeedTab";
 import { CommunityPostPreview } from "@/components/communityFeed/CommunityPostPreview";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
-import { BOARD_CATEGORY_MAP } from "@/constants/commnityFeedTabs";
+import { BOARD_CATEGORY_MAP } from "@/constants/communityFeedTabs";
 import { PAGE_PATH } from "@/constants/path";
 
 import WriteOff from "@/assets/icons/write_off.svg?react";

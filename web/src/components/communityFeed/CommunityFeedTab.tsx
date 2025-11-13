@@ -1,6 +1,6 @@
-import { cn } from "@/lib/cn";
+import { COMMUNITY_FEED_TABS } from "@/constants/communityFeedTabs";
 
-import { COMMUNITY_FEED_TABS } from "@/constants/commnityFeedTabs";
+import { cn } from "@/lib/cn";
 
 interface CommunityFeedTabProps {
   activeTab: string;
