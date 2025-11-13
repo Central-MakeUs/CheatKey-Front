@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
-import { cn } from "@/lib/cn";
 import type { CommunityPost } from "@/types/community/community.types";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 import { generatePath } from "@/utils/generatePath";
@@ -13,6 +12,8 @@ import { NameTag } from "@/components/common/NameTag";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
 import { PAGE_PATH } from "@/constants/path";
+
+import { cn } from "@/lib/cn";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 import RemoveIcon from "@/assets/icons/remove.svg?react";

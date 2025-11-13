@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 
 import { useCarousel } from "@/hooks/useCarousel";
-import { cn } from "@/lib/cn";
 import type { CategoryAnalysisResult } from "@/types/analyzeResult/analyzeResult.types";
 
 import { DetailResultCard } from "@/components/analyze/DetailResultCard";
@@ -9,6 +8,8 @@ import { FirstResultCard } from "@/components/analyze/FirstResultCard";
 import { PageIndicator } from "@/components/common/PageIndicator";
 
 import { CARD_ANIMATION } from "@/constants/animation/cardAnimationConstants";
+
+import { cn } from "@/lib/cn";
 
 interface ResultCardListProps {
   currentData: CategoryAnalysisResult;

@@ -4,7 +4,6 @@
 //import { path } from "@/routes/path";
 
 import { useFontSize } from "@/contexts/FontSizeContext";
-import { cn } from "@/lib/cn";
 import type {
   ContentCategory,
   ContentSectionType,
@@ -21,6 +20,8 @@ import {
   APP_STORE_URL,
   GOOGLE_PLAY_URL,
 } from "@/constants/contentPageConstants";
+
+import { cn } from "@/lib/cn";
 
 //import safe from "@/assets/images/result/safe.svg";
 import android from "@/assets/logo/logo_store_android.svg";

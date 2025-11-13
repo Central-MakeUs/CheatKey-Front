@@ -1,10 +1,11 @@
-import { cn } from "@/lib/cn";
 import type { Comment } from "@/types/community/community.types";
 import { formatDetailDate } from "@/utils/formatUTCtoKR";
 
 import { MenuButton } from "@/components/common/MenuButton";
 import { NameTag } from "@/components/common/NameTag";
 import { ReplyCommentItem } from "@/components/communityDetail/ReplyCommentItem";
+
+import { cn } from "@/lib/cn";
 
 import BlockIcon from "@/assets/icons/block.svg";
 import RemoveIcon from "@/assets/icons/remove.svg?react";

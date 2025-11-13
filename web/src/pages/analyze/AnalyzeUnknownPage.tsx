@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { useBackgroundColor } from "@/contexts/BackgroundColorContext";
-import { cn } from "@/lib/cn";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
 
@@ -14,6 +13,8 @@ import {
   STAGGER_CONTAINER,
   FADE_IN_UP_ITEM,
 } from "@/constants/animation/enterAnimation";
+
+import { cn } from "@/lib/cn";
 
 import Close from "@/assets/icons/close.svg?react";
 

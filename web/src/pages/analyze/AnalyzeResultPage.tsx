@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 
 import { getAnalyzeResult } from "@/apis/analyze/getAnalyzeResult";
 import { useBackgroundColor } from "@/contexts/BackgroundColorContext";
-import { cn } from "@/lib/cn";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
 
 import { ResultCardList } from "@/components/analyze/ResultCardList";
@@ -19,6 +18,8 @@ import {
   FADE_IN_UP_ITEM,
 } from "@/constants/animation/enterAnimation";
 import { QUERY_KEYS } from "@/constants/apiConstants";
+
+import { cn } from "@/lib/cn";
 
 import Close from "@/assets/icons/close.svg?react";
 
