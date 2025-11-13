@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 
 import { useSignUp } from "@/hooks/useSignUp";
-import { cn } from "@/lib/cn";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
@@ -17,6 +16,8 @@ import { TermForm } from "@/components/signup/TermForm";
 
 import { SLIDE_ANIMATION } from "@/constants/animation/slideAnimation";
 import { SIGNUP_HEADER_CONFIG } from "@/constants/signUpConstants";
+
+import { cn } from "@/lib/cn";
 
 export const SignUpPage = () => {
   const {

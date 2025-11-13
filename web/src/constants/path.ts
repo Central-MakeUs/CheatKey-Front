@@ -34,7 +34,6 @@ export const PAGE_PATH = {
   MY: {
     BASE: "/my",
     SPECIFIC: {
-      EDIT: "/my/edit",
       POSTS: "/my/posts",
       ANALYSIS: "/my/analysis",
       TERMS: "/my/terms",

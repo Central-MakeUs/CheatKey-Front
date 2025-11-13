@@ -1,6 +1,6 @@
-import { cn } from "@/lib/cn";
-
 import { MY_ANALYSIS_PAGE_TABS } from "@/constants/myAnalysisPageTabs";
+
+import { cn } from "@/lib/cn";
 
 interface MyAnalysisPageTabProps {
   activeTab: string;

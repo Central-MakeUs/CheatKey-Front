@@ -1,10 +1,11 @@
 import { type ChangeEvent } from "react";
 
 import { useNicknameValidation } from "@/hooks/useNicknameValidation";
-import { cn } from "@/lib/cn";
 import type { NicknameStatus } from "@/types/signup/signup.types";
 
 import { NICKNAME_MESSAGES } from "@/constants/signUpConstants";
+
+import { cn } from "@/lib/cn";
 
 import CheckOn from "@/assets/icons/check_on.svg?react";
 import CloseButton from "@/assets/icons/close_button.svg?react";

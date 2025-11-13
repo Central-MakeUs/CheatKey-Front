@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
-import { cn } from "@/lib/cn";
-
 import { Toggle } from "@/components/common/Toggle";
+
+import { cn } from "@/lib/cn";
 
 import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 

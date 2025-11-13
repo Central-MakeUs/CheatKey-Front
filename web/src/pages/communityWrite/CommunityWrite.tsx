@@ -24,7 +24,7 @@ import { PostImageUploader } from "@/components/communityWrite/PostImageUploader
 import { TitleForm } from "@/components/communityWrite/TitleForm";
 
 import { QUERY_KEYS } from "@/constants/apiConstants";
-import { BOARD_CATEGORY_MAP } from "@/constants/commnityFeedTabs";
+import { BOARD_CATEGORY_MAP } from "@/constants/communityFeedTabs";
 import { PAGE_PATH } from "@/constants/path";
 
 export const CommunityWrite = () => {

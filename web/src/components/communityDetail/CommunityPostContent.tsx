@@ -1,9 +1,10 @@
 import { useImageSlider } from "@/hooks/useImageSlider";
-import { cn } from "@/lib/cn";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { MenuButton } from "@/components/common/MenuButton";
 import { ImageCloseUpModal } from "@/components/communityDetail/ImageCloseUpModal";
+
+import { cn } from "@/lib/cn";
 
 import TemporaryProfilePicIcon from "@/assets/images/temporary_profile_pic.png";
 

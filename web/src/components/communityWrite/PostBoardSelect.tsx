@@ -1,6 +1,6 @@
 import { CategoryTagGroup } from "@/components/common/CategoryTagGroup";
 
-import { COMMUNITY_FEED_TABS } from "@/constants/commnityFeedTabs";
+import { COMMUNITY_FEED_TABS } from "@/constants/communityFeedTabs";
 
 export const PostBoardSelect = ({
   value,

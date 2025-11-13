@@ -1,14 +1,14 @@
 import { useRef, useEffect } from "react";
 
-import { cn } from "@/lib/cn";
 import type { UploadedImage } from "@/types/community/community.types";
 
 import {
-  imageFileSchema,
-  imagesSchema,
-  MAX_IMAGE_COUNT,
-  MAX_IMAGE_SIZE_MB,
-} from "@/schemas/communityWriteSchema";
+  COMMUNITY_WRITE_LIMIT,
+  COMMUNITY_ERROR_MESSAGE,
+} from "@/constants/communityWriteConstants";
+
+import { cn } from "@/lib/cn";
+import { imageFileSchema, imagesSchema } from "@/lib/zod/communityWriteSchema";
 
 import AddIcon from "@/assets/icons/add.svg?react";
 import DeleteIcon from "@/assets/icons/delete.svg?react";
@@ -52,7 +52,11 @@ export const PostImageUploader = ({
     }
 
     if (oversizedFilesFound) {
-      showToast(`사진 용량이 ${MAX_IMAGE_SIZE_MB}MB를 초과해요.`);
+      showToast(
+        COMMUNITY_ERROR_MESSAGE.IMAGE_TOO_LARGE(
+          COMMUNITY_WRITE_LIMIT.MAX_IMAGE_SIZE_MB,
+        ),
+      );
     }
 
     if (validFilesToAdd.length === 0) {
@@ -73,7 +77,7 @@ export const PostImageUploader = ({
         showToast(maxCountError.message);
       }
 
-      onChange(combinedImages.slice(0, MAX_IMAGE_COUNT));
+      onChange(combinedImages.slice(0, COMMUNITY_WRITE_LIMIT.MAX_IMAGE_COUNT));
     }
 
     if (event.target) {

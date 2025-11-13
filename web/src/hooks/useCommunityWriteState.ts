@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 
 import type { UploadedImage } from "@/types/community/community.types";
 
-import { communityWriteSchema } from "@/schemas/communityWriteSchema";
+import { communityWriteSchema } from "@/lib/zod/communityWriteSchema";
 
 export const useCommunityWriteState = () => {
   const [form, setForm] = useState({

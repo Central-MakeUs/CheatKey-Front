@@ -69,7 +69,7 @@ export default tseslint.config(
               position: "after",
             },
             {
-              pattern: "@/schemas/**",
+              pattern: "@/lib/**",
               group: "internal",
               position: "after",
             },

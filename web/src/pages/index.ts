@@ -69,9 +69,6 @@ export const InterviewDetailPage = lazy(() =>
 export const MyPage = lazy(() =>
   import("./my/MyPage").then((module) => ({ default: module.MyPage })),
 );
-export const MyEditPage = lazy(() =>
-  import("./my/MyEditPage").then((module) => ({ default: module.MyEditPage })),
-);
 export const MyPostsPage = lazy(() =>
   import("./my/MyPostsPage").then((module) => ({
     default: module.MyPostsPage,

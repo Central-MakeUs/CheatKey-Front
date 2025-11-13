@@ -1,10 +1,11 @@
-import { cn } from "@/lib/cn";
 import type {
   AnalysisFirstCardData,
   ResultCardStyle,
 } from "@/types/analyzeResult/analyzeResult.types";
 
 import { ANALYSIS_STATUS, STATUS_TEXT_MAP } from "@/constants/analyze/result";
+
+import { cn } from "@/lib/cn";
 
 interface FirstResultCardProps {
   data: AnalysisFirstCardData;

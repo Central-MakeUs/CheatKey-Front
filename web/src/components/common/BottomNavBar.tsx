@@ -4,13 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { motion, useAnimation } from "framer-motion";
 
-import { cn } from "@/lib/cn";
 import { getPlatform } from "@/utils/getPlatform";
 
 import { BottomNavBarItem } from "@/components/common/BottomNavBarItem";
 import { TooltipBubble } from "@/components/common/TooltipBubble";
 
 import { PAGE_PATH } from "@/constants/path";
+
+import { cn } from "@/lib/cn";
 
 import AiAnalysisIcon from "@/assets/icons/ai_analysis.svg?react";
 import CommunityIcon from "@/assets/icons/community.svg?react";

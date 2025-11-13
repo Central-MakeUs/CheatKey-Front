@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-import { cn } from "@/lib/cn";
 import type { CommunityPost } from "@/types/community/community.types";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 import { generatePath } from "@/utils/generatePath";
@@ -10,6 +9,8 @@ import { MenuButton } from "@/components/common/MenuButton";
 import { NameTag } from "@/components/common/NameTag";
 
 import { PAGE_PATH } from "@/constants/path";
+
+import { cn } from "@/lib/cn";
 
 import CommentIcon from "@/assets/icons/comment.svg?react";
 //TODO: @tifsy 임시 프로필 이미지 제거
