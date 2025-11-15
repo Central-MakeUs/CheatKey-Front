@@ -79,23 +79,21 @@ cheatkey-front/
 └── web/                  \# React (Vite) 프로젝트
 ├── public/           \# 정적 파일
 └── src/
-├── apis/         \# 웹 환경 API 호출
-├── assets/       \# 이미지, 아이콘, 애니메이션 등
-├── bridge/       \# 웹뷰-네이티브 통신 브릿지
-├── components/   \# 재사용 가능한 UI 컴포넌트
-├── constants/    \# 상수 데이터
-├── contexts/     \# Context API
-├── hooks/        \# 커스텀 훅
-├── layouts/      \# 페이지 레이아웃
-├── lib/          \# 라이브러리
-├── mocks/        \# mock 데이터
-├── pages/        \# 라우팅 페이지 컴포넌트
-├── routes/       \# React Router 설정
-├── schemas/      \# Zod 스키마
-├── stores/       \# Zustand 스토어
-├── styles/       \# 전역 CSS
-├── types/        \# TypeScript 타입 정의
-└── utils/        \# 유틸리티 함수
+  ├── apis/         \# 웹 환경 API 호출
+  ├── assets/       \# 이미지, 아이콘, 애니메이션 등
+  ├── components/   \# 재사용 가능한 UI 컴포넌트
+  ├── constants/    \# 상수 데이터
+  ├── contexts/     \# Context API
+  ├── hooks/        \# 커스텀 훅
+  ├── layouts/      \# 페이지 레이아웃
+  ├── lib/          \# 라이브러리 (브릿지, Zod 등)
+  ├── mocks/        \# mock 데이터
+  ├── pages/        \# 라우팅 페이지 컴포넌트
+  ├── routes/       \# React Router 설정
+  ├── stores/       \# Zustand 스토어
+  ├── styles/       \# 전역 CSS
+  ├── types/        \# TypeScript 타입 정의
+  └── utils/        \# 유틸리티 함수
 
 ````
 
