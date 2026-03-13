@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import { Link } from "react-router-dom";
+
 import { useBackgroundColor } from "@/contexts/BackgroundColorContext";
 import { useAnalyzePage } from "@/hooks/useAnalyzePage";
 
@@ -9,6 +11,8 @@ import { AppHeader } from "@/components/common/AppHeader";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { FormTextarea } from "@/components/common/FormTextarea";
 import { Toast } from "@/components/common/Toast";
+
+import { PAGE_PATH } from "@/constants/path";
 
 import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 
@@ -24,7 +28,6 @@ export const AnalyzePage = () => {
     isAnalyzeSuccess,
     isButtonEnabled,
     handleNavigateBack,
-    handleNavigateCommunity,
     handleTabChange,
     handleSubmit,
     toastInfo,
@@ -87,8 +90,8 @@ export const AnalyzePage = () => {
         <Toast position="ai" icon={toastInfo.icon} text={toastInfo.message} />
       )}
 
-      <a
-        onClick={handleNavigateCommunity}
+      <Link
+        to={PAGE_PATH.COMMUNITY.SPECIFIC.FEED}
         className="body-4-medium text-gray-system-600 mt-10 flex items-center rounded-full bg-[#3c5187]/30 px-4 py-2"
       >
         함께 얘기 나누기
@@ -96,7 +99,7 @@ export const AnalyzePage = () => {
           aria-hidden="true"
           className="text-gray-system-600 h-5 w-5"
         />
-      </a>
+      </Link>
     </div>
   );
 };

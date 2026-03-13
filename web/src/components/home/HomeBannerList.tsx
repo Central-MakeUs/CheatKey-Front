@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,9 +12,9 @@ interface HomeBannerListProps {
   banners: HomeBannerData[];
 }
 
-export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
-  const navigate = useNavigate();
+const MotionLink = motion(Link);
 
+export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
   const intervalRef = useRef<number>(null);
 
@@ -69,8 +69,9 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
   return (
     <div className="relative flex h-19 w-full items-center overflow-hidden rounded-xl bg-[#212738]">
       <AnimatePresence initial={false} custom={direction}>
-        <motion.a
+        <MotionLink
           key={currentIndex}
+          to={banners[currentIndex].navigate}
           className="absolute inset-0 flex cursor-pointer items-center gap-3"
           custom={direction}
           variants={SLIDE_ANIMATION}
@@ -83,7 +84,6 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
           dragElastic={0.5}
           onDragStart={stopAutoPlay}
           onDragEnd={handleDragEnd}
-          onClick={() => navigate(banners[currentIndex].navigate)}
         >
           <img
             src={banners[currentIndex].image}
@@ -98,7 +98,7 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
               {banners[currentIndex].content}
             </p>
           </div>
-        </motion.a>
+        </MotionLink>
       </AnimatePresence>
 
       <div className="caption-1-medium text-gray-system-500 bg-base-100/50 shadow-shadow-1 absolute right-[0.6875rem] bottom-[0.4375rem] flex h-6 w-12 items-center rounded-full px-2.5 text-center tracking-[0.25rem]">

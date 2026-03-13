@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { BottomLayout } from "@/layouts/BottomLayout";
-import { RootLayout } from "@/layouts/RootLayout";
 import * as Pages from "@/pages";
+
+import { BottomLayout } from "@/components/layouts/BottomLayout";
+import { RootLayout } from "@/components/layouts/RootLayout";
 
 import { PAGE_PATH } from "@/constants/path";
 

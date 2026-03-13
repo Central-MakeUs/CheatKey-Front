@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -26,7 +26,6 @@ import { PAGE_PATH } from "@/constants/path";
 import GoodCutting from "@/assets/images/cutting_good.svg?react";
 
 export const Home = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { setBgColor } = useBackgroundColor();
 
@@ -121,13 +120,13 @@ export const Home = () => {
           <h1 className="body-1-bold text-gray-system-50">
             현재 인기 있는 게시글
           </h1>
-          <a
-            onClick={() => navigate(PAGE_PATH.COMMUNITY.SPECIFIC.FEED)}
+          <Link
+            to={PAGE_PATH.COMMUNITY.SPECIFIC.FEED}
             aria-label="인기 게시글 더보기"
             className="caption-1-medium text-gray-system-600"
           >
             더보기
-          </a>
+          </Link>
         </div>
         <p className="caption-2-regular text-gray-system-400 mt-1 w-full px-5">
           커뮤니티에서 다양한 사기 사례를 볼 수 있어요
