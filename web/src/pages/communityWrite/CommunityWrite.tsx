@@ -10,7 +10,7 @@ import {
   postFilesUpload,
   type CommunityPostResponse,
 } from "@/apis/community/postCommunity";
-import { useCommunityWriteState } from "@/hooks/useCommunityWriteState";
+import { useCommunityWriteState } from "@/hooks/community/useCommunityWriteState";
 import type { CommunityWriteFormState } from "@/types/community/community.types";
 import { generatePath } from "@/utils/generatePath";
 
@@ -23,9 +23,9 @@ import { PostBoardSelect } from "@/components/communityWrite/PostBoardSelect";
 import { PostImageUploader } from "@/components/communityWrite/PostImageUploader";
 import { TitleForm } from "@/components/communityWrite/TitleForm";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
-import { BOARD_CATEGORY_MAP } from "@/constants/communityFeedTabs";
-import { PAGE_PATH } from "@/constants/path";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
+import { BOARD_CATEGORY_MAP } from "@/constants/community/communityFeedTabs";
+import { PAGE_PATH } from "@/constants/route/path";
 
 export const CommunityWrite = () => {
   const navigate = useNavigate();

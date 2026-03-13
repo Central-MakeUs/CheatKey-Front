@@ -1,6 +1,6 @@
 import type { HomeBannerData } from "@/types/home/home.types";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import cutting_LV01 from "@/assets/cuttings/cutting_Lv01.png";
 import cutting_LV02 from "@/assets/cuttings/cutting_Lv02.png";

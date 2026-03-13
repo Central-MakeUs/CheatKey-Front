@@ -1,7 +1,7 @@
 import { authAPI } from "@/apis/instance";
 import type { CommunityPost } from "@/types/community/community.types";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 interface CommunityPostsResponse {
   content: CommunityPost[];

@@ -7,16 +7,16 @@ import type { AxiosError } from "axios";
 
 import { getAuthRegister } from "@/apis/auth/getAuthRegister.api";
 import { postAuthRegister } from "@/apis/auth/postAuthRegister";
-import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
-import { useSignUpTerms } from "@/hooks/useSignUpTerms";
+import { useSignUpTerms } from "@/hooks/auth/useSignUpTerms";
+import { useKeyboardHeight } from "@/hooks/common/useKeyboardHeight";
 import type {
   NicknameStatus,
   RegisterRequest,
   SignUpForm,
 } from "@/types/signup/signup.types";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
-import { PAGE_PATH } from "@/constants/path";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 export const useSignUp = () => {
   const navigate = useNavigate();

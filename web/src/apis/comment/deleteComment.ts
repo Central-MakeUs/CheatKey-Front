@@ -1,7 +1,7 @@
 import { authAPI } from "@/apis/instance";
 import { generatePath } from "@/utils/generatePath";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 export const deleteComment = async ({ commentId }: { commentId: number }) => {
   const response = await authAPI.delete(

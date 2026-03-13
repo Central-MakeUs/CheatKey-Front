@@ -2,7 +2,7 @@ import { authAPI } from "@/apis/instance";
 import type { PostStatus } from "@/types/community/community.types";
 import { generatePath } from "@/utils/generatePath";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 export interface PostDetailResponse {
   id: number;

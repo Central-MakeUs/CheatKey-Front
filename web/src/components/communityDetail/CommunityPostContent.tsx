@@ -1,4 +1,4 @@
-import { useImageSlider } from "@/hooks/useImageSlider";
+import { useImageSlider } from "@/hooks/community/useImageSlider";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { MenuButton } from "@/components/common/MenuButton";

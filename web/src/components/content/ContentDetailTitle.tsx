@@ -8,7 +8,7 @@ import type {
 import {
   AUTHOR_INFO_CONFIG,
   FONT_SIZE_CONFIG,
-} from "@/constants/contentPageConstants";
+} from "@/constants/content/contentPageConstants";
 
 import { cn } from "@/lib/cn";
 

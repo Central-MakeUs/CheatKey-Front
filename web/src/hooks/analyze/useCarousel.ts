@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 import { useMotionValue, animate, type PanInfo } from "framer-motion";
 
-import { useCardNavigation } from "@/hooks/useCardNavigation";
+import { useCardNavigation } from "@/hooks/analyze/useCardNavigation";
 
 import { CARD_ANIMATION } from "@/constants/animation/cardAnimationConstants";
 

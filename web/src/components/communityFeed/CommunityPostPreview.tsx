@@ -8,7 +8,7 @@ import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 import { MenuButton } from "@/components/common/MenuButton";
 import { NameTag } from "@/components/common/NameTag";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import { cn } from "@/lib/cn";
 

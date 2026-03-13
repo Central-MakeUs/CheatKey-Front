@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
-import { useBlockPostMutation } from "@/hooks/mutations/useBlockPostMutation";
-import { useMenu } from "@/hooks/useMenu";
+import { useBlockPostMutation } from "@/hooks/community/mutations/useBlockPostMutation";
+import { useMenu } from "@/hooks/community/useMenu";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";
@@ -20,9 +20,9 @@ import { CommunityFeedSortOptionDropdown } from "@/components/communityFeed/Comm
 import { CommunityFeedTab } from "@/components/communityFeed/CommunityFeedTab";
 import { CommunityPostPreview } from "@/components/communityFeed/CommunityPostPreview";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
-import { BOARD_CATEGORY_MAP } from "@/constants/communityFeedTabs";
-import { PAGE_PATH } from "@/constants/path";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
+import { BOARD_CATEGORY_MAP } from "@/constants/community/communityFeedTabs";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import WriteOff from "@/assets/icons/write_off.svg?react";
 

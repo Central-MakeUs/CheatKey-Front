@@ -5,7 +5,7 @@ import type { UploadedImage } from "@/types/community/community.types";
 import {
   COMMUNITY_WRITE_LIMIT,
   COMMUNITY_ERROR_MESSAGE,
-} from "@/constants/communityWriteConstants";
+} from "@/constants/community/communityWriteConstants";
 
 import { cn } from "@/lib/cn";
 import { imageFileSchema, imagesSchema } from "@/lib/zod/communityWriteSchema";

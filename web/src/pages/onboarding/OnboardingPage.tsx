@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useImagePreloader } from "@/hooks/onboarding/useImagePreloader";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { BottomFullButton } from "@/components/common/BottomFullButton";
@@ -16,8 +16,8 @@ import { SLIDE_ANIMATION } from "@/constants/animation/slideAnimation";
 import {
   ONBOARDING_CONSTANTS,
   ONBOARDING_TOTAL_STEP,
-} from "@/constants/onboardingConstants";
-import { PAGE_PATH } from "@/constants/path";
+} from "@/constants/onboarding/onboardingConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import { bridge } from "@/lib/bridge";
 

@@ -1,6 +1,6 @@
 import { authAPI } from "@/apis/instance";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 export interface CommentPostRequest {
   postId: number;

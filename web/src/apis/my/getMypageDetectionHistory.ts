@@ -1,7 +1,7 @@
 import { authAPI } from "@/apis/instance";
 import type { MyAnalysisHistoryResponse } from "@/types/my/my.types";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 interface PageParams {
   page?: number;

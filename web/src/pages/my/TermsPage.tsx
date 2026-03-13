@@ -10,7 +10,7 @@ import {
   TERMS_OF_SERVICE_CONTENT,
   PRIVACY_POLICY_CONTENT,
   MARKETING_CONSENT_CONTENT,
-} from "@/constants/termContents";
+} from "@/constants/my/termContents";
 
 export const TermsPage = () => {
   const navigate = useNavigate();

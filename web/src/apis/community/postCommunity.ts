@@ -1,6 +1,6 @@
 import { authAPI } from "@/apis/instance";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 //커뮤니티 글 작성 이미지 업로드 api 응답
 

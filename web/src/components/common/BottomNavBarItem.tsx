@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { cn } from "@/lib/cn";
 
@@ -15,14 +15,14 @@ export const BottomNavBarItem = ({
   ActiveIcon,
   label,
 }: BottomNavBarItemProps) => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const isActive = location.pathname === path;
 
   return (
-    <a
-      onClick={() => navigate(path)}
+    <Link
+      to={path}
+      aria-current={isActive ? "page" : undefined}
       className="flex h-15 w-15 flex-col items-center justify-center gap-[0.1875rem]"
     >
       {isActive ? (
@@ -38,6 +38,6 @@ export const BottomNavBarItem = ({
       >
         {label}
       </span>
-    </a>
+    </Link>
   );
 };

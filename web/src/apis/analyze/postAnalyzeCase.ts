@@ -1,7 +1,7 @@
 import { authAPI } from "@/apis/instance";
 import type { AnalyzeResponse } from "@/types/analyzeResult/analyzeResult.types";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 export const postAnalyzeCase = async ({
   text,

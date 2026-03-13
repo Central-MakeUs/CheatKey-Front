@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { generatePath } from "@/utils/generatePath";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 interface SearchResultItemProps {
   id: number;

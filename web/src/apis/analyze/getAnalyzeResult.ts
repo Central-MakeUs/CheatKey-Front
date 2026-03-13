@@ -6,7 +6,7 @@ import type {
   ANALYSIS_CATEGORY,
   ANALYSIS_STATUS,
 } from "@/constants/analyze/result";
-import { API_DOMAINS } from "@/constants/apiConstants";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
 
 export interface GetAnalyzeResultResponse {
   id: number;

@@ -6,7 +6,7 @@ import type { MyInfo } from "@/types/my/my.types";
 
 import { NameTag } from "@/components/common/NameTag";
 
-import { LEVEL_DATA_MAP } from "@/constants/homePageConstants";
+import { LEVEL_DATA_MAP } from "@/constants/home/homePageConstants";
 
 //import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 

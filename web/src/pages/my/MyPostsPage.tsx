@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/common/useToast";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";
@@ -14,7 +14,7 @@ import { Toast } from "@/components/common/Toast";
 import { ToTop } from "@/components/common/ToTop";
 import { MyPostsPreview } from "@/components/my/MyPostsPreview";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
 
 export const MyPostsPage = () => {
   const navigate = useNavigate();

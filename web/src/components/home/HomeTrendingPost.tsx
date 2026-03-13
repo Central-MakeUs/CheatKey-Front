@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import type { HomeTrendingPostData } from "@/types/home/home.types";
 import { generatePath } from "@/utils/generatePath";
 
 import { NameTag } from "@/components/common/NameTag";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 export const HomeTrendingPost = ({
   id,
@@ -14,16 +14,13 @@ export const HomeTrendingPost = ({
   authorProfileImageUrl,
   authorNickname,
 }: HomeTrendingPostData) => {
-  const navigate = useNavigate();
+  const postPath = generatePath(PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL, {
+    postId: String(id),
+  });
+
   return (
-    <a
-      onClick={() =>
-        navigate(
-          generatePath(PAGE_PATH.COMMUNITY.SPECIFIC.DETAIL, {
-            postId: String(id),
-          }),
-        )
-      }
+    <Link
+      to={postPath}
       className="bg-gray-system-800 flex w-73 shrink-0 flex-col gap-2.5 rounded-xl p-4"
     >
       <div className="flex w-full items-center gap-2">
@@ -40,6 +37,6 @@ export const HomeTrendingPost = ({
           {content}
         </p>
       </div>
-    </a>
+    </Link>
   );
 };

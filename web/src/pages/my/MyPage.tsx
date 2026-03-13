@@ -13,8 +13,8 @@ import { MyAccount } from "@/components/my/MyAccount";
 import { MyMenuItem } from "@/components/my/MyMenuItem";
 import { MyProfile } from "@/components/my/MyProfile";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
-import { PAGE_PATH } from "@/constants/path";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import AddIcon from "@/assets/icons/add.svg?react";
 import AnalysisIcon from "@/assets/icons/analysis.svg?react";

@@ -7,7 +7,7 @@ import { generatePath } from "@/utils/generatePath";
 import { AnalysisLevelBadge } from "@/components/my/AnalysisLevelBadge";
 import { AnalysisTypeBadge } from "@/components/my/AnalysisTypeBadge";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import ArrowRightIcon from "@/assets/icons/arrow_right.svg?react";
 
