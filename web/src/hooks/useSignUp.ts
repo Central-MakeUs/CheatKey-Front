@@ -15,8 +15,8 @@ import type {
   SignUpForm,
 } from "@/types/signup/signup.types";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
-import { PAGE_PATH } from "@/constants/path";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 export const useSignUp = () => {
   const navigate = useNavigate();

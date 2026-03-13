@@ -10,8 +10,8 @@ import { generatePath } from "@/utils/generatePath";
 import { DeleteModal } from "@/components/common/DeleteModal";
 import { NameTag } from "@/components/common/NameTag";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
-import { PAGE_PATH } from "@/constants/path";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import { cn } from "@/lib/cn";
 

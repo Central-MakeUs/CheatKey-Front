@@ -5,7 +5,7 @@ import { generatePath } from "@/utils/generatePath";
 
 import { NameTag } from "@/components/common/NameTag";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 export const HomeTrendingPost = ({
   id,

@@ -1,4 +1,4 @@
-import { COMMUNITY_FEED_TABS } from "@/constants/communityFeedTabs";
+import { COMMUNITY_FEED_TABS } from "@/constants/community/communityFeedTabs";
 
 import { cn } from "@/lib/cn";
 

@@ -25,7 +25,7 @@ import { CommentInput } from "@/components/communityDetail/CommentInput";
 import { CommentSection } from "@/components/communityDetail/CommentSection";
 import { CommunityPostContent } from "@/components/communityDetail/CommunityPostContent";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
 
 export const CommunityDetail = () => {
   const navigate = useNavigate();

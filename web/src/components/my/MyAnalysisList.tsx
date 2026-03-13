@@ -5,7 +5,7 @@ import { getMypageDetectionHistory } from "@/apis/my/getMypageDetectionHistory";
 import { NoResult } from "@/components/common/NoResult";
 import { MyAnalysisListItem } from "@/components/my/MyAnalysisListItem";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
 
 interface MyAnalysisListProps {
   period: "today" | "week" | "month";

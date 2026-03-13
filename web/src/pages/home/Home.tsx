@@ -16,12 +16,12 @@ import { HomeBannerList } from "@/components/home/HomeBannerList";
 import { HomeHeader } from "@/components/home/HomeHeader";
 import { HomeTrendingPost } from "@/components/home/HomeTrendingPost";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
 import {
   HOME_BANNER_DATA,
   LEVEL_DATA_MAP,
-} from "@/constants/homePageConstants";
-import { PAGE_PATH } from "@/constants/path";
+} from "@/constants/home/homePageConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import GoodCutting from "@/assets/images/cutting_good.svg?react";
 

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import AnalysisStarIcon from "@/assets/icons/analysis_star.svg?react";
 import WriteIcon from "@/assets/icons/write_off.svg?react";

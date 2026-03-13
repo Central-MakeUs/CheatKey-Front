@@ -14,7 +14,7 @@ import { Toast } from "@/components/common/Toast";
 import { ToTop } from "@/components/common/ToTop";
 import { MyPostsPreview } from "@/components/my/MyPostsPreview";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
 
 export const MyPostsPage = () => {
   const navigate = useNavigate();

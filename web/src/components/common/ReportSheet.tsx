@@ -14,7 +14,7 @@ import {
   REPORT_REASON_MAP,
   REPORT_REASONS,
   type ReportType,
-} from "@/constants/reportReasons";
+} from "@/constants/community/reportReasons";
 
 interface ReportSheetProps {
   id: number;

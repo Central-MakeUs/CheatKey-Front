@@ -9,7 +9,7 @@ import { postAuthLogout } from "@/apis/auth/postAuthLogout";
 
 import { MyAccountModalRenderer } from "@/components/my/MyAccountModalRenderer";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 export const MyAccount = () => {
   const navigate = useNavigate();

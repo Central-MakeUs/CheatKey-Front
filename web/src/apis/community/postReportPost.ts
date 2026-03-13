@@ -1,8 +1,8 @@
 import { authAPI } from "@/apis/instance";
 import { generatePath } from "@/utils/generatePath";
 
-import { API_DOMAINS } from "@/constants/apiConstants";
-import type { ReportType } from "@/constants/reportReasons";
+import { API_DOMAINS } from "@/constants/api/apiConstants";
+import type { ReportType } from "@/constants/community/reportReasons";
 
 export const postReportPost = async ({
   reasonCode,

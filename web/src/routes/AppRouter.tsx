@@ -5,7 +5,7 @@ import * as Pages from "@/pages";
 import { BottomLayout } from "@/components/layouts/BottomLayout";
 import { RootLayout } from "@/components/layouts/RootLayout";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 const AppRouter = createBrowserRouter([
   {

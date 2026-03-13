@@ -7,7 +7,7 @@ import { ToTop } from "@/components/common/ToTop";
 import { MyAnalysisList } from "@/components/my/MyAnalysisList";
 import { MyAnalysisPageTab } from "@/components/my/MyAnalysisPageTab";
 
-import { MY_ANALYSIS_PAGE_TABS } from "@/constants/myAnalysisPageTabs";
+import { MY_ANALYSIS_PAGE_TABS } from "@/constants/my/myAnalysisPageTabs";
 
 export const MyAnalysisPage = () => {
   const navigate = useNavigate();

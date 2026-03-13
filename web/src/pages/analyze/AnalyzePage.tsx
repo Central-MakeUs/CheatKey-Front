@@ -12,7 +12,7 @@ import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { FormTextarea } from "@/components/common/FormTextarea";
 import { Toast } from "@/components/common/Toast";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import GuideIcon from "@/assets/icons/arrow_right_bold.svg?react";
 

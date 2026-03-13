@@ -9,7 +9,7 @@ import { getPlatform } from "@/utils/getPlatform";
 import { BottomNavBarItem } from "@/components/common/BottomNavBarItem";
 import { TooltipBubble } from "@/components/common/TooltipBubble";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import { cn } from "@/lib/cn";
 

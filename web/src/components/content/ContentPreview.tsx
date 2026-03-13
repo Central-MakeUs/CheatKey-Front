@@ -11,8 +11,8 @@ import { generatePath } from "@/utils/generatePath";
 
 import { ImageWithLoader } from "@/components/common/ImageWithLoader";
 
-import { AUTHOR_INFO_CONFIG } from "@/constants/contentPageConstants";
-import { PAGE_PATH } from "@/constants/path";
+import { AUTHOR_INFO_CONFIG } from "@/constants/content/contentPageConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 interface ContentPreviewProps extends ContentType {
   author: ContentCategory;

@@ -15,7 +15,7 @@ import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
 import { TermForm } from "@/components/signup/TermForm";
 
 import { SLIDE_ANIMATION } from "@/constants/animation/slideAnimation";
-import { SIGNUP_HEADER_CONFIG } from "@/constants/signUpConstants";
+import { SIGNUP_HEADER_CONFIG } from "@/constants/auth/signUpConstants";
 
 import { cn } from "@/lib/cn";
 

@@ -12,7 +12,7 @@ import { SearchBar } from "@/components/common/SearchBar";
 import { ToTop } from "@/components/common/ToTop";
 import { SearchResultPreview } from "@/components/searchPage/SearchResultPreview";
 
-import { QUERY_KEYS } from "@/constants/apiConstants";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
 
 export const SearchPage = () => {
   const [query, setQuery] = useState("");

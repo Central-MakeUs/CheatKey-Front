@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FormTextarea } from "@/components/common/FormTextarea";
 import { TermBottomSheet } from "@/components/signup/TermBottomSheet";
 
-import { WRITE_RULE } from "@/constants/writeRule";
+import { WRITE_RULE } from "@/constants/community/writeRule";
 
 import Rule from "@/assets/icons/alert.svg?react";
 

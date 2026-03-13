@@ -19,7 +19,7 @@ import {
   FONT_SIZE_CONFIG,
   APP_STORE_URL,
   GOOGLE_PLAY_URL,
-} from "@/constants/contentPageConstants";
+} from "@/constants/content/contentPageConstants";
 
 import { cn } from "@/lib/cn";
 

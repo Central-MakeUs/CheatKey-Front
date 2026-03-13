@@ -17,7 +17,7 @@ import {
   STAGGER_CONTAINER,
   FADE_IN_UP_ITEM,
 } from "@/constants/animation/enterAnimation";
-import { QUERY_KEYS } from "@/constants/apiConstants";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
 
 import { cn } from "@/lib/cn";
 

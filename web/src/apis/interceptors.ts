@@ -7,7 +7,7 @@ import type {
 
 import { useAuthStore } from "@/stores/useAuthStore";
 
-import { PAGE_PATH } from "@/constants/path";
+import { PAGE_PATH } from "@/constants/route/path";
 
 import { bridge } from "@/lib/bridge";
 

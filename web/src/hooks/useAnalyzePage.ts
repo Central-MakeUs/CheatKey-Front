@@ -15,8 +15,8 @@ import type { TabCategory } from "@/components/analyze/TabSwitcher";
 import type { ToastIconType } from "@/components/common/Toast";
 
 import { ANALYZE_TABS_DATA } from "@/constants/analyze/page/analyzePageConstants";
-import { QUERY_KEYS } from "@/constants/apiConstants";
-import { PAGE_PATH } from "@/constants/path";
+import { QUERY_KEYS } from "@/constants/api/apiConstants";
+import { PAGE_PATH } from "@/constants/route/path";
 
 interface AnalyzeVariables {
   activeTab: TabCategory;

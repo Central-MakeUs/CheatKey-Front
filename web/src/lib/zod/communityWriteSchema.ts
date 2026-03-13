@@ -3,7 +3,7 @@ import { z } from "zod";
 import {
   COMMUNITY_WRITE_LIMIT,
   COMMUNITY_ERROR_MESSAGE,
-} from "@/constants/communityWriteConstants";
+} from "@/constants/community/communityWriteConstants";
 
 export const imageFileSchema = z.object({
   file: z
