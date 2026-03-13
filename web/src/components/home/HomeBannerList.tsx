@@ -12,8 +12,6 @@ interface HomeBannerListProps {
   banners: HomeBannerData[];
 }
 
-const MotionLink = motion(Link);
-
 export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
   const intervalRef = useRef<number>(null);
@@ -69,10 +67,9 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
   return (
     <div className="relative flex h-19 w-full items-center overflow-hidden rounded-xl bg-[#212738]">
       <AnimatePresence initial={false} custom={direction}>
-        <MotionLink
+        <motion.div
           key={currentIndex}
-          to={banners[currentIndex].navigate}
-          className="absolute inset-0 flex cursor-pointer items-center gap-3"
+          className="absolute inset-0"
           custom={direction}
           variants={SLIDE_ANIMATION}
           initial="enter"
@@ -85,20 +82,25 @@ export const HomeBannerList = ({ banners }: HomeBannerListProps) => {
           onDragStart={stopAutoPlay}
           onDragEnd={handleDragEnd}
         >
-          <img
-            src={banners[currentIndex].image}
-            className="h-19 w-auto shrink-0"
-            alt={banners[currentIndex].title}
-          />
-          <div className="flex flex-col gap-[0.1825rem]">
-            <h1 className="body-4-medium text-gray-system-100">
-              {banners[currentIndex].title}
-            </h1>
-            <p className="caption-2-regular text-primary-200">
-              {banners[currentIndex].content}
-            </p>
-          </div>
-        </MotionLink>
+          <Link
+            to={banners[currentIndex].navigate}
+            className="flex h-full w-full cursor-pointer items-center gap-3"
+          >
+            <img
+              src={banners[currentIndex].image}
+              className="h-19 w-auto shrink-0"
+              alt={banners[currentIndex].title}
+            />
+            <div className="flex flex-col gap-[0.1825rem]">
+              <h1 className="body-4-medium text-gray-system-100">
+                {banners[currentIndex].title}
+              </h1>
+              <p className="caption-2-regular text-primary-200">
+                {banners[currentIndex].content}
+              </p>
+            </div>
+          </Link>
+        </motion.div>
       </AnimatePresence>
 
       <div className="caption-1-medium text-gray-system-500 bg-base-100/50 shadow-shadow-1 absolute right-[0.6875rem] bottom-[0.4375rem] flex h-6 w-12 items-center rounded-full px-2.5 text-center tracking-[0.25rem]">

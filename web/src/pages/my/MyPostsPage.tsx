@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { getMypageCommunityPostsManagement } from "@/apis/my/getMypageCommunityPostsManagement";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/common/useToast";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";

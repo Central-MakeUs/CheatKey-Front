@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 
-import { useSignUp } from "@/hooks/useSignUp";
+import { useSignUp } from "@/hooks/auth/useSignUp";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { AppHeader } from "@/components/common/AppHeader";

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useBackgroundColor } from "@/contexts/BackgroundColorContext";
-import { useAnalyzePage } from "@/hooks/useAnalyzePage";
+import { useAnalyzePage } from "@/hooks/analyze/useAnalyzePage";
 
 import { AnalyzeLoading } from "@/components/analyze/AnalyzeLoading";
 import { TabSwitcher } from "@/components/analyze/TabSwitcher";

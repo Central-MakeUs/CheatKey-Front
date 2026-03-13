@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import { useCarousel } from "@/hooks/useCarousel";
+import { useCarousel } from "@/hooks/analyze/useCarousel";
 import type { CategoryAnalysisResult } from "@/types/analyzeResult/analyzeResult.types";
 
 import { DetailResultCard } from "@/components/analyze/DetailResultCard";

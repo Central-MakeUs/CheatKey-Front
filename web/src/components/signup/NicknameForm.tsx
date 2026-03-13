@@ -1,6 +1,6 @@
 import { type ChangeEvent } from "react";
 
-import { useNicknameValidation } from "@/hooks/useNicknameValidation";
+import { useNicknameValidation } from "@/hooks/auth/useNicknameValidation";
 import type { NicknameStatus } from "@/types/signup/signup.types";
 
 import { NICKNAME_MESSAGES } from "@/constants/auth/signUpConstants";

@@ -10,7 +10,7 @@ import {
   postFilesUpload,
   type CommunityPostResponse,
 } from "@/apis/community/postCommunity";
-import { useCommunityWriteState } from "@/hooks/useCommunityWriteState";
+import { useCommunityWriteState } from "@/hooks/community/useCommunityWriteState";
 import type { CommunityWriteFormState } from "@/types/community/community.types";
 import { generatePath } from "@/utils/generatePath";
 

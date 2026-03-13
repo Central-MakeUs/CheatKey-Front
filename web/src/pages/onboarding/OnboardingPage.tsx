@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useImagePreloader } from "@/hooks/onboarding/useImagePreloader";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";
 import { BottomFullButton } from "@/components/common/BottomFullButton";

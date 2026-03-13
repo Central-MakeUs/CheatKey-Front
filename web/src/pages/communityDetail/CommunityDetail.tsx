@@ -7,12 +7,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getCommentList } from "@/apis/comment/getCommentList";
 import type { CommentPostRequest } from "@/apis/comment/postComment";
 import { getCommunityDetail } from "@/apis/community/getCommunityDetail";
-import { useBlockCommentMutation } from "@/hooks/mutations/useBlockCommentMutation";
-import { useBlockPostMutation } from "@/hooks/mutations/useBlockPostMutation";
-import { useDeleteCommentMutation } from "@/hooks/mutations/useDeleteCommentMutation";
-import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
-import { usePostCommentMutation } from "@/hooks/mutations/usePostCommentMutation";
-import { useMenu } from "@/hooks/useMenu";
+import { useBlockCommentMutation } from "@/hooks/community/mutations/useBlockCommentMutation";
+import { useBlockPostMutation } from "@/hooks/community/mutations/useBlockPostMutation";
+import { useDeleteCommentMutation } from "@/hooks/community/mutations/useDeleteCommentMutation";
+import { useDeletePostMutation } from "@/hooks/community/mutations/useDeletePostMutation";
+import { usePostCommentMutation } from "@/hooks/community/mutations/usePostCommentMutation";
+import { useMenu } from "@/hooks/community/useMenu";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 
 import { LoadingScreen } from "@/components/animation/LoadingScreen";

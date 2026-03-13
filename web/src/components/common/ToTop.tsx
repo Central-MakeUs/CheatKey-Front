@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 
 import { createPortal } from "react-dom";
 
-import { useThrottle } from "@/hooks/useThrottle";
+import { useThrottle } from "@/hooks/common/useThrottle";
 
 import ToTopIcon from "@/assets/icons/arrow_up.svg?react";
 

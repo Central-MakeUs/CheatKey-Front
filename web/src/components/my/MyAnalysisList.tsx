@@ -7,6 +7,8 @@ import { MyAnalysisListItem } from "@/components/my/MyAnalysisListItem";
 
 import { QUERY_KEYS } from "@/constants/api/apiConstants";
 
+import { LoadingSpinner } from "../animation/LoadingSpinner";
+
 interface MyAnalysisListProps {
   period: "today" | "week" | "month";
 }
@@ -31,7 +33,7 @@ export const MyAnalysisList = ({ period }: MyAnalysisListProps) => {
   });
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <LoadingSpinner />;
   }
   if (isError) {
     return <div>❌ 데이터를 불러오지 못했습니다.</div>;

@@ -5,7 +5,7 @@ import type { AxiosError } from "axios";
 import z from "zod";
 
 import { getCheckNickname } from "@/apis/auth/getCheckNickname";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "@/hooks/common/useDebounce";
 import type { NicknameStatus } from "@/types/signup/signup.types";
 
 interface UseNicknameValidationProps {

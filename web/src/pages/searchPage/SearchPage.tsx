@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "@/hooks/common/useDebounce";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { NoResult } from "@/components/common/NoResult";

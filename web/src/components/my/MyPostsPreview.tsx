@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { useDeletePostMutation } from "@/hooks/mutations/useDeletePostMutation";
+import { useDeletePostMutation } from "@/hooks/community/mutations/useDeletePostMutation";
 import type { CommunityPost } from "@/types/community/community.types";
 import { formatUTCtoKR } from "@/utils/formatUTCtoKR";
 import { generatePath } from "@/utils/generatePath";

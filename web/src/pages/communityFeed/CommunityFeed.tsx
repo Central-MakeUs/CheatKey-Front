@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getCommunityPosts } from "@/apis/community/getCommunityPosts";
-import { useBlockPostMutation } from "@/hooks/mutations/useBlockPostMutation";
-import { useMenu } from "@/hooks/useMenu";
+import { useBlockPostMutation } from "@/hooks/community/mutations/useBlockPostMutation";
+import { useMenu } from "@/hooks/community/useMenu";
 
 import { LoadingSpinner } from "@/components/animation/LoadingSpinner";
 import { AppHeader } from "@/components/common/AppHeader";

@@ -7,8 +7,8 @@ import type { AxiosError } from "axios";
 
 import { getAuthRegister } from "@/apis/auth/getAuthRegister.api";
 import { postAuthRegister } from "@/apis/auth/postAuthRegister";
-import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
-import { useSignUpTerms } from "@/hooks/useSignUpTerms";
+import { useSignUpTerms } from "@/hooks/auth/useSignUpTerms";
+import { useKeyboardHeight } from "@/hooks/common/useKeyboardHeight";
 import type {
   NicknameStatus,
   RegisterRequest,

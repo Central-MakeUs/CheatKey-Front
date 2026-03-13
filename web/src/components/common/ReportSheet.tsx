@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 import type { QueryKey } from "@tanstack/react-query";
 
-import { useReportCommentMutation } from "@/hooks/mutations/useReportCommentMutation";
-import { useReportPostMutation } from "@/hooks/mutations/useReportPostMutation";
-import type { MenuType } from "@/hooks/useMenu";
+import { useReportCommentMutation } from "@/hooks/community/mutations/useReportCommentMutation";
+import { useReportPostMutation } from "@/hooks/community/mutations/useReportPostMutation";
+import type { MenuType } from "@/hooks/community/useMenu";
 
 import { BottomFullButton } from "@/components/common/BottomFullButton";
 import { BottomSheet } from "@/components/common/BottomSheet";
